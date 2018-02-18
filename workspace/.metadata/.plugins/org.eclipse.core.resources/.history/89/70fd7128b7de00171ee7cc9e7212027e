@@ -1,0 +1,48 @@
+<script type="text/javascript"> 
+			FusionCharts.ready(
+						function () {
+									 new FusionCharts(
+												{type: "bulb",
+												 renderAt: "chart",
+												 width: "300",
+												 height: "300",
+												 dataFormat: "json",
+												 id: "chart1",
+												 dataSource: {
+															"chart":{
+																	"placeValuesInside":"1",
+																	"is3donHaver":"1",
+																	"valueFontSize":"20",
+																	"useColorNameAsValue":"1",
+																	"caption":"Indicador",
+																	"plottooltext":
+																	"<div id=' valueDiv 'u003e $value apps running u003c/divu003e",
+																	"theme":"hulk-light",
+																	"lowerlimit":"25",
+																	"upperlimit":"0"
+																	},
+															"colorrage":[{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},
+																		 {"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},
+																		 {"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},
+																		 {"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"}],
+																		 "value":"9"
+														    },
+											     events: {
+															"rendered": " function(evtObj,argObj){ setInterval(function(){ var num = parseInt(Math.random() * (25-1)+1); FunsionCharts('chart1').feedData('u0026value+'+num);},5000);}"
+														}
+												});
+								    });
+</script>
+<script type="text/javascript">
+		 FusionCharts.ready(function () {                FusionCharts('chart1').render();});</script>
+		 
+		 
+		 
+		 
+<script type="text/javascript">FusionCharts.ready(function () {new FusionCharts({type: "bulb",renderAt: "chart",width: "300",height: "300",dataFormat: "json",id: "chart1",dataSource: {"chart":{"placeValuesInside":"1","is3donHaver":"1","valueFontSize":"20","useColorNameAsValue":"1","caption":"Indicador","plottooltext":"u003cdiv id=u0027valueDivu0027u003e $value apps running u003c/divu003e","theme":"hulk-light","lowerlimit":"25","upperlimit":"0"},"colorrage":[{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"}],"value":"9"},events: {"rendered":function(evtObj,argObj){ setInterval(function(){ var num = parseInt(Math.random() * (25-1)+1); FunsionCharts(u0027chart1u0027).feedData(u0027u0026value+u0027+num);},5000);}}});});</script><script type="text/javascript">FusionCharts.ready(function () {                FusionCharts("chart1").render();});</script>
+ <!--    Step 5: Render the chart    -->                
+            <script type="text/javascript">
+			FusionCharts.ready(function () {new FusionCharts({type: "bulb",renderAt: "chart",width: "300",height: "300",dataFormat: "json",id: "chart1",dataSource: {"chart":{"placeValuesInside":"1","is3donHaver":"1","valueFontSize":"20","useColorNameAsValue":"1","caption":"Indicador","plottooltext":"u003cdiv id=u0027valueDivu0027u003e $value apps running u003c/divu003e","theme":"hulk-light","lowerlimit":"25","upperlimit":"0"},"colorrage":[{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"},{"minValue":"15","code":"#ff0000","maxValue":"20","label":"Extremadamente Cargado"}],"value":"9"},events: {"rendered":function(evtObj,argObj){ setInterval(function(){ var num = parseInt(Math.random() * (25-1)+1); FunsionCharts(u0027chart1u0027).feedData(u0027u0026value+u0027+num);},5000);}}});});
+			</script>
+		<script type="text/javascript">FusionCharts.ready(function () {                FusionCharts("chart1").render();});</script>
+    

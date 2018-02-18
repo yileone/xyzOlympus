@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Sun Feb 18 16:51:20 VET 2018
+org.eclipse.jst.j2ee.server\:Addons=WEB-INF/lib/Addons.jar
+org.eclipse.jst.j2ee.server\:OpenXava=WEB-INF/lib/OpenXava.jar

@@ -1,0 +1,139 @@
+<%-- 
+    Document   : basic-example
+    Author     : suvradip saha
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*" %>
+<%@page import="java.util.*" %>
+<%@page import="com.google.gson.*" %>
+<%@page import="fusioncharts.FusionCharts" %>
+<%
+    
+/* 
+    The following 4 code lines contain the database connection information.
+    Alternatively, you can move these code lines to a separate file and
+    include the file here. You can also modify this code based on your 
+    database connection. 
+ */
+
+ String hostdb = "localhost:3300";  // MySQl host
+ String userdb = "root";  // MySQL username
+ String passdb = "123456";  // MySQL password
+ String namedb = "fateon";  // MySQL database name
+
+    // Establish a connection to the database
+    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+    Connection con = DriverManager.getConnection("jdbc:mysql://" + hostdb + "/" + namedb , userdb , passdb);
+   
+    %>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Informe Actual</title>
+        <script src="../scripts/fusioncharts.js"></script>
+    </head>
+    <body>
+         <div id="chart"></div>         
+<%
+    
+         Gson gson = new Gson();
+            
+            
+
+            
+            // The 'chartobj' map object holds the chart attributes and data.
+            Map<String, String> chartobj = new HashMap<String, String>();
+            
+            chartobj.put("caption", "Situacion Actual del Sistema");
+            chartobj.put("subCaption" , "");
+            chartobj.put("theme" , "hulk-light");
+            chartobj.put("showhovereffect" , "1");
+            chartobj.put("xAxisName" , "Fecha");
+            chartobj.put("showValues" , "0");
+            chartobj.put("numbersuffix" , "MBPS");
+            chartobj.put("drawCrossLine" , "1");
+            chartobj.put("crossLineAlpha" , "100");
+            chartobj.put("crossLineColor" , "#cc3300");
+ 
+            
+            // Categoria
+            String sql="SELECT registro_date_1 FROM fateon.fateon_registro1 group by registro_date_1 LIMIT 1";
+            // Execute the query.
+            PreparedStatement pt=con.prepareStatement(sql);    
+            ResultSet rs=pt.executeQuery();
+            // Push the data into the array using map object.
+  
+            
+            ArrayList arrData = new ArrayList();
+            
+            while(rs.next())
+            {
+                Map<String, String> lv = new HashMap<String, String>();
+                lv.put("label", rs.getString("registro_date_1"));
+                arrData.add(lv);             
+            }
+            Map<String,String> charCategory = new HashMap<String, String>();
+            charCategory.put("category",gson.toJson(arrData));
+            //close the connection.
+            rs.close();
+ 
+            
+            // DATASET
+             sql="SELECT registro_date_1 FROM fateon.fateon_registro1 group by registro_date_1 LIMIT 1";
+            // Execute the query.
+             pt=con.prepareStatement(sql);    
+             rs=pt.executeQuery();
+            // Push the data into the array using map object.
+  
+           Map<String, String> chardataset = new HashMap<String, String>();
+            
+           chardataset.put("seriesname", "serie 1");
+           chardataset.put("anchorBgColor", "#876EA1");
+            ArrayList arrDataset = new ArrayList();
+            
+            
+            while(rs.next())
+            {
+                Map<String, String> lv1 = new HashMap<String, String>();
+                lv1.put("label", rs.getString("registro_date_1"));
+                arrDataset.add(lv1);             
+            }
+            chardataset.put("data",gson.toJson(arrDataset));
+            //close the connection.
+            rs.close();
+            
+            
+            
+            
+            
+            //create 'dataMap' map object to make a complete FC datasource.
+             Map<String, String> dataMap = new LinkedHashMap<String, String>();  
+        /*
+            gson.toJson() the data to retrieve the string containing the
+            JSON representation of the data in the array.
+        */
+             dataMap.put("chart", gson.toJson(chartobj));
+             dataMap.put("categories", gson.toJson(charCategory));
+             dataMap.put("dataset", gson.toJson(chardataset));
+
+             FusionCharts mslineChat = new FusionCharts(
+                     "msline",// chartType
+                                 "chart1",// chartId
+                                 "600","400",// chartWidth, chartHeight
+                                 "chart",// chartContainer
+                                 "json",// dataFormat
+                                 gson.toJson(dataMap) //dataSource
+                             );
+             
+    
+           
+            %>
+            
+<!--    Step 5: Render the chart    -->                
+            <%=mslineChat.render()%>
+        
+    </body>
+</html>

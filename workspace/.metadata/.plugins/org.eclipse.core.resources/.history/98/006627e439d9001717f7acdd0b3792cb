@@ -1,0 +1,61 @@
+/**
+ * 
+ */
+package com.jayktec.xyzOlympus.actions;
+import java.util.*;
+
+import net.sf.jasperreports.engine.*;
+import org.openxava.actions.*;
+
+import com.gargoylesoftware.htmlunit.html.*;
+/**
+ * @author Anthonny
+ *
+ */
+public class Grafico  extends JasperReportBaseAction {  // 1
+ 
+/*	public void execute() throws Exception {
+		super.execute();
+		addMessage("InvoiceReportAction.printOK");
+	}
+	*/
+	@Inject
+	private Chart chart;
+	public void execute() throws Exception {
+		getView().setModelName("Chart");
+		getView().setEditable(true);
+		chart = Chart.load(getTab());
+		if (chart == null) chart = Chart.create(getTab());
+		Charts.updateView(getRequest(), getView(), getTab(), chart);
+	}
+	
+	
+    public Map getParameters() throws Exception  {                             // 2
+        Map parametros = new HashMap();
+         return parametros;
+    }
+ 
+   
+ 
+    protected String getJRXML() 
+    {
+    	try {
+			this.setFormat(PREVIOUS_MODE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "C:/ambiente/xyzOlympus/openxava-5.8/workspace/Afrodita/reports/Blank_A4.jrxml"; 
+        //return "/home/javi/Products.jrxml"; // Para leer del sistema de ficheros
+    }
+
+
+
+	@Override
+	protected JRDataSource getDataSource() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+ 
+   
+}

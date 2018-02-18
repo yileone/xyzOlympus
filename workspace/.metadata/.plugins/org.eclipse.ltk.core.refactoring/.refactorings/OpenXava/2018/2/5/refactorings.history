@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;CancelAction.java&apos; to &apos;Afrodita/src/com.jayktec.xyzOlympus.actions&apos;&#x0D;&#x0A;- Original project: &apos;OpenXava&apos;&#x0D;&#x0A;- Destination element: &apos;Afrodita/src/com.jayktec.xyzOlympus.actions&apos;&#x0D;&#x0A;- Original element: &apos;org.openxava.actions.CancelAction.java&apos;" description="Copy compilation unit" destination="=Afrodita/src&lt;com.jayktec.xyzOlympus.actions" element1="/src&lt;org.openxava.actions{CancelAction.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1517602622657" units="1" version="1.0"/>
+</session>
