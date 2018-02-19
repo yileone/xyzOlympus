@@ -11,6 +11,8 @@ import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
+import com.jayktec.persistencia.*;
+
 
 @Entity
 @Table(name="fateon_catalogo", schema="fateon")
@@ -82,6 +84,27 @@ public class Catalogo {
 	@ReferenceView("VCatalogo") 
 	private Tabla tabla;
 
+	
+	public Catalogo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Catalogo(String id) {
+		buscarCatalogo(id);
+	}
+
+	private void buscarCatalogo(String id) {
+		// TODO Auto-generated method stub
+		Catalogo temp = BdManager.buscarCatalogo(id);
+		this.setOid(temp.getOid());
+		this.setNombre(temp.getNombre());
+		this.setTabla(temp.getTabla());
+		this.setValorFecha(temp.getValorFecha());
+		this.setValorDecimal(temp.getValorDecimal());
+		this.setValorEntero(temp.getValorEntero());
+		this.setValorCadena(temp.getValorCadena());
+		this.setValorHora(temp.getValorHora());
+	}
 	public String getOid() {
 		return oid;
 	}

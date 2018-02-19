@@ -48,6 +48,12 @@ public class Programa {
 	}*/
 
 
+	public Programa() {
+		// TODO Auto-generated constructor stub
+	}
+	public Programa(String string) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getProgramaNombre() {
 		return programaNombre;

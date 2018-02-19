@@ -142,7 +142,39 @@ public class Origen {
 	private Catalogo ciudad;
 	
 	
+	public Origen(String string) {
+		// TODO Auto-generated constructor stub
+		buscarOrigen(string);
+	}
+
+	public Origen() {
+	}
 	
+	/**
+	 * genera todo un origen busncandolo de bd a partir del id
+	 * 
+	 * @param id2
+	 */
+	private void buscarOrigen(String id) {
+		// TODO Generar busqueda
+		Origen temp = BdManager.BuscarOrigen(id);
+		if (temp != null) {
+			this.setId(temp.getId());
+			this.setCiudad(temp.getCiudad());
+			this.setIp(temp.getIp());
+			this.setMac(temp.getMac());
+			this.setModelo(temp.getModelo());
+			this.setMunicipio(temp.municipio);
+			this.setNombre(temp.getNombre());
+			this.setOficina(temp.oficina);
+			this.setPais(temp.getPais());
+			this.setSistema(temp.getSistema());
+			this.setSucursal(temp.getSucursal());
+			this.setTipo(temp.getTipo());
+
+		}
+	}
+
 	public Catalogo getCiudad() {
 		return ciudad;
 	}
