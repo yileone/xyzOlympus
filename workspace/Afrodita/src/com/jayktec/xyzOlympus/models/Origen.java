@@ -159,7 +159,7 @@ public class Origen {
 		// TODO Generar busqueda
 		Origen temp = BdManager.BuscarOrigen(id);
 		if (temp != null) {
-			this.setId(temp.getId());
+			this.setOid(temp.getOid());
 			this.setCiudad(temp.getCiudad());
 			this.setIp(temp.getIp());
 			this.setMac(temp.getMac());

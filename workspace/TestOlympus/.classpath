@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/home/arte/eclipseNeon/eclipse/plugins/javax.xml.soap_1.2.0.v201005080501/lib/saaj.jar"/>
 	<classpathentry kind="lib" path="/home/arte/eclipseNeon/eclipse/plugins/javax.wsdl_1.6.2.v201012040545.jar"/>
 	<classpathentry kind="lib" path="/home/arte/eclipseNeon/eclipse/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Afrodita"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
