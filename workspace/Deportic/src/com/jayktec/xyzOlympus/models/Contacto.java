@@ -14,7 +14,7 @@ Valor*/
 @Entity
 @Views({
 	@View(name="VClub",members="club;tipoContacto;valor"),
-	@View(name="VPersona",members="persona.oid;tipoContacto;valor")})
+	@View(name="VContactoenPersona",members="persona.oid;tipoContacto;valor")})
 @Table(name="contacto", schema="deportic")
 public class Contacto {
 	
@@ -23,24 +23,16 @@ public class Contacto {
 	@Column(name="idcontacto",length=11)
 	private int oid;
 
-	/*@Hidden
-	@Column(name="idpersona",length=11)
-	private int oidpersona;*/
-	//@Hidden
-	@ManyToOne(fetch=FetchType.LAZY,optional=true)
-	@JoinColumn(name="idpersona",insertable=false,updatable=false)
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="idpersona",insertable=true,updatable=true)
+	@DescriptionsList(
+			showReferenceView=true)  
+	@ReferenceView("VPersonaenContacto") 
 	private Persona persona;
 	
-	/*@Column(name="idclub",length=11)
-	private int oidclub;*/
-	//@Hidden
-	@ManyToOne(fetch=FetchType.LAZY,optional=true)
-	@JoinColumn(name="idclub",insertable=false,updatable=false)
-	private Club club;
-    
-    
-    
-    
+	
 	
 	//TODO LLENAR EL CATALOGO PARA TIPO DE CONTACTO
 	@NoModify
@@ -99,17 +91,7 @@ public class Contacto {
 	}
 
 	public void setPersona(Persona persona) {
-		this.club= null;
 		this.persona = persona;
-	}
-
-	public Club getClub() {
-		return club;
-	}
-
-	public void setClub(Club club) {
-		this.club = club;
-		this.persona=null;
 	}
 
 	public void setTipoContacto(Catalogo tipoContacto) {
