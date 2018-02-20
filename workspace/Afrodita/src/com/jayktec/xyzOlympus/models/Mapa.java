@@ -49,6 +49,9 @@ public class Mapa {
 	@Column(name="mapa_nombre_campo",insertable=true,updatable=true)
 	private String mapaapp;
 
+	@Column(name="mapa_fecha_",insertable=true,updatable=true)
+	private Date mapaFecha;
+
 	public String getOid() {
 		return oid;
 	}
@@ -85,6 +88,20 @@ public class Mapa {
 
 	public void setMapaapp(String mapaapp) {
 		this.mapaapp = mapaapp;
+	}
+
+	/**
+	 * @return the mapaFecha
+	 */
+	public Date getMapaFecha() {
+		return mapaFecha;
+	}
+
+	/**
+	 * @param mapaFecha the mapaFecha to set
+	 */
+	public void setMapaFecha(Date mapaFecha) {
+		this.mapaFecha = mapaFecha;
 	}
 
 
