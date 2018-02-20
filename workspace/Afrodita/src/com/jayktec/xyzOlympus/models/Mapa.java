@@ -7,6 +7,7 @@ import org.openxava.annotations.*;
 import java.util.Date;
 import java.sql.Time;
 
+
 @Entity
 @Table(name="fateon_mapa", schema="fateon")
 public class Mapa {
