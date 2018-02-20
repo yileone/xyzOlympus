@@ -7,8 +7,8 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.recommenders
-
+.recommender
+.markers
 # External tool builders
 .externalToolBuilders/
 
