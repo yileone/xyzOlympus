@@ -30,6 +30,8 @@ manoHabil varchar(45)
 */
 @Entity
 @Table(name="persona", schema="deportic")
+@Views({
+	@View(name="VPersonaenContacto",members="primerNombre,primerApellido")})
 public class Persona implements Serializable  {
 
 	
@@ -74,9 +76,10 @@ public class Persona implements Serializable  {
 	@Column(name="lugarNacimiento",length=45)
 	private String lugarNacimiento;
 	
+
 	
+	@CollectionView("VContactoenPersona")
 	@OneToMany(mappedBy="persona")
-	@CollectionView("VPersona")
 	private Collection<Contacto> listacontactos;
 
 		
