@@ -4,6 +4,7 @@ tmp/
 *.bak
 *.swp
 *~.nib
+*.snap
 local.properties
 .settings/
 .loadpath
