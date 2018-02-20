@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
-import org.hibernate.envers.query.internal.property.*;
-
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
@@ -31,14 +29,6 @@ public class BdManager {
 		}
 		return null;
 	}
-	
-
-	public static ArrayList<Registro> consultarRegistro(String origen, Sensor sensor) throws SQLException {
-
-		return consultarRegistro(new Origen(origen),sensor);
-
-	}
-
 
 	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor) throws SQLException {
 
