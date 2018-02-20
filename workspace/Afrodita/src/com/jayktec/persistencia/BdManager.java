@@ -112,35 +112,35 @@ public class BdManager {
 		while (rs.next()) {
  
 			Registro temp = new Registro();
-			temp.setDate1(rs.getDate(Constantes.CampoRegistro.DATE1.campoBD()));
-			temp.setDate2(rs.getDate("registro_date_2"));
-			temp.setDate3(rs.getDate("registro_date_3"));
-			temp.setDate4(rs.getDate("registro_date_4"));
-			temp.setDate5(rs.getDate("registro_date_5"));
-			temp.setFloat1(rs.getFloat("registro_float_1"));
-			temp.setFloat2(rs.getFloat("registro_float_2"));
-			temp.setFloat3(rs.getFloat("registro_float_3"));
-			temp.setFloat4(rs.getFloat("registro_float_4"));
-			temp.setFloat5(rs.getFloat("registro_float_5"));
-			temp.setInt1(rs.getInt("registro_int_1"));
-			temp.setInt2(rs.getInt("registro_int_2"));
-			temp.setInt3(rs.getInt("registro_int_3"));
-			temp.setInt4(rs.getInt("registro_int_4"));
-			temp.setInt5(rs.getInt("registro_int_5"));
-			temp.setVarchar1(rs.getString("registro_varchar_1"));
-			temp.setVarchar2(rs.getString("registro_varchar_2"));
-			temp.setVarchar3(rs.getString("registro_varchar_3"));
-			temp.setVarchar4(rs.getString("registro_varchar_4"));
-			temp.setVarchar5(rs.getString("registro_varchar_5"));
-			temp.setHora1(rs.getTimestamp("registro_datetime_1"));
-			temp.setHora2(rs.getTimestamp("registro_datetime_2"));
-			temp.setHora3(rs.getTimestamp("registro_datetime_3"));
-			temp.setHora4(rs.getTimestamp("registro_datetime_4"));
-			temp.setHora5(rs.getTimestamp("registro_datetime_5"));
+			temp.setRegistroDate1(rs.getDate(Constantes.CampoRegistro.DATE1.campoBD()));
+			temp.setRegistroDate2(rs.getDate("registro_date_2"));
+			temp.setRegistroDate3(rs.getDate("registro_date_3"));
+			temp.setRegistroDate4(rs.getDate("registro_date_4"));
+			temp.setRegistroDate5(rs.getDate("registro_date_5"));
+			temp.setRegistroFloat1(rs.getFloat("registro_float_1"));
+			temp.setRegistroFloat2(rs.getFloat("registro_float_2"));
+			temp.setRegistroFloat3(rs.getFloat("registro_float_3"));
+			temp.setRegistroFloat4(rs.getFloat("registro_float_4"));
+			temp.setRegistroFloat5(rs.getFloat("registro_float_5"));
+			temp.setRegistroInt1(rs.getInt("registro_int_1"));
+			temp.setRegistroInt2(rs.getInt("registro_int_2"));
+			temp.setRegistroInt3(rs.getInt("registro_int_3"));
+			temp.setRegistroInt4(rs.getInt("registro_int_4"));
+			temp.setRegistroInt5(rs.getInt("registro_int_5"));
+			temp.setRegistroVarchar1(rs.getString("registro_varchar_1"));
+			temp.setRegistroVarchar2(rs.getString("registro_varchar_2"));
+			temp.setRegistroVarchar3(rs.getString("registro_varchar_3"));
+			temp.setRegistroVarchar4(rs.getString("registro_varchar_4"));
+			temp.setRegistroVarchar5(rs.getString("registro_varchar_5"));
+			temp.setRegistrotime1(rs.getTime("registro_datetime_1"));
+			temp.setRegistrotime2(rs.getTime("registro_datetime_2"));
+			temp.setRegistrotime3(rs.getTime("registro_datetime_3"));
+			temp.setRegistrotime4(rs.getTime("registro_datetime_4"));
+			temp.setRegistrotime5(rs.getTime("registro_datetime_5"));
 			temp.setSensor(new Sensor(rs.getString("sensor_id")));
 			temp.setOrigen(new Origen(rs.getString("origen_id")));
 			temp.setOid(rs.getString("registro_id"));
-			temp.setFechaRegistro(rs.getTimestamp("registro_fecha"));
+			temp.setRegistroFecha(rs.getString("registro_fecha"));
 			respuesta.add(temp);
 
 		}
@@ -289,30 +289,30 @@ public class BdManager {
 	 * buscar una tabla a partir de un mapa
 	 * @param id
 	 * @return
-	 */
-	public static Tabla_Mapa buscarTablaMapa(String id) {
-		Tabla_Mapa respuesta = null;
-		try {
-			String sql = "select * from fateon.fateon_tabla_mapa where tabla_mapa_id='" + id + "'";
-			PreparedStatement pst = connection.prepareStatement(sql);
-
-			ResultSet rs = consultarSql(pst);
-
-			while (rs.next()) {
-				respuesta = new Tabla_Mapa();
-				respuesta.setId(rs.getString("tabla_mapa_id"));
-				respuesta.setNombre(rs.getString("tabla_mapa_nombre"));
-				respuesta.setMapas(buscarMapas(respuesta.getId()));
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			Logger.getLogger("BdManager").log(Level.SEVERE,
-					"Error in search of Tabla_mapa in the bd:" + e.getMessage());
-
-		}
-
-		return respuesta;
-	}
+//	 */
+//	public static Tabla_Mapa buscarTablaMapa(String id) {
+//		Tabla_Mapa respuesta = null;
+//		try {
+//			String sql = "select * from fateon.fateon_tabla_mapa where tabla_mapa_id='" + id + "'";
+//			PreparedStatement pst = connection.prepareStatement(sql);
+//
+//			ResultSet rs = consultarSql(pst);
+//
+//			while (rs.next()) {
+//				respuesta = new Tabla_Mapa();
+//				respuesta.setId(rs.getString("tabla_mapa_id"));
+//				respuesta.setNombre(rs.getString("tabla_mapa_nombre"));
+//				respuesta.setMapas(buscarMapas(respuesta.getId()));
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			Logger.getLogger("BdManager").log(Level.SEVERE,
+//					"Error in search of Tabla_mapa in the bd:" + e.getMessage());
+//
+//		}
+//
+//		return respuesta;
+//	}
 
 	/**
 	 * buscar una tabla a partir de un mapa
@@ -331,8 +331,8 @@ public class BdManager {
 				respuesta = new Tabla();
 				respuesta.setOid(rs.getString("tabla_mapa_id"));
 				respuesta.setNombre(rs.getString("tabla_mapa_nombre"));
-				respuesta.setCatalogos(buscarCatalogos(respuesta.getId()));
-				respuesta.setNemonico(rs.getString("tabla_nemonico"));
+				respuesta.setCatalogos(buscarCatalogos(respuesta.getOid()));
+				respuesta.setTablaNemonico(rs.getString("tabla_nemonico"));
 				respuesta.setPrograma(rs.getString("tabla_programa"));
 				respuesta.setUbicacion(rs.getString("tabla_ubicacion_programa"));
 			}
@@ -360,13 +360,12 @@ public class BdManager {
 				temp = new Catalogo();
 				temp.setOid(rs.getString("catalogo_id"));
 				temp.setNombre(rs.getString("catalogo_nombre"));
-				temp.setTabla(rs.getString("catalogo_tabla"));
-				temp.setIdTabla(rs.getString("catalogo_id_tabla"));
+				temp.setTabla(new Tabla (rs.getString("catalogo_tabla")));
 				temp.setValorFecha(rs.getDate("catalogo_valor_time"));
-				temp.setValorFloat(rs.getFloat("catalogo_valor_float"));
+				temp.setValorDecimal(rs.getFloat("catalogo_valor_float"));
 				temp.setValorHora(rs.getTime("catlogo_valor_time"));
-				temp.setValorInt(rs.getInt("catalogo_valor_int"));
-				temp.setDescripcion(rs.getString("catalogo_descripcion_varchar"));
+				temp.setValorEntero(rs.getInt("catalogo_valor_int"));
+				temp.setValorCadena(rs.getString("catalogo_descripcion_varchar"));
 				respuesta.add(temp);
 			}
 		} catch (Exception e) {
@@ -396,7 +395,7 @@ public class BdManager {
 			while (rs.next()) {
 				Mapa temp = new Mapa();
 				temp.setOid(rs.getString("mapa_id"));
-				temp.setFecha(rs.getDate("mapa_fecha"));
+				temp.set(rs.getDate("mapa_fecha"));
 				temp.setTablaMapa(rs.getString("mapa_tabla"));
 				temp.setCampo(rs.getString("mapa_campo"));
 				temp.setNombreCampo(rs.getString("mapa_nombre_campo"));
@@ -423,12 +422,12 @@ public class BdManager {
 				respuesta = new Catalogo();
 				respuesta.setOid(rs.getString("catalogo_id"));
 				respuesta.setNombre(rs.getString("catalogo_nombre"));
-				respuesta.setTabla(rs.getString("catalogo_tabla"));
-				respuesta.setIdTabla(rs.getString("catalogo_id_tabla"));
+				respuesta.setTabla(new Tabla(rs.getString("catalogo_tabla")));
+				
 				respuesta.setValorFecha(rs.getDate("catalogo_valor_time"));
-				respuesta.setValorFloat(rs.getFloat("catalogo_valor_float"));
-				respuesta.setValorInt(rs.getInt("catalogo_valor_int"));
-				respuesta.setDescripcion(rs.getString("catalogo_descripcion_varchar"));
+				respuesta.setValorDecimal(rs.getFloat("catalogo_valor_float"));
+				respuesta.setValorEntero(rs.getInt("catalogo_valor_int"));
+				respuesta.setValorCadena(rs.getString("catalogo_descripcion_varchar"));
 				respuesta.setValorHora(rs.getTime("catalogo_valor_time"));
 				
 				
