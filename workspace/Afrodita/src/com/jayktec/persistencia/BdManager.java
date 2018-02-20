@@ -70,7 +70,7 @@ public class BdManager {
 
 	public static ArrayList<Mapa> consultarMapa(Sensor sensor) throws SQLException {
 
-		String sql = "select a.* from fateon_mapa a where  " + "a.mapa_id =" + sensor.getTabla().getId();
+		String sql = "select a.* from fateon_mapa a where  " + "a.mapa_id =" + sensor.getMapa().getOid();
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
 
@@ -84,13 +84,12 @@ public class BdManager {
 
 		ArrayList<Mapa> respuesta = new ArrayList<Mapa>();
 		while (rs.next()) {
-
 			Mapa temp = new Mapa();
-			temp.setCampo(rs.getString(("mapa_campo")));
-			temp.setFecha(rs.getDate(("mapa_fecha")));
-			temp.setOid(rs.getString(("mapa_id")));
-			temp.setTablaMapa(rs.getString(("mapa_tabla")));
-			temp.setNombreCampo(rs.getString("mapa_nombre_campo"));
+			temp.setOid(rs.getString("mapa_id"));
+			temp.setMapaFecha(rs.getDate("mapa_fecha"));
+			temp.setMapabd(new Catalogo(rs.getString("mapa_campo")));
+			temp.setMapaTabla(new Catalogo(rs.getString("mapa_tabla")));
+			temp.setMapaapp(rs.getString("mapa_nombre_campo"));
 			respuesta.add(temp);
 
 		}
@@ -395,10 +394,10 @@ public class BdManager {
 			while (rs.next()) {
 				Mapa temp = new Mapa();
 				temp.setOid(rs.getString("mapa_id"));
-				temp.set(rs.getDate("mapa_fecha"));
-				temp.setTablaMapa(rs.getString("mapa_tabla"));
-				temp.setCampo(rs.getString("mapa_campo"));
-				temp.setNombreCampo(rs.getString("mapa_nombre_campo"));
+				temp.setMapaFecha(rs.getDate("mapa_fecha"));
+				temp.setMapabd(new Catalogo(rs.getString("mapa_campo")));
+				temp.setMapaTabla(new Catalogo(rs.getString("mapa_tabla")));
+				temp.setMapaapp(rs.getString("mapa_nombre_campo"));
 				respuesta.add(temp);
 			}
 		} catch (Exception e) {
