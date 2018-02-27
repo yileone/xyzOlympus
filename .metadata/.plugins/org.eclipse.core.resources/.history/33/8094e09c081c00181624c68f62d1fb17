@@ -1,0 +1,19 @@
+package com.jayktec.xyzOlympus.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/*Table: contrato_extras
+Columns:
+extra_id int(11) PK 
+contrato_id int(11) 
+fechaRegistro timestamp 
+fechaInicio date 
+fechaVigencia date 
+funcionario_id int(11)*/
+
+@Entity
+@Table(name="contrato_extras", schema="deportic")
+public class Adicional {
+
+}

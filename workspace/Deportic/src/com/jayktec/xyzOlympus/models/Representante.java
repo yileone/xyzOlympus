@@ -9,17 +9,17 @@ import org.openxava.calculators.*;
 import java.io.*;
 import java.util.Date;
 
-/*Table: Representante
+/*Table: representante
 Columns:
-idrepresentante int(11) AI PK 
+representante_id int(11) AI PK 
 fechaInicio date 
 fechaFin date 
-fechaRegistro date 
-idpersona int(11) PK 
-idclub int(11) PK*/
+fechaRegistro timestamp 
+persona_id int(11) PK 
+club_id*/
 
 @Entity
-@Table(name="representante", schema="deportic")
+@Table(name="representante")
 public class Representante implements Serializable{
 	
 
@@ -31,11 +31,11 @@ public class Representante implements Serializable{
 	
 	@Id
 	@Hidden
-	@Column(name="idrepresentante",length=11)
+	@Column(name="representante_id",length=11)
 	private int oid;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idpersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	private Persona Persona;
 	
 	@Column(name="fechaInicio",length=10)
@@ -47,14 +47,8 @@ public class Representante implements Serializable{
 	private Date fechaFin;
 	
 	
-	@Column(name="fechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date fechaRegistro;
-	
-
-
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idclub",insertable=true,updatable=true)
+	@JoinColumn(name="club_id",insertable=true,updatable=true)
 	private Club club;
 
 
@@ -103,18 +97,6 @@ public class Representante implements Serializable{
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-
-
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
-
-
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
 	}
 
 

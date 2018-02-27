@@ -12,7 +12,7 @@ FROM `fateon`.`fateon_accion`;
 */
 
 @Entity
-@Table(name="fateon_accion", schema="fateon")
+@Table(name="fateon_accion")
 public class Programa {
 	
 	

@@ -1,0 +1,10 @@
+package com.jayktec.xyzOlympus.models;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="partido", schema="deportic")
+public class Partido {
+
+}

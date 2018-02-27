@@ -1,0 +1,33 @@
+package com.jayktec.xyzOlympus.models;
+import javax.persistence.*;
+
+
+import java.io.*;
+import java.util.*;
+
+import javax.persistence.*;
+
+import org.openxava.annotations.*;
+import org.openxava.calculators.*;
+
+@Entity
+@Table(name="contrato_descuento", schema="deportic")
+/*idtorneo int(11) AI PK 
+nombre varchar(45) 
+descripcion varchar(255)*/
+public class Descuento {
+	
+	
+	@Id
+	@Hidden
+	@Column(name="idtorneo",length=11)
+	private int oid;
+
+	@Column(name="nombre",length=45)
+	private String razonSocial;
+	
+	@Stereotype("MEMO")
+	@Column(name="descripcion",length=255)
+	private String descripcion;
+
+}

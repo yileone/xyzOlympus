@@ -5,28 +5,29 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 /*
 
-Table: Contacto
+Table: contacto
 Columns:
-idcontacto int(11) AI PK 
-tipoContacto int(11) PK 
-idpersona int(11) 
-Valor*/
+contacto_id int(11) AI PK 
+persona_id int(11) 
+tipoContacto int(11) 
+valor longtext
+*/
 @Entity
 @Views({
 	@View(name="VClub",members="club;tipoContacto;valor"),
 	@View(name="VContactoenPersona",members="persona.oid;tipoContacto;valor")})
-@Table(name="contacto", schema="deportic")
+@Table(name="contacto")
 public class Contacto {
 	
 	@Id
 	@Hidden
-	@Column(name="idcontacto",length=11)
+	@Column(name="contacto_id",length=11)
 	private int oid;
 
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idpersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	@DescriptionsList(
 			showReferenceView=true)  
 	@ReferenceView("VPersonaenContacto") 

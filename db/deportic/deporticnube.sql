@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `deportic` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `deportic`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 45.7.229.159    Database: deportic
@@ -625,6 +627,7 @@ CREATE TABLE `persona` (
   `fechaRegistro` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `sexo` varchar(45) NOT NULL,
   `manoHabil` varchar(45) NOT NULL,
+  `idcontacto` int(11) NOT NULL,
   PRIMARY KEY (`idpersona`),
   UNIQUE KEY `idpersona_unique` (`idpersona`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -636,7 +639,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,1234567890,'2','Anthony','Jose','Marrufo','','2014-10-02',NULL,'Los Teques','9','2018-02-08 01:01:07','6','8'),(2,9475892,'0','yisheng','','León','espinoza','2018-06-02',NULL,'santiago de chile','9','2018-02-09 19:57:41','6','8'),(3,8668401,'2','Jose','R.','Leon','Vasquez','1969-04-17',NULL,'ñuñoa','9','2018-02-12 15:11:12','6','8');
+INSERT INTO `persona` VALUES (1,1234567890,'2','Anthony','Jose','Marrufo','','2014-10-02',NULL,'Los Teques','9','2018-02-08 01:01:07','6','8',0),(2,9475892,'0','yisheng','','León','espinoza','2018-06-02',NULL,'santiago de chile','9','2018-02-09 19:57:41','6','8',0),(3,8668401,'2','Jose','R.','Leon','Vasquez','1969-04-17',NULL,'ñuñoa','9','2018-02-12 15:11:12','6','8',0);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -812,4 +815,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-19 19:39:15
+-- Dump completed on 2018-02-19 21:12:36

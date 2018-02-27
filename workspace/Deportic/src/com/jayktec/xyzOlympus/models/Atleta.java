@@ -21,7 +21,11 @@ import org.openxava.calculators.*;
 import org.openxava.filters.*;
 
 @Entity
-@Table(name="atleta", schema="deportic")
+/*atleta_id int(11) AI PK 
+persona_id int(11) 
+tipoSangre varchar(45) 
+manoHabil varchar(45*/
+@Table(name="atleta")
 public class Atleta implements Serializable{
 	
 
@@ -35,11 +39,11 @@ public class Atleta implements Serializable{
 	
 	@Id
 	@Hidden
-	@Column(name="idatleta",length=11)
+	@Column(name="atleta_id",length=11)
 	private int oid;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idpersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	private Persona persona;
 	
 	@NoModify
@@ -52,30 +56,45 @@ public class Atleta implements Serializable{
 	@ReferenceView("VVarchar")private Catalogo tipoSangre;
 
 	
-	/*@NoModify
+	
+	//TODO CARGA DATA PARA EL CATALOGO Lateralidad 
+	@NoModify
 	@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="alergia",insertable=true,updatable=true,table="atleta")
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Alergias')")
-	private Catalogo alergia;*/
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="manoHabil",insertable=true,updatable=true,table="persona")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Lateralidad')",
+	showReferenceView=false,
+	descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")
+	private Catalogo manoHabil;
 	
-	
-	
-	/*@NoCreate
-	@OneToMany(targetEntity=com.jayktec.xyzOlympus.models.Catalogo.class)
-	private Collection <Catalogo> alergia;*/
-	
-	
-	/*@NoModify
+
+	/*Cargamos la Rutina que Tiene el Atleta*/
 	@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="enfermedades",insertable=true,updatable=true,table="Atleta")*/
+	@NoModify
+	@OneToMany(mappedBy="atleta")
+	private Collection<AtletaRutina> rutinas;
 	
 	
-	/*@OneToMany(cascade=CascadeType.ALL, mappedBy="idCatalogo")
-	private Collection <Catalogo> enfermedades;*/
-
-
+	/*Cargamos Los Logros del Atleta*/
+	
+	@NoCreate
+	@NoModify
+	@OneToMany(mappedBy="atleta")
+	private Collection<HistorialLogros> historialLogros;
+	
+	/*Cargamos Historia Fisico del Atleta*/
+	@NoCreate
+	@NoModify
+	@OneToMany(mappedBy="atleta")
+	private Collection<HistorialFisico> historialFisico;
+	
+	/*Cargamos Historia Medico del Atleta*/
+	@NoCreate
+	@NoModify
+	@OneToMany(mappedBy="atleta")
+	private Collection<Historialmedico> historialmedico;
+	
 	public int getOid() {
 		return oid;
 	}
@@ -102,21 +121,45 @@ public class Atleta implements Serializable{
 		this.tipoSangre = tipoSangre;
 	}
 
-	/*public Collection<Catalogo> getEnfermedades() {
-		
-		return enfermedades;
+	public Catalogo getManoHabil() {
+		return manoHabil;
 	}
 
-	public void setEnfermedades(Collection<Catalogo> enfermedades) {
-		this.enfermedades = enfermedades;
-	}*/
+	public void setManoHabil(Catalogo manoHabil) {
+		this.manoHabil = manoHabil;
+	}
 
+	public Collection<AtletaRutina> getRutinas() {
+		return rutinas;
+	}
 
-	
+	public void setRutinas(Collection<AtletaRutina> rutinas) {
+		this.rutinas = rutinas;
+	}
 
-	
+	public Collection<HistorialLogros> getHistorialLogros() {
+		return historialLogros;
+	}
 
+	public void setHistorialLogros(Collection<HistorialLogros> historialLogros) {
+		this.historialLogros = historialLogros;
+	}
 
+	public Collection<HistorialFisico> getHistorialFisico() {
+		return historialFisico;
+	}
+
+	public void setHistorialFisico(Collection<HistorialFisico> historialFisico) {
+		this.historialFisico = historialFisico;
+	}
+
+	public Collection<Historialmedico> getHistorialmedico() {
+		return historialmedico;
+	}
+
+	public void setHistorialmedico(Collection<Historialmedico> historialmedico) {
+		this.historialmedico = historialmedico;
+	}
 
 
 

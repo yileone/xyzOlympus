@@ -15,7 +15,7 @@ import com.jayktec.persistencia.*;
 import sun.util.*;
 
 @Entity
-@Table(name = "fateon_tabla", schema = "fateon")
+@Table(name = "fateon_tabla")
 // @View(members="Ingresar Tabla {# nombre,tablaNemonico;programa,ubicacion;}
 // Gestionar Catalogos {#catalogos}" )
 @Views({ @View(name = "VCatalogo", members = "nombre; tablaNemonico; programa;ubicacion"), })

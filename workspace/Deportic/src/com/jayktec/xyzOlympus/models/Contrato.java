@@ -10,40 +10,40 @@ import org.openxava.calculators.*;
 /*
 Table: contrato
 Columns:
-atleta_idatleta int(11) 
-convenio_idconvenio int(11) 
-contratocol varchar(45) PK 
-FechaRegistro date 
+contrato_id int(11) PK 
+atleta_id int(11) 
+convenio_id int(11) 
+fechaRegistro timestamp 
 fechaInicio date 
-FechaFin date 
-formaPago varchar(45) 
-valorCuota int(11) 
+fechaFin date 
+formaPago int(11) 
+valorCuota float 
 cantidadCuotas int(11) 
-equipo_idEquipo int(11)
+equipo_id int(11)
 */
 @Entity
-@Table(name="contrato", schema="deportic")
+@Table(name="contrato")
 public class Contrato {
 	
 	
 	@Id
 	@Hidden
-	@Column(name="contratocol",length=11)
-	private int oidContrato;
+	@Column(name="contrato_id",length=11)
+	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_idatleta",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
 	private Atleta atleta;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="convenio_idconvenio",insertable=true,updatable=true)
-	private Convenio idconvenio;
+	@JoinColumn(name="convenio_id",insertable=true,updatable=true)
+	private Convenio convenio;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="equipo_idEquipo",insertable=true,updatable=true)
+	@JoinColumn(name="equipo_id",insertable=true,updatable=true)
 	private Equipo equipo;
 	
 	@Column(name="fechaInicio",length=10)
@@ -54,27 +54,28 @@ public class Contrato {
 	@DefaultValueCalculator(CurrentDateCalculator.class)
 	private Date fechaFin;
 	
-	
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date fechaRegistro;
-	
-	@Column(name="formaPago",length=45)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="formaPago",insertable=true,updatable=true,table="atleta")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='FormaPago')",
+			showReferenceView=false,
+			descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")private Catalogo tipoSangre;
 	private String formaPago;
 	
 	@Column(name="valorCuota",length=11)
-	private int valorCuota;
+	private float valorCuota;
 	
 	@Column(name="cantidadCuotas",length=11)
 	private int cantidadCuotas;
 
-	public int getOidContrato() {
-		return oidContrato;
+	public int getOid() {
+		return oid;
 	}
 
-	public void setOidContrato(int oidContrato) {
-		this.oidContrato = oidContrato;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
 	public Atleta getAtleta() {
@@ -85,12 +86,12 @@ public class Contrato {
 		this.atleta = atleta;
 	}
 
-	public Convenio getIdconvenio() {
-		return idconvenio;
+	public Convenio getConvenio() {
+		return convenio;
 	}
 
-	public void setIdconvenio(Convenio idconvenio) {
-		this.idconvenio = idconvenio;
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
 	}
 
 	public Equipo getEquipo() {
@@ -117,12 +118,12 @@ public class Contrato {
 		this.fechaFin = fechaFin;
 	}
 
-	public Date getFechaRegistro() {
-		return fechaRegistro;
+	public Catalogo getTipoSangre() {
+		return tipoSangre;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+	public void setTipoSangre(Catalogo tipoSangre) {
+		this.tipoSangre = tipoSangre;
 	}
 
 	public String getFormaPago() {
@@ -133,11 +134,11 @@ public class Contrato {
 		this.formaPago = formaPago;
 	}
 
-	public int getValorCuota() {
+	public float getValorCuota() {
 		return valorCuota;
 	}
 
-	public void setValorCuota(int valorCuota) {
+	public void setValorCuota(float valorCuota) {
 		this.valorCuota = valorCuota;
 	}
 
@@ -148,5 +149,7 @@ public class Contrato {
 	public void setCantidadCuotas(int cantidadCuotas) {
 		this.cantidadCuotas = cantidadCuotas;
 	}
+
+	
 
 }

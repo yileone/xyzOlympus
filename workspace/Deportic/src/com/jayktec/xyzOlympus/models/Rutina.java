@@ -4,26 +4,26 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 /*
- Table: rutina
+Table: rutina
 Columns:
-idrutina int(11) AI PK 
-Actividad varchar(45) 
+rutina_id int(11) AI PK 
+actividad varchar(45) 
 frecuencia varchar(45) 
 tiempo varchar(45) 
 descansoFrecuencia varchar(45) 
-rutinaNombre varchar(45)
+rutinaNombre
  */
 @Entity
-@Table(name="roles", schema="deportic")
+@Table(name="rutina")
 public class Rutina {
 	
 	@Id
 	@Hidden
-	@Column(name="idrutina",length=11)
-	private int oidRutina;
+	@Column(name="rutina_id",length=11)
+	private int oid;
 	
 	@Column(name="rutinaNombre",length=50)
-	private String rutinaNombre;
+	private String nombre;
 	
 	
 	//TODO Ver si est es un catalogo
@@ -42,43 +42,53 @@ public class Rutina {
 	
 	@Column(name="descansoFrecuencia",length=50)
 	private String descansoFrecuencia;
-	
-	public int getOidRutina() {
-		return oidRutina;
+
+	public int getOid() {
+		return oid;
 	}
-	public void setOidRutina(int oidRutina) {
-		this.oidRutina = oidRutina;
+
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
-	public String getRutinaNombre() {
-		return rutinaNombre;
+
+	public String getNombre() {
+		return nombre;
 	}
-	public void setRutinaNombre(String rutinaNombre) {
-		this.rutinaNombre = rutinaNombre;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 	public String getActividad() {
 		return actividad;
 	}
+
 	public void setActividad(String actividad) {
 		this.actividad = actividad;
 	}
+
 	public String getFrecuencia() {
 		return frecuencia;
 	}
+
 	public void setFrecuencia(String frecuencia) {
 		this.frecuencia = frecuencia;
 	}
+
 	public String getTiempo() {
 		return tiempo;
 	}
+
 	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
 	}
+
 	public String getDescansoFrecuencia() {
 		return descansoFrecuencia;
 	}
+
 	public void setDescansoFrecuencia(String descansoFrecuencia) {
 		this.descansoFrecuencia = descansoFrecuencia;
 	}
-
 
 }

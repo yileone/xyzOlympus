@@ -6,21 +6,21 @@ import org.openxava.annotations.*;
 
 /*
  * 
- Table: equipo
+Table: equipo
 Columns:
-club_idclub int(11) 
-id_equipo int(11) AI PK 
+equipo_id int(11) AI PK 
 nombre varchar(45) 
-categoria varchar(45)*/
+categoria int(11) 
+club_id int(11)*/
 @Entity
-@Table(name="equipo", schema="deportic")
+@Table(name="equipo")
 public class Equipo {
 	
 
 	@Id
 	@Hidden
-	@Column(name="id_equipo",length=11)
-	private int oidEquipo;
+	@Column(name="equipo_id",length=11)
+	private int oid;
 	
 	
 	@Column(name="nombre",length=45)
@@ -39,40 +39,47 @@ public class Equipo {
 	
 
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="club_idclub",insertable=true,updatable=true)
+	@JoinColumn(name="club_id",insertable=true,updatable=true)
 	private Club club;
 
-	public int getOidEquipo() {
-		return oidEquipo;
+
+	public int getOid() {
+		return oid;
 	}
 
-	public void setOidEquipo(int oidEquipo) {
-		this.oidEquipo = oidEquipo;
+
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
+
 
 	public String getNombreEquipo() {
 		return nombreEquipo;
 	}
 
+
 	public void setNombreEquipo(String nombreEquipo) {
 		this.nombreEquipo = nombreEquipo;
 	}
+
 
 	public Catalogo getCategoriaEquipo() {
 		return categoriaEquipo;
 	}
 
+
 	public void setCategoriaEquipo(Catalogo categoriaEquipo) {
 		this.categoriaEquipo = categoriaEquipo;
 	}
+
 
 	public Club getClub() {
 		return club;
 	}
 
+
 	public void setClub(Club club) {
 		this.club = club;
 	}
 
-	
 }

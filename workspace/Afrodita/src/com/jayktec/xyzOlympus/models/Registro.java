@@ -11,7 +11,7 @@ import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
 @Entity
-@Table(name = "fateon_registro", schema = "fateon")
+@Table(name = "fateon_registro")
 @View(name = "Simple", members = "registroFloat1,registroFloat2,registroDate1")
 public class Registro {
 

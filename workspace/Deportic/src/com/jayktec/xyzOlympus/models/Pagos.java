@@ -10,42 +10,40 @@ import org.openxava.calculators.*;
 /*
 Table: pagos
 Columns:
-id_contrato varchar(45) 
-pagos int(11) AI PK 
-FechaRegistro date 
-Monto varchar(45) 
+pago_id int(11) PK 
+contrato_id int(11) AI 
+fechaRegistro timestamp 
+monto float 
 numeroCheque varchar(45) 
 banco varchar(45) 
 tdc varchar(45) 
-efectivo int(11) 
+efectivo float 
 numerotransaccion int(11) 
 transferencia int(11)*/
 @Entity
-@Table(name="pagos", schema="deportic")
+@Table(name="pagos")
 public class Pagos {
 	
 	
 	@Id
 	@Hidden
-	@Column(name="id_contrato",length=11)
-	private int oidContrato;
+	@Column(name="pago_id",length=11)
+	private int oid;
 	
 	
-	//TODO Ver el tipo de datos creo mejor colocarlo Float pagos
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="contrato_id",insertable=true,updatable=true)
+	private Contrato contrato;
+	
+	
+	@Column(name="Monto",length=45)
+	private float monto;
+	
+	
 	@Column(name="pagos",length=11)
 	private int pago;
 	
-	@NoModify
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaRegistro;	
-	
-	
-	//TODO Ver el tipo de datos creo mejor colocarlo Float  Monto
-	@Column(name="Monto",length=45)
-	private String monto;	
-	
-	
+
 	@Column(name="numeroCheque",length=45)
 	private String numeroCheque;	
 	
@@ -53,30 +51,44 @@ public class Pagos {
 	@Column(name="banco",length=45)
 	private String 	banco;
 	
-	
-	
 	//TODO Ver como funciona este estereotipo tarjeta de credito
 	@Stereotype("TARJETA_CREDITO")
 	@Column(name="tdc",length=45)
 	private String numeroTarjeta;
 	
 	//TODO Ver el tipo de datos creo mejor colocarlo Float  efectivo
-	@Column(name="efectivo",length=45)
-	private int efectivo;
+	@Column(name="efectivo",length=12)
+	private float efectivo;
 	
 	
-	@Column(name="numerotransaccion",length=45)
+	@Column(name="numerotransaccion",length=12)
 	private int numerotransaccion;
 	
-	@Column(name="transferencia",length=45)
+	@Column(name="transferencia",length=12)
 	private int numerotransferencia;
 
-	public int getOidContrato() {
-		return oidContrato;
+	public int getOid() {
+		return oid;
 	}
 
-	public void setOidContrato(int oidContrato) {
-		this.oidContrato = oidContrato;
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
+
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+
+	public float getMonto() {
+		return monto;
+	}
+
+	public void setMonto(float monto) {
+		this.monto = monto;
 	}
 
 	public int getPago() {
@@ -85,22 +97,6 @@ public class Pagos {
 
 	public void setPago(int pago) {
 		this.pago = pago;
-	}
-
-	public Date getFechaRegistro() {
-		return FechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
-	}
-
-	public String getMonto() {
-		return monto;
-	}
-
-	public void setMonto(String monto) {
-		this.monto = monto;
 	}
 
 	public String getNumeroCheque() {
@@ -127,11 +123,11 @@ public class Pagos {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 
-	public int getEfectivo() {
+	public float getEfectivo() {
 		return efectivo;
 	}
 
-	public void setEfectivo(int efectivo) {
+	public void setEfectivo(float efectivo) {
 		this.efectivo = efectivo;
 	}
 

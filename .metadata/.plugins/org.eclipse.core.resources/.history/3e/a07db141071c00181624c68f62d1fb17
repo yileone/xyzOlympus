@@ -1,0 +1,49 @@
+package com.jayktec.xyzOlympus.models;
+import javax.persistence.*;
+
+
+import java.io.*;
+import java.util.*;
+
+import javax.persistence.*;
+
+import org.openxava.annotations.*;
+import org.openxava.calculators.*;
+
+@Entity
+@Table(name="contrato_descuento", schema="deportic")
+/*Table: contrato_descuento
+Columns:
+contratoDescuento_id int(11) AI PK 
+contrato_id int(11) 
+fechaRegistro timestamp 
+funcionario_id int(11) PK 
+valor int(11) 
+porcentaje*/
+public class Descuento {
+	
+	
+	@Id
+	@Hidden
+	@Column(name="contratoDescuento_id",length=11)
+	private int oid;
+
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="contrato_id",insertable=true,updatable=true)
+	private Contrato contrato;
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true)
+	private Funcionario funcionario;
+	
+	@Stereotype("MEMO")
+	@Column(name="descripcion",length=255)
+	private String descripcion;
+	
+	
+	@Stereotype("MEMO")
+	@Column(name="valor",length=12)
+	private float valor;
+
+}

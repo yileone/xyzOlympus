@@ -19,7 +19,6 @@ valor_hora time
 valor_fecha date 
 descripcion varch*/
 @Entity
-@Table(name="catalogo", schema="deportic")
 @Views({
 	 @View( members="tabla; nombre; descripcion; valorEntero;valorFloat;valorVarchar;valorHora;valorFecha" ),
 	 @View( name="VEntero", members="valorEntero" ),

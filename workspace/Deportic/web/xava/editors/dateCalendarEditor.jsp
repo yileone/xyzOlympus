@@ -21,7 +21,7 @@ if (editable || !label) {
 	align='<%=align%>'
 	maxlength="<%=p.getSize()%>" 
 	size="<%=p.getSize() + sizeIncrement%>" 	 
-	value="<%=fvalue%>" <%=disabled%> <%=script%>><%if (editable) {%><a style="position: relative; right: 25px;" href="javascript:showCalendar('<%=propertyKey%>', '<%=org.openxava.util.Dates.dateFormatForJSCalendar(org.openxava.util.Locales.getCurrent())%>')"><i class="mdi mdi-calendar"></i></a><%} %>	
+	value="<%=fvalue%>" <%=disabled%> <%=script%>><%if (editable) {%><a style="position: relative; right: 25px;" href="javascript:showCalendar('<%=propertyKey%>', '%d/%m/%Y')"><i class="mdi mdi-calendar"></i></a><%} %>
 </span> 
 <%
 } else {

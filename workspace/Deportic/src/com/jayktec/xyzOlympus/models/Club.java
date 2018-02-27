@@ -9,17 +9,14 @@ import org.openxava.annotations.*;
 /*
 Table: club
 Columns:
-idclub int(11) AI PK 
+club_id int(11) AI PK 
 razonSocial varchar(45) 
-direccion longtext 
-logo blob 
-fono varchar(45) 
-email varchar(45) 
-paginaWeb varchar(45)*/
+logo blob
+*/
 
 
 @Entity
-@Table(name="club", schema="deportic")
+@Table(name="club")
 public class Club implements Serializable {
 
 	
@@ -30,7 +27,7 @@ public class Club implements Serializable {
 
 	@Id
 	@Hidden
-	@Column(name="idclub",length=11)
+	@Column(name="club_id",length=11)
 	private int oid;
 
 	@Column(name="razonSocial",length=45)
@@ -41,18 +38,9 @@ public class Club implements Serializable {
 	private byte[] logo;
 	
 
-@OneToMany(mappedBy="club")
-@CollectionView("VClub")
-private Collection<Contacto> listacontactos;
-
-	
-	public Collection<Contacto> getListacontactos() {
-	return listacontactos;
-}
-
-public void setListacontactos(Collection<Contacto> listacontactos) {
-	this.listacontactos = listacontactos;
-}
+	@OneToMany(mappedBy="club")
+	@CollectionView("VClub")
+	private Collection<Contacto> listacontactos;
 
 	public int getOid() {
 		return oid;
@@ -78,6 +66,13 @@ public void setListacontactos(Collection<Contacto> listacontactos) {
 		this.logo = logo;
 	}
 
+	public Collection<Contacto> getListacontactos() {
+		return listacontactos;
+	}
+
+	public void setListacontactos(Collection<Contacto> listacontactos) {
+		this.listacontactos = listacontactos;
+	}
 	
 	
 	

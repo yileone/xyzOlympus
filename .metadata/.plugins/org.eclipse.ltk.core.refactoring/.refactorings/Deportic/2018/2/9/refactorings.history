@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.jayktec.xyzOlympus.models.Extra&apos; to &apos;Adicional&apos;&#x0D;&#x0A;- Original project: &apos;Deportic&apos;&#x0D;&#x0A;- Original element: &apos;com.jayktec.xyzOlympus.models.Extra&apos;&#x0D;&#x0A;- Renamed element: &apos;com.jayktec.xyzOlympus.models.Adicional&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Extra&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.jayktec.xyzOlympus.models{Extra.java[Extra" matchStrategy="1" name="Adicional" qualified="false" references="true" similarDeclarations="false" stamp="1519768201379" textual="false" version="1.0"/>
+</session>

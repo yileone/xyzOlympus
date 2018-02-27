@@ -8,30 +8,32 @@ import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
 /*Columns:
-identrenador int(11) AI PK 
+Table: entrenador
+Columns:
+entrenador_id int(11) AI PK 
 desde date 
 hasta date 
-Persona_idPersona int(11) PK 
-equipo_idEquipo int(11) PK 
-estado varchar(45)*/
+persona_id int(11) PK 
+equipo_id int(11) PK 
+estado int(11)*/
 @Entity
-@Table(name="entrenador", schema="deportic")
+@Table(name="entrenador")
 public class Entrenador {
 
 	@Id
 	@Hidden
-	@Column(name="identrenador",length=11)
-	private int oidEntrenador;
+	@Column(name="entrenador_id",length=11)
+	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="Persona_idPersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	private Persona persona;
 	
 
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="equipo_idEquipo",insertable=true,updatable=true)
+	@JoinColumn(name="equipo_id",insertable=true,updatable=true)
 	private Equipo equipo;
 	
 	@Column(name="desde",length=10)
@@ -59,15 +61,15 @@ public class Entrenador {
 
 
 
-	public int getOidEntrenador() {
-		return oidEntrenador;
+	public int getOid() {
+		return oid;
 	}
 
 
 
 
-	public void setOidEntrenador(int oidEntrenador) {
-		this.oidEntrenador = oidEntrenador;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
 
@@ -139,7 +141,6 @@ public class Entrenador {
 	public void setEstado(Catalogo estado) {
 		this.estado = estado;
 	}
-
 
 
 

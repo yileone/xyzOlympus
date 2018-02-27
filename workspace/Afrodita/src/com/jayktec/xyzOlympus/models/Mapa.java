@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="fateon_mapa", schema="fateon")
+@Table(name="fateon_mapa")
 public class Mapa {
 	@Id
 	@GeneratedValue(generator="system-uuid")

@@ -7,19 +7,19 @@ import org.openxava.annotations.*;
 /*
 Table: funcionario
 Columns:
-Persona_idPersona int(11) 
-idfuncionario int(11) AI PK*/
+funcionario_id int(11) AI PK 
+persona_id int(11)*/
 @Entity
-@Table(name="funcionario", schema="deportic")
+@Table(name="funcionario")
 public class Funcionario {
 	
 	@Id
 	@Hidden
-	@Column(name="idfuncionario",length=11)
+	@Column(name="funcionario_id",length=11)
 	private int oid;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="Persona_idPersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	private Persona persona;
 
 	public int getOid() {

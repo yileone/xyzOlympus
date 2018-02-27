@@ -5,29 +5,30 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 /*
+Table: rol
 Columns:
-id_rol int(11) PK 
-descripcion varchar(255) 
-funcionario_idfuncionario int(11)
- */
+rol_id int(11) PK 
+descripcion longtext 
+funcionario_id int(11) 
+persona_id */
 @Entity
-@Table(name="roles", schema="deportic")
+@Table(name="roles")
 public class Roles {
 	
 	@Id
 	@Hidden
-	@Column(name="idrol",length=11)
+	@Column(name="rol_id",length=11)
 	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idpersona",insertable=true,updatable=true)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
 	private Persona persona;
 	
 
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="funcionario_idfuncionario",insertable=true,updatable=true)
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true)
 	private Funcionario funcionario;
 	
 	@Stereotype("TEXTOGRANDE")

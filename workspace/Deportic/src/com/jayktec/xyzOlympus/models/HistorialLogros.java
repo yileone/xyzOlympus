@@ -7,28 +7,31 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
-/*Table: historiallogros
+/*
+Table: historiallogros
 Columns:
-atleta_idatleta int(11) 
-FechaRegistro date 
+historial_Logro_id int(11) PK 
+atleta_id int(11) 
+fechaRegistro timestamp 
 logro longtext 
 lugar varchar(45) 
 competencia varchar(45) 
-funcionario_idfuncionario int(11) 
-torneo_idtorneo int(11)*/
+funcionario_id int(11) 
+torneo_id int(11)
+*/
 @Entity
-@Table(name="historialLogros", schema="deportic")
+@Table(name="historialLogros")
 public class HistorialLogros {
 	
 	//TODO No tiene id para la tabla historialLogros esta bien ?
 	@Id
 	@Hidden
-	@Column(name="idhistorialogro",length=11)
-	private int oidHistlogro;
+	@Column(name="historial_Logro_id",length=11)
+	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_idatleta",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
 	private Atleta atleta;
 	
 	
@@ -37,13 +40,8 @@ public class HistorialLogros {
 	private Funcionario funcionario;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="torneo_idtorneo",insertable=true,updatable=true)
+	@JoinColumn(name="torneo_id",insertable=true,updatable=true)
 	private Torneo torneo;
-
-	
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaRegistro;	
 
 	@Stereotype("TEXTO_GRANDE")
 	@Column(name="logro",length=10)
@@ -55,6 +53,14 @@ public class HistorialLogros {
 	//TODO Esto es un catalogo ?
 	@Column(name="competencia",length=45)
 	private String competencia;
+
+	public int getOid() {
+		return oid;
+	}
+
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
 
 	public Atleta getAtleta() {
 		return atleta;
@@ -80,14 +86,6 @@ public class HistorialLogros {
 		this.torneo = torneo;
 	}
 
-	public Date getFechaRegistro() {
-		return FechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
-	}
-
 	public String getLogro() {
 		return logro;
 	}
@@ -111,17 +109,5 @@ public class HistorialLogros {
 	public void setCompetencia(String competencia) {
 		this.competencia = competencia;
 	}
-
-	public int getOidHistlogro() {
-		return oidHistlogro;
-	}
-
-	public void setOidHistlogro(int oidHistlogro) {
-		this.oidHistlogro = oidHistlogro;
-	}
-
-
-
-	
 
 }

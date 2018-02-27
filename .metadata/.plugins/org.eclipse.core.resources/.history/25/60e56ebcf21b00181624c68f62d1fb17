@@ -1,0 +1,17 @@
+package com.jayktec.xyzOlympus.models;
+import javax.persistence.*;
+
+
+import java.io.*;
+import java.util.*;
+
+import javax.persistence.*;
+
+import org.openxava.annotations.*;
+import org.openxava.calculators.*;
+
+@Entity
+@Table(name="contrato_descuento", schema="deportic")
+public class Descuento {
+
+}

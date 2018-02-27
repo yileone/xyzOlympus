@@ -6,20 +6,19 @@ import org.openxava.annotations.*;
 
 /*
  * 
- Table: torneo
 Columns:
-idtorneo int(11) AI PK 
+torneo_id int(11) AI PK 
 nombre varchar(45) 
-descripcion varchar(255)
+descripcion longtext
  */
 @Entity
-@Table(name="torneo", schema="deportic")
+@Table(name="torneo")
 public class Torneo {
 	
 	@Id
 	@Hidden
-	@Column(name="idtorneo",length=11)
-	private int oidTorneo;
+	@Column(name="torneo_id",length=11)
+	private int oid;
 	
 	@Column(name="nombre",length=45)
 	private String nombre;
@@ -28,12 +27,12 @@ public class Torneo {
 	@Column(name="descripcion",length=255)
 	private String descripcion;
 
-	public int getOidTorneo() {
-		return oidTorneo;
+	public int getOid() {
+		return oid;
 	}
 
-	public void setOidTorneo(int oidTorneo) {
-		this.oidTorneo = oidTorneo;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
 	public String getNombre() {
@@ -51,6 +50,5 @@ public class Torneo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
 
 }
