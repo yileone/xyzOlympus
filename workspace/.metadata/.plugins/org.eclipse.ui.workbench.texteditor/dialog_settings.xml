@@ -14,14 +14,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="NoModify"/>
-			<item value=".jsp"/>
-			<item value="depe"/>
-			<item value="tabla"/>
-			<item value="club"/>
-			<item value="date"/>
-			<item value="cate"/>
-			<item value="catego"/>
+			<item value="consultaregistro"/>
+			<item value="tabla_mapa"/>
+			<item value="connection"/>
+			<item value="main"/>
+			<item value="armar"/>
+			<item value="json"/>
+			<item value="armarj"/>
+			<item value="from"/>
 		</list>
 		<list key="replacehistory">
 			<item value="chartobj"/>
@@ -35,9 +35,9 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="284" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="391" key="DIALOG_HEIGHT"/>
+		<item value="313" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="400" key="DIALOG_HEIGHT"/>
 		<item value="881" key="DIALOG_X_ORIGIN"/>
 		<item value="97" key="DIALOG_Y_ORIGIN"/>
 	</section>

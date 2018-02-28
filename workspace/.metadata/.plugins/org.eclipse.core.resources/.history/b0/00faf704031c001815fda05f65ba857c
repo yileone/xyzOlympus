@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package com.jayktec.traductor;
+
+import java.sql.*;
+import java.util.*;
+
+import com.jayktec.xyzOlympus.models.*;
+
+/**
+ * @author arte
+ *
+ */
+public class ToJsonMultiAxis extends ToJson{
+
+	public ToJsonMultiAxis(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
+		super(registros, origen, sensor);
+		// TODO Auto-generated constructor stub
+	}
+
+	public ToJsonMultiAxis(String origen, Sensor sensor) throws SQLException {
+		super(origen, sensor);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+}

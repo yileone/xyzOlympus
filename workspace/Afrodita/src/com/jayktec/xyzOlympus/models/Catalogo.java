@@ -99,6 +99,7 @@ public class Catalogo {
 		this.setOid(temp.getOid());
 		this.setNombre(temp.getNombre());
 		this.setTabla(temp.getTabla());
+		this.setCatalogoTabla(temp.getCatalogoTabla());
 		this.setValorFecha(temp.getValorFecha());
 		this.setValorDecimal(temp.getValorDecimal());
 		this.setValorEntero(temp.getValorEntero());

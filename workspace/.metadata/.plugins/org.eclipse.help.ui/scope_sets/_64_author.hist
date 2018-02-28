@@ -1,0 +1,6 @@
+#Tue Feb 27 17:35:33 VET 2018
+__DEFAULT__=false
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.sdk.Google.master=true
+org.eclipse.help.ui.localSearch.master=true
+expression=@author

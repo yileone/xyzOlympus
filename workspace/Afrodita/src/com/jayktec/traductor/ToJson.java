@@ -1,18 +1,12 @@
 package com.jayktec.traductor;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.persistencia.*;
 import com.jayktec.xyzOlympus.models.*;
-
 
 public class ToJson {
 
@@ -22,8 +16,17 @@ public class ToJson {
 	ArrayList<Mapa> mapa;
 	String origen = "";
 	private boolean refrescar;
-	BdManager bd = new BdManager();
 
+
+	public static void main(String[] args) throws SQLException, JsonIOException, IOException {
+		System.out.println("empezando json");
+		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("4028b881619cd61001619ce60bf90024"));
+		temp.crearJson();
+		System.out.println("finalizando json");
+	
+	}
+		
+	
 	public ToJson(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		this(origen, sensor);
 		this.listaRegistro = registros;
@@ -57,6 +60,11 @@ public class ToJson {
 		}
 	}
 
+	/**
+	 * @throws SQLException
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	private void crearJson() throws SQLException, JsonIOException, IOException {
 		// TODO Auto-generated method stub
 		if (refrescar) {
@@ -64,7 +72,14 @@ public class ToJson {
 			buscarRegistros();
 		}
 
-		Gson salida = new GsonBuilder().create();
+		BdManager.saveJson(armarJson());
+
+	}
+
+	/**
+	 * @return
+	 */
+	public String armarJson() {
 		String temp = "{";
 
 		for (Registro registro : listaRegistro) {
@@ -160,12 +175,7 @@ public class ToJson {
 
 		}
 		temp = temp + "}" + '\n';
-
-		FileWriter archivo= new FileWriter(
-				"./" + origen + "_" + sensor + Calendar.YEAR + Calendar.MONTH + Calendar.DATE + ".json");
-		salida.toJson(temp, archivo);
-		archivo.close();
-	
+		return temp;
 	}
 
 	private void buscarRegistros() throws SQLException {
@@ -176,17 +186,17 @@ public class ToJson {
 	}
 
 	public void mapaParaSensor() throws SQLException {
-		mapa = bd.consultarMapa(sensor);
+		mapa = BdManager.consultarMapa(sensor);
 
 	}
 
 	public void mapaParaSensor(Sensor sensor) throws SQLException {
-		mapa = bd.consultarMapa(sensor);
+		mapa = BdManager.consultarMapa(sensor);
 
 	}
 
 	public void mapaParaSensor(Registro registro) throws SQLException {
-		mapa = bd.consultarMapa(registro);
+		mapa = BdManager.consultarMapa(registro);
 
 	}
 
