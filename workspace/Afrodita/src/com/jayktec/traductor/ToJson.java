@@ -14,13 +14,20 @@ public class ToJson {
 	Registro registro;
 	ArrayList<Registro> listaRegistro;
 	ArrayList<Mapa> mapa;
-	String origen = "";
+	Origen origen ;
+	String xName;
+	String yName;
+	int showValues=0;
+	int legendborderalpha=50;
+	int showborder=0;
+	String numberPrefix="S";
+	String bgColor="FFFFFF,FFFFFF";
 	private boolean refrescar;
 
 
 	public static void main(String[] args) throws SQLException, JsonIOException, IOException {
 		System.out.println("empezando json");
-		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("4028b881619cd61001619ce60bf90024"));
+		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("ad87651f619cd4430161dd9ec4590029"));
 		temp.crearJson();
 		System.out.println("finalizando json");
 	
@@ -29,12 +36,12 @@ public class ToJson {
 	
 	public ToJson(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		this(origen, sensor);
-		this.listaRegistro = registros;
+		this.listaRegistro = registros;																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				
 
 	}
 
 	public ToJson(String origen, Sensor sensor) throws SQLException {
-		this.origen = origen;
+		this.origen = new Origen( origen);
 		this.sensor = sensor;
 		mapaParaSensor();
 		refrescar = true;
@@ -42,7 +49,7 @@ public class ToJson {
 
 	public void refrescarJson(Object object) throws SQLException, JsonIOException, IOException {
 
-		if (origen.length() > 0) {
+		if (origen!=null) {
 			refrescar = true;
 
 			if (object instanceof Sensor) {
