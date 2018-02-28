@@ -27,14 +27,16 @@ public class AtletaRutina {
 	@Column(name="atletaRutina_id",length=11)
 	private int oid;
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="rutina_id",insertable=true,updatable=true)
-	private Rutina rutina;
-	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenRutina")
 	private Atleta atleta;
+	
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="rutina_id",insertable=true,updatable=true)
+	private Rutina rutina;
 	
 	@Column(name="fechaInicio",length=10)
 	@DefaultValueCalculator(CurrentDateCalculator.class)
@@ -44,7 +46,7 @@ public class AtletaRutina {
 	@DefaultValueCalculator(CurrentDateCalculator.class)
 	private Date fechaFin;	
 	
-	@Stereotype("TEXTOGRANDE")
+	@Stereotype("TEXTO_GRANDE")
 	@Column(name="observacion",length=255)
 	private String observacion;
 

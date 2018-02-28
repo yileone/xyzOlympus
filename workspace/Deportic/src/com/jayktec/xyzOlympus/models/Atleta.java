@@ -1,39 +1,44 @@
 package com.jayktec.xyzOlympus.models;
 
-
-import java.io.*;
-import java.util.*;
+import java.util.Collection;
 
 import javax.persistence.*;
+import org.openxava.annotations.*;
+
+
 
 /*
- Table: Atleta
-Columns:
-idatleta int(11) AI PK 
-idpersona int(11) 
-tipoSangre varchar(45) 
-alergia varchar(45) 
-enfermedades varchar(45) 
-idclub int(11)
- * */
-import org.openxava.annotations.*;
-import org.openxava.calculators.*;
-import org.openxava.filters.*;
-
-@Entity
-/*atleta_id int(11) AI PK 
+atleta_id int(11) AI PK 
 persona_id int(11) 
 tipoSangre varchar(45) 
 manoHabil varchar(45*/
+@Entity
 @Table(name="atleta")
-public class Atleta implements Serializable{
+
+@Views({
+	@View(members="datosGenerales {#persona;tipoSangre,manoHabil;}"
+	           + "contrato {#contrato}"
+	           + "historialFisico {#historialFisico}"
+	           + "historialLogros {#historialLogros}"
+	           + "historialMedico {#historialMedico}"
+	),
+	@View(name="VAtletaenHistorialFisico",members="datosGenerales {#persona;tipoSangre,manoHabil;}"
+	           + "historialLogros {#historialLogros}"
+	           + "historialMedico {#historialMedico}"
+	),
+	@View(name="VAtletaenHistorialLogros",members="datosGenerales {#persona;tipoSangre,manoHabil;}"
+	           + "historialFisico {#historialFisico}"
+	           + "historialMedico {#historialMedico}"
+	),
+	@View(name="VAtletaenHistorialMedico",members="datosGenerales {#persona;tipoSangre,manoHabil;}"
+	           + "historialFisico {#historialFisico}"
+	           + "historialLogros {#historialLogros}"
+	),	
+	@View(name="VAtletaenRutina",members="persona;tipoSangre,manoHabil"
+	)
+})
+public class Atleta{
 	
-
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 
 	
@@ -44,6 +49,8 @@ public class Atleta implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="persona_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
+	@ReferenceView("VPersonaenAtleta")
 	private Persona persona;
 	
 	@NoModify
@@ -61,43 +68,39 @@ public class Atleta implements Serializable{
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="manoHabil",insertable=true,updatable=true,table="persona")
+	@JoinColumn(name="manoHabil",insertable=true,updatable=true,table="atleta")
 	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Lateralidad')",
 	showReferenceView=false,
 	descriptionProperties="valorVarchar")  
 	@ReferenceView("VVarchar")
 	private Catalogo manoHabil;
 	
-
-	/*Cargamos la Rutina que Tiene el Atleta*/
-	@NoCreate
-	@NoModify
-	@OneToMany(mappedBy="atleta")
-	private Collection<AtletaRutina> rutinas;
 	
 	
-	/*Cargamos Los Logros del Atleta*/
+	//@NoCreate
+	//@NoModify
+	@CollectionView("VContratoenAtleta")
+	@OneToMany(mappedBy = "atleta")
+	private Collection<Contrato> contrato;
 	
-	@NoCreate
-	@NoModify
-	@OneToMany(mappedBy="atleta")
-	private Collection<HistorialLogros> historialLogros;
-	
-	/*Cargamos Historia Fisico del Atleta*/
-	@NoCreate
-	@NoModify
-	@OneToMany(mappedBy="atleta")
+	@OneToMany(mappedBy = "atleta")
 	private Collection<HistorialFisico> historialFisico;
+
 	
-	/*Cargamos Historia Medico del Atleta*/
-	@NoCreate
-	@NoModify
-	@OneToMany(mappedBy="atleta")
-	private Collection<Historialmedico> historialmedico;
+	@OneToMany(mappedBy = "atleta")
+	private Collection<HistorialLogros> historialLogros;
+
 	
+	@OneToMany(mappedBy = "atleta")
+	private Collection<HistorialMedico> historialMedico;
+
+
+
 	public int getOid() {
 		return oid;
 	}
+
+
 
 	public void setOid(int oid) {
 		this.oid = oid;
@@ -109,63 +112,87 @@ public class Atleta implements Serializable{
 		return persona;
 	}
 
+
+
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+
+
 
 	public Catalogo getTipoSangre() {
 		return tipoSangre;
 	}
 
+
+
 	public void setTipoSangre(Catalogo tipoSangre) {
 		this.tipoSangre = tipoSangre;
 	}
+
+
 
 	public Catalogo getManoHabil() {
 		return manoHabil;
 	}
 
+
+
 	public void setManoHabil(Catalogo manoHabil) {
 		this.manoHabil = manoHabil;
 	}
 
-	public Collection<AtletaRutina> getRutinas() {
-		return rutinas;
+
+
+	public Collection<Contrato> getContrato() {
+		return contrato;
 	}
 
-	public void setRutinas(Collection<AtletaRutina> rutinas) {
-		this.rutinas = rutinas;
+
+
+	public void setContrato(Collection<Contrato> contrato) {
+		this.contrato = contrato;
 	}
 
-	public Collection<HistorialLogros> getHistorialLogros() {
-		return historialLogros;
-	}
 
-	public void setHistorialLogros(Collection<HistorialLogros> historialLogros) {
-		this.historialLogros = historialLogros;
-	}
 
 	public Collection<HistorialFisico> getHistorialFisico() {
 		return historialFisico;
 	}
 
+
+
 	public void setHistorialFisico(Collection<HistorialFisico> historialFisico) {
 		this.historialFisico = historialFisico;
 	}
 
-	public Collection<Historialmedico> getHistorialmedico() {
-		return historialmedico;
+
+
+	public Collection<HistorialLogros> getHistorialLogros() {
+		return historialLogros;
 	}
 
-	public void setHistorialmedico(Collection<Historialmedico> historialmedico) {
-		this.historialmedico = historialmedico;
+
+
+	public void setHistorialLogros(Collection<HistorialLogros> historialLogros) {
+		this.historialLogros = historialLogros;
 	}
 
 
 
+	public Collection<HistorialMedico> getHistorialMedico() {
+		return historialMedico;
+	}
 
 
 
+	public void setHistorialMedico(Collection<HistorialMedico> historialMedico) {
+		this.historialMedico = historialMedico;
+	}
+
+
+
+	
 
 
 }

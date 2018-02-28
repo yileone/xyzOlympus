@@ -23,6 +23,10 @@ equipo_id int(11)
 */
 @Entity
 @Table(name="contrato")
+@Views({
+	@View(name="VContratoenAtleta",members="convenio,equipo;fechaInicio,fechaFin"),
+	@View(name="VContratoenAdicional",members="convenio.nombre,convenio.valor,convenio.descripcion	")
+	})
 public class Contrato {
 	
 	
@@ -31,11 +35,17 @@ public class Contrato {
 	@Column(name="contrato_id",length=11)
 	private int oid;
 	
-	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=false,updatable=false)
 	private Atleta atleta;
-	
+	public Atleta getAtleta() {
+		return atleta;
+	}
+
+	public void setAtleta(Atleta atleta) {
+		this.atleta = atleta;
+	}
+
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="convenio_id",insertable=true,updatable=true)
@@ -57,12 +67,13 @@ public class Contrato {
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="formaPago",insertable=true,updatable=true,table="atleta")
+	@JoinColumn(name="formaPago",insertable=true,updatable=true,table="contrato")
 	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='FormaPago')",
 			showReferenceView=false,
 			descriptionProperties="valorVarchar")  
-	@ReferenceView("VVarchar")private Catalogo tipoSangre;
-	private String formaPago;
+	@ReferenceView("VVarchar")
+	private Catalogo formaPago;
+
 	
 	@Column(name="valorCuota",length=11)
 	private float valorCuota;
@@ -78,13 +89,6 @@ public class Contrato {
 		this.oid = oid;
 	}
 
-	public Atleta getAtleta() {
-		return atleta;
-	}
-
-	public void setAtleta(Atleta atleta) {
-		this.atleta = atleta;
-	}
 
 	public Convenio getConvenio() {
 		return convenio;
@@ -118,19 +122,11 @@ public class Contrato {
 		this.fechaFin = fechaFin;
 	}
 
-	public Catalogo getTipoSangre() {
-		return tipoSangre;
-	}
-
-	public void setTipoSangre(Catalogo tipoSangre) {
-		this.tipoSangre = tipoSangre;
-	}
-
-	public String getFormaPago() {
+	public Catalogo getFormaPago() {
 		return formaPago;
 	}
 
-	public void setFormaPago(String formaPago) {
+	public void setFormaPago(Catalogo formaPago) {
 		this.formaPago = formaPago;
 	}
 
@@ -150,6 +146,5 @@ public class Contrato {
 		this.cantidadCuotas = cantidadCuotas;
 	}
 
-	
 
 }

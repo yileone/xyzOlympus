@@ -10,6 +10,9 @@
 /hibernate-junit.cfg.xml
 /hibernate.cfg.xml
 /org/
+/stereotype-type-default.xml
+/tabs-default-values.xml
+/validators.xml
 /OpenXavaTest-labels_ca.properties
 /OpenXavaTest-labels_en.properties
 /OpenXavaTest-labels_es.properties

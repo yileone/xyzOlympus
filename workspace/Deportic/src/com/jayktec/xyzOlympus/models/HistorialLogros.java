@@ -32,12 +32,20 @@ public class HistorialLogros {
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenHistorialLogros")
 	private Atleta atleta;
 	
 	
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="funcionario_idfuncionario",insertable=true,updatable=true)
-	private Funcionario funcionario;
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="historialLogros")
+	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	showReferenceView=true,
+	descriptionProperties="rut")  
+	@ReferenceView("VPersonaenAtleta")
+	private Persona funcionario;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="torneo_id",insertable=true,updatable=true)
@@ -70,11 +78,13 @@ public class HistorialLogros {
 		this.atleta = atleta;
 	}
 
-	public Funcionario getFuncionario() {
+
+
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
 

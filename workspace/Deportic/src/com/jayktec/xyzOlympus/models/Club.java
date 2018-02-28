@@ -17,6 +17,9 @@ logo blob
 
 @Entity
 @Table(name="club")
+@Views({
+	@View(name="VClubenEquipo",members="razonSocial,nombre"),
+	@View(name="VClubenRepresentante",members="razonSocial;nombre")})
 public class Club implements Serializable {
 
 	
@@ -30,17 +33,29 @@ public class Club implements Serializable {
 	@Column(name="club_id",length=11)
 	private int oid;
 
+	@Required
 	@Column(name="razonSocial",length=45)
 	private String razonSocial;
+	
+	
+	@Required
+	@Column(name="nombre",length=45)
+	private String nombre;
 
 	@Column(name="logo",length=255)
 	@Stereotype("FOTO")
 	private byte[] logo;
 	
-
-	@OneToMany(mappedBy="club")
-	@CollectionView("VClub")
-	private Collection<Contacto> listacontactos;
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="representante_id",insertable=true,updatable=true,table="club")
+	@DescriptionsList(showReferenceView=true,
+	descriptionProperties="persona.rut")  
+	@ReferenceView("VRepresentanteenClub")
+	private Representante representante;
+	
+	
 
 	public int getOid() {
 		return oid;
@@ -66,12 +81,25 @@ public class Club implements Serializable {
 		this.logo = logo;
 	}
 
-	public Collection<Contacto> getListacontactos() {
-		return listacontactos;
+
+	public Representante getRepresentante() {
+		return representante;
 	}
 
-	public void setListacontactos(Collection<Contacto> listacontactos) {
-		this.listacontactos = listacontactos;
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

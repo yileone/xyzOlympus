@@ -29,7 +29,13 @@ sexo int(11)
 @Entity
 @Table(name="persona")
 @Views({
-	@View(name="VPersonaenContacto",members="primerNombre,primerApellido")})
+	@View(name="VPersonaenContacto",members="primerNombre,primerApellido"),
+	@View(name="VPersonaenAtleta",members="primerNombre,segundoNombre;primerApellido,segundoApellido"),
+	@View(members="datosGenerales {#rut,digitoVerificador,funcionario;primerNombre,segundoNombre;"
+			   + "primerApellido,segundoApellido;fechaNac,lugarNacimiento;sexo,nacionalidad}"
+	           + "DatosContacto {#listacontactos}"),
+	@View(name="VPersonaenRepresentante",members="primerNombre;primerApellido")
+	})
 public class Persona implements Serializable  {
 
 	
@@ -46,20 +52,23 @@ public class Persona implements Serializable  {
 	private int oid;
 	
 	// ver el tamanio del rut 
+	@Required
 	@Column(name="rut",length=11)
 	private String rut;
 	
+	@Required
 	@Column(name="digitoVerificador",length=1)
 	private String digitoVerificador;
 	
-	
+	@Required
 	@Column(name="primerNombre",length=45)
 	private String primerNombre;
+	
 	
 	@Column(name="segundoNombre",length=45)
 	private String segundoNombre;
 	
-	
+	@Required
 	@Column(name="primerApellido",length=45)
 	private String primerApellido;
 	
@@ -102,6 +111,9 @@ public class Persona implements Serializable  {
 	@OneToMany(mappedBy="persona")
 	private Collection<Contacto> listacontactos;
 	
+	
+	@Column(name="funcionario",length=45)
+	private boolean funcionario;
 	
 	public int getOid() {
 		return oid;
@@ -199,6 +211,18 @@ public class Persona implements Serializable  {
 
 	public void setListacontactos(Collection<Contacto> listacontactos) {
 	this.listacontactos = listacontactos;
+	}
+
+	public boolean isFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(boolean funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 

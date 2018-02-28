@@ -95,7 +95,7 @@ public class Partido {
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="ganador",insertable=true,updatable=true,table="atleta")
+	@JoinColumn(name="ganador",insertable=true,updatable=true,table="partido")
 	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Ganador')",
 			showReferenceView=false,
 			descriptionProperties="valorVarchar")  

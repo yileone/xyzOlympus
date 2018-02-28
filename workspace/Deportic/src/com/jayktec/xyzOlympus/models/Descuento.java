@@ -47,7 +47,7 @@ public class Descuento {
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="funcionario_id",insertable=true,updatable=true)
-	private Funcionario funcionario;
+	private Persona funcionario;
 
 
 	public int getOid() {
@@ -100,14 +100,17 @@ public class Descuento {
 	}
 
 
-	public Funcionario getFuncionario() {
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
+
+
+
 	
 	
 	

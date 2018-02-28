@@ -37,9 +37,12 @@ public class Equipo {
 	@ReferenceView("VVarchar")
 	private Catalogo categoriaEquipo;
 	
-
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="club_id",insertable=true,updatable=true)
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=true)
+	@JoinColumn(name="club_id")
+	@DescriptionsList(showReferenceView=true,descriptionProperties="nombre")
+	@ReferenceView("VClubenEquipo")
 	private Club club;
 
 

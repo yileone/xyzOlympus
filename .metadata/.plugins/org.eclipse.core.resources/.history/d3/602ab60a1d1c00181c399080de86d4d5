@@ -1,0 +1,95 @@
+package com.jayktec.xyzOlympus.models;
+
+import java.util.*;
+
+import javax.persistence.*;
+
+import org.openxava.annotations.*;
+import org.openxava.calculators.*;
+
+/*
+Table: contrato
+Columns:
+contrato_id int(11) PK 
+atleta_id int(11) 
+convenio_id int(11) 
+fechaRegistro timestamp 
+fechaInicio date 
+fechaFin date 
+formaPago int(11) 
+valorCuota float 
+cantidadCuotas int(11) 
+equipo_id int(11)
+*/
+@Entity
+@Table(name="contrato")
+public class Contrato {
+	
+	
+	@Id
+	@Hidden
+	@Column(name="contrato_id",length=11)
+	private int oid;
+	
+	
+	
+
+	
+	@Column(name="fechaInicio",length=10)
+	@DefaultValueCalculator(CurrentDateCalculator.class)
+	private Date fechaInicio;
+	
+	@Column(name="FechaFin",length=10)
+	@DefaultValueCalculator(CurrentDateCalculator.class)
+	private Date fechaFin;
+
+
+	
+	@Column(name="valorCuota",length=11)
+	private float valorCuota;
+	
+	@Column(name="cantidadCuotas",length=11)
+	private int cantidadCuotas;
+
+	public int getOid() {
+		return oid;
+	}
+
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public float getValorCuota() {
+		return valorCuota;
+	}
+
+	public void setValorCuota(float valorCuota) {
+		this.valorCuota = valorCuota;
+	}
+
+	public int getCantidadCuotas() {
+		return cantidadCuotas;
+	}
+
+	public void setCantidadCuotas(int cantidadCuotas) {
+		this.cantidadCuotas = cantidadCuotas;
+	}
+	
+	
+}

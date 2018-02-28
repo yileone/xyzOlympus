@@ -9,15 +9,15 @@ import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 /*Table: catalogo
 Columns:
-idcatalogo int(11) PK 
-idtabla int(11) 
+catalogo_id int(11) AI PK 
+tabla_id int(11) 
 nombre varchar(45) 
 valor_entero int(11) 
 valor_float float 
-valor_varchar varchar(255) 
+valor_varchar varchar(45) 
 valor_hora time 
 valor_fecha date 
-descripcion varch*/
+descripcion longtext*/
 @Entity
 @Views({
 	 @View( members="tabla; nombre; descripcion; valorEntero;valorFloat;valorVarchar;valorHora;valorFecha" ),
@@ -31,12 +31,12 @@ public class Catalogo {
 
 	@Id
 	@Hidden
-	@Column(name="idcatalogo",length=11)
+	@Column(name="catalogo_id",length=11)
 	private int oid;
 	
 
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idtabla",insertable=true,updatable=true)
+	@JoinColumn(name="tabla_id",insertable=true,updatable=true)
 	private Tabla tabla;
 	
 	@Column(name="nombre",length=45)

@@ -33,13 +33,20 @@ public class HistorialFisico {
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenHistorialFisico")
 	private Atleta atleta;
 	
 	
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="funcionario_id",insertable=true,updatable=true)
-	private Funcionario funcionario;
-	
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="historialFisico")
+	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	showReferenceView=true,
+	descriptionProperties="rut")  
+	@ReferenceView("VPersonaenAtleta")
+	private Persona funcionario;
 	
 	@Column(name="altura",length=11)
 	private float altura;
@@ -52,7 +59,7 @@ public class HistorialFisico {
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="tallaCamisa",insertable=true,updatable=true,table="atleta")
+	@JoinColumn(name="tallaCamisa",insertable=true,updatable=true,table="historialFisico")
 	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TallaCamisa')",
 			showReferenceView=false,
 			descriptionProperties="valorVarchar")  
@@ -66,12 +73,12 @@ public class HistorialFisico {
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="taltallaPantalon",insertable=true,updatable=true,table="atleta")
+	@JoinColumn(name="tallaPantalon",insertable=true,updatable=true,table="historialFisico")
 	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TallaPantalon')",
 			showReferenceView=false,
 			descriptionProperties="valorVarchar")  
 	@ReferenceView("VVarchar")
-	private Catalogo taltallaPantalon;
+	private Catalogo tallaPantalon;
 	
 	@Column(name="porcGrasa",length=11)
 	private float porcGrasa;
@@ -99,11 +106,11 @@ public class HistorialFisico {
 		this.atleta = atleta;
 	}
 
-	public Funcionario getFuncionario() {
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
 
@@ -139,12 +146,13 @@ public class HistorialFisico {
 		this.tallaZapato = tallaZapato;
 	}
 
-	public Catalogo getTaltallaPantalon() {
-		return taltallaPantalon;
+
+	public Catalogo getTallaPantalon() {
+		return tallaPantalon;
 	}
 
-	public void setTaltallaPantalon(Catalogo taltallaPantalon) {
-		this.taltallaPantalon = taltallaPantalon;
+	public void setTallaPantalon(Catalogo tallaPantalon) {
+		this.tallaPantalon = tallaPantalon;
 	}
 
 	public float getPorcGrasa() {

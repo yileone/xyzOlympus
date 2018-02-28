@@ -29,7 +29,7 @@ public class Roles {
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="funcionario_id",insertable=true,updatable=true)
-	private Funcionario funcionario;
+	private Persona funcionario;
 	
 	@Stereotype("TEXTOGRANDE")
 	@Column(name="descripcion",length=255)
@@ -53,11 +53,13 @@ public class Roles {
 		this.persona = persona;
 	}
 
-	public Funcionario getFuncionario() {
+
+
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
 
