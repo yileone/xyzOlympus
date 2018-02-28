@@ -88,7 +88,6 @@ INDEX VERSION 1.130+/home/arte/proyecto/xyzOlympus/workspace/.metadata/.plugins/
 1388322744.index
 1361892265.index
 2321396401.index
-1765594081.index
 346694955.index
 3485262699.index
 152350311.index
