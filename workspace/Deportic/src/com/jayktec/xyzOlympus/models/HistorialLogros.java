@@ -7,43 +7,49 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
-/*Table: historiallogros
+/*
+Table: historiallogros
 Columns:
-atleta_idatleta int(11) 
-FechaRegistro date 
+historial_Logro_id int(11) PK 
+atleta_id int(11) 
+fechaRegistro timestamp 
 logro longtext 
 lugar varchar(45) 
 competencia varchar(45) 
-funcionario_idfuncionario int(11) 
-torneo_idtorneo int(11)*/
+funcionario_id int(11) 
+torneo_id int(11)
+*/
 @Entity
-@Table(name="historialLogros", schema="deportic")
+@Table(name="historialLogros")
 public class HistorialLogros {
 	
 	//TODO No tiene id para la tabla historialLogros esta bien ?
 	@Id
 	@Hidden
-	@Column(name="idhistorialogro",length=11)
-	private int oidHistlogro;
+	@Column(name="historial_Logro_id",length=11)
+	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_idatleta",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenHistorialLogros")
 	private Atleta atleta;
 	
 	
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="funcionario_idfuncionario",insertable=true,updatable=true)
-	private Funcionario funcionario;
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="historialLogros")
+	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	showReferenceView=true,
+	descriptionProperties="rut")  
+	@ReferenceView("VPersonaenAtleta")
+	private Persona funcionario;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="torneo_idtorneo",insertable=true,updatable=true)
+	@JoinColumn(name="torneo_id",insertable=true,updatable=true)
 	private Torneo torneo;
-
-	
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaRegistro;	
 
 	@Stereotype("TEXTO_GRANDE")
 	@Column(name="logro",length=10)
@@ -56,6 +62,14 @@ public class HistorialLogros {
 	@Column(name="competencia",length=45)
 	private String competencia;
 
+	public int getOid() {
+		return oid;
+	}
+
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
+
 	public Atleta getAtleta() {
 		return atleta;
 	}
@@ -64,11 +78,13 @@ public class HistorialLogros {
 		this.atleta = atleta;
 	}
 
-	public Funcionario getFuncionario() {
+
+
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
 
@@ -78,14 +94,6 @@ public class HistorialLogros {
 
 	public void setTorneo(Torneo torneo) {
 		this.torneo = torneo;
-	}
-
-	public Date getFechaRegistro() {
-		return FechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
 	}
 
 	public String getLogro() {
@@ -111,17 +119,5 @@ public class HistorialLogros {
 	public void setCompetencia(String competencia) {
 		this.competencia = competencia;
 	}
-
-	public int getOidHistlogro() {
-		return oidHistlogro;
-	}
-
-	public void setOidHistlogro(int oidHistlogro) {
-		this.oidHistlogro = oidHistlogro;
-	}
-
-
-
-	
 
 }

@@ -11,7 +11,7 @@ import org.openxava.annotations.*;
 FROM `fateon`.`fateon_regla`;*/
 
 @Entity
-@Table(name="fateon_regla", schema="fateon")
+@Table(name="fateon_regla")
 public class Regla {
 	
 	@Id

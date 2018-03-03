@@ -9,27 +9,29 @@ import org.openxava.calculators.*;
 
 
 /*
- Table: convenio
+Table: convenio
 Columns:
-idconvenio int(11) AI PK 
-nombreConvenio varchar(45) 
-Valor int(11) 
-descripcion varchar(45) 
-vigencia date 
+convenio_id int(11) AI PK 
+nombre varchar(45) 
+valor float 
+descripcion longtext 
+fechaRegistro timestamp 
+fechaInicio date 
+FechaFin date 
 */
 @Entity
-@Table(name="convenio", schema="deportic")
+@Table(name="convenio")
 public class Convenio {
 	
 	@Id
 	@Hidden
-	@Column(name="idconvenio",length=11)
-	private int oidCovenio;
+	@Column(name="convenio_id",length=11)
+	private int oid;
 
-	@Column(name="nombreConvenio",length=45)
-	private String nombreConvenio;
+	@Column(name="nombre",length=45)
+	private String nombre;
 	
-	@Column(name="Valor",length=11)
+	@Column(name="valor",length=11)
 	private int valor;
 	
 	
@@ -38,64 +40,60 @@ public class Convenio {
 	private String descripcion;
 	
 	
-	@Column(name="vigencia",length=10)
+	@Column(name="fechaInicio",length=10)
 	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date vigencia;
+	private Date fechaInicio;
 
+	@Column(name="FechaFin",length=10)
+	@DefaultValueCalculator(CurrentDateCalculator.class)
+	private Date FechaFin;
 
-
-
-	public int getOidCovenio() {
-		return oidCovenio;
+	public int getOid() {
+		return oid;
 	}
 
-
-	public void setOidCovenio(int oidCovenio) {
-		this.oidCovenio = oidCovenio;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
-
-	public String getNombreConvenio() {
-		return nombreConvenio;
+	public String getNombre() {
+		return nombre;
 	}
 
-
-	public void setNombreConvenio(String nombreConvenio) {
-		this.nombreConvenio = nombreConvenio;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
 
 	public int getValor() {
 		return valor;
 	}
 
-
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
-	public Date getVigencia() {
-		return vigencia;
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
 
-
-	public void setVigencia(Date vigencia) {
-		this.vigencia = vigencia;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
-	
-	
-	
-	
-	
+
+	public Date getFechaFin() {
+		return FechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		FechaFin = fechaFin;
+	}
+
 }

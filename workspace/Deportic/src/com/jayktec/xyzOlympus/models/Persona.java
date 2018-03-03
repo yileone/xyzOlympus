@@ -8,11 +8,10 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
-import jdk.nashorn.internal.ir.annotations.*;
 /*
-Table: Persona
+Table: persona
 Columns:
-idpersona int(11) AI PK 
+persona_id int(11) AI PK 
 rut int(11) 
 digitoVerificador varchar(1) 
 primerNombre varchar(45) 
@@ -20,18 +19,23 @@ segundoNombre varchar(45)
 primerApellido varchar(45) 
 segundoApellido varchar(45) 
 fechaNac date 
-estadoCivil varchar(45) 
+estadoCivil int(11) 
 lugarNacimiento varchar(45) 
 nacionalidad varchar(45) 
-fechaRegistro date 
-sexo varchar(45) 
-manoHabil varchar(45)
+fechaRegistro timestamp 
+sexo int(11)
 
 */
 @Entity
-@Table(name="persona", schema="deportic")
+@Table(name="persona")
 @Views({
-	@View(name="VPersonaenContacto",members="primerNombre,primerApellido")})
+	@View(name="VPersonaenContacto",members="primerNombre,primerApellido"),
+	@View(name="VPersonaenAtleta",members="primerNombre,segundoNombre;primerApellido,segundoApellido"),
+	@View(members="datosGenerales {#rut,digitoVerificador,funcionario;primerNombre,segundoNombre;"
+			   + "primerApellido,segundoApellido;fechaNac,lugarNacimiento;sexo,nacionalidad}"
+	           + "DatosContacto {#listacontactos}"),
+	@View(name="VPersonaenRepresentante",members="primerNombre;primerApellido")
+	})
 public class Persona implements Serializable  {
 
 	
@@ -44,25 +48,27 @@ public class Persona implements Serializable  {
 
 	@Id
 	@Hidden
-	@Column(name="idpersona",length=11)
+	@Column(name="persona_id",length=11)
 	private int oid;
 	
 	// ver el tamanio del rut 
+	@Required
 	@Column(name="rut",length=11)
 	private String rut;
 	
-	// para que es este campo?
+	@Required
 	@Column(name="digitoVerificador",length=1)
 	private String digitoVerificador;
 	
-	
+	@Required
 	@Column(name="primerNombre",length=45)
 	private String primerNombre;
+	
 	
 	@Column(name="segundoNombre",length=45)
 	private String segundoNombre;
 	
-	
+	@Required
 	@Column(name="primerApellido",length=45)
 	private String primerApellido;
 	
@@ -77,21 +83,6 @@ public class Persona implements Serializable  {
 	private String lugarNacimiento;
 	
 
-	
-	@CollectionView("VContactoenPersona")
-	@OneToMany(mappedBy="persona")
-	private Collection<Contacto> listacontactos;
-
-		
-		public Collection<Contacto> getListacontactos() {
-		return listacontactos;
-	}
-
-	public void setListacontactos(Collection<Contacto> listacontactos) {
-		this.listacontactos = listacontactos;
-	}
-	
-	
 	//TODO CARGA DATA PARA EL CATALOGO Nacionalidades
 	@NoModify
 	@NoCreate
@@ -115,21 +106,15 @@ public class Persona implements Serializable  {
 	@ReferenceView("VVarchar")
 	private Catalogo sexo;
 	
-	//TODO CARGA DATA PARA EL CATALOGO Lateralidad 
-	@NoModify
-	@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="manoHabil",insertable=true,updatable=true,table="persona")
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Lateralidad')",
-	showReferenceView=false,
-	descriptionProperties="valorVarchar")  
-	@ReferenceView("VVarchar")
-	private Catalogo manoHabil;
+	
+	@CollectionView("VContactoenPersona")
+	@OneToMany(mappedBy="persona")
+	private Collection<Contacto> listacontactos;
 	
 	
-	//TODO para la relacion oneTomany tengo rollos ver con yishen para encontrar solucion
-
-
+	@Column(name="funcionario",length=45)
+	private boolean funcionario;
+	
 	public int getOid() {
 		return oid;
 	}
@@ -219,17 +204,26 @@ public class Persona implements Serializable  {
 	public void setSexo(Catalogo sexo) {
 		this.sexo = sexo;
 	}
-
-	public Catalogo getManoHabil() {
-		return manoHabil;
-	}
-
-	public void setManoHabil(Catalogo manoHabil) {
-		this.manoHabil = manoHabil;
-	}
-
 	
+	public Collection<Contacto> getListacontactos() {
+	return listacontactos;
+	}
 
+	public void setListacontactos(Collection<Contacto> listacontactos) {
+	this.listacontactos = listacontactos;
+	}
+
+	public boolean isFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(boolean funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 
 

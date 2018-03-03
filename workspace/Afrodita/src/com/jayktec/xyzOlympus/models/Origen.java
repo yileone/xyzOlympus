@@ -18,24 +18,9 @@ import com.sun.istack.internal.*;
  
 
 
-
-/*
-id_origen	 int(11)
-   nombre	 varchar(45)
-   modelo	 varchar(45)
-      mac	 varchar(45)
-  id_tipo	 int(11)
- id_sistema	 int(11)
- id_sucursal int(11)
- id_oficina	 int(11)
-id_municipio int(11)
-   id_ciudad int(11)
-     id_pais int(11)
-
-*/
 @Entity
 //@View(members="Orige {#nombre,modelo;mac,ip; sistema,tipo;} DIRECCION {#pais,municipio,sucursal,oficina,ciudad}" )
-@Table(name="fateon_origen", schema="fateon")
+@Table(name="fateon_origen")
 public class Origen {
 	
 	@Id
@@ -54,7 +39,7 @@ public class Origen {
 	private String modelo;
 	
 	//@Required
-	@Column(name="origen_mac",length=45)
+	@Column(name="origen_mac",length=100)
 	private String mac;	
 	
 	//@Required
@@ -89,7 +74,26 @@ public class Origen {
 	@ReferenceView("VVarchar") 
 	private Catalogo sistema;
 	
-
+	//@NoModify
+	//@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="origen_id_pais",insertable=true,updatable=true)
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Paises')",
+			showReferenceView=false,
+			descriptionProperties="valorCadena")  
+	@ReferenceView("VVarchar") 
+	private Catalogo pais;
+	
+	//@NoModify
+	//@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="origen_id_provincia",insertable=true,updatable=true)
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Provicias' )",
+		showReferenceView=false,
+			descriptionProperties="valorCadena")  
+	@ReferenceView("VVarchar") 
+	private Catalogo provincia;
+		
 	//@NoModify
 	//@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
@@ -121,15 +125,7 @@ public class Origen {
 	@ReferenceView("VVarchar") 
 	private Catalogo municipio;
 
-	//@NoModify
-	//@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="origen_id_pais",insertable=true,updatable=true)
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Paises')",
-			showReferenceView=false,
-			descriptionProperties="valorCadena")  
-	@ReferenceView("VVarchar") 
-	private Catalogo pais;
+
 	
 	//@NoModify
 	//@NoCreate
@@ -140,7 +136,6 @@ public class Origen {
 			descriptionProperties="valorCadena")  
 	@ReferenceView("VVarchar") 
 	private Catalogo ciudad;
-	
 	
 	public Origen(String string) {
 		// TODO Auto-generated constructor stub
@@ -294,6 +289,14 @@ public class Origen {
 
 	public void setPais(Catalogo pais) {
 		this.pais = pais;
+	}
+
+	public Catalogo getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Catalogo provincia) {
+		this.provincia = provincia;
 	}
 
 

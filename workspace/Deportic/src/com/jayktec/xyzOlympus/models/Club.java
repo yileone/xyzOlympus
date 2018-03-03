@@ -9,17 +9,17 @@ import org.openxava.annotations.*;
 /*
 Table: club
 Columns:
-idclub int(11) AI PK 
+club_id int(11) AI PK 
 razonSocial varchar(45) 
-direccion longtext 
-logo blob 
-fono varchar(45) 
-email varchar(45) 
-paginaWeb varchar(45)*/
+logo blob
+*/
 
 
 @Entity
-@Table(name="club", schema="deportic")
+@Table(name="club")
+@Views({
+	@View(name="VClubenEquipo",members="razonSocial,nombre"),
+	@View(name="VClubenRepresentante",members="razonSocial;nombre")})
 public class Club implements Serializable {
 
 	
@@ -30,29 +30,32 @@ public class Club implements Serializable {
 
 	@Id
 	@Hidden
-	@Column(name="idclub",length=11)
+	@Column(name="club_id",length=11)
 	private int oid;
 
+	@Required
 	@Column(name="razonSocial",length=45)
 	private String razonSocial;
+	
+	
+	@Required
+	@Column(name="nombre",length=45)
+	private String nombre;
 
 	@Column(name="logo",length=255)
 	@Stereotype("FOTO")
 	private byte[] logo;
 	
-
-@OneToMany(mappedBy="club")
-@CollectionView("VClub")
-private Collection<Contacto> listacontactos;
-
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="representante_id",insertable=true,updatable=true,table="club")
+	@DescriptionsList(showReferenceView=true,
+	descriptionProperties="persona.rut")  
+	@ReferenceView("VRepresentanteenClub")
+	private Representante representante;
 	
-	public Collection<Contacto> getListacontactos() {
-	return listacontactos;
-}
-
-public void setListacontactos(Collection<Contacto> listacontactos) {
-	this.listacontactos = listacontactos;
-}
+	
 
 	public int getOid() {
 		return oid;
@@ -78,6 +81,26 @@ public void setListacontactos(Collection<Contacto> listacontactos) {
 		this.logo = logo;
 	}
 
+
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 	

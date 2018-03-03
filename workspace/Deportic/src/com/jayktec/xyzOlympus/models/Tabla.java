@@ -14,12 +14,12 @@ enfermedades varchar(45)
 idclub int(11)
 */
 @Entity
-@Table(name="tabla", schema="deportic")
+@Table(name="tabla")
 public class Tabla {
 	
 	@Id
 	@Hidden
-	@Column(name="idTabla",length=11)
+	@Column(name="tabla_id",length=11)
 	private int oid;
 	
 	@Column(name="nombre",length=45)

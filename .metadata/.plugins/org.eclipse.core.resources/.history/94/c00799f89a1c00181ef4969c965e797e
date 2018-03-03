@@ -1,0 +1,122 @@
+package com.jayktec.xyzOlympus.models;
+
+import javax.persistence.*;
+import org.openxava.annotations.*;
+
+
+
+/*
+atleta_id int(11) AI PK 
+persona_id int(11) 
+tipoSangre varchar(45) 
+manoHabil varchar(45*/
+@Entity
+@Table(name="atleta")
+public class Atleta{
+	
+
+
+	
+	@Id
+	@Hidden
+	@Column(name="atleta_id",length=11)
+	private int oid;
+	
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="persona_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
+	@ReferenceView("VPersonaenAtleta")
+	private Persona persona;
+	
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="tipoSangre",insertable=true,updatable=true,table="atleta")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TipoSangre')",
+			showReferenceView=false,
+			descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")private Catalogo tipoSangre;
+
+	
+	
+	//TODO CARGA DATA PARA EL CATALOGO Lateralidad 
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="manoHabil",insertable=true,updatable=true,table="atleta")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Lateralidad')",
+	showReferenceView=false,
+	descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")
+	private Catalogo manoHabil;
+	
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="contrato_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
+	@ReferenceView("VContratoenAtleta")
+	private Contrato contrato;
+
+
+	public int getOid() {
+		return oid;
+	}
+
+
+
+	public void setOid(int oid) {
+		this.oid = oid;
+	}
+
+
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+
+
+	public Catalogo getTipoSangre() {
+		return tipoSangre;
+	}
+
+
+
+	public void setTipoSangre(Catalogo tipoSangre) {
+		this.tipoSangre = tipoSangre;
+	}
+
+
+
+	public Catalogo getManoHabil() {
+		return manoHabil;
+	}
+
+
+
+	public void setManoHabil(Catalogo manoHabil) {
+		this.manoHabil = manoHabil;
+	}
+
+
+
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+	
+
+
+}

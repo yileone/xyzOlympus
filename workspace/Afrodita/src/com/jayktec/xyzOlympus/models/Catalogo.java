@@ -15,7 +15,7 @@ import com.jayktec.persistencia.*;
 
 
 @Entity
-@Table(name="fateon_catalogo", schema="fateon")
+@Table(name="fateon_catalogo")
 @Views({
 	 @View( members="tabla; nombre; valorEntero; valorFecha;valorDecimal;valorCadena;valorHora;catalogoTabla" ),
 	 @View( name="VEntero", members="valorEntero" ),

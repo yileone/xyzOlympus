@@ -1,55 +1,50 @@
 package com.jayktec.xyzOlympus.models;
 
 import javax.persistence.*;
-
 import org.openxava.annotations.*;
 /*
-
-Table: Contacto
+Table: contacto
 Columns:
-idcontacto int(11) AI PK 
-tipoContacto int(11) PK 
-idpersona int(11) 
-Valor*/
+contacto_id int(11) AI PK 
+persona_id int(11) 
+tipoContacto int(11) 
+valor longtext
+*/
 @Entity
 @Views({
-	@View(name="VClub",members="club;tipoContacto;valor"),
-	@View(name="VContactoenPersona",members="persona.oid;tipoContacto;valor")})
-@Table(name="contacto", schema="deportic")
+	@View(name="VContactoenClub",members="tipoContacto,valor"),
+	@View(name="VContactoenPersona",members="tipoContacto,valor")})
+@Table(name="contacto")
 public class Contacto {
 	
 	@Id
 	@Hidden
-	@Column(name="idcontacto",length=11)
+	@Column(name="contacto_id",length=11)
 	private int oid;
 
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="idpersona",insertable=true,updatable=true)
-	@DescriptionsList(
-			showReferenceView=true)  
+	@JoinColumn(name="persona_id")
+	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
 	@ReferenceView("VPersonaenContacto") 
 	private Persona persona;
-	
-	
 	
 	//TODO LLENAR EL CATALOGO PARA TIPO DE CONTACTO
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="tipoContacto",insertable=true,updatable=true,table="contacto")
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TipoContactos')",
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, "
+			+ "Tabla t where c.tabla = t.oid and t.nombre ='TipoContactos')",
 	showReferenceView=false,
 	descriptionProperties="valorVarchar")  
 	@ReferenceView("VVarchar")
 	private Catalogo tipoContacto;
 	
-	
+	@Required
 	@Column(name="valor",length=255)
 	private String valor;
-
-	
 
 	public int getOid() {
 		return oid;
@@ -58,33 +53,10 @@ public class Contacto {
 	public void setOid(int oid) {
 		this.oid = oid;
 	}
-
-	/*public int getOidpersona() {
-		return oidpersona;
-	}
-
-	public void setOidpersona(int oidpersona) {
-		this.oidpersona = oidpersona;
-	}*/
-
-	/*public int getOidclub() {
-		return oidclub;
-	}
-
-	public void setOidclub(int oidclub) {
-		this.oidclub = oidclub;
-	}*/
 	
-	
-	
-	
-	
-
 	public Catalogo getTipoContacto() {
 		return tipoContacto;
 	}
-
-
 
 	public Persona getPersona() {
 		return persona;

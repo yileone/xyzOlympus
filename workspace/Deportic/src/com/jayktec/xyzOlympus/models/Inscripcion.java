@@ -6,27 +6,31 @@ import org.openxava.annotations.*;
 
 /**
  * @author Anthonny
- *
+Table: inscripcion
+Columns:
+inscripcion_id int(11) PK 
+equipo_id int(11) 
+torneo_id int(11)
  */
 @Entity
-@Table(name="inscripcion", schema="deportic")
+@Table(name="inscripcion")
 public class Inscripcion {
 	
 	
 	
 	@Id
 	@Hidden
-	@Column(name="idincripcion",length=11)
-	private int oidIncripcion;
+	@Column(name="inscripcion_id",length=11)
+	private int oid;
 	
 	//TODO Esta tabla no tiene id esta bien ?
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="equipo_idEquipo",insertable=true,updatable=true)
+	@JoinColumn(name="equipo_id",insertable=true,updatable=true)
 	private Equipo equipo;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="torneo_idtorneo",insertable=true,updatable=true)
+	@JoinColumn(name="torneo_id",insertable=true,updatable=true)
 	private Torneo torneo;
 
 
@@ -50,15 +54,17 @@ public class Inscripcion {
 	}
 
 
-	public int getOidIncripcion() {
-		return oidIncripcion;
+	public int getOid() {
+		return oid;
 	}
 
 
-	public void setOidIncripcion(int oidIncripcion) {
-		this.oidIncripcion = oidIncripcion;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
-	
+
+
+
 	
 	
 

@@ -11,53 +11,51 @@ import org.openxava.calculators.*;
  
 Table: atletarutina
 Columns:
-atleta_idatleta int(11) PK 
-rutina_idrutina int(11) PK 
+atletaRutina_id int(11) PK 
+rutina_id int(11) 
+atleta_id int(11) 
+fechaRegistro timestamp 
 fechaInicio date 
-FechaRegistro date 
-FechaFin date 
+fechaFin date 
 observacion longtext
  */
 @Entity
-@Table(name="atletarutina", schema="deportic")
+@Table(name="atletarutina")
 public class AtletaRutina {
 	@Id
 	@Hidden
-	@Column(name="idatletarutina",length=11)
-	private int oidAtletaRutina;
+	@Column(name="atletaRutina_id",length=11)
+	private int oid;
+	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_idatleta",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenRutina")
 	private Atleta atleta;
 	
-	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="rutina_idrutina",insertable=true,updatable=true)
+	@JoinColumn(name="rutina_id",insertable=true,updatable=true)
 	private Rutina rutina;
 	
 	@Column(name="fechaInicio",length=10)
 	@DefaultValueCalculator(CurrentDateCalculator.class)
 	private Date fechaInicio;	
 	
-	
-	@Column(name="FechaFin",length=10)
+	@Column(name="fechaFin",length=10)
 	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaFin;	
+	private Date fechaFin;	
 	
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaRegistro;	
-	
-	@Stereotype("TEXTOGRANDE")
+	@Stereotype("TEXTO_GRANDE")
 	@Column(name="observacion",length=255)
 	private String observacion;
 
-	public Atleta getAtleta() {
-		return atleta;
+	public int getOid() {
+		return oid;
 	}
 
-	public void setAtleta(Atleta atleta) {
-		this.atleta = atleta;
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
 	public Rutina getRutina() {
@@ -66,6 +64,14 @@ public class AtletaRutina {
 
 	public void setRutina(Rutina rutina) {
 		this.rutina = rutina;
+	}
+
+	public Atleta getAtleta() {
+		return atleta;
+	}
+
+	public void setAtleta(Atleta atleta) {
+		this.atleta = atleta;
 	}
 
 	public Date getFechaInicio() {
@@ -77,19 +83,11 @@ public class AtletaRutina {
 	}
 
 	public Date getFechaFin() {
-		return FechaFin;
+		return fechaFin;
 	}
 
 	public void setFechaFin(Date fechaFin) {
-		FechaFin = fechaFin;
-	}
-
-	public Date getFechaRegistro() {
-		return FechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
+		this.fechaFin = fechaFin;
 	}
 
 	public String getObservacion() {
@@ -99,18 +97,5 @@ public class AtletaRutina {
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
 	}
-
-	public int getOidAtletaRutina() {
-		return oidAtletaRutina;
-	}
-
-	public void setOidAtletaRutina(int oidAtletaRutina) {
-		this.oidAtletaRutina = oidAtletaRutina;
-	}	
 	
-	
-	
-	
-	
-
 }

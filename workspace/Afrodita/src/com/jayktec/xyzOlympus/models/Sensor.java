@@ -9,7 +9,7 @@ import org.openxava.annotations.*;
 import com.jayktec.persistencia.*;
 
 @Entity
-@Table(name="fateon_sensor", schema="fateon")
+@Table(name="fateon_sensor")
 public class Sensor {
 	
 	
@@ -29,11 +29,6 @@ public class Sensor {
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="sensor_programa",insertable=true,updatable=true)
 	private Programa programa;
-
-
-	/*@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="sensor_tabla",insertable=true,updatable=true)
-	private Tablamapa mapa;*/
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="sensor_tabla",insertable=true,updatable=true)

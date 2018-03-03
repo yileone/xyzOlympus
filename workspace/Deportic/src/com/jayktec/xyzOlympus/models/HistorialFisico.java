@@ -8,71 +8,87 @@ import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
 /*
- Table: historialfisico
+Table: historialfisico
 Columns:
-idhistorialFisico int(11) PK 
-atleta_idatleta int(11) 
-FechaRegistro date 
-altura int(11) 
-peso int(11) 
+historialFisico_id int(11) PK 
+atleta_id int(11) 
+fechaRegistro timestamp 
+altura float 
+peso float 
 tallaCamisa int(11) 
-tallaZapato int(11) 
-tallaPantalon varchar(45) 
+tallaZapato float 
+tallaPantalon int(11) 
 porcGrasa int(11) 
-porcMusculo int(11) 
+porcMusculo float 
 imagen blob 
-funcionario_idfuncionario int(11)*/
+funcionario_id int(11)*/
 @Entity
-@Table(name="historialFisico", schema="deportic")
+@Table(name="historialFisico")
 public class HistorialFisico {
 	@Id
 	@Hidden
-	@Column(name="idhistorialFisico",length=11)
+	@Column(name="historialFisico_id",length=11)
 	private int oid;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="atleta_idatleta",insertable=true,updatable=true)
+	@JoinColumn(name="atleta_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="persona.rut")
+	@ReferenceView("VAtletaenHistorialFisico")
 	private Atleta atleta;
 	
 	
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="funcionario_idfuncionario",insertable=true,updatable=true)
-	private Funcionario funcionario;
-	
-	
-	@Column(name="FechaRegistro",length=10)
-	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaRegistro;	
+	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="historialFisico")
+	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	showReferenceView=true,
+	descriptionProperties="rut")  
+	@ReferenceView("VPersonaenAtleta")
+	private Persona funcionario;
 	
 	@Column(name="altura",length=11)
-	private int altura;
+	private float altura;
 	
 	@Column(name="peso",length=11)
-	private int peso;
-	@Column(name="tallaCamisa",length=11)
-	private int tallaCamisa;
+	private float peso;
+	
+
+	
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="tallaCamisa",insertable=true,updatable=true,table="historialFisico")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TallaCamisa')",
+			showReferenceView=false,
+			descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")
+	private Catalogo tallaCamisa;
 	
 	@Column(name="tallaZapato",length=11)
-	private int tallaZapato;
+	private float tallaZapato;
+
 	
-	@Column(name="taltallaPantalon",length=11)
-	private String taltallaPantalon;
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="tallaPantalon",insertable=true,updatable=true,table="historialFisico")
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='TallaPantalon')",
+			showReferenceView=false,
+			descriptionProperties="valorVarchar")  
+	@ReferenceView("VVarchar")
+	private Catalogo tallaPantalon;
 	
 	@Column(name="porcGrasa",length=11)
-	private int porcGrasa;
+	private float porcGrasa;
 	
 	@Column(name="porcMusculo",length=11)
-	private int porcMusculo;
+	private float porcMusculo;
 
 	@Column(name="imagen",length=255)
-	
-	
-	//TODO Indagar como guardar la imagen en la base de datos con openxava
 	@Stereotype("IMAGEN")
 	private byte[] imagen;
-	
-	
 
 	public int getOid() {
 		return oid;
@@ -90,75 +106,68 @@ public class HistorialFisico {
 		this.atleta = atleta;
 	}
 
-	public Funcionario getFuncionario() {
+	public Persona getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Persona funcionario) {
 		this.funcionario = funcionario;
 	}
 
-	public Date getFechaRegistro() {
-		return FechaRegistro;
-	}
-
-	public void setFechaRegistro(Date fechaRegistro) {
-		FechaRegistro = fechaRegistro;
-	}
-
-	public int getAltura() {
+	public float getAltura() {
 		return altura;
 	}
 
-	public void setAltura(int altura) {
+	public void setAltura(float altura) {
 		this.altura = altura;
 	}
 
-	public int getPeso() {
+	public float getPeso() {
 		return peso;
 	}
 
-	public void setPeso(int peso) {
+	public void setPeso(float peso) {
 		this.peso = peso;
 	}
 
-	public int getTallaCamisa() {
+	public Catalogo getTallaCamisa() {
 		return tallaCamisa;
 	}
 
-	public void setTallaCamisa(int tallaCamisa) {
+	public void setTallaCamisa(Catalogo tallaCamisa) {
 		this.tallaCamisa = tallaCamisa;
 	}
 
-	public int getTallaZapato() {
+	public float getTallaZapato() {
 		return tallaZapato;
 	}
 
-	public void setTallaZapato(int tallaZapato) {
+	public void setTallaZapato(float tallaZapato) {
 		this.tallaZapato = tallaZapato;
 	}
 
-	public String getTaltallaPantalon() {
-		return taltallaPantalon;
+
+	public Catalogo getTallaPantalon() {
+		return tallaPantalon;
 	}
 
-	public void setTaltallaPantalon(String taltallaPantalon) {
-		this.taltallaPantalon = taltallaPantalon;
+	public void setTallaPantalon(Catalogo tallaPantalon) {
+		this.tallaPantalon = tallaPantalon;
 	}
 
-	public int getPorcGrasa() {
+	public float getPorcGrasa() {
 		return porcGrasa;
 	}
 
-	public void setPorcGrasa(int porcGrasa) {
+	public void setPorcGrasa(float porcGrasa) {
 		this.porcGrasa = porcGrasa;
 	}
 
-	public int getPorcMusculo() {
+	public float getPorcMusculo() {
 		return porcMusculo;
 	}
 
-	public void setPorcMusculo(int porcMusculo) {
+	public void setPorcMusculo(float porcMusculo) {
 		this.porcMusculo = porcMusculo;
 	}
 
@@ -170,6 +179,6 @@ public class HistorialFisico {
 		this.imagen = imagen;
 	}
 	
-
+	
 
 }
