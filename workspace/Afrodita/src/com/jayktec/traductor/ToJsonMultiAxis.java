@@ -20,112 +20,91 @@ public class ToJsonMultiAxis extends ToJson {
 	@Override
 	public String armarJson() {
 		// TODO Auto-generated method stub
-		{
-			String temp = "chart\": {"
-					+ " \"caption\": " + " \""+ origen.getNombre() +"-"+sensor.getNombre()+","
-					+ "\"xaxisname\":"+ " \"" + xName+ " \"" +","
-					+ "\"yaxisname\":"+ " \"" + yName+ " \""+","
-			        + "\"showvalues\":" +  " \"" + showValues+ " \""+","
-			        + "\"numberprefix\":" +  " \"" + numberPrefix+ " \""+","
-			        + "\"legendborderalpha\":" +  " \"" + legendborderalpha+ " \""+","
-			        + "\"showborder\":" +  " \"" + showborder+ " \""+","
-			        + "\"bgcolor\":" +  " \"" + bgColor+ " \""+","
-			        + "\"showborder\":" +  " \"" + showborder+ " \""+","
-			        + "\"plotgradientcolor\":" +  " \"" + showborder+ " \""+","
-			        + "\"showalternatehgridcolor\":" +  " \"" + showborder+ " \""+","
-					
-//		        "plotgradientcolor": " ",
-//		        "showalternatehgridcolor": "0",
-//		        "showplotborder": "0",
-//		        "labeldisplay": "WRAP",
-//		        "divlinecolor": "CCCCCC",
-//		        "showcanvasborder": "0",
-//		        "canvasborderalpha": "0",
-//		        "legendshadow": "0",
-//		        "linethickness": "3"},{";
-;
+		
+			String temp = encabezado;
+
 			for (Registro registro : listaRegistro) {
 				temp = temp + "{";
 				for (Mapa mapaItem : mapa) {
 					String campo = mapaItem.getMapabdToString();
 					String valor = "";
 					String nombreCampo = mapaItem.getMapaapp();
-					if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD())) {
 						valor = registro.getRegistroDate1().toString();
 					}
-					if (campo.equals(Constantes.CampoRegistro.DATE2.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.DATE2.campoBD())) {
 						valor = registro.getRegistroDate2().toString();
 					}
-					if (campo.equals(Constantes.CampoRegistro.DATE3.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.DATE3.campoBD())) {
 						valor = registro.getRegistroDate3().toString();
 					}
-					if (campo.equals(Constantes.CampoRegistro.DATE4.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.DATE4.campoBD())) {
 						valor = registro.getRegistroDate4().toString();
 					}
-					if (campo.equals(Constantes.CampoRegistro.DATE5.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.DATE5.campoBD())) {
 						valor = registro.getRegistroDate5().toString();
 					}
 
-					if (campo.equals(Constantes.CampoRegistro.INT1.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.INT1.campoBD())) {
 						valor = String.valueOf(registro.getRegistroInt1());
 					}
-					if (campo.equals(Constantes.CampoRegistro.INT2.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.INT2.campoBD())) {
 						valor = String.valueOf(registro.getRegistroInt2());
 					}
-					if (campo.equals(Constantes.CampoRegistro.INT3.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.INT3.campoBD())) {
 						valor = String.valueOf(registro.getRegistroInt3());
 					}
-					if (campo.equals(Constantes.CampoRegistro.INT4.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.INT4.campoBD())) {
 						valor = String.valueOf(registro.getRegistroInt4());
 					}
-					if (campo.equals(Constantes.CampoRegistro.INT5.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.INT5.campoBD())) {
 						valor = String.valueOf(registro.getRegistroInt5());
 					}
-					if (campo.equals(Constantes.CampoRegistro.FLOAT1.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.FLOAT1.campoBD())) {
 						valor = String.valueOf(registro.getRegistroFloat1());
 					}
-					if (campo.equals(Constantes.CampoRegistro.FLOAT2.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.FLOAT2.campoBD())) {
 						valor = String.valueOf(registro.getRegistroFloat2());
 					}
-					if (campo.equals(Constantes.CampoRegistro.FLOAT3.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.FLOAT3.campoBD())) {
 						valor = String.valueOf(registro.getRegistroFloat3());
 					}
-					if (campo.equals(Constantes.CampoRegistro.FLOAT4.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.FLOAT4.campoBD())) {
 						valor = String.valueOf(registro.getRegistroFloat4());
 					}
-					if (campo.equals(Constantes.CampoRegistro.FLOAT5.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.FLOAT5.campoBD())) {
 						valor = String.valueOf(registro.getRegistroFloat5());
 					}
 
-					if (campo.equals(Constantes.CampoRegistro.VARCHAR1.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.VARCHAR1.campoBD())) {
 						valor = registro.getRegistroVarchar1();
 					}
-					if (campo.equals(Constantes.CampoRegistro.VARCHAR2.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.VARCHAR2.campoBD())) {
 						valor = registro.getRegistroVarchar2();
 					}
-					if (campo.equals(Constantes.CampoRegistro.VARCHAR3.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.VARCHAR3.campoBD())) {
 						valor = registro.getRegistroVarchar3();
 					}
-					if (campo.equals(Constantes.CampoRegistro.VARCHAR4.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.VARCHAR4.campoBD())) {
 						valor = registro.getRegistroVarchar4();
 					}
-					if (campo.equals(Constantes.CampoRegistro.VARCHAR5.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.VARCHAR5.campoBD())) {
 						valor = registro.getRegistroVarchar5();
 					}
 
-					if (campo.equals(Constantes.CampoRegistro.HORA1.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.HORA1.campoBD())) {
 						valor = String.valueOf(registro.getRegistrotime1());
 					}
-					if (campo.equals(Constantes.CampoRegistro.HORA2.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.HORA2.campoBD())) {
 						valor = String.valueOf(registro.getRegistrotime2());
 					}
-					if (campo.equals(Constantes.CampoRegistro.HORA3.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.HORA3.campoBD())) {
 						valor = String.valueOf(registro.getRegistrotime3());
 					}
-					if (campo.equals(Constantes.CampoRegistro.HORA4.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.HORA4.campoBD())) {
 						valor = String.valueOf(registro.getRegistrotime4());
 					}
-					if (campo.equals(Constantes.CampoRegistro.HORA5.campoBD)) {
+					if (campo.equals(Constantes.CampoRegistro.HORA5.campoBD())) {
 						valor = String.valueOf(registro.getRegistrotime5());
 					}
 
@@ -140,6 +119,8 @@ public class ToJsonMultiAxis extends ToJson {
 			return temp;
 
 	}
+	
+	
 
 	public ToJsonMultiAxis(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		super(registros, origen, sensor);

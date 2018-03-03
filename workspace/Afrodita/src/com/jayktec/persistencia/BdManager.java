@@ -41,7 +41,7 @@ public class BdManager {
 	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor) throws SQLException {
 
 		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id='" + sensor.getOid()
-				+ "' and origen_id='" + origen.getOid() + "'";
+				+ "' and origen_id='" + origen.getOid() + "'  order by "+Constantes.CampoRegistro.DATE1.campoBD() +","+ Constantes.CampoRegistro.HORA1.campoBD();
 		System.out.println(sql);
 		return consultarRegistro(sql, sensor, origen);
 
@@ -140,34 +140,34 @@ public class BdManager {
 
 			Registro temp = new Registro();
 			temp.setRegistroDate1(rs.getDate(Constantes.CampoRegistro.DATE1.campoBD()));
-			temp.setRegistroDate2(rs.getDate("registro_date_2"));
-			temp.setRegistroDate3(rs.getDate("registro_date_3"));
-			temp.setRegistroDate4(rs.getDate("registro_date_4"));
-			temp.setRegistroDate5(rs.getDate("registro_date_5"));
-			temp.setRegistroFloat1(rs.getFloat("registro_float_1"));
-			temp.setRegistroFloat2(rs.getFloat("registro_float_2"));
-			temp.setRegistroFloat3(rs.getFloat("registro_float_3"));
-			temp.setRegistroFloat4(rs.getFloat("registro_float_4"));
-			temp.setRegistroFloat5(rs.getFloat("registro_float_5"));
-			temp.setRegistroInt1(rs.getInt("registro_int_1"));
-			temp.setRegistroInt2(rs.getInt("registro_int_2"));
-			temp.setRegistroInt3(rs.getInt("registro_int_3"));
-			temp.setRegistroInt4(rs.getInt("registro_int_4"));
-			temp.setRegistroInt5(rs.getInt("registro_int_5"));
-			temp.setRegistroVarchar1(rs.getString("registro_varchar_1"));
-			temp.setRegistroVarchar2(rs.getString("registro_varchar_2"));
-			temp.setRegistroVarchar3(rs.getString("registro_varchar_3"));
-			temp.setRegistroVarchar4(rs.getString("registro_varchar_4"));
-			temp.setRegistroVarchar5(rs.getString("registro_varchar_5"));
-			temp.setRegistrotime1(rs.getTime("registro_datetime_1"));
-			temp.setRegistrotime2(rs.getTime("registro_datetime_2"));
-			temp.setRegistrotime3(rs.getTime("registro_datetime_3"));
-			temp.setRegistrotime4(rs.getTime("registro_datetime_4"));
-			temp.setRegistrotime5(rs.getTime("registro_datetime_5"));
-			temp.setSensor(new Sensor(rs.getString("sensor_id")));
-			temp.setOrigen(new Origen(rs.getString("origen_id")));
-			temp.setOid(rs.getString("registro_id"));
-			temp.setRegistroFecha(rs.getString("registro_fecha"));
+			temp.setRegistroDate2(rs.getDate(Constantes.CampoRegistro.DATE2.campoBD()));
+			temp.setRegistroDate3(rs.getDate(Constantes.CampoRegistro.DATE3.campoBD()));
+			temp.setRegistroDate4(rs.getDate(Constantes.CampoRegistro.DATE4.campoBD()));
+			temp.setRegistroDate5(rs.getDate(Constantes.CampoRegistro.DATE5.campoBD()));
+			temp.setRegistroFloat1(rs.getFloat(Constantes.CampoRegistro.FLOAT1.campoBD()));
+			temp.setRegistroFloat2(rs.getFloat(Constantes.CampoRegistro.FLOAT2.campoBD()));
+			temp.setRegistroFloat3(rs.getFloat(Constantes.CampoRegistro.FLOAT3.campoBD()));
+			temp.setRegistroFloat4(rs.getFloat(Constantes.CampoRegistro.FLOAT4.campoBD()));
+			temp.setRegistroFloat5(rs.getFloat(Constantes.CampoRegistro.FLOAT5.campoBD()));
+			temp.setRegistroInt1(rs.getInt(Constantes.CampoRegistro.INT1.campoBD()));
+			temp.setRegistroInt2(rs.getInt(Constantes.CampoRegistro.INT2.campoBD()));
+			temp.setRegistroInt3(rs.getInt(Constantes.CampoRegistro.INT3.campoBD()));
+			temp.setRegistroInt4(rs.getInt(Constantes.CampoRegistro.INT4.campoBD()));
+			temp.setRegistroInt5(rs.getInt(Constantes.CampoRegistro.INT5.campoBD()));
+			temp.setRegistroVarchar1(rs.getString(Constantes.CampoRegistro.VARCHAR1.campoBD()));
+			temp.setRegistroVarchar2(rs.getString(Constantes.CampoRegistro.VARCHAR2.campoBD()));
+			temp.setRegistroVarchar3(rs.getString(Constantes.CampoRegistro.VARCHAR3.campoBD()));
+			temp.setRegistroVarchar4(rs.getString(Constantes.CampoRegistro.VARCHAR4.campoBD()));
+			temp.setRegistroVarchar5(rs.getString(Constantes.CampoRegistro.VARCHAR5.campoBD()));
+			temp.setRegistrotime1(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()));
+			temp.setRegistrotime2(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()));
+			temp.setRegistrotime3(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()));
+			temp.setRegistrotime4(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()));
+			temp.setRegistrotime5(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()));
+			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
+			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
+			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
+			temp.setRegistroFecha(rs.getString(Constantes.CampoRegistro.FECHA_REGISTRO.campoBD()));
 			respuesta.add(temp);
 
 		}
@@ -189,34 +189,34 @@ public class BdManager {
 
 			Registro temp = new Registro();
 			temp.setRegistroDate1(rs.getDate(Constantes.CampoRegistro.DATE1.campoBD()));
-			temp.setRegistroDate2(rs.getDate("registro_date_2"));
-			temp.setRegistroDate3(rs.getDate("registro_date_3"));
-			temp.setRegistroDate4(rs.getDate("registro_date_4"));
-			temp.setRegistroDate5(rs.getDate("registro_date_5"));
-			temp.setRegistroFloat1(rs.getFloat("registro_float_1"));
-			temp.setRegistroFloat2(rs.getFloat("registro_float_2"));
-			temp.setRegistroFloat3(rs.getFloat("registro_float_3"));
-			temp.setRegistroFloat4(rs.getFloat("registro_float_4"));
-			temp.setRegistroFloat5(rs.getFloat("registro_float_5"));
-			temp.setRegistroInt1(rs.getInt("registro_int_1"));
-			temp.setRegistroInt2(rs.getInt("registro_int_2"));
-			temp.setRegistroInt3(rs.getInt("registro_int_3"));
-			temp.setRegistroInt4(rs.getInt("registro_int_4"));
-			temp.setRegistroInt5(rs.getInt("registro_int_5"));
-			temp.setRegistroVarchar1(rs.getString("registro_varchar_1"));
-			temp.setRegistroVarchar2(rs.getString("registro_varchar_2"));
-			temp.setRegistroVarchar3(rs.getString("registro_varchar_3"));
-			temp.setRegistroVarchar4(rs.getString("registro_varchar_4"));
-			temp.setRegistroVarchar5(rs.getString("registro_varchar_5"));
-			temp.setRegistrotime1(rs.getTime("registro_datetime_1"));
-			temp.setRegistrotime2(rs.getTime("registro_datetime_2"));
-			temp.setRegistrotime3(rs.getTime("registro_datetime_3"));
-			temp.setRegistrotime4(rs.getTime("registro_datetime_4"));
-			temp.setRegistrotime5(rs.getTime("registro_datetime_5"));
-			temp.setSensor(sensor);
-			temp.setOrigen(origen);
-			temp.setOid(rs.getString("registro_id"));
-			temp.setRegistroFecha(rs.getString("registro_fecha"));
+			temp.setRegistroDate2(rs.getDate(Constantes.CampoRegistro.DATE2.campoBD()));
+			temp.setRegistroDate3(rs.getDate(Constantes.CampoRegistro.DATE3.campoBD()));
+			temp.setRegistroDate4(rs.getDate(Constantes.CampoRegistro.DATE4.campoBD()));
+			temp.setRegistroDate5(rs.getDate(Constantes.CampoRegistro.DATE5.campoBD()));
+			temp.setRegistroFloat1(rs.getFloat(Constantes.CampoRegistro.FLOAT1.campoBD()));
+			temp.setRegistroFloat2(rs.getFloat(Constantes.CampoRegistro.FLOAT2.campoBD()));
+			temp.setRegistroFloat3(rs.getFloat(Constantes.CampoRegistro.FLOAT3.campoBD()));
+			temp.setRegistroFloat4(rs.getFloat(Constantes.CampoRegistro.FLOAT4.campoBD()));
+			temp.setRegistroFloat5(rs.getFloat(Constantes.CampoRegistro.FLOAT5.campoBD()));
+			temp.setRegistroInt1(rs.getInt(Constantes.CampoRegistro.INT1.campoBD()));
+			temp.setRegistroInt2(rs.getInt(Constantes.CampoRegistro.INT2.campoBD()));
+			temp.setRegistroInt3(rs.getInt(Constantes.CampoRegistro.INT3.campoBD()));
+			temp.setRegistroInt4(rs.getInt(Constantes.CampoRegistro.INT4.campoBD()));
+			temp.setRegistroInt5(rs.getInt(Constantes.CampoRegistro.INT5.campoBD()));
+			temp.setRegistroVarchar1(rs.getString(Constantes.CampoRegistro.VARCHAR1.campoBD()));
+			temp.setRegistroVarchar2(rs.getString(Constantes.CampoRegistro.VARCHAR2.campoBD()));
+			temp.setRegistroVarchar3(rs.getString(Constantes.CampoRegistro.VARCHAR3.campoBD()));
+			temp.setRegistroVarchar4(rs.getString(Constantes.CampoRegistro.VARCHAR4.campoBD()));
+			temp.setRegistroVarchar5(rs.getString(Constantes.CampoRegistro.VARCHAR5.campoBD()));
+			temp.setRegistrotime1(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()));
+			temp.setRegistrotime2(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()));
+			temp.setRegistrotime3(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()));
+			temp.setRegistrotime4(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()));
+			temp.setRegistrotime5(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()));
+			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
+			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
+			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
+			temp.setRegistroFecha(rs.getString(Constantes.CampoRegistro.FECHA_REGISTRO.campoBD()));
 			respuesta.add(temp);
 
 		}
@@ -287,7 +287,11 @@ public class BdManager {
 		return 0;
 
 	}
-
+/**
+ * guarda un json y devuelve el numero del id guardado en la bd
+ * @param jSon
+ * @return
+ */
 	public static int saveJson(String jSon) {
 		int autoGeneratedID = 0;
 		try {

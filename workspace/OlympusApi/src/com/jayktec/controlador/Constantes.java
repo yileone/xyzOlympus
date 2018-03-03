@@ -6,6 +6,26 @@ public class Constantes {
 	public static final String IP ="IP";
 	public static final String PUERTO ="PORT";
 	public static final String BD="fateon_new";
+	
+	public enum Tiempo {
+		DIA("dia"),
+		MES("mes"),
+		ANUAL("anual"),
+		SEMANAL("semanal");
+        private String periodo;
+		
+		private Tiempo(String periodo) {
+			this.periodo= periodo;
+			// TODO Auto-generated constructor stub
+		}
+		
+		public String periodo()
+		{
+			return periodo;
+		}
+	}
+	
+	
 	public enum CampoRegistro {
 
 		SENSOR("sensor_id"),
@@ -13,11 +33,11 @@ public class Constantes {
 		ORIGEN("origen_id"),
 		ID_("registro_id"),
 				
-		HORA1("registro_datetime_1"),
-		HORA2("registro_datetime_2"),
-		HORA3("registro_datetime_3"),
-		HORA4("registro_datetime_4"),
-		HORA5("registro_datetime_5"),
+		HORA1("registro_time_1"),
+		HORA2("registro_time_2"),
+		HORA3("registro_time_3"),
+		HORA4("registro_time_4"),
+		HORA5("registro_time_5"),
 			
 		INT1("registro_int_1"),
 		INT2("registro_int_2"),
@@ -43,7 +63,7 @@ public class Constantes {
 	    DATE4("registro_date_4"),
 	    DATE5("registro_date_5");
 		
-		public String campoBD;
+		private String campoBD;
 		
 		private CampoRegistro(String campo) {
 			this.campoBD= campo;

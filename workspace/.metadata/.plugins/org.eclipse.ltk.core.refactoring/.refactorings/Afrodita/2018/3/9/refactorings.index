@@ -1,0 +1,5 @@
+1519922401926	Encapsulate field 'categorias'
+1519922906314	Encapsulate field 'fechaFinal'
+1519999402086	Encapsulate field 'campoCategoria'
+1520000777189	Rename field 'campoCategoria'
+1520004688436	Encapsulate field 'dataset'
