@@ -16,12 +16,8 @@ import com.jayktec.xyzOlympus.models.*;
 public class ToJsonMultiAxis extends ToJson {
 
 	
-<<<<<<< HEAD
-
-=======
 //
 //	@Override
->>>>>>> d3cd06bb17fcf3e55e7a36e39b817114809cee26
 //	public String armarJson() {
 //		// TODO Auto-generated method stub
 //		
@@ -30,11 +26,9 @@ public class ToJsonMultiAxis extends ToJson {
 //			for (Registro registro : listaRegistro) {
 //				temp = temp + "{";
 //				for (Mapa mapaItem : mapa) {
-<<<<<<< HEAD
+
 //					String campo = mapaItem.getMapabd().getNombre();
-=======
-//					String campo = mapaItem.getMapabdToString();
->>>>>>> d3cd06bb17fcf3e55e7a36e39b817114809cee26
+
 //					String valor = "";
 //					String nombreCampo = mapaItem.getMapaapp();
 //					if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD())) {

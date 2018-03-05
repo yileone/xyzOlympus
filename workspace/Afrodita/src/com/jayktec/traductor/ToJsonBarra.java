@@ -62,13 +62,7 @@ public class ToJsonBarra extends ToJson {
 		float temp = 0;
 
 		for (Registro registro : listaRegistro) {
-<<<<<<< HEAD
-		
-			float temp2=0;
-			if (registro.getRegistroFloat1()!=null)
-			if (temp2<( temp2=registro.getRegistroFloat1()));
-			
-=======
+
 
 			float temp2 = 0;
 			if (registro.getRegistroFloat1() != null)
@@ -97,7 +91,6 @@ public class ToJsonBarra extends ToJson {
 
 			if (temp2>temp)temp=temp2;
 			temp2=0;
->>>>>>> d3cd06bb17fcf3e55e7a36e39b817114809cee26
 		}
 		
 		setYaxismaxvalue((int)(temp*0.05));
