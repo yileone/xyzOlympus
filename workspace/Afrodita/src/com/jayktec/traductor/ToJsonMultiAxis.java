@@ -26,7 +26,9 @@ public class ToJsonMultiAxis extends ToJson {
 //			for (Registro registro : listaRegistro) {
 //				temp = temp + "{";
 //				for (Mapa mapaItem : mapa) {
-//					String campo = mapaItem.getMapabdToString();
+
+//					String campo = mapaItem.getMapabd().getNombre();
+
 //					String valor = "";
 //					String nombreCampo = mapaItem.getMapaapp();
 //					if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD())) {

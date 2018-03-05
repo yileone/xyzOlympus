@@ -63,6 +63,7 @@ public class ToJsonBarra extends ToJson {
 
 		for (Registro registro : listaRegistro) {
 
+
 			float temp2 = 0;
 			if (registro.getRegistroFloat1() != null)
 				if (temp2 < registro.getRegistroFloat1())

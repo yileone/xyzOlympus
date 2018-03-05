@@ -98,7 +98,6 @@ public class BdManager {
 		while (rs.next()) {
 			Mapa temp = new Mapa();
 			temp.setOid(rs.getString("mapa_id"));
-			temp.setMapaFecha(rs.getDate("mapa_fecha"));
 			temp.setMapabd(buscarEnListaCatalogo(rs.getString("mapa_campo")));
 			temp.setMapaTabla(buscarEnListaCatalogo(rs.getString("mapa_tabla")));
 			temp.setMapaapp(rs.getString("mapa_nombre_campo"));
@@ -596,7 +595,6 @@ public class BdManager {
 			while (rs.next()) {
 				Mapa temp = new Mapa();
 				temp.setOid(rs.getString("mapa_id"));
-				temp.setMapaFecha(rs.getDate("mapa_fecha"));
 				temp.setMapabd(new Catalogo(rs.getString("mapa_campo")));
 				temp.setMapaTabla(new Catalogo(rs.getString("mapa_tabla")));
 				temp.setMapaapp(rs.getString("mapa_nombre_campo"));

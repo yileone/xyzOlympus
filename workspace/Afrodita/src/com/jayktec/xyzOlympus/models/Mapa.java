@@ -49,29 +49,12 @@ public class Mapa {
 	@Column(name="mapa_nombre_campo",insertable=true,updatable=true)
 	private String mapaapp;
 
-	@Column(name="mapa_fecha_",insertable=true,updatable=true)
-	private Date mapaFecha;
-
 	public String getOid() {
 		return oid;
 	}
 
 	public void setOid(String oid) {
 		this.oid = oid;
-	}
-
-
-
-
-	public String getMapabdToString() {
-		return mapabd.getValorCadena();
-	}
-	public Catalogo getMapabd() {
-		return mapabd;
-	}
-
-	public void setMapabd(Catalogo mapabd) {
-		this.mapabd = mapabd;
 	}
 
 	public Catalogo getMapaTabla() {
@@ -82,6 +65,14 @@ public class Mapa {
 		this.mapaTabla = mapaTabla;
 	}
 
+	public Catalogo getMapabd() {
+		return mapabd;
+	}
+
+	public void setMapabd(Catalogo mapabd) {
+		this.mapabd = mapabd;
+	}
+
 	public String getMapaapp() {
 		return mapaapp;
 	}
@@ -90,19 +81,10 @@ public class Mapa {
 		this.mapaapp = mapaapp;
 	}
 
-	/**
-	 * @return the mapaFecha
-	 */
-	public Date getMapaFecha() {
-		return mapaFecha;
-	}
 
-	/**
-	 * @param mapaFecha the mapaFecha to set
-	 */
-	public void setMapaFecha(Date mapaFecha) {
-		this.mapaFecha = mapaFecha;
-	}
+
+
+
 
 
 
