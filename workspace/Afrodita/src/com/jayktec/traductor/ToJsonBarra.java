@@ -59,15 +59,40 @@ public class ToJsonBarra extends ToJson {
 	 */
 	private void actualizarYaxismaxValue() {
 		// TODO Auto-generated method stub
-		float temp=0;
-		
+		float temp = 0;
+
 		for (Registro registro : listaRegistro) {
-		
-			float temp2=0;
-			if (registro.getRegistroFloat1()!=null)
-			if (temp2<( temp2=registro.getRegistroFloat1();
-			
+
+			float temp2 = 0;
+			if (registro.getRegistroFloat1() != null)
+				if (temp2 < registro.getRegistroFloat1())
+					temp2 = registro.getRegistroFloat1();
+			if (temp2 < registro.getRegistroFloat2())
+				temp2 = registro.getRegistroFloat2();
+			if (temp2 < registro.getRegistroFloat3())
+				temp2 = registro.getRegistroFloat3();
+			if (temp2 < registro.getRegistroFloat4())
+				temp2 = registro.getRegistroFloat4();
+
+			if (temp2 < registro.getRegistroFloat5())
+				temp2 = registro.getRegistroFloat5();
+
+			if (temp2 < registro.getRegistroInt1())
+				temp2 = registro.getRegistroInt1();
+			if (temp2 < registro.getRegistroInt2())
+				temp2 = registro.getRegistroInt2();
+			if (temp2 < registro.getRegistroInt3())
+				temp2 = registro.getRegistroInt3();
+			if (temp2 < registro.getRegistroInt4())
+				temp2 = registro.getRegistroInt4();
+			if (temp2 < registro.getRegistroInt5())
+				temp2 = registro.getRegistroInt5();
+
+			if (temp2>temp)temp=temp2;
+			temp2=0;
 		}
+		
+		setYaxismaxvalue((int)(temp*0.05));
 	}
 
 	/**
