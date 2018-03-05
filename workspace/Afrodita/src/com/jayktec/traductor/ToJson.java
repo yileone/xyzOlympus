@@ -249,7 +249,7 @@ public class ToJson {
 	 * @throws JsonIOException
 	 * @throws IOException
 	 */
-	private int crearJson() throws SQLException, JsonIOException, IOException {
+	public int crearJson() throws SQLException, JsonIOException, IOException {
 		// TODO Auto-generated method stub
 		if (refrescar) {
 			mapaParaSensor();
@@ -264,7 +264,7 @@ public class ToJson {
 	/**
 	 * @return
 	 */
-	public String armarJson() {
+	private String armarJson() {
 		crearEncabezado();
 		crearCategorias();
 		creaDataset();
