@@ -132,4 +132,14 @@ public class ToJsonMultiAxis extends ToJson {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
+	public ToJsonMultiAxis(String origen, String sensor) throws SQLException {
+		super(origen, sensor);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	
 }
