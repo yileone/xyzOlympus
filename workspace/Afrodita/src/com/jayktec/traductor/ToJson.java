@@ -58,6 +58,13 @@ public class ToJson {
 
 	}
 
+
+	public ToJson(String origen, String sensor) throws SQLException {
+		this.origen = new Origen(origen);
+		this.sensor = new Sensor( sensor);
+		mapaParaSensor();
+		refrescar = true;
+	}
 	public ToJson(String origen, Sensor sensor) throws SQLException {
 		this.origen = new Origen(origen);
 		this.sensor = sensor;

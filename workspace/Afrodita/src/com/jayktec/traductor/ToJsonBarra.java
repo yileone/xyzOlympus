@@ -6,7 +6,11 @@ package com.jayktec.traductor;
 import java.sql.*;
 import java.util.*;
 
+import org.hibernate.hql.internal.ast.tree.*;
+
+import com.jayktec.persistencia.*;
 import com.jayktec.xyzOlympus.models.*;
+import com.sun.org.apache.bcel.internal.generic.*;
 
 /**
  * @author {Yisheng León Espinoza} 5 mar. 2018 www.jayktec.com.ve
@@ -32,11 +36,9 @@ public class ToJsonBarra extends ToJson {
 	public void crearEncabezado() {
 		// TODO Auto-generated method stub
 
-		crearEncabezado(true); 
+		crearEncabezado(true);
 	}
 
-	
-	
 	public void crearEncabezado(boolean actualizarYaxismaxValue) {
 		// TODO Auto-generated method stub
 		if (actualizarYaxismaxValue)
@@ -57,7 +59,15 @@ public class ToJsonBarra extends ToJson {
 	 */
 	private void actualizarYaxismaxValue() {
 		// TODO Auto-generated method stub
-
+		float temp=0;
+		
+		for (Registro registro : listaRegistro) {
+		
+			float temp2=0;
+			if (registro.getRegistroFloat1()!=null)
+			if (temp2<( temp2=registro.getRegistroFloat1();
+			
+		}
 	}
 
 	/**
