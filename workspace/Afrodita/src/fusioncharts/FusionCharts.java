@@ -109,8 +109,8 @@ public class FusionCharts {
                 outputHTML = this.constructorTemplate.replace("__constructorOptions__", this.jsonEncode(this.chartOptions).replace("__dataSource__","\'"+this.chartDataSource+"\'"))+this.renderTemplate.replace("__chartId__", this.chartOptions[0]);
             }
         }
-      //  System.out.println("*******************************************************");
-      //  System.out.println(outputHTML);
+       System.out.println("*******************************************************");
+       System.out.println(outputHTML);
         return outputHTML;
     }
 

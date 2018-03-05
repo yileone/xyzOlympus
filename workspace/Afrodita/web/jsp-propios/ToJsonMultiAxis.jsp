@@ -28,16 +28,21 @@ System.out.println(origen);
 System.out.print("SENSOR: ");
 System.out.println(sensor);
 ToJsonMultiAxis tjMultiAxis = new ToJsonMultiAxis(origen,sensor);
-System.out.print("BUSCAR JSON Y CREAR: ");
-System.out.println(BdManager.buscarJson(tjMultiAxis.crearJson()));
 
-/*FusionCharts mslineChat = new FusionCharts("msline",
+
+System.out.println("BUSCAR CREAR Y BUSCAR: ");
+String grafico = BdManager.buscarJson(tjMultiAxis.crearJson());
+System.out.println(grafico);
+System.out.println("************************");
+
+FusionCharts mslineChat = new FusionCharts("msline",
 											"chart1","90%", "600",
 											"chart","json",
-											BdManager.buscarJson(tjMultiAxis.crearJson()) 
-		);*/
+											grafico);
 	%>
+	
 	<div id="chart"></div>
 	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/VerOrigen'">
+	<%=mslineChat.render()%>
 	
 	
