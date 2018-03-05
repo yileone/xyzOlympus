@@ -264,7 +264,7 @@ public class ToJson {
 	/**
 	 * @return
 	 */
-	private String armarJson() {
+	public String armarJson() {
 		crearEncabezado();
 		crearCategorias();
 		creaDataset();
