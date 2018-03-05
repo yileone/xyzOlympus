@@ -14,6 +14,9 @@ torneo_id int(11)
  */
 @Entity
 @Table(name="inscripcion")
+@Views({
+	@View(name="VInscripcionenPartido",members="torneo")
+	})
 public class Inscripcion {
 	
 	
@@ -23,11 +26,12 @@ public class Inscripcion {
 	@Column(name="inscripcion_id",length=11)
 	private int oid;
 	
-	//TODO Esta tabla no tiene id esta bien ?
+
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="equipo_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="nombreEquipo")
+	@ReferenceView("VEquipoenIncripcion")
 	private Equipo equipo;
-	
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="torneo_id",insertable=true,updatable=true)

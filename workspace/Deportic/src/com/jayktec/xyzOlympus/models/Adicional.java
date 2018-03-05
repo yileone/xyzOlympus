@@ -16,6 +16,8 @@ import org.openxava.annotations.Hidden;
 import org.openxava.annotations.NoCreate;
 import org.openxava.annotations.NoModify;
 import org.openxava.annotations.ReferenceView;
+import org.openxava.annotations.View;
+import org.openxava.annotations.Views;
 import org.openxava.calculators.CurrentDateCalculator;
 
 /*Table: contrato_extras
@@ -29,6 +31,9 @@ funcionario_id int(11)*/
 
 @Entity
 @Table(name="contrato_extras")
+@Views({
+	@View(name="VAdicionalenContrato",members="extras;fechaInicio,fechaFin"),
+	})
 public class Adicional {
 	
 	@Id
@@ -41,7 +46,7 @@ public class Adicional {
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=true)
 	@JoinColumn(name="contrato_id")
-	@DescriptionsList(showReferenceView=true,descriptionProperties="convenio.nombre")
+	@DescriptionsList(showReferenceView=true,descriptionProperties="atleta")
 	@ReferenceView("VContratoenAdicional")
 	private Contrato contrato;
 	
@@ -55,7 +60,7 @@ public class Adicional {
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="contrato_extras")
-	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Persona c where c.funcionario > 0)",
 	showReferenceView=true,
 	descriptionProperties="rut")  
 	@ReferenceView("VPersonaenAtleta")

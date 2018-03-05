@@ -14,6 +14,9 @@ categoria int(11)
 club_id int(11)*/
 @Entity
 @Table(name="equipo")
+@Views({
+	@View(name="VEquipoenIncripcion",members="nombreEquipo;categoriaEquipo")
+	})
 public class Equipo {
 	
 
@@ -37,8 +40,8 @@ public class Equipo {
 	@ReferenceView("VVarchar")
 	private Catalogo categoriaEquipo;
 	
-	@NoModify
-	@NoCreate
+	//@NoModify
+	//@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=true)
 	@JoinColumn(name="club_id")
 	@DescriptionsList(showReferenceView=true,descriptionProperties="nombre")

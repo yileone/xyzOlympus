@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.openxava.annotations.DefaultValueCalculator;
 import org.openxava.annotations.Hidden;
+import org.openxava.annotations.View;
+import org.openxava.annotations.Views;
 import org.openxava.calculators.CurrentDateCalculator;
 
 /*
@@ -19,6 +21,9 @@ nombre varchar(45)
 valor float*/
 @Entity
 @Table(name="extras")
+@Views({
+	@View(name="VExtrasenAdicional",members="nombre,valor")
+	})
 public class Extra {
 	
 	@Id

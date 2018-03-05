@@ -25,6 +25,8 @@ public class Tabla {
 	@Column(name="nombre",length=45)
 	private String nombre;
 	
+	
+	@Stereotype("TEXTO_GRANDE")
 	@Column(name="descripcion",length=255)
 	private String descripcion;
 

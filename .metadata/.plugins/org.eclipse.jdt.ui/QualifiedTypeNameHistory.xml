@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.models.Contrato"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.Required"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.DescriptionsList"/>
 </qualifiedTypeNameHistroy>
