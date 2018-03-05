@@ -228,7 +228,7 @@ public class ToJson {
 			}
 			if (object instanceof Registro) {
 				Registro registro = (Registro) object;
-				mapaParaSensor(registro);
+				mapaParaSensor(registro); 
 				crearJson();
 
 			}
@@ -236,11 +236,13 @@ public class ToJson {
 	}
 
 	/**
+	 * crea Json
+	 * @return el id guardado en la base de datos en la tabla fateon_Json
 	 * @throws SQLException
 	 * @throws JsonIOException
 	 * @throws IOException
 	 */
-	private void crearJson() throws SQLException, JsonIOException, IOException {
+	private int crearJson() throws SQLException, JsonIOException, IOException {
 		// TODO Auto-generated method stub
 		if (refrescar) {
 			mapaParaSensor();
@@ -248,7 +250,7 @@ public class ToJson {
 		}
 
 	;
-		BdManager.saveJson(armarJson());
+		return BdManager.saveJson(armarJson());
 
 	}
 
