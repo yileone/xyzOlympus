@@ -2,6 +2,7 @@ package com.jayktec.traductor;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.*;
 import java.util.*;
 
 import com.google.gson.JsonIOException;
@@ -27,10 +28,10 @@ public class ToJson {
 	protected String encabezado = "";
 	private boolean refrescar;
 	private String plotgradientcolor = " ";
-	private String showalternatehgridcolor = "\"0\"";
+	private String showalternatehgridcolor = "0";
 	private String showplotborder = "0";
-	private String labeldisplay = "\"WRAP\"";
-	private String divlinecolor = "\"CCCCCC\"";
+	private String labeldisplay = "WRAP";
+	private String divlinecolor = "CCCCCC";
 	private String showcanvasborder = "0";
 	private String canvasborderalpha = "0";
 	private String legendshadow = "0";
@@ -93,18 +94,25 @@ public class ToJson {
 	}
 	public void crearEncabezado(String yAxisName, String xAxisName) {
 
-		this.encabezado = " { \"chart\": \"{" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre() + ","
-				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," + "\"yaxisname\":" + " \"" + yName + "\"" + ","
-				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," + "\"numberprefix\":" + " \"" + numberPrefix
-				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha + "\"" + "," + "\"showborder\":"
-				+ " \"" + showborder + "\"" + "," + "\"bgcolor\":" + " \"" + bgColor + "\"" + "," + "\"showborder\":"
-				+ " \"" + showborder + "\"" + "," + "\"plotgradientcolor\":" + " \"" + plotgradientcolor + "\"" + ","
-				+ "\"showalternatehgridcolor\":" + " \"" + showalternatehgridcolor + " \"" + "," + "\"showplotborder\":"
-				+ " \"" + showplotborder + " \"" + "," + "\"labeldisplay\":" + " \"" + labeldisplay + "\"" + ","
-				+ "\"divlinecolor\":" + " \"" + divlinecolor + "\"" + "," + "\"showcanvasborder\":" + " \""
-				+ showcanvasborder + "\"" + "," + "\"canvasborderalpha\":" + " \"" + canvasborderalpha + "\"" + ","
-				+ "\"legendshadow\":" + " \"" + legendshadow + " \"" + "," + "\"linethickness\":" + " \""
-				+ linethickness + "\"" + "," + "},";
+		this.encabezado = 
+				" { \"chart\": \"{" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre() + ","
+				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," 
+				+ "\"yaxisname\":" + " \"" + yName + "\"" + ","
+				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," 
+				+ "\"numberprefix\":" + " \"" + numberPrefix
+				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha 
+				+ "\"" + "," + "\"showborder\":"+ " \"" + showborder 
+				+ "\"" + "," + "\"bgcolor\":"	+ " \"" + bgColor + "\"" + ","
+				+ "\"plotgradientcolor\":" + " \"" + plotgradientcolor + "\"" + ","
+				+ "\"showalternatehgridcolor\":" + " \"" + showalternatehgridcolor + "\"" + "," 
+				+ "\"showplotborder\":"		+ " \"" + showplotborder + "\"" + "," 
+				+ "\"labeldisplay\":" + " \"" + labeldisplay + "\"" + ","
+				+ "\"divlinecolor\":" + " \"" + divlinecolor + "\"" + "," 
+				+ "\"showcanvasborder\":" + " \""	+ showcanvasborder + "\"" + "," 
+				+ "\"canvasborderalpha\":" + " \"" + canvasborderalpha + "\"" + ","
+				+ "\"legendshadow\":" + " \"" + legendshadow + "\"" + ","
+				+ "\"linethickness\":" + " \""
+				+ linethickness + "\""  + "},";
 
 		System.out.println(encabezado);
 	}
@@ -157,6 +165,7 @@ public class ToJson {
 	private static void crearCategorias(Date fechaFinal2, Date fechaInicio) {
 		// TODO Auto-generated method stub
 		categorias = "\"categories\": [ {   \"category\": \"";
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		boolean primeraVez = true;
 		for (Registro registro : listaRegistro) {
 
@@ -178,15 +187,15 @@ public class ToJson {
 			categorias = categorias + " ";
 
 			if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA1)) {
-				categorias = categorias + registro.getRegistrotime1();
+				categorias = categorias + sdf.format(registro.getRegistrotime1());
 			} else if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA2)) {
-				categorias = categorias + registro.getRegistrotime2();
+				categorias = categorias + sdf.format(registro.getRegistrotime2());
 			} else if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA3)) {
-				categorias = categorias + registro.getRegistrotime3();
+				categorias = categorias + sdf.format(registro.getRegistrotime3());
 			} else if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA4)) {
-				categorias = categorias + registro.getRegistrotime4();
+				categorias = categorias + sdf.format(registro.getRegistrotime4());
 			} else if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA5)) {
-				categorias = categorias + registro.getRegistrotime5();
+				categorias = categorias + sdf.format(registro.getRegistrotime5());
 			}
 
 			primeraVez = false;
