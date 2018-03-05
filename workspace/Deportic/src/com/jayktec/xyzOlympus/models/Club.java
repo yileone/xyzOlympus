@@ -19,7 +19,8 @@ logo blob
 @Table(name="club")
 @Views({
 	@View(name="VClubenEquipo",members="razonSocial,nombre"),
-	@View(name="VClubenRepresentante",members="razonSocial;nombre")})
+	@View(name="VClubenRepresentante",members="razonSocial;nombre"),
+	@View(members="razonSocial,nombre;representante;logo")})
 public class Club implements Serializable {
 
 	
@@ -49,7 +50,7 @@ public class Club implements Serializable {
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="representante_id",insertable=true,updatable=true,table="club")
+	@JoinColumn(name="representante_id",insertable=true,updatable=true)
 	@DescriptionsList(showReferenceView=true,
 	descriptionProperties="persona.rut")  
 	@ReferenceView("VRepresentanteenClub")

@@ -32,7 +32,7 @@ public class Convenio {
 	private String nombre;
 	
 	@Column(name="valor",length=11)
-	private int valor;
+	private float valor;
 	
 	
 	@Stereotype("TEXTOGRANDE")
@@ -46,7 +46,7 @@ public class Convenio {
 
 	@Column(name="FechaFin",length=10)
 	@DefaultValueCalculator(CurrentDateCalculator.class)
-	private Date FechaFin;
+	private Date fechaFin;
 
 	public int getOid() {
 		return oid;
@@ -64,11 +64,11 @@ public class Convenio {
 		this.nombre = nombre;
 	}
 
-	public int getValor() {
+	public float getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(float valor) {
 		this.valor = valor;
 	}
 
@@ -89,11 +89,13 @@ public class Convenio {
 	}
 
 	public Date getFechaFin() {
-		return FechaFin;
+		return fechaFin;
 	}
 
 	public void setFechaFin(Date fechaFin) {
-		FechaFin = fechaFin;
+		this.fechaFin = fechaFin;
 	}
+
+
 
 }

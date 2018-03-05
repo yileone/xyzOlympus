@@ -47,18 +47,16 @@ public class Entrenador {
 	
 
 	
-	//TODO Esto es un catalogo hay que crear la tabla y llenar el catalogo desde sus modulos EstadoEntrenador
+
 	@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="estado",insertable=true,updatable=true,table="entrenador")
-	@DescriptionsList(condition="e.oidEntrenador in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='EstadoEntrenador')",
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='EstadoEntrenador')",
 			showReferenceView=false,
 			descriptionProperties="valorVarchar")  
 	@ReferenceView("VVarchar")
 	private Catalogo estado;
-
-
 
 
 	public int getOid() {

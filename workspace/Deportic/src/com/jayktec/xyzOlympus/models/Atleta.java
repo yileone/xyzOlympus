@@ -17,6 +17,7 @@ manoHabil varchar(45*/
 
 @Views({
 	@View(members="datosGenerales {#persona;tipoSangre,manoHabil;}"
+			   + "atletaRutina {#atletaRutina}"
 	           + "contrato {#contrato}"
 	           + "historialFisico {#historialFisico}"
 	           + "historialLogros {#historialLogros}"
@@ -34,8 +35,11 @@ manoHabil varchar(45*/
 	           + "historialFisico {#historialFisico}"
 	           + "historialLogros {#historialLogros}"
 	),	
-	@View(name="VAtletaenRutina",members="persona;tipoSangre,manoHabil"
+	@View(name="VAtletaenContrato",members="persona;tipoSangre,manoHabil;"
+	),
+	@View(name="VAtletaenRutina",members="datosGenerales {#persona;tipoSangre,manoHabil;}"
 	)
+	
 })
 public class Atleta{
 	
@@ -52,6 +56,8 @@ public class Atleta{
 	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
 	@ReferenceView("VPersonaenAtleta")
 	private Persona persona;
+	
+	
 	
 	@NoModify
 	@NoCreate
@@ -93,6 +99,9 @@ public class Atleta{
 	
 	@OneToMany(mappedBy = "atleta")
 	private Collection<HistorialMedico> historialMedico;
+	
+	@OneToMany(mappedBy = "atleta")
+	private Collection<AtletaRutina> atletaRutina;
 
 
 
@@ -188,6 +197,18 @@ public class Atleta{
 
 	public void setHistorialMedico(Collection<HistorialMedico> historialMedico) {
 		this.historialMedico = historialMedico;
+	}
+
+
+
+	public Collection<AtletaRutina> getAtletaRutina() {
+		return atletaRutina;
+	}
+
+
+
+	public void setAtletaRutina(Collection<AtletaRutina> atletaRutina) {
+		this.atletaRutina = atletaRutina;
 	}
 
 

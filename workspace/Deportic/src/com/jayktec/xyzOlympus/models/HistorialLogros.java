@@ -41,7 +41,7 @@ public class HistorialLogros {
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="funcionario_id",insertable=true,updatable=true,table="historialLogros")
-	@DescriptionsList(condition="e.oid in( SELECT p.oid FROM Persona p where p.funcionario > 0 ",
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Persona c where c.funcionario > 0)",
 	showReferenceView=true,
 	descriptionProperties="rut")  
 	@ReferenceView("VPersonaenAtleta")

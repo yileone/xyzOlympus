@@ -8,11 +8,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.openxava.annotations.DefaultValueCalculator;
 import org.openxava.annotations.DescriptionsList;
 import org.openxava.annotations.Hidden;
 import org.openxava.annotations.NoCreate;
 import org.openxava.annotations.NoModify;
+import org.openxava.annotations.PropertyValue;
 import org.openxava.annotations.ReferenceView;
+import org.openxava.annotations.View;
+import org.openxava.annotations.Views;
+import org.openxava.calculators.CurrentDateCalculator;
+import org.openxava.calculators.IntegerCalculator;
 
 import java.util.Date;
 import java.sql.Time;
@@ -38,6 +44,18 @@ set5Visitante int(11)
 ganador tinyint(1)*/
 @Entity
 @Table(name="partido")
+@Views({
+	@View(members="inscripcionLocal,"
+				+ "inscripcionVisitante;"
+			    + "lugar,fecha,hora;"
+			    + "set1Local,set1Visitante;"
+			    + "set2Local,set2Visitante;"
+			    + "set3Local,set3Visitante;"
+			    + "set4Local,set4Visitante;"
+			    + "set5Local,set5Visitante;"
+			    + "ganador"
+		   )
+	})
 public class Partido {
 	
 	@Id
@@ -45,51 +63,77 @@ public class Partido {
 	@Column(name="partido_id",length=11)
 	private int oid;
 	
+	@DescriptionsList(showReferenceView=true,descriptionProperties="equipo.nombreEquipo")
+	@ReferenceView("VInscripcionenPartido")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="inscripcionLocal_id",insertable=true,updatable=true)
-	private Equipo equipoLocal;
+	private Inscripcion inscripcionLocal;
 	
+	
+	@DescriptionsList(showReferenceView=true,descriptionProperties="equipo.nombreEquipo")
+	@ReferenceView("VInscripcionenPartido")
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="inscripcionVisitante_id",insertable=true,updatable=true)
-	private Equipo equipoVisitante;
+	private Inscripcion inscripcionVisitante;
 	
 	@Column(name="lugar",length=45)
 	private String lugar;
 	
 	@Column(name="fecha",length=10)
+	@DefaultValueCalculator(CurrentDateCalculator.class)
 	private Date fecha;
 	
 	@Column(name="hora",length=8)
 	private Time hora;
 	
 	@Column(name="set1Local",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set1Local;
 	
 	@Column(name="set2Local",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set2Local;
 	
 	@Column(name="set3Local",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set3Local;
 	
 	@Column(name="set4Local",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set4Local;
 	
 	@Column(name="set5Local",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set5Local;
 
 	@Column(name="set1Visitante",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set1Visitante;
 	
 	@Column(name="set2Visitante",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set2Visitante;
 	
 	@Column(name="set3Visitante",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set3Visitante;
 	
 	@Column(name="set4Visitante",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set4Visitante;
 	
 	@Column(name="set5Visitante",length=2)
+	@DefaultValueCalculator(value=IntegerCalculator.class, properties=
+	@PropertyValue(name="value", value="0"))
 	private int set5Visitante;
 	
 	@NoModify
@@ -109,21 +153,7 @@ public class Partido {
 		this.oid = oid;
 	}
 
-	public Equipo getEquipoLocal() {
-		return equipoLocal;
-	}
 
-	public void setEquipoLocal(Equipo equipoLocal) {
-		this.equipoLocal = equipoLocal;
-	}
-
-	public Equipo getEquipoVisitante() {
-		return equipoVisitante;
-	}
-
-	public void setEquipoVisitante(Equipo equipoVisitante) {
-		this.equipoVisitante = equipoVisitante;
-	}
 
 	public String getLugar() {
 		return lugar;
@@ -235,6 +265,22 @@ public class Partido {
 
 	public void setGanador(Catalogo ganador) {
 		this.ganador = ganador;
+	}
+
+	public Inscripcion getInscripcionLocal() {
+		return inscripcionLocal;
+	}
+
+	public void setInscripcionLocal(Inscripcion inscripcionLocal) {
+		this.inscripcionLocal = inscripcionLocal;
+	}
+
+	public Inscripcion getInscripcionVisitante() {
+		return inscripcionVisitante;
+	}
+
+	public void setInscripcionVisitante(Inscripcion inscripcionVisitante) {
+		this.inscripcionVisitante = inscripcionVisitante;
 	}
 
 

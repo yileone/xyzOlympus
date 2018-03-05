@@ -42,7 +42,8 @@ public class Catalogo {
 	@Column(name="nombre",length=45)
 	private String nombre;
 	
-	@Column(name="descripcion",length=45)
+	@Stereotype("TEXTO_GRANDE")
+	@Column(name="descripcion",length=255)
 	private String descripcion;
 	
 	

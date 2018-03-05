@@ -21,8 +21,7 @@ club_id*/
 @Entity
 @Table(name="representante")
 @Views({
-	@View(name="VRepresentanteenClub",members="persona.primerNombre,persona.segundoNombre;"
-			+ "persona.primerApellido,persona.segundoApellido;fechaInicio,fechaFin"),
+	@View(name="VRepresentanteenClub",members="persona;fechaInicio,fechaFin"),
 	@View(members="fechaInicio,fechaFin;persona,club;")
 	})
 public class Representante implements Serializable{
@@ -37,14 +36,14 @@ public class Representante implements Serializable{
 	private int oid;
 	
 	@NoModify
-	@NoCreate
+	//@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="persona_id")
 	@DescriptionsList(showReferenceView=true,descriptionProperties="rut")
 	@ReferenceView("VPersonaenRepresentante") 
 	private Persona persona;
 	
-	@NoModify
+	//@NoModify
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=true)
 	@JoinColumn(name="club_id")
