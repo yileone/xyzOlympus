@@ -32,7 +32,7 @@ public class ToJsonBarra extends ToJson {
 	public void crearEncabezado() {
 		// TODO Auto-generated method stub
 
-		crearEncabezado(true);
+		crearEncabezado(true); 
 	}
 
 	
