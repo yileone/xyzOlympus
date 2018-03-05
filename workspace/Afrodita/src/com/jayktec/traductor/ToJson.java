@@ -46,9 +46,9 @@ public class ToJson {
 		System.out.println("empezando json");
 
 		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("ad87651f619cd4430161dd9ec4590029"));
-		temp.crearJson();
+		
 	
-		System.out.println("finalizando json");
+		System.out.println("finalizando json "+temp.crearJson());
 
 	}
 
