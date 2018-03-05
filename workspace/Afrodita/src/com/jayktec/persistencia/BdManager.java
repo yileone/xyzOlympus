@@ -316,6 +316,36 @@ public class BdManager {
 
 	}
 
+
+	/**
+	 * busqueda de Sensor a traves de un id
+	 * 
+	 * @param id
+	 */
+	public static String buscarJson(int id) {
+		String respuesta = "";
+		try {
+			String sql = "select * from " + Constantes.BD + ".fateon_Json where idfateon_Json='" + id + "'";
+			PreparedStatement pst = connection.prepareStatement(sql);
+
+			ResultSet rs = consultarSql(pst);
+			System.out.println(sql);
+
+			while (rs.next()) {
+				respuesta = (rs.getString("json"));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			Logger.getLogger("BdManager").log(Level.SEVERE, "Error in search of Sensor in the bd:" + e.getMessage());
+
+		}
+
+		return respuesta;
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * busqueda de Sensor a traves de un id
 	 * 
