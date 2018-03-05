@@ -46,9 +46,8 @@ public class ToJson {
 		System.out.println("empezando json");
 
 		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("ad87651f619cd4430161dd9ec4590029"));
-		
-	
-		System.out.println("finalizando json "+temp.crearJson());
+
+		System.out.println("finalizando json " + temp.crearJson());
 
 	}
 
@@ -58,13 +57,13 @@ public class ToJson {
 
 	}
 
-
 	public ToJson(String origen, String sensor) throws SQLException {
 		this.origen = new Origen(origen);
-		this.sensor = new Sensor( sensor);
+		this.sensor = new Sensor(sensor);
 		mapaParaSensor();
 		refrescar = true;
 	}
+
 	public ToJson(String origen, Sensor sensor) throws SQLException {
 		this.origen = new Origen(origen);
 		this.sensor = sensor;
@@ -73,8 +72,28 @@ public class ToJson {
 	}
 
 	public void crearEncabezado() {
+		iniciarXaxisName();
+		iniciarYaxisName();
+		crearEncabezado(getxName(),getyName());
+		System.out.println(encabezado);
+	}
 
-		this.encabezado = "chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre() + ","
+	/**
+	 * @return
+	 */
+	private void iniciarXaxisName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void iniciarYaxisName() {
+		for (Mapa temp : mapa) {
+		//temp.getMapabd().getNombre().equals(arg0)	
+		}
+	}
+	public void crearEncabezado(String yAxisName, String xAxisName) {
+
+		this.encabezado = " { \"chart\": \"{" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre() + ","
 				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," + "\"yaxisname\":" + " \"" + yName + "\"" + ","
 				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," + "\"numberprefix\":" + " \"" + numberPrefix
 				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha + "\"" + "," + "\"showborder\":"
@@ -90,8 +109,10 @@ public class ToJson {
 		System.out.println(encabezado);
 	}
 
+
+
 	public static void crearCategorias()
-																																																																											
+
 	{
 		setCategorias("");
 		periodo = Constantes.Tiempo.SEMANAL;
@@ -199,26 +220,24 @@ public class ToJson {
 						serie = serie + registro.getRegistroFloat4();
 					} else if (bd.equals(Constantes.CampoRegistro.FLOAT5.campoBD())) {
 						serie = serie + registro.getRegistroFloat5();
+					} else if (bd.equals(Constantes.CampoRegistro.INT1.campoBD())) {
+						serie = serie + registro.getRegistroInt1();
+					} else if (bd.equals(Constantes.CampoRegistro.INT2.campoBD())) {
+						serie = serie + registro.getRegistroInt2();
+					} else if (bd.equals(Constantes.CampoRegistro.INT3.campoBD())) {
+						serie = serie + registro.getRegistroInt3();
+					} else if (bd.equals(Constantes.CampoRegistro.INT4.campoBD())) {
+						serie = serie + registro.getRegistroInt4();
+					} else if (bd.equals(Constantes.CampoRegistro.INT5.campoBD())) {
+						serie = serie + registro.getRegistroInt5();
 					}
-					else 
-						if (bd.equals(Constantes.CampoRegistro.INT1.campoBD())) {
-							serie = serie + registro.getRegistroInt1();
-						} else if (bd.equals(Constantes.CampoRegistro.INT2.campoBD())) {
-							serie = serie + registro.getRegistroInt2();
-						} else if (bd.equals(Constantes.CampoRegistro.INT3.campoBD())) {
-							serie = serie + registro.getRegistroInt3();
-						} else if (bd.equals(Constantes.CampoRegistro.INT4.campoBD())) {
-							serie = serie + registro.getRegistroInt4();
-						} else if (bd.equals(Constantes.CampoRegistro.INT5.campoBD())) {
-							serie = serie + registro.getRegistroInt5();
-						}
 					primeraVez = false;
 				}
 
-				dataset = dataset + serie+"\"}";
+				dataset = dataset + serie + "\"}";
 			}
 		}
-		dataset=dataset+"]}";
+		dataset = dataset + "]}";
 		System.out.println(dataset);
 	}
 
@@ -235,7 +254,7 @@ public class ToJson {
 			}
 			if (object instanceof Registro) {
 				Registro registro = (Registro) object;
-				mapaParaSensor(registro); 
+				mapaParaSensor(registro);
 				crearJson();
 
 			}
@@ -244,6 +263,7 @@ public class ToJson {
 
 	/**
 	 * crea Json
+	 * 
 	 * @return el id guardado en la base de datos en la tabla fateon_Json
 	 * @throws SQLException
 	 * @throws JsonIOException
@@ -256,7 +276,7 @@ public class ToJson {
 			buscarRegistros();
 		}
 
-	;
+		;
 		return BdManager.saveJson(armarJson());
 
 	}
@@ -268,103 +288,104 @@ public class ToJson {
 		crearEncabezado();
 		crearCategorias();
 		creaDataset();
-		return encabezado+categorias+dataset;
-//		String temp = "{";
-//
-//		for (Registro registro : listaRegistro) {
-//			temp = temp + "{";
-//			for (Mapa mapaItem : mapa) {
-//				String campo = mapaItem.getMapabdToString();
-//				String valor = "";
-//				String nombreCampo = mapaItem.getMapaapp();
-//				if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD())) {
-//					valor = registro.getRegistroDate1().toString();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.DATE2.campoBD())) {
-//					valor = registro.getRegistroDate2().toString();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.DATE3.campoBD())) {
-//					valor = registro.getRegistroDate3().toString();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.DATE4.campoBD())) {
-//					valor = registro.getRegistroDate4().toString();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.DATE5.campoBD())) {
-//					valor = registro.getRegistroDate5().toString();
-//				}
-//
-//				if (campo.equals(Constantes.CampoRegistro.INT1.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroInt1());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.INT2.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroInt2());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.INT3.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroInt3());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.INT4.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroInt4());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.INT5.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroInt5());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.FLOAT1.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroFloat1());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.FLOAT2.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroFloat2());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.FLOAT3.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroFloat3());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.FLOAT4.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroFloat4());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.FLOAT5.campoBD())) {
-//					valor = String.valueOf(registro.getRegistroFloat5());
-//				}
-//
-//				if (campo.equals(Constantes.CampoRegistro.VARCHAR1.campoBD())) {
-//					valor = registro.getRegistroVarchar1();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.VARCHAR2.campoBD())) {
-//					valor = registro.getRegistroVarchar2();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.VARCHAR3.campoBD())) {
-//					valor = registro.getRegistroVarchar3();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.VARCHAR4.campoBD())) {
-//					valor = registro.getRegistroVarchar4();
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.VARCHAR5.campoBD())) {
-//					valor = registro.getRegistroVarchar5();
-//				}
-//
-//				if (campo.equals(Constantes.CampoRegistro.HORA1.campoBD())) {
-//					valor = String.valueOf(registro.getRegistrotime1());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.HORA2.campoBD())) {
-//					valor = String.valueOf(registro.getRegistrotime2());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.HORA3.campoBD())) {
-//					valor = String.valueOf(registro.getRegistrotime3());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.HORA4.campoBD())) {
-//					valor = String.valueOf(registro.getRegistrotime4());
-//				}
-//				if (campo.equals(Constantes.CampoRegistro.HORA5.campoBD())) {
-//					valor = String.valueOf(registro.getRegistrotime5());
-//				}
-//
-//				temp = temp + '\n' + '\"' + nombreCampo + '\"' + ":" + '\"' + valor + '\"';
-//
-//			}
-//
-//			temp = temp + "}" + '\n';
-//
-//		}
-//		temp = temp + "}" + '\n';
-//		return temp;
+		return encabezado + categorias + dataset;
+		// String temp = "{";
+		//
+		// for (Registro registro : listaRegistro) {
+		// temp = temp + "{";
+		// for (Mapa mapaItem : mapa) {
+		// String campo = mapaItem.getMapabdToString();
+		// String valor = "";
+		// String nombreCampo = mapaItem.getMapaapp();
+		// if (campo.equals(Constantes.CampoRegistro.DATE1.campoBD())) {
+		// valor = registro.getRegistroDate1().toString();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.DATE2.campoBD())) {
+		// valor = registro.getRegistroDate2().toString();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.DATE3.campoBD())) {
+		// valor = registro.getRegistroDate3().toString();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.DATE4.campoBD())) {
+		// valor = registro.getRegistroDate4().toString();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.DATE5.campoBD())) {
+		// valor = registro.getRegistroDate5().toString();
+		// }
+		//
+		// if (campo.equals(Constantes.CampoRegistro.INT1.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroInt1());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.INT2.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroInt2());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.INT3.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroInt3());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.INT4.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroInt4());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.INT5.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroInt5());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.FLOAT1.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroFloat1());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.FLOAT2.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroFloat2());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.FLOAT3.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroFloat3());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.FLOAT4.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroFloat4());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.FLOAT5.campoBD())) {
+		// valor = String.valueOf(registro.getRegistroFloat5());
+		// }
+		//
+		// if (campo.equals(Constantes.CampoRegistro.VARCHAR1.campoBD())) {
+		// valor = registro.getRegistroVarchar1();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.VARCHAR2.campoBD())) {
+		// valor = registro.getRegistroVarchar2();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.VARCHAR3.campoBD())) {
+		// valor = registro.getRegistroVarchar3();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.VARCHAR4.campoBD())) {
+		// valor = registro.getRegistroVarchar4();
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.VARCHAR5.campoBD())) {
+		// valor = registro.getRegistroVarchar5();
+		// }
+		//
+		// if (campo.equals(Constantes.CampoRegistro.HORA1.campoBD())) {
+		// valor = String.valueOf(registro.getRegistrotime1());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.HORA2.campoBD())) {
+		// valor = String.valueOf(registro.getRegistrotime2());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.HORA3.campoBD())) {
+		// valor = String.valueOf(registro.getRegistrotime3());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.HORA4.campoBD())) {
+		// valor = String.valueOf(registro.getRegistrotime4());
+		// }
+		// if (campo.equals(Constantes.CampoRegistro.HORA5.campoBD())) {
+		// valor = String.valueOf(registro.getRegistrotime5());
+		// }
+		//
+		// temp = temp + '\n' + '\"' + nombreCampo + '\"' + ":" + '\"' + valor +
+		// '\"';
+		//
+		// }
+		//
+		// temp = temp + "}" + '\n';
+		//
+		// }
+		// temp = temp + "}" + '\n';
+		// return temp;
 	}
 
 	private void buscarRegistros() throws SQLException {
