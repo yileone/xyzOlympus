@@ -4,11 +4,8 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
-import org.codehaus.groovy.transform.*;
-
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
-import com.jayktec.traductor.*;
 import com.jayktec.xyzOlympus.models.*;
 
 public class BdManager {
