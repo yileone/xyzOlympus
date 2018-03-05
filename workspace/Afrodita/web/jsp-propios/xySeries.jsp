@@ -250,7 +250,7 @@ View view = (org.openxava.view.View) context.get(request,viewObject);
 		
 		rs.close();
 		
-		System.out.println(gson.toJson(dataMap));
+		System.out.println("ASI: "+gson.toJson(dataMap));
 		
 		FusionCharts mslineChat = new FusionCharts("msline", // chartType
 				"chart1", // chartId

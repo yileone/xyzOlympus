@@ -65,7 +65,7 @@ public class ToJsonBarra extends ToJson {
 		
 			float temp2=0;
 			if (registro.getRegistroFloat1()!=null)
-			if (temp2<( temp2=registro.getRegistroFloat1();
+			if (temp2<( temp2=registro.getRegistroFloat1()));
 			
 		}
 	}

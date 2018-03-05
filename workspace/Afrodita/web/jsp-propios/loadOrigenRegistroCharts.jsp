@@ -18,9 +18,9 @@
 String viewObject = request.getParameter("viewObject");
 viewObject = (viewObject == null || viewObject.equals(""))?"xava_view":viewObject;
 View view = (org.openxava.view.View) context.get(request,viewObject);
-System.out.println(" JSP PROPIO-->"+view.getModelName());
-System.out.println(" JSP PROPIO--> origen "+view.getValue("origen.oid"));
-System.out.println(" JSP PROPIO--> sensor "+view.getValue("sensor.oid"));
+System.out.println("loadOrigenRegistroCharts  JSP PROPIO-->"+view.getModelName());
+System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> origen "+view.getValue("origen.oid"));
+System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> sensor "+view.getValue("sensor.oid"));
 
 //String accept = request.getParameter("accept");
 //String action="javascript:openxava.executeAction('Afrodita', 'Registro', '', false, 'ImportData.importData')";
