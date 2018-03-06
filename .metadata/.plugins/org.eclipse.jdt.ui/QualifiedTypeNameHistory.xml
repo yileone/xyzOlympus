@@ -6,4 +6,6 @@
 <fullyQualifiedTypeName name="org.openxava.annotations.Required"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.DescriptionsList"/>
+<fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportRegistro"/>
+<fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportColumnRegistro"/>
 </qualifiedTypeNameHistroy>

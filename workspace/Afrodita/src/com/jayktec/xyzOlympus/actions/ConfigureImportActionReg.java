@@ -25,7 +25,7 @@ import org.openxava.web.meta.*;
 
 public class ConfigureImportActionReg extends TabBaseAction implements INavigationAction, IProcessLoadedFileAction {
 	
-	private static Log log = LogFactory.getLog(ConfigureImportAction.class);  
+	private static Log log = LogFactory.getLog(ConfigureImportActionReg.class);  
 		 
 	private List fileItems;
 	private String[] nextControllers = new String [] { "ImportReg" }; 
@@ -95,6 +95,7 @@ public class ConfigureImportActionReg extends TabBaseAction implements INavigati
 	
 	private boolean configureImport(String data) { 
 		Import imp = new Import();
+		//ImportRegistro imp = new ImportRegistro();
 		Scanner scanner = new Scanner(data);
 		if (!scanner.hasNextLine()) {
 			addError("empty_file"); 
