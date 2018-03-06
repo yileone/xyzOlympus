@@ -2,6 +2,7 @@ package com.jayktec.persistencia;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 import java.util.logging.*;
 
 import com.jayktec.controlador.Constantes;
@@ -156,11 +157,11 @@ public class BdManager {
 			temp.setRegistroVarchar3(rs.getString(Constantes.CampoRegistro.VARCHAR3.campoBD()));
 			temp.setRegistroVarchar4(rs.getString(Constantes.CampoRegistro.VARCHAR4.campoBD()));
 			temp.setRegistroVarchar5(rs.getString(Constantes.CampoRegistro.VARCHAR5.campoBD()));
-			temp.setRegistrotime1(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()));
-			temp.setRegistrotime2(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()));
-			temp.setRegistrotime3(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()));
-			temp.setRegistrotime4(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()));
-			temp.setRegistrotime5(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()));
+			temp.setRegistrotime1(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()).getTime()));
+			temp.setRegistrotime2(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()).getTime()));
+			temp.setRegistrotime3(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()).getTime()));
+			temp.setRegistrotime4(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()).getTime()));
+			temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
 			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
 			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
@@ -205,11 +206,11 @@ public class BdManager {
 			temp.setRegistroVarchar3(rs.getString(Constantes.CampoRegistro.VARCHAR3.campoBD()));
 			temp.setRegistroVarchar4(rs.getString(Constantes.CampoRegistro.VARCHAR4.campoBD()));
 			temp.setRegistroVarchar5(rs.getString(Constantes.CampoRegistro.VARCHAR5.campoBD()));
-			temp.setRegistrotime1(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()));
-			temp.setRegistrotime2(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()));
-			temp.setRegistrotime3(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()));
-			temp.setRegistrotime4(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()));
-			temp.setRegistrotime5(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()));
+			temp.setRegistrotime1(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()).getTime()));
+			temp.setRegistrotime2(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()).getTime()));
+			temp.setRegistrotime3(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()).getTime()));
+			temp.setRegistrotime4(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()).getTime()));
+			temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
 			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
 			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));

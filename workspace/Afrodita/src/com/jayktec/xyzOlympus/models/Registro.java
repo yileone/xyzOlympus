@@ -85,23 +85,23 @@ public class Registro {
 
 	@Column(name = "registro_time_1", length = 9)
 	@Stereotype("HORA_MINUTO")
-	private Timestamp registrotime1;
+	private Time registrotime1;
 
 	@Column(name = "registro_time_2", length = 9)
 	@Stereotype("HORA_MINUTO")
-	private Timestamp registrotime2;
+	private Time registrotime2;
 
 	@Column(name = "registro_time_3", length = 9)
 	@Stereotype("HORA_MINUTO")
-	private Timestamp registrotime3;
+	private Time registrotime3;
 
 	@Column(name = "registro_time_4", length = 9)
 	@Stereotype("HORA_MINUTO")
-	private Timestamp registrotime4;
+	private Time registrotime4;
 
 	@Column(name = "registro_time_5", length = 9)
 	@Stereotype("HORA_MINUTO")
-	private Timestamp registrotime5;
+	private Time registrotime5;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "origen_id", insertable = true, updatable = true)
@@ -269,67 +269,67 @@ public class Registro {
 		this.registroDate5 = registroDate5;
 	}
 
-	public Timestamp getRegistrotime1() {
+	public Time getRegistrotime1() {
 		return registrotime1;
 	}
 
-	public void setRegistrotime1(Timestamp timestamp) {
+	public void setRegistrotime1(Time timestamp) {
 		this.registrotime1 = timestamp;
 	}
 
 	/**
 	 * @return the registrotime2
 	 */
-	public Timestamp getRegistrotime2() {
+	public Time getRegistrotime2() {
 		return registrotime2;
 	}
 
 	/**
 	 * @param timestamp the registrotime2 to set
 	 */
-	public void setRegistrotime2(Timestamp timestamp) {
+	public void setRegistrotime2(Time timestamp) {
 		this.registrotime2 = timestamp;
 	}
 
 	/**
 	 * @return the registrotime3
 	 */
-	public Timestamp getRegistrotime3() {
+	public Time getRegistrotime3() {
 		return registrotime3;
 	}
 
 	/**
 	 * @param registrotime3 the registrotime3 to set
 	 */
-	public void setRegistrotime3(Timestamp registrotime3) {
+	public void setRegistrotime3(Time registrotime3) {
 		this.registrotime3 = registrotime3;
 	}
 
 	/**
 	 * @return the registrotime4
 	 */
-	public Timestamp getRegistrotime4() {
+	public Time getRegistrotime4() {
 		return registrotime4;
 	}
 
 	/**
 	 * @param registrotime4 the registrotime4 to set
 	 */
-	public void setRegistrotime4(Timestamp registrotime4) {
+	public void setRegistrotime4(Time registrotime4) {
 		this.registrotime4 = registrotime4;
 	}
 
 	/**
 	 * @return the registrotime5
 	 */
-	public Timestamp getRegistrotime5() {
+	public Time getRegistrotime5() {
 		return registrotime5;
 	}
 
 	/**
 	 * @param registrotime5 the registrotime5 to set
 	 */
-	public void setRegistrotime5(Timestamp registrotime5) {
+	public void setRegistrotime5(Time registrotime5) {
 		this.registrotime5 = registrotime5;
 	}
 
