@@ -31,6 +31,7 @@
 		<accion nombre="GraficoXyZoom"  clase="com.jayktec.xyzOlympus.actions.MostrarGrafricoZoomxyLine" />
 		<accion nombre="GraficoDetalle" clase="com.jayktec.xyzOlympus.actions.MostrarGraficoBarraDetalle"/>
 		<accion nombre="MultiAxis" clase="com.jayktec.xyzOlympus.actions.ToJsonMultiAxis"/>
+		<accion nombre="MsLine" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
 		<accion nombre="ImportarDatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
 	</controlador>
 	
