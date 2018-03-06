@@ -12,7 +12,6 @@ INDEX VERSION 1.130+C:\ambiente\xyzOlympus\.metadata\.plugins\org.eclipse.jdt.co
 863025060.index
 566149698.index
 2916426105.index
-2685545713.index
 1727215403.index
 1383597285.index
 586934859.index

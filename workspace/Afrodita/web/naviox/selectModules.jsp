@@ -5,6 +5,7 @@
 <%@page import="org.openxava.util.Strings"%> 
 <%@page import="org.openxava.application.meta.MetaModule"%>
 
+
 <jsp:useBean id="modules" class="com.openxava.naviox.Modules" scope="session"/>
 
 <%
