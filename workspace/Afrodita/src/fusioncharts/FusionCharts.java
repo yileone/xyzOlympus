@@ -111,28 +111,7 @@ public class FusionCharts {
         }
        System.out.println("*******************************************************");
        System.out.println(outputHTML);
-        return outputHTML;
+   return outputHTML;
     }
-
-    
-  /*  public static void main(String[] args) {
-        // TODO code application logic here
-    	
-    	String eventfun1= "{console.log(\"Hello1\");"
-        		         + "console.log(eventObj);}";
-    	
-    	String eventfun2= "{console.log(\"Hello2\");"
-        		+ "console.log(eventObj);}";
-    	
-    	HashMap<String, String> events=new HashMap<String, String>();
-    	
-    	String e="";
-    	events.put("dataPlotClick", eventfun1);
-    	events.put("dataLabelClick", e);
-    	events.put("dataPlotRollOver", eventfun2);
-        
-        FusionCharts obj= new FusionCharts("column2d","c1", "400","500","here","xml","chartattributes", events);
-        System.out.println(obj.render());
-    }*/
-    
+   
 }
