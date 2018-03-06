@@ -216,22 +216,26 @@ categorias=categorias+"\""+postCategoria;
 	public void creaDataset()
 
 	{
-		setDataset("\"dataset\": [ ");
-		boolean pVez = true;
+		setDataset( "\"dataset\": [");
+		boolean primeraVez = true;
 		
 		for (Mapa mapaItem : mapa) {
+			
+			
 			String serie = "";
 			
-			if (!pVez)
-			serie=serie+",";
-			pVez=false;
+		
 			String bd = mapaItem.getMapabd().getNombre();
 			if (!(bd.equals(campoCategoriaFecha.campoBD()) || bd.equals(campoCategoriaHora.campoBD()))) {
-				boolean primeraVez = true;
-				serie = "{\"seriesname\":  \"" + mapaItem.getMapaapp() + "\", \"data\":\"";
+				if (!primeraVez)	
+					serie=",";
+				primeraVez=true;
+				serie = serie+"{\"seriesname\":  \"" + mapaItem.getMapaapp() + "\", \"data\": [";
 				for (Registro registro : listaRegistro) {
 					if (!primeraVez)
-						serie = serie + "|";
+						serie = serie + ",";
+					serie = serie + " { \"value\":\"";
+
 					if (bd.equals(Constantes.CampoRegistro.FLOAT1.campoBD())) {
 						serie = serie + registro.getRegistroFloat1();
 					} else if (bd.equals(Constantes.CampoRegistro.FLOAT2.campoBD())) {
@@ -253,14 +257,17 @@ categorias=categorias+"\""+postCategoria;
 					} else if (bd.equals(Constantes.CampoRegistro.INT5.campoBD())) {
 						serie = serie + registro.getRegistroInt5();
 					}
+					serie = serie +"\" }";
 					primeraVez = false;
 				}
 
-				dataset = dataset + serie + "\"}";
+				setDataset(getDataset()+ serie + "]}");
 			}
 		}
-		dataset = dataset + "]}";
-		System.out.println(dataset);
+		setDataset(getDataset()+ "]}]}}");
+		System.out.println(getDataset());
+
+
 	}
 
 	public void refrescarJson(Object object) throws SQLException, JsonIOException, IOException {
