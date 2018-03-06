@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="****************12.11*********************" key="selection"/>
+		<item value="registrotime1" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="registrotime1"/>
+			<item value="prov"/>
+			<item value="pro"/>
 			<item value="****************12.11*********************"/>
 			<item value="***************12.10.6 ********************"/>
 			<item value="****************12.10.6 ********************"/>
 			<item value="model"/>
 			<item value="setMo"/>
-			<item value="ImportColumn"/>
-			<item value="ImportColumnRegistro"/>
-			<item value=" 1 else if (fileName.endsWith(.csv)) {{begin"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ImportColumnRegistro"/>
