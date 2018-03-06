@@ -6,7 +6,7 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="Encabezado" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="369" key="x"/>
 		<item value="88" key="y"/>
@@ -14,14 +14,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="encabezado"/>
+			<item value="category"/>
 			<item value="consultaregistro"/>
 			<item value="tabla_mapa"/>
 			<item value="connection"/>
 			<item value="main"/>
 			<item value="armar"/>
 			<item value="json"/>
-			<item value="armarj"/>
-			<item value="from"/>
 		</list>
 		<list key="replacehistory">
 			<item value="chartobj"/>

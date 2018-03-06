@@ -40,8 +40,8 @@ public class ToJson {
 	private static String categorias;
 	private static Tiempo periodo;
 	private static Date fechaFinal = Calendar.getInstance().getTime();
-	private static CampoRegistro campoCategoriaFecha = Constantes.CampoRegistro.DATE1;
-	private static CampoRegistro campoCategoriaHora = Constantes.CampoRegistro.HORA1;
+	protected static CampoRegistro campoCategoriaFecha = Constantes.CampoRegistro.DATE1;
+	public static CampoRegistro campoCategoriaHora = Constantes.CampoRegistro.HORA1;
 	private static String preCategoria="{ \"label\": ";
     
 	private static String postCategoria=  "}";//", \"stepSkipped\": false, \"appliedSmartLabel\": true }";
@@ -124,7 +124,7 @@ public class ToJson {
 
 
 
-	public static void crearCategorias()
+	public  void crearCategorias()
 
 	{
 		setCategorias("");
@@ -139,7 +139,7 @@ public class ToJson {
 	 * @param periodo
 	 * @param fechaFinal
 	 */
-	private static void crearCategorias(Tiempo periodo, Date fechaFinal) {
+	private  void crearCategorias(Tiempo periodo, Date fechaFinal) {
 		// TODO Auto-generated method stub
 		Date fechaInicio = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -167,7 +167,7 @@ public class ToJson {
 	 * @param fechaFinal2
 	 * @param fechaInicio
 	 */
-	private static void crearCategorias(Date fechaFinal2, Date fechaInicio) {
+	private  void crearCategorias(Date fechaFinal2, Date fechaInicio) {
 		// TODO Auto-generated method stub
 		categorias = "\"categories\": [ {   \"category\": [";
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -213,7 +213,7 @@ categorias=categorias+"\""+postCategoria;
 		System.out.println(categorias);
 	}
 
-	public static void creaDataset()
+	public void creaDataset()
 
 	{
 		setDataset("\"dataset\": [ ");
@@ -848,7 +848,7 @@ categorias=categorias+"\""+postCategoria;
 	 * @param dataset
 	 *            the dataset to set
 	 */
-	public static void setDataset(String dataSet) {
+	public  void setDataset(String dataSet) {
 		dataset = dataSet;
 	}
 
