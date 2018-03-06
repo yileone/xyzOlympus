@@ -1,5 +1,9 @@
 in/
 tmp/
+.metadata
+bin/**
+tmp/**
+tmp/**/*
 *.tmp
 *.bak
 *.swp
@@ -45,7 +49,7 @@ local.properties
 
 # Code Recommenders
 .recommenders/
-.metadata/
+.metadata/**
 
 # Scala IDE specific (Scala & Java development for Eclipse)
 .cache-main
