@@ -98,7 +98,7 @@ public class ToJsonMultiAxis extends ToJson {
 				setDataset(getDataset()+ serie + "]}");
 			}
 		}
-		setDataset(getDataset()+ "]}]}");
+		setDataset(getDataset()+ "]}]}}");
 		System.out.println(getDataset());
 
 	}

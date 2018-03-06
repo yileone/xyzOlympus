@@ -15,7 +15,7 @@ import com.jayktec.controlador.*;
 public class Conexion {
 
 	Connection conexion;
-	private String url = "jdbc:mysql://localhost:3306/"+Constantes.BD;
+	private String url = "jdbc:mysql://45.7.229.159:3306/"+Constantes.BD;
 	private String username = "mysql";
 	private String password = "afrodita";
 

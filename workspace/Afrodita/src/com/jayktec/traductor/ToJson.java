@@ -100,7 +100,7 @@ public class ToJson {
 	public void crearEncabezado(String yAxisName, String xAxisName) {
 
 		this.encabezado = 
-				" { \"chart\": \"{" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()+ " \"" + ","
+				" { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()+ " \"" + ","
 				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," 
 				+ "\"yaxisname\":" + " \"" + yName + "\"" + ","
 				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," 
@@ -118,7 +118,7 @@ public class ToJson {
 				+ "\"legendshadow\":" + " \"" + legendshadow + "\"" + ","
 				+ "\"linethickness\":" + " \""
 				+ linethickness + "\""  + "},";
-
+ 
 		System.out.println(encabezado);
 	}
 
