@@ -31,9 +31,11 @@ ToJsonMultiAxis tjMultiAxis = new ToJsonMultiAxis(origen,sensor);
 
 System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
 System.out.println("BUSCAR CREAR Y BUSCAR: ");
-String grafico = BdManager.buscarJson(tjMultiAxis.crearJson());
+String grafico = BdManager.buscarJson(20);
+//String grafico = BdManager.buscarJson(tjMultiAxis.crearJson());
+System.out.println("******* GRAFICO *********");
 System.out.println(grafico);
-System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+System.out.println("******* GRAFICO *********");
 
 FusionCharts mslineChat = new FusionCharts("msline",
 											"chart1","90%", "600",
