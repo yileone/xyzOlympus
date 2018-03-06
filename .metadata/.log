@@ -4087,3 +4087,9 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.jst.j2ee 2 0 2018-03-06 10:48:24.611
 !MESSAGE Refreshing referenced projects before trying to export again the project Deportic
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-06 11:33:07.020
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-06 11:33:07.020
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
