@@ -38,6 +38,7 @@ public class ToJsonMultiAxis extends ToJson {
 
 
 	public ToJsonMultiAxis(String origen, String sensor) throws SQLException {
+
 		super(origen, sensor);
 		// TODO Auto-generated constructor stub
 	}
@@ -98,7 +99,7 @@ public class ToJsonMultiAxis extends ToJson {
 				setDataset(getDataset()+ serie + "]}");
 			}
 		}
-		setDataset(getDataset()+ "]}]}}");
+		setDataset(getDataset()+ "]}]}");
 		System.out.println(getDataset());
 
 	}
