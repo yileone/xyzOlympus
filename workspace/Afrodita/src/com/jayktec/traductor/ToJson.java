@@ -264,7 +264,7 @@ categorias=categorias+"\""+postCategoria;
 				setDataset(getDataset()+ serie + "]}");
 			}
 		}
-		setDataset(getDataset()+ "]}]}}");
+		setDataset(getDataset()+ "]}");
 		System.out.println(getDataset());
 
 
