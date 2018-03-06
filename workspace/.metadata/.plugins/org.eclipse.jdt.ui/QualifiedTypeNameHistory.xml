@@ -56,8 +56,8 @@
 <fullyQualifiedTypeName name="javax.validation.constraints.Null"/>
 <fullyQualifiedTypeName name="com.sun.istack.internal.Nullable"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
-<fullyQualifiedTypeName name="com.jayktec.traductor.ToJson"/>
 <fullyQualifiedTypeName name="com.jayktec.persistencia.BdManager"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.jayktec.controlador.Constantes"/>
+<fullyQualifiedTypeName name="com.jayktec.traductor.ToJson"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
