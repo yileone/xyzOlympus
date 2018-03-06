@@ -111,14 +111,16 @@ public class FusionCharts {
         }
        System.out.println("*******************************************************");
        System.out.println(outputHTML);
-        return outputHTML;
+       //outputHTML ="<script type=\"text/javascript\">FusionCharts.ready(function () {new FusionCharts({type: \"msline\",renderAt: \"chart\",width: \"90%\",height: \"600\",dataFormat: \"json\",id: \"chart1\",dataSource:  { \"chart\": { \"caption\":  \"Hogar-TES \",\"xaxisname\": \"null\",\"yaxisname\": \"null\",\"showvalues\": \"0\",\"numberprefix\": \"S\",\"legendborderalpha\": \"50\",\"showborder\": \"0\",\"bgcolor\": \"FFFFFF,FFFFFF\",\"plotgradientcolor\": \" \",\"showalternatehgridcolor\": \"0\",\"showplotborder\": \"0\",\"labeldisplay\": \"WRAP\",\"divlinecolor\": \"CCCCCC\",\"showcanvasborder\": \"0\",\"canvasborderalpha\": \"0\",\"legendshadow\": \"0\",\"linethickness\": \"3\"},\"categories\": [ {   \"category\": [{ \"label\": \"2017-10-12 22:15:00\"},{ \"label\": \"2017-10-12 22:20:00\"},{ \"label\": \"2017-10-12 22:25:00\"},{ \"label\": \"2017-10-12 22:30:00\"},{ \"label\": \"2017-10-12 22:35:00\"},{ \"label\": \"2017-10-12 22:40:00\"}] } ],\"dataset\": [{\"seriesname\":  \"Entrada\", \"data\": [ { \"value\":\"1.541\" }, { \"value\":\"1.517\" }, { \"value\":\"1497600.0\" }, { \"value\":\"1371050.0\" }, { \"value\":\"1353490.0\" }, { \"value\":\"1472750.0\" }]},{\"seriesname\":  \"Salida\", \"data\": [ { \"value\":\"1155730.0\" }, { \"value\":\"1126620.0\" }, { \"value\":\"1.108\" }, { \"value\":\"1006640.0\" }, { \"value\":\"1001610.0\" }, { \"value\":\"1.079\" }]}]}});});</script><script type=\"text/javascript\">FusionCharts.ready(function () {                FusionCharts(\"chart1\").render();});</script>";
+       //outputHTML ="FusionCharts.ready(function () {new FusionCharts({type: \"multiaxisline\",renderAt: \"chart\",width: \"90%\",height: \"600\",dataFormat: \"json\",id: \"chart1\",dataSource:  { \"chart\": { \"caption\":  \"Hogar-TES \",\"xaxisname\": \"null\",\"yaxisname\": \"null\",\"showvalues\": \"0\",\"numberprefix\": \"S\",\"legendborderalpha\": \"50\",\"showborder\": \"0\",\"bgcolor\": \"FFFFFF,FFFFFF\",\"plotgradientcolor\": \" \",\"showalternatehgridcolor\": \"0\",\"showplotborder\": \"0\",\"labeldisplay\": \"WRAP\",\"divlinecolor\": \"CCCCCC\",\"showcanvasborder\": \"0\",\"canvasborderalpha\": \"0\",\"legendshadow\": \"0\",\"linethickness\": \"3\"},\"categories\":[ {   \"category\": [{ \"label\": \"2017-10-12 22:15:00\"},{ \"label\": \"2017-10-12 22:20:00\"},{ \"label\": \"2017-10-12 22:25:00\"},{ \"label\": \"2017-10-12 22:30:00\"},{ \"label\": \"2017-10-12 22:35:00\"},{ \"label\": \"2017-10-12 22:40:00\"}] } ],\"axis\": [ {  \"title\": \"Revenue\", \"titlepos\": \"left\",\"tickwidth\": \"10\",\"numberPrefix\": \"$\",\"divlineisdashed\": \"1\",\"dataset\": [{\"seriesname\":  \"Entrada\",\"data\": [ { \"value\":\"1.541\" }, { \"value\":\"1.517\" }, { \"value\":\"1497600.0\" }, { \"value\":\"1371050.0\" }, { \"value\":\"1353490.0\" }, { \"value\":\"1472750.0\" }]},{\"seriesname\":  \"Salida\", \"data\": [ { \"value\":\"1155730.0\" }, { \"value\":\"1126620.0\" }, { \"value\":\"1.108\" }, { \"value\":\"1006640.0\" }, { \"value\":\"1001610.0\" }, { \"value\":\"1.079\" }]}]}]}});});</script><script type=\"text/javascript\">FusionCharts.ready(function () {                FusionCharts(\"chart1\").render();});</script>";
+       return outputHTML;
     }
 
     
   /*  public static void main(String[] args) {
         // TODO code application logic here
     	
-    	String eventfun1= "{console.log(\"Hello1\");"
+    	String eventfun1= \"{console.log(\"Hello1\");"
         		         + "console.log(eventObj);}";
     	
     	String eventfun2= "{console.log(\"Hello2\");"
