@@ -19,7 +19,7 @@ import com.sun.istack.internal.*;
 
 
 @Entity
-//@View(members="Orige {#nombre,modelo;mac,ip; sistema,tipo;} DIRECCION {#pais,municipio,sucursal,oficina,ciudad}" )
+@View(name="VOrigenenUmbral",members="Orige {#nombre,modelo;mac,ip; sistema,tipo;} DIRECCION {#pais,municipio,sucursal,oficina,ciudad}" )
 @Table(name="fateon_origen")
 public class Origen {
 	

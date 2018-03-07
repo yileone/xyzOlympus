@@ -20,7 +20,7 @@ public class ToJsonBarra extends ViewBaseAction implements INavigationAction{
 	@Override
 	public String getCustomView() throws Exception {
 		// TODO Auto-generated method stub
-		return "jsp-propios/ToJsonMsline.jsp";
+		return "jsp-propios/ToJsoncolumn2d.jsp";
 	}
 	public void setKeyProperty(String s){
 		
