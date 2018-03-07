@@ -24,7 +24,8 @@ import com.jayktec.persistencia.*;
 	 @View( name="VHora", members="valorHora" ),
 	 @View( name="VFecha", members="valorFecha" ),
 	 @View( name="VTabla", members="nombre; valorEntero; valorFecha;valorDecimal;valorCadena;valorHora;catalogoTabla" ),
-	 @View( name="VMapa", members="nombre;valorCadena" )
+	 @View( name="VMapa", members="nombre;valorCadena" ),
+	 @View( name="VUmbral", members="valorCadena" )
 	})
 public class Catalogo {
 

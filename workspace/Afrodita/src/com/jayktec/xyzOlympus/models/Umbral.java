@@ -18,9 +18,13 @@ import org.openxava.annotations.DescriptionsList;
 import org.openxava.annotations.Hidden;
 import org.openxava.annotations.NoCreate;
 import org.openxava.annotations.NoModify;
+import org.openxava.annotations.OnChange;
+import org.openxava.annotations.ReadOnly;
 import org.openxava.annotations.ReferenceView;
 import org.openxava.annotations.View;
 import org.openxava.annotations.Views;
+
+import com.jayktec.xyzOlympus.actions.buscarMapaSensor;
 /*
 Table: fateon_umbral
 Columns:
@@ -33,8 +37,8 @@ umbral float
 @Entity
 @Table(name="fateon_umbral")
 @Views({
-	@View(name="VUmbralenOrigen",members="umbralValor.sensor.nombre"),
-	@View(name="VUmbralenSensor",members="umbralValor.origen.nombre")})
+	@View(name="VUmbralenOrigen",members="umbralValor,sensor.nombre"),
+	@View(name="VUmbralenSensor",members="umbralValor,origen.nombre")})
 public class Umbral {
 	
 	@Id
@@ -59,15 +63,17 @@ public class Umbral {
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@DescriptionsList(showReferenceView=true,descriptionProperties="nombre")
 	@ReferenceView("VSensorenUmbral")
-	@JoinColumn(name="Sensor_id",insertable=true,updatable=true)
+	@JoinColumn(name="sensor_id",insertable=true,updatable=true)
 	private Sensor sensor;
 	
 	
-
-	@NoModify
-	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="mapa_id",insertable=true,updatable=true)
+	@DescriptionsList(
+			showReferenceView=true,
+			descriptionProperties="mapaTabla.valorCadena")
+	@ReferenceView("VMapaenUmbral")
+
 	private Mapa mapa;
 	
 
@@ -112,6 +118,7 @@ public class Umbral {
 	}
 
 	public void setMapa(Mapa mapa) {
+		mapa.setOid(sensor.getMapa().getOid());
 		this.mapa = mapa;
 	}
 

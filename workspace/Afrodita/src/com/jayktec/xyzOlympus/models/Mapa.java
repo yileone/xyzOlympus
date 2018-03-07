@@ -11,12 +11,14 @@ import java.util.Date;
 
 @Entity
 @Table(name = "fateon_mapa")
+@View(name="VMapaenUmbral",members="mapaTabla" )
 public class Mapa {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@Hidden
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(name = "mapa_id", length = 32)
+	
 	private String oid;
 
 	/*
@@ -30,8 +32,9 @@ public class Mapa {
 	// @NoCreate
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "mapa_tabla", insertable = true, updatable = true)
-	@DescriptionsList(condition = "e.oid in(SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaTabla')", showReferenceView = true, descriptionProperties = "valorCadena")
-	@ReferenceView("VMapa")
+	@DescriptionsList(condition = "e.oid in(SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaTabla')",
+	showReferenceView = true, descriptionProperties = "valorCadena")
+	@ReferenceView("VUmbral")
 	private Catalogo mapaTabla;
 
 	/*

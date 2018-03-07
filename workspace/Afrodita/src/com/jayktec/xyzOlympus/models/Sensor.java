@@ -39,6 +39,10 @@ public class Sensor {
 	@ReferenceView("VVarchar") 
 	private Catalogo mapa;
 	
+	
+	
+	@NoModify
+	@NoCreate
 	@OneToMany(mappedBy="sensor")
 	@CollectionView("VUmbralenSensor")
 	private Collection<Umbral> umbral;

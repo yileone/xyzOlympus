@@ -27,7 +27,7 @@ import com.sun.istack.internal.*;
 public class Origen {
 	
 	@Id
-	@GeneratedValue(generator="system-uuid")
+	@GeneratedValue(generator="system-uuid")	
 	@Hidden
 	@GenericGenerator(name="system-uuid",strategy="uuid")
 	@Column(name="origen_id",length=32)
@@ -140,7 +140,8 @@ public class Origen {
 	@ReferenceView("VVarchar") 
 	private Catalogo ciudad;
 	
-	
+	@NoModify
+	@NoCreate
 	@OneToMany(mappedBy="origen")
 	@CollectionView("VUmbralenOrigen")
 	private Collection<Umbral> umbral;

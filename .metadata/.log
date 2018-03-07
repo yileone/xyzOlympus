@@ -4886,3 +4886,6 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 
 !ENTRY org.eclipse.jface.text 2 0 2018-03-07 15:11:41.441
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jst.server.core 4 0 2018-03-07 17:21:27.923
+!MESSAGE Could not launch in profiling mode because no profilers are configured.
