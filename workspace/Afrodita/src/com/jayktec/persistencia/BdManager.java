@@ -71,7 +71,8 @@ public class BdManager {
 	public static ArrayList<Mapa> consultarMapa(Registro registro) throws SQLException {
 
 		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a" + " fateon_sensor b  where  "
-				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id =" + registro.getSensor();
+				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id ='" + registro.getSensor().getMapa().getOid()+"'";
+		System.out.println(sql);
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
 
@@ -79,8 +80,8 @@ public class BdManager {
 
 	public static ArrayList<Mapa> consultarMapa(Sensor sensor) throws SQLException {
 
-		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a where  " + "a.mapa_tabla ='"
-				+ sensor.getMapa().getOid() + "'";
+		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a where  " + "a.mapa_tabla =\""
+				+ sensor.getMapa().getOid() + "\"";
 		System.out.println(sql);
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
@@ -185,7 +186,7 @@ public class BdManager {
 		
 		// PreparedStatement pst = connection.prepareStatement(sql);
 		Statement stmt = connection.createStatement();
-		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ="+ origen.getOid();
+		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ='"+ origen.getOid()+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		// ResultSet rs = consultarSql(pst);
