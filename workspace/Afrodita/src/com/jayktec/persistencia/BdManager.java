@@ -71,7 +71,8 @@ public class BdManager {
 	public static ArrayList<Mapa> consultarMapa(Registro registro) throws SQLException {
 
 		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a" + " fateon_sensor b  where  "
-				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id =" + registro.getSensor();
+				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id ='" + registro.getSensor().getMapa().getOid()+"'";
+		System.out.println(sql);
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
 
@@ -79,8 +80,8 @@ public class BdManager {
 
 	public static ArrayList<Mapa> consultarMapa(Sensor sensor) throws SQLException {
 
-		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a where  " + "a.mapa_tabla ='"
-				+ sensor.getMapa().getOid() + "'";
+		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a where  " + "a.mapa_tabla =\""
+				+ sensor.getMapa().getOid() + "\"";
 		System.out.println(sql);
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
@@ -175,13 +176,17 @@ public class BdManager {
 
 	}
 
-	
-
 	public static ArrayList<Umbral> consultarUmbral( Sensor sensor, Origen origen) throws SQLException {
+		return consultarUmbral(sensor, origen, consultarMapa(sensor));
+	}
 
+	public static ArrayList<Umbral> consultarUmbral( Sensor sensor, Origen origen,ArrayList<Mapa> mapas) throws SQLException {
+
+		 
+		
 		// PreparedStatement pst = connection.prepareStatement(sql);
 		Statement stmt = connection.createStatement();
-		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ="+ origen.getOid();
+		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ='"+ origen.getOid()+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		// ResultSet rs = consultarSql(pst);
@@ -190,11 +195,10 @@ public class BdManager {
 		while (rs.next()) {
 
 			Umbral temp = new Umbral();
-			temp.setMapa(new Mapa(rs.getString("mapa_id")));
+			temp.setMapa(buscarMapaLista(rs.getString("mapa_id"),mapas));
 			temp.setOid(rs.getString("umbral_id"));
 			temp.setOrigen(origen);
-			temp.set(rs.getString("mapa_id"));
-			temp.setMapa(rs.getString("mapa_id"));
+			temp.setUmbralValor(rs.getFloat("umbral"));
 			
 			respuesta.add(temp);
 
@@ -205,6 +209,20 @@ public class BdManager {
 	}
 
 	
+	/**
+	 * @param idMapa
+	 * @param mapas 
+	 * @return
+	 */
+	private static Mapa buscarMapaLista(String idMapa, ArrayList<Mapa> mapas) {
+		// TODO Auto-generated method stub
+		for (Mapa mapa : mapas) {
+			if (mapa.getOid().equals(idMapa))
+				return mapa;
+		}
+		return null;
+	}
+
 	public static ArrayList<Registro> consultarRegistro(String sql, Sensor sensor, Origen origen) throws SQLException {
 
 		// PreparedStatement pst = connection.prepareStatement(sql);
