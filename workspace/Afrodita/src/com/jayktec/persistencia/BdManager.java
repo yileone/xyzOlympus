@@ -134,7 +134,9 @@ public class BdManager {
 		ResultSet rs = stmt.executeQuery(sql);
 
 		// ResultSet rs = consultarSql(pst);
-
+boolean pvez=true;
+Sensor sensor=null;
+Origen origen= null;
 		ArrayList<Registro> respuesta = new ArrayList<Registro>();
 		while (rs.next()) {
 
@@ -164,8 +166,14 @@ public class BdManager {
 			temp.setRegistrotime3(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()).getTime()));
 			temp.setRegistrotime4(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()).getTime()));
 			temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
-			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
-			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
+			if (pvez)
+			{
+				sensor=new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
+				origen=new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
+			}
+			
+			temp.setSensor(sensor);
+			temp.setOrigen(origen);
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
 			temp.setRegistroFecha(rs.getString(Constantes.CampoRegistro.FECHA_REGISTRO.campoBD()));
 			respuesta.add(temp);
