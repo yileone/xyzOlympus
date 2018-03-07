@@ -170,6 +170,7 @@ Origen origen= null;
 			{
 				sensor=new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
 				origen=new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
+			pvez=false;
 			}
 			
 			temp.setSensor(sensor);
