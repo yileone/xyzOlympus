@@ -399,11 +399,16 @@ public class ToJson {
 		// TODO Auto-generated method stub
 
 		String serie = "";
-
+boolean pVez=true;
 		serie = serie + ",{\"seriesname\":  \"" + "Percentil-" + mapaItem.getMapaapp() + "\", \"data\": [";
 		Float percentil = percentil(valorPercentil, mapaItem.getMapabd());
 		for (int i = 0; i < countLista; i++) {
 
+			if (!pVez)
+			{
+				serie=serie+",";
+			}
+			else pVez=false;
 			serie = serie + " { \"value\":\"" + percentil + "\"}";
 
 		}
@@ -416,9 +421,12 @@ public class ToJson {
 
 		String serie = "";
 		int countLista = listaRegistro.size();
+boolean pVez=true;
 		if (existeUmbral(mapaItem)) {
 			Float umbral = umbral(mapaItem.getMapabd());
 
+			if (pVez) pVez=false;
+			else serie=serie+",";
 			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
 			for (int i = 0; i < countLista; i++) {
 
