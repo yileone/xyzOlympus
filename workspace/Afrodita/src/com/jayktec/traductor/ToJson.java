@@ -426,7 +426,7 @@ boolean pVez=true;
 			Float umbral = umbral(mapaItem.getMapabd());
 
 			if (pVez) pVez=false;
-			else serie=serie+",";
+			else serie=serie+","; 
 			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
 			for (int i = 0; i < countLista; i++) {
 
