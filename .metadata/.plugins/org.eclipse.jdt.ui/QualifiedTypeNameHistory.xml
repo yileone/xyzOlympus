@@ -4,10 +4,15 @@
 <fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.Required"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.DescriptionsList"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportRegistro"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportColumnRegistro"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="org.hibernate.cache.spi.entry.CollectionCacheEntry"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.DescriptionsList"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.ReadOnly"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.OnChange"/>
+<fullyQualifiedTypeName name="org.openxava.actions.OnChangePropertyBaseAction"/>
+<fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.buscarMapaSensor"/>
 </qualifiedTypeNameHistroy>
