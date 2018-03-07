@@ -450,7 +450,7 @@ public class ToJson {
 	private Float umbral(Catalogo mapabd) {
 		for (Umbral umbral : listaUmbrales) {
 			if (umbral.getMapa().equals(mapabd))
-				return(umbral.getUmbralValor())
+				return(umbral.getUmbralValor());
 		}
 		return 0f;
 	}
