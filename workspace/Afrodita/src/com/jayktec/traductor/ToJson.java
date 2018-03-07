@@ -36,6 +36,39 @@ public class ToJson {
 	private String canvasborderalpha = "0";
 	private String legendshadow = "0";
 	private String linethickness = "3";
+	
+	/*amarrufo 20180307 Bangin*/
+	
+	private String subCaption="";
+	private String theme="fint";
+	private String showhovereffect="1";
+	private String xAxisName="";
+	private String yAxisName="";
+	private String numbersuffix="";
+	private String drawCrossLine="2";
+	private String crossLineAlpha="100";
+	private String crossLineColor ="#876EA1"; //amarrufo se cambio el color para homologar con el grafico existente
+	private String ajustDiv ="1";
+	private String yAxisMaxvalue ="0";
+	private String yAxisMinvalue ="10";
+	private String numDivLines ="10";
+	private String numVDivLines ="0";
+	private String vDivLineColor ="0";
+	private String VDivLineThickness = "0";//groso line vertical en px
+	private String VDivLineAlpha = "50";//transparencia de la lineas verticales 0 trasparente 100 opaco
+	private String showAlternateVGridColor = "0";
+	private String alternateVGridColor = "#00ffaa";
+	private String alternateVGridAlpha = "0";
+	private String drawAnchors = "0";
+	private String logoURL = "";
+	private String logoScale = "110";
+	private String logoPosition = "TR";
+	private String logoAlpha = "40";
+	private String exportenabled = "1";
+	private String exportatclient = "1";
+	private String exporthandler = "http://export.api3.fusioncharts.com";
+	private String html5exporthandler = "http://export.api3.fusioncharts.com";
+	/*amarrufo 20180307 End*/
 	private static String dataset;
 	private static String categorias;
 	private static Tiempo periodo;
@@ -98,26 +131,50 @@ public class ToJson {
 		}
 	}
 	public void crearEncabezado(String yAxisName, String xAxisName) {
-
+		
 		this.encabezado = 
 				" { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()+ " \"" + ","
-				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," 
-				+ "\"yaxisname\":" + " \"" + yName + "\"" + ","
-				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," 
-				+ "\"numberprefix\":" + " \"" + numberPrefix
-				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha 
-				+ "\"" + "," + "\"showborder\":"+ " \"" + showborder 
-				+ "\"" + "," + "\"bgcolor\":"	+ " \"" + bgColor + "\"" + ","
-				+ "\"plotgradientcolor\":" + " \"" + plotgradientcolor + "\"" + ","
-				+ "\"showalternatehgridcolor\":" + " \"" + showalternatehgridcolor + "\"" + "," 
-				+ "\"showplotborder\":"		+ " \"" + showplotborder + "\"" + "," 
-				+ "\"labeldisplay\":" + " \"" + labeldisplay + "\"" + ","
-				+ "\"divlinecolor\":" + " \"" + divlinecolor + "\"" + "," 
-				+ "\"showcanvasborder\":" + " \""	+ showcanvasborder + "\"" + "," 
-				+ "\"canvasborderalpha\":" + " \"" + canvasborderalpha + "\"" + ","
-				+ "\"legendshadow\":" + " \"" + legendshadow + "\"" + ","
-				+ "\"linethickness\":" + " \""
-				+ linethickness + "\""  + "},";
+				+ "\"xaxisname\":" + " \"" + this.getxAxisName() + "\"" + "," 
+				+ "\"yaxisname\":" + " \"" + this.getyAxisName()  + "\"" + ","
+				+ "\"showvalues\":" + " \"" + this.getShowValues()  + "\"" + "," 
+				+ "\"numberprefix\":" + " \"" + this.getNumberPrefix() +"\"" + "," 
+				+ "\"legendborderalpha\":" + " \"" + this.getLegendborderalpha() + "\"" + "," 
+				+ "\"showborder\":"+ " \"" + this.getShowborder() + "\"" + "," 
+				+ "\"bgcolor\":"	+ " \"" + this.getBgColor() + "\"" + ","
+				+ "\"plotgradientcolor\":" + " \"" + this.getPlotgradientcolor() + "\"" + ","
+				+ "\"showalternatehgridcolor\":" + " \"" + this.getShowalternatehgridcolor() + "\"" + "," 
+				+ "\"showplotborder\":"		+ " \"" + this.getShowplotborder() + "\"" + "," 
+				+ "\"labeldisplay\":" + " \"" + this.getLabeldisplay() + "\"" + ","
+				+ "\"divlinecolor\":" + " \"" + this.getDivlinecolor() + "\"" + "," 
+				+ "\"showcanvasborder\":" + " \""	+ this.getShowcanvasborder() + "\"" + "," 
+				+ "\"canvasborderalpha\":" + " \"" + this.getCanvasborderalpha() + "\"" + ","
+				+ "\"legendshadow\":" + " \"" + this.getLegendshadow() + "\"" + ","
+				+ "\"theme\": \"" + this.getTheme() + "\"" + ","
+				+ "\"showhovereffect\": \"" + this.getShowhovereffect() + "\"" + ","
+				+ "\"numbersuffix\": \"" + this.getNumbersuffix() + "\"" + ","
+				+ "\"drawCrossLine\": \"" + this.getDrawCrossLine() + "\"" + ","
+				+ "\"crossLineAlpha\": \"" + this.getCrossLineAlpha() + "\"" + ","
+				+ "\"crossLineColor\": \"" + this.getCrossLineColor() + "\"" + ","
+				+ "\"ajustDiv\": \"" + this.getAjustDiv() + "\"" + ","
+				+ "\"yAxisMaxvalue\": \"" + this.getyAxisMaxvalue() + "\"" + ","
+				+ "\"yAxisMinvalue\": \"" + this.getyAxisMinvalue() + "\"" + ","
+				+ "\"numDivLines\": \"" + this.getNumDivLines() + "\"" + ","
+				+ "\"numVDivLines\": \"" + this.getNumVDivLines() + "\"" + ","
+				+ "\"vDivLineColor\": \"" + this.getvDivLineColor() + "\"" + ","
+				+ "\"VDivLineThickness\": \"" + this.getVDivLineThickness() + "\"" + ","
+				+ "\"VDivLineAlpha\": \"" + this.getVDivLineAlpha() + "\"" + ","
+				+ "\"showAlternateVGridColor\": \"" + this.getShowAlternateVGridColor() + "\"" + ","
+				+ "\"alternateVGridColor\": \"" + this.getAlternateVGridColor() + "\"" + ","
+				+ "\"alternateVGridAlpha\": \"" + this.getAlternateVGridAlpha() + "\"" + ","
+				+ "\"drawAnchors\": \"" + this.getDrawAnchors() + "\"" + ","
+				+ "\"logoURL\": \"" + this.getLogoURL() + "\"" + ","
+				+ "\"logoScale\": \"" + this.getLogoScale() + "\"" + ","
+				+ "\"logoPosition\": \"" + this.getLogoPosition() + "\"" + ","
+				+ "\"logoAlpha\": \"" + this.getLogoAlpha() + "\"" + ","
+				+ "\"exportenabled\": \"" + this.getExportenabled() + "\"" + ","
+				+ "\"exportatclient\": \"" + this.getExportatclient() + "\"" + ","
+				+ "\"exporthandler\": \"" + this.getExporthandler() + "\"" + ","
+				+ "\"html5exporthandler\": \"" + this.getHtml5exporthandler() +"\"},";
  
 		System.out.println(encabezado);
 	}
@@ -858,5 +915,272 @@ categorias=categorias+"\""+postCategoria;
 	public  void setDataset(String dataSet) {
 		dataset = dataSet;
 	}
+
+	public String getSubCaption() {
+		return subCaption;
+	}
+
+	public void setSubCaption(String subCaption) {
+		this.subCaption = subCaption;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public String getShowhovereffect() {
+		return showhovereffect;
+	}
+
+	public void setShowhovereffect(String showhovereffect) {
+		this.showhovereffect = showhovereffect;
+	}
+
+	public String getxAxisName() {
+		return xAxisName;
+	}
+
+	public void setxAxisName(String xAxisName) {
+		this.xAxisName = xAxisName;
+	}
+
+	public String getNumbersuffix() {
+		return numbersuffix;
+	}
+
+	public void setNumbersuffix(String numbersuffix) {
+		this.numbersuffix = numbersuffix;
+	}
+
+	public String getDrawCrossLine() {
+		return drawCrossLine;
+	}
+
+	public void setDrawCrossLine(String drawCrossLine) {
+		this.drawCrossLine = drawCrossLine;
+	}
+
+	public String getCrossLineAlpha() {
+		return crossLineAlpha;
+	}
+
+	public void setCrossLineAlpha(String crossLineAlpha) {
+		this.crossLineAlpha = crossLineAlpha;
+	}
+
+	public String getCrossLineColor() {
+		return crossLineColor;
+	}
+
+	public void setCrossLineColor(String crossLineColor) {
+		this.crossLineColor = crossLineColor;
+	}
+
+	public String getAjustDiv() {
+		return ajustDiv;
+	}
+
+	public void setAjustDiv(String ajustDiv) {
+		this.ajustDiv = ajustDiv;
+	}
+
+	public String getyAxisMaxvalue() {
+		return yAxisMaxvalue;
+	}
+
+	public void setyAxisMaxvalue(String yAxisMaxvalue) {
+		this.yAxisMaxvalue = yAxisMaxvalue;
+	}
+
+	public String getyAxisMinvalue() {
+		return yAxisMinvalue;
+	}
+
+	public void setyAxisMinvalue(String yAxisMinvalue) {
+		this.yAxisMinvalue = yAxisMinvalue;
+	}
+
+	public String getNumDivLines() {
+		return numDivLines;
+	}
+
+	public void setNumDivLines(String numDivLines) {
+		this.numDivLines = numDivLines;
+	}
+
+	public String getNumVDivLines() {
+		return numVDivLines;
+	}
+
+	public void setNumVDivLines(String numVDivLines) {
+		this.numVDivLines = numVDivLines;
+	}
+
+	public String getvDivLineColor() {
+		return vDivLineColor;
+	}
+
+	public void setvDivLineColor(String vDivLineColor) {
+		this.vDivLineColor = vDivLineColor;
+	}
+
+	public String getVDivLineThickness() {
+		return VDivLineThickness;
+	}
+
+	public void setVDivLineThickness(String vDivLineThickness) {
+		VDivLineThickness = vDivLineThickness;
+	}
+
+	public String getVDivLineAlpha() {
+		return VDivLineAlpha;
+	}
+
+	public void setVDivLineAlpha(String vDivLineAlpha) {
+		VDivLineAlpha = vDivLineAlpha;
+	}
+
+	public String getShowAlternateVGridColor() {
+		return showAlternateVGridColor;
+	}
+
+	public void setShowAlternateVGridColor(String showAlternateVGridColor) {
+		this.showAlternateVGridColor = showAlternateVGridColor;
+	}
+
+	public String getAlternateVGridColor() {
+		return alternateVGridColor;
+	}
+
+	public void setAlternateVGridColor(String alternateVGridColor) {
+		this.alternateVGridColor = alternateVGridColor;
+	}
+
+	public String getAlternateVGridAlpha() {
+		return alternateVGridAlpha;
+	}
+
+	public void setAlternateVGridAlpha(String alternateVGridAlpha) {
+		this.alternateVGridAlpha = alternateVGridAlpha;
+	}
+
+	public String getDrawAnchors() {
+		return drawAnchors;
+	}
+
+	public void setDrawAnchors(String drawAnchors) {
+		this.drawAnchors = drawAnchors;
+	}
+
+	public String getLogoURL() {
+		return logoURL;
+	}
+
+	public void setLogoURL(String logoURL) {
+		this.logoURL = logoURL;
+	}
+
+	public String getLogoScale() {
+		return logoScale;
+	}
+
+	public void setLogoScale(String logoScale) {
+		this.logoScale = logoScale;
+	}
+
+	public String getLogoPosition() {
+		return logoPosition;
+	}
+
+	public void setLogoPosition(String logoPosition) {
+		this.logoPosition = logoPosition;
+	}
+
+	public String getLogoAlpha() {
+		return logoAlpha;
+	}
+
+	public void setLogoAlpha(String logoAlpha) {
+		this.logoAlpha = logoAlpha;
+	}
+
+	public String getExportenabled() {
+		return exportenabled;
+	}
+
+	public void setExportenabled(String exportenabled) {
+		this.exportenabled = exportenabled;
+	}
+
+	public String getExportatclient() {
+		return exportatclient;
+	}
+
+	public void setExportatclient(String exportatclient) {
+		this.exportatclient = exportatclient;
+	}
+
+	public String getExporthandler() {
+		return exporthandler;
+	}
+
+	public void setExporthandler(String exporthandler) {
+		this.exporthandler = exporthandler;
+	}
+
+	public String getHtml5exporthandler() {
+		return html5exporthandler;
+	}
+
+	public void setHtml5exporthandler(String html5exporthandler) {
+		this.html5exporthandler = html5exporthandler;
+	}
+
+	public static CampoRegistro getCampoCategoriaFecha() {
+		return campoCategoriaFecha;
+	}
+
+	public static void setCampoCategoriaFecha(CampoRegistro campoCategoriaFecha) {
+		ToJson.campoCategoriaFecha = campoCategoriaFecha;
+	}
+
+	public static CampoRegistro getCampoCategoriaHora() {
+		return campoCategoriaHora;
+	}
+
+	public static void setCampoCategoriaHora(CampoRegistro campoCategoriaHora) {
+		ToJson.campoCategoriaHora = campoCategoriaHora;
+	}
+
+	public static String getPreCategoria() {
+		return preCategoria;
+	}
+
+	public static void setPreCategoria(String preCategoria) {
+		ToJson.preCategoria = preCategoria;
+	}
+
+	public static String getPostCategoria() {
+		return postCategoria;
+	}
+
+	public static void setPostCategoria(String postCategoria) {
+		ToJson.postCategoria = postCategoria;
+	}
+
+	public String getyAxisName() {
+		return yAxisName;
+	}
+
+	public void setyAxisName(String yAxisName) {
+		this.yAxisName = yAxisName;
+	}
+	
+	
+	
 
 }
