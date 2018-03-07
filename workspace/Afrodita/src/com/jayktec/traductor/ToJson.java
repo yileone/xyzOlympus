@@ -225,7 +225,7 @@ public class ToJson {
 	public float percentil(int valor, Catalogo mapa) {
 		if (valor < 100) {
 			float resp = 0f;
-			int count = (int) Math.round(listaRegistro.size() * (valor / 100));
+			int count = ((int) Math.round(listaRegistro.size() * (valor  *0.01)))-1;
 
 			final String bdOrder = mapa.getNombre();
 
@@ -262,25 +262,25 @@ public class ToJson {
 
 			});
 
-			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1))
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
 				return temp.get(count).getRegistroFloat1();
-			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2))
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
 				return temp.get(count).getRegistroFloat2();
-			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3))
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
 				return temp.get(count).getRegistroFloat3();
-			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4))
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
 				return temp.get(count).getRegistroFloat4();
-			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5))
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
 				return temp.get(count).getRegistroFloat5();
-			if (bdOrder.equals(Constantes.CampoRegistro.INT1))
+			if (bdOrder.equals(Constantes.CampoRegistro.INT1.campoBD()))
 				return temp.get(count).getRegistroInt1();
-			if (bdOrder.equals(Constantes.CampoRegistro.INT2))
+			if (bdOrder.equals(Constantes.CampoRegistro.INT2.campoBD()))
 				return temp.get(count).getRegistroInt2();
-			if (bdOrder.equals(Constantes.CampoRegistro.INT3))
+			if (bdOrder.equals(Constantes.CampoRegistro.INT3.campoBD()))
 				return temp.get(count).getRegistroInt3();
-			if (bdOrder.equals(Constantes.CampoRegistro.INT4))
+			if (bdOrder.equals(Constantes.CampoRegistro.INT4.campoBD()))
 				return temp.get(count).getRegistroInt4();
-			if (bdOrder.equals(Constantes.CampoRegistro.INT5))
+			if (bdOrder.equals(Constantes.CampoRegistro.INT5.campoBD()))
 				return temp.get(count).getRegistroInt5();
 		}
 		return 0;
@@ -387,11 +387,11 @@ public class ToJson {
 					}
 					serie = serie + "\" }";
 					
-					serie=serie+crearSeriePercentil(countLista,percentil,mapaItem);
 					primeraVez = false;
 				}
+				serie=serie+ "]}"+crearSeriePercentil(countLista,percentil,mapaItem);
 
-				setDataset(getDataset() + serie + "]}");
+				setDataset(getDataset() + serie );
 				
 			}
 		}
