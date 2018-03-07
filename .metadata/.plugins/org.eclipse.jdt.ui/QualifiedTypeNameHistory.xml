@@ -4,8 +4,10 @@
 <fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.Required"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.DescriptionsList"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportRegistro"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportColumnRegistro"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.ReferenceView"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
 </qualifiedTypeNameHistroy>

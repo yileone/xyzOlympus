@@ -1,5 +1,7 @@
 package com.jayktec.xyzOlympus.models;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,6 +12,7 @@ import com.jayktec.persistencia.*;
 
 @Entity
 @Table(name="fateon_sensor")
+@View(name="VSensorenUmbral",members="nombre,mapa" )
 public class Sensor {
 	
 	
@@ -36,7 +39,10 @@ public class Sensor {
 	@ReferenceView("VVarchar") 
 	private Catalogo mapa;
 	
-
+	@OneToMany(mappedBy="sensor")
+	@CollectionView("VUmbralenSensor")
+	private Collection<Umbral> umbral;
+	
 	public Sensor(String id) {
 		buscarSensor(id);
 
@@ -89,6 +95,14 @@ public class Sensor {
 
 	public void setMapa(Catalogo mapa) {
 		this.mapa = mapa;
+	}
+
+	public Collection<Umbral> getUmbral() {
+		return umbral;
+	}
+
+	public void setUmbral(Collection<Umbral> umbral) {
+		this.umbral = umbral;
 	}
 
 

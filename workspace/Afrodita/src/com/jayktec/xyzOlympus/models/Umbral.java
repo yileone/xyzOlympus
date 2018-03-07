@@ -19,6 +19,8 @@ import org.openxava.annotations.Hidden;
 import org.openxava.annotations.NoCreate;
 import org.openxava.annotations.NoModify;
 import org.openxava.annotations.ReferenceView;
+import org.openxava.annotations.View;
+import org.openxava.annotations.Views;
 /*
 Table: fateon_umbral
 Columns:
@@ -30,6 +32,9 @@ umbral float
 */
 @Entity
 @Table(name="fateon_umbral")
+@Views({
+	@View(name="VUmbralenOrigen",members="umbralValor.sensor.nombre"),
+	@View(name="VUmbralenSensor",members="umbralValor.origen.nombre")})
 public class Umbral {
 	
 	@Id
@@ -43,16 +48,17 @@ public class Umbral {
 	@Column(name="umbral",length=32)
 	private float umbralValor;
 	
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="origen_id",insertable=true,updatable=true)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="nombre")
+	@ReferenceView("VOrigenenUmbral")
+	private Origen origen;
+	
 
 	
-	@CollectionView("VContactoenPersona")
-	@OneToMany(mappedBy="umbral")
-	private Collection<Origen> origen;
-	
-	
-	@NoModify
-	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@DescriptionsList(showReferenceView=true,descriptionProperties="nombre")
+	@ReferenceView("VSensorenUmbral")
 	@JoinColumn(name="Sensor_id",insertable=true,updatable=true)
 	private Sensor sensor;
 	
@@ -62,10 +68,6 @@ public class Umbral {
 	@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="mapa_id",insertable=true,updatable=true)
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Mapa c, Umbral t"
-			+ " where c.oid = t.oid and ${sensor.oid} = ?)",
-			showReferenceView=false,
-			descriptionProperties="nombre",depends="sensor")  
 	private Mapa mapa;
 	
 
@@ -97,11 +99,11 @@ public class Umbral {
 		this.umbralValor = umbralValor;
 	}
 
-	public Collection<Origen> getOrigen() {
+	public Origen getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(Collection<Origen> origen) {
+	public void setOrigen(Origen origen) {
 		this.origen = origen;
 	}
 

@@ -2,12 +2,15 @@ package com.jayktec.xyzOlympus.models;
 
 
 
+import java.util.Collection;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
 import org.hibernate.annotations.*;
+import org.hibernate.cache.spi.entry.CollectionCacheEntry;
 import org.openxava.annotations.*;
 
 import com.sun.istack.internal.*;
@@ -138,10 +141,11 @@ public class Origen {
 	private Catalogo ciudad;
 	
 	
-	@NoModify
-	@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	private Umbral umbral;
+	@OneToMany(mappedBy="origen")
+	@CollectionView("VUmbralenOrigen")
+	private Collection<Umbral> umbral;
+
+
 	
 	public Origen(String string) {
 		// TODO Auto-generated constructor stub
@@ -305,14 +309,16 @@ public class Origen {
 		this.provincia = provincia;
 	}
 
-	public Umbral getUmbral() {
+	public Collection<Umbral> getUmbral() {
 		return umbral;
 	}
 
-	public void setUmbral(Umbral umbral) {
+	public void setUmbral(Collection<Umbral> umbral) {
 		this.umbral = umbral;
 	}
 
+
+	
 
 
 
