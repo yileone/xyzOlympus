@@ -1,1 +1,24 @@
+/BeansContext.properties
+/EtiquetasAfrodita_es.properties
+/GalleryImage.hbm.xml
+/LoginContextFactory.properties
+/META-INF/
+/MensajesAfrodita_es.properties
+/aplicacion.xml
 /com/
+<<<<<<< HEAD
+=======
+/controladores.xml
+/dtds/
+/editores.xml
+/fusioncharts/
+/hibernate.cfg.xml
+/jndi-jboss.properties
+/jndi-websphere.properties
+/jndi.properties
+/logging.properties
+/naviox-users.properties
+/naviox.properties
+/xava-junit.properties
+/xava.properties
+>>>>>>> 9a9f2fb32e8679e73b01348c083afdbbc7b4de4f
