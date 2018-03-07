@@ -36,18 +36,19 @@ public class ToJson {
 	private String canvasborderalpha = "0";
 	private String legendshadow = "0";
 	private String linethickness = "3";
+	private int valorPercentil=95;
 	private static String dataset;
 	private static String categorias;
 	private static Tiempo periodo;
 	private static Date fechaFinal = Calendar.getInstance().getTime();
 	protected static CampoRegistro campoCategoriaFecha = Constantes.CampoRegistro.DATE1;
 	public static CampoRegistro campoCategoriaHora = Constantes.CampoRegistro.HORA1;
-	private static String preCategoria="{ \"label\": ";
-    
-	private static String postCategoria=  "}";//", \"stepSkipped\": false, \"appliedSmartLabel\": true }";
-                
-	
-	
+	private static String preCategoria = "{ \"label\": ";
+
+	private static String postCategoria = "}";// ", \"stepSkipped\": false,
+												// \"appliedSmartLabel\": true
+												// }";
+
 	public static void main(String[] args) throws SQLException, JsonIOException, IOException {
 		System.out.println("empezando json");
 
@@ -80,7 +81,7 @@ public class ToJson {
 	public void crearEncabezado() {
 		iniciarXaxisName();
 		iniciarYaxisName();
-		crearEncabezado(getxName(),getyName());
+		crearEncabezado(getxName(), getyName());
 		System.out.println(encabezado);
 	}
 
@@ -89,42 +90,33 @@ public class ToJson {
 	 */
 	private void iniciarXaxisName() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void iniciarYaxisName() {
 		for (Mapa temp : mapa) {
-		//temp.getMapabd().getNombre().equals(arg0)	
+			// temp.getMapabd().getNombre().equals(arg0)
 		}
 	}
+
 	public void crearEncabezado(String yAxisName, String xAxisName) {
 
-		this.encabezado = 
-				" { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()+ " \"" + ","
-				+ "\"xaxisname\":" + " \"" + xName + "\"" + "," 
-				+ "\"yaxisname\":" + " \"" + yName + "\"" + ","
-				+ "\"showvalues\":" + " \"" + showValues + "\"" + "," 
-				+ "\"numberprefix\":" + " \"" + numberPrefix
-				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha 
-				+ "\"" + "," + "\"showborder\":"+ " \"" + showborder 
-				+ "\"" + "," + "\"bgcolor\":"	+ " \"" + bgColor + "\"" + ","
-				+ "\"plotgradientcolor\":" + " \"" + plotgradientcolor + "\"" + ","
-				+ "\"showalternatehgridcolor\":" + " \"" + showalternatehgridcolor + "\"" + "," 
-				+ "\"showplotborder\":"		+ " \"" + showplotborder + "\"" + "," 
-				+ "\"labeldisplay\":" + " \"" + labeldisplay + "\"" + ","
-				+ "\"divlinecolor\":" + " \"" + divlinecolor + "\"" + "," 
-				+ "\"showcanvasborder\":" + " \""	+ showcanvasborder + "\"" + "," 
-				+ "\"canvasborderalpha\":" + " \"" + canvasborderalpha + "\"" + ","
-				+ "\"legendshadow\":" + " \"" + legendshadow + "\"" + ","
-				+ "\"linethickness\":" + " \""
-				+ linethickness + "\""  + "},";
- 
+		this.encabezado = " { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()
+				+ " \"" + "," + "\"xaxisname\":" + " \"" + xName + "\"" + "," + "\"yaxisname\":" + " \"" + yName + "\""
+				+ "," + "\"showvalues\":" + " \"" + showValues + "\"" + "," + "\"numberprefix\":" + " \"" + numberPrefix
+				+ "\"" + "," + "\"legendborderalpha\":" + " \"" + legendborderalpha + "\"" + "," + "\"showborder\":"
+				+ " \"" + showborder + "\"" + "," + "\"bgcolor\":" + " \"" + bgColor + "\"" + ","
+				+ "\"plotgradientcolor\":" + " \"" + plotgradientcolor + "\"" + "," + "\"showalternatehgridcolor\":"
+				+ " \"" + showalternatehgridcolor + "\"" + "," + "\"showplotborder\":" + " \"" + showplotborder + "\""
+				+ "," + "\"labeldisplay\":" + " \"" + labeldisplay + "\"" + "," + "\"divlinecolor\":" + " \""
+				+ divlinecolor + "\"" + "," + "\"showcanvasborder\":" + " \"" + showcanvasborder + "\"" + ","
+				+ "\"canvasborderalpha\":" + " \"" + canvasborderalpha + "\"" + "," + "\"legendshadow\":" + " \""
+				+ legendshadow + "\"" + "," + "\"linethickness\":" + " \"" + linethickness + "\"" + "},";
+
 		System.out.println(encabezado);
 	}
 
-
-
-	public  void crearCategorias()
+	public void crearCategorias()
 
 	{
 		setCategorias("");
@@ -139,7 +131,7 @@ public class ToJson {
 	 * @param periodo
 	 * @param fechaFinal
 	 */
-	private  void crearCategorias(Tiempo periodo, Date fechaFinal) {
+	private void crearCategorias(Tiempo periodo, Date fechaFinal) {
 		// TODO Auto-generated method stub
 		Date fechaInicio = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -162,12 +154,77 @@ public class ToJson {
 		crearCategorias(fechaFinal, fechaInicio);
 	}
 
+	@SuppressWarnings("unchecked")
+	public float percentil(int valor, Catalogo mapa) {
+		if (valor < 100) {
+			float resp = 0f;
+			int count = (int) Math.round(listaRegistro.size() * (valor / 100));
+
+			final String bdOrder = mapa.getNombre();
+
+			ArrayList<Registro> temp = (ArrayList<Registro>) listaRegistro.clone();
+			Collections.sort(temp, new Comparator() {
+
+				@Override
+				public int compare(Object o1, Object o2) {
+					Registro r1 = (Registro) o1;
+					Registro r2 = (Registro) o2;
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1))
+						return Float.compare(r1.getRegistroFloat1(), r2.getRegistroFloat1());
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2))
+						return Float.compare(r1.getRegistroFloat2(), r2.getRegistroFloat2());
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3))
+						return Float.compare(r1.getRegistroFloat3(), r2.getRegistroFloat3());
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4))
+						return Float.compare(r1.getRegistroFloat4(), r2.getRegistroFloat4());
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5))
+						return Float.compare(r1.getRegistroFloat5(), r2.getRegistroFloat5());
+					if (bdOrder.equals(Constantes.CampoRegistro.INT1))
+						return Float.compare(r1.getRegistroInt1(), r2.getRegistroInt1());
+					if (bdOrder.equals(Constantes.CampoRegistro.INT2))
+						return Float.compare(r1.getRegistroInt2(), r2.getRegistroInt2());
+					if (bdOrder.equals(Constantes.CampoRegistro.INT3))
+						return Float.compare(r1.getRegistroInt3(), r2.getRegistroInt3());
+					if (bdOrder.equals(Constantes.CampoRegistro.INT4))
+						return Float.compare(r1.getRegistroInt4(), r2.getRegistroInt4());
+					if (bdOrder.equals(Constantes.CampoRegistro.INT5))
+						return Float.compare(r1.getRegistroInt5(), r2.getRegistroInt5());
+
+					return 0;
+				}
+
+			});
+
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1))
+				return temp.get(count).getRegistroFloat1();
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2))
+				return temp.get(count).getRegistroFloat2();
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3))
+				return temp.get(count).getRegistroFloat3();
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4))
+				return temp.get(count).getRegistroFloat4();
+			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5))
+				return temp.get(count).getRegistroFloat5();
+			if (bdOrder.equals(Constantes.CampoRegistro.INT1))
+				return temp.get(count).getRegistroInt1();
+			if (bdOrder.equals(Constantes.CampoRegistro.INT2))
+				return temp.get(count).getRegistroInt2();
+			if (bdOrder.equals(Constantes.CampoRegistro.INT3))
+				return temp.get(count).getRegistroInt3();
+			if (bdOrder.equals(Constantes.CampoRegistro.INT4))
+				return temp.get(count).getRegistroInt4();
+			if (bdOrder.equals(Constantes.CampoRegistro.INT5))
+				return temp.get(count).getRegistroInt5();
+		}
+		return 0;
+	}
+
 	/**
 	 * @param periodo2
 	 * @param fechaFinal2
 	 * @param fechaInicio
 	 */
-	private  void crearCategorias(Date fechaFinal2, Date fechaInicio) {
+	private void crearCategorias(Date fechaFinal2, Date fechaInicio) {
 		// TODO Auto-generated method stub
 		categorias = "\"categories\": [ {   \"category\": [";
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -177,15 +234,14 @@ public class ToJson {
 			if (!primeraVez) {
 				categorias = categorias + ",";
 			}
-			categorias= categorias+preCategoria+"\"";
+			categorias = categorias + preCategoria + "\"";
 
-             
 			if (campoCategoriaFecha.equals(Constantes.CampoRegistro.DATE1)) {
 				categorias = categorias + registro.getRegistroDate1();
 			} else if (campoCategoriaFecha.equals(Constantes.CampoRegistro.DATE2)) {
 				categorias = categorias + registro.getRegistroDate2();
 			} else if (campoCategoriaFecha.equals(Constantes.CampoRegistro.DATE3)) {
-				categorias = categorias +registro.getRegistroDate3();
+				categorias = categorias + registro.getRegistroDate3();
 			} else if (campoCategoriaFecha.equals(Constantes.CampoRegistro.DATE4)) {
 				categorias = categorias + registro.getRegistroDate4();
 			} else if (campoCategoriaFecha.equals(Constantes.CampoRegistro.DATE5)) {
@@ -205,7 +261,7 @@ public class ToJson {
 			} else if (campoCategoriaHora.equals(Constantes.CampoRegistro.HORA5)) {
 				categorias = categorias + sdf.format(registro.getRegistrotime5());
 			}
-categorias=categorias+"\""+postCategoria;
+			categorias = categorias + "\"" + postCategoria;
 			primeraVez = false;
 
 		}
@@ -213,24 +269,29 @@ categorias=categorias+"\""+postCategoria;
 		System.out.println(categorias);
 	}
 
+
 	public void creaDataset()
 
 	{
-		setDataset( "\"dataset\": [");
+		creaDataset(valorPercentil);
+	}
+
+	public void creaDataset(int percentil)
+
+	{
+		setDataset("\"dataset\": [");
 		boolean primeraVez = true;
-		
+
 		for (Mapa mapaItem : mapa) {
-			
-			
+
 			String serie = "";
-			
-		
+			int countLista=listaRegistro.size();
 			String bd = mapaItem.getMapabd().getNombre();
 			if (!(bd.equals(campoCategoriaFecha.campoBD()) || bd.equals(campoCategoriaHora.campoBD()))) {
-				if (!primeraVez)	
-					serie=",";
-				primeraVez=true;
-				serie = serie+"{\"seriesname\":  \"" + mapaItem.getMapaapp() + "\", \"data\": [";
+				if (!primeraVez)
+					serie = ",";
+				primeraVez = true;
+				serie = serie + "{\"seriesname\":  \"" + mapaItem.getMapaapp() + "\", \"data\": [";
 				for (Registro registro : listaRegistro) {
 					if (!primeraVez)
 						serie = serie + ",";
@@ -257,17 +318,42 @@ categorias=categorias+"\""+postCategoria;
 					} else if (bd.equals(Constantes.CampoRegistro.INT5.campoBD())) {
 						serie = serie + registro.getRegistroInt5();
 					}
-					serie = serie +"\" }";
+					serie = serie + "\" }";
+					
+					serie=serie+crearSeriePercentil(countLista,percentil,mapaItem);
 					primeraVez = false;
 				}
 
-				setDataset(getDataset()+ serie + "]}");
+				setDataset(getDataset() + serie + "]}");
+				
 			}
 		}
-		setDataset(getDataset()+ "]}");
+		setDataset(getDataset() + "]}");
 		System.out.println(getDataset());
 
+	}
 
+	/**
+	 * @param countLista
+	 * @param mapaItem
+	 * @return
+	 */
+	private String crearSeriePercentil(int countLista,int valorPercentil ,Mapa mapaItem) {
+		// TODO Auto-generated method stub
+		
+		String serie="";
+		
+		
+		serie = serie + ",{\"seriesname\":  \"" + "Percentil-"+mapaItem.getMapaapp() + "\", \"data\": [";
+		Float percentil = percentil(valorPercentil, mapaItem.getMapabd());
+		for (int i = 0; i < countLista; i++) {
+
+			serie = serie + " { \"value\":\""+ percentil+"\"}";
+			
+			
+		}
+		serie = serie + "]}";
+		return serie;
 	}
 
 	public void refrescarJson(Object object) throws SQLException, JsonIOException, IOException {
@@ -855,8 +941,78 @@ categorias=categorias+"\""+postCategoria;
 	 * @param dataset
 	 *            the dataset to set
 	 */
-	public  void setDataset(String dataSet) {
+	public void setDataset(String dataSet) {
 		dataset = dataSet;
+	}
+
+	/**
+	 * @return the valorPercentil
+	 */
+	public int getValorPercentil() {
+		return valorPercentil;
+	}
+
+	/**
+	 * @param valorPercentil the valorPercentil to set
+	 */
+	public void setValorPercentil(int valorPercentil) {
+		this.valorPercentil = valorPercentil;
+	}
+
+	/**
+	 * @return the campoCategoriaFecha
+	 */
+	public static CampoRegistro getCampoCategoriaFecha() {
+		return campoCategoriaFecha;
+	}
+
+	/**
+	 * @param campoCategoriaFecha the campoCategoriaFecha to set
+	 */
+	public static void setCampoCategoriaFecha(CampoRegistro campoCategoriaFecha) {
+		ToJson.campoCategoriaFecha = campoCategoriaFecha;
+	}
+
+	/**
+	 * @return the campoCategoriaHora
+	 */
+	public static CampoRegistro getCampoCategoriaHora() {
+		return campoCategoriaHora;
+	}
+
+	/**
+	 * @param campoCategoriaHora the campoCategoriaHora to set
+	 */
+	public static void setCampoCategoriaHora(CampoRegistro campoCategoriaHora) {
+		ToJson.campoCategoriaHora = campoCategoriaHora;
+	}
+
+	/**
+	 * @return the preCategoria
+	 */
+	public static String getPreCategoria() {
+		return preCategoria;
+	}
+
+	/**
+	 * @param preCategoria the preCategoria to set
+	 */
+	public static void setPreCategoria(String preCategoria) {
+		ToJson.preCategoria = preCategoria;
+	}
+
+	/**
+	 * @return the postCategoria
+	 */
+	public static String getPostCategoria() {
+		return postCategoria;
+	}
+
+	/**
+	 * @param postCategoria the postCategoria to set
+	 */
+	public static void setPostCategoria(String postCategoria) {
+		ToJson.postCategoria = postCategoria;
 	}
 
 }

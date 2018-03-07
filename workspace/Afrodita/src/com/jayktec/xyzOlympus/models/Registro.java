@@ -472,5 +472,13 @@ public class Registro {
 	public void setRegistroVarchar5(String registroVarchar5) {
 		this.registroVarchar5 = registroVarchar5;
 	}
+	
+	public int compare(Registro o1, Registro o2) {
+				
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+
 
 }
