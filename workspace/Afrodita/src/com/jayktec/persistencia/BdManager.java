@@ -187,6 +187,7 @@ public class BdManager {
 		// PreparedStatement pst = connection.prepareStatement(sql);
 		Statement stmt = connection.createStatement();
 		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ='"+ origen.getOid()+"'";
+		System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);
 		
 		// ResultSet rs = consultarSql(pst);
@@ -198,6 +199,7 @@ public class BdManager {
 			temp.setMapa(buscarMapaLista(rs.getString("mapa_id"),mapas));
 			temp.setOid(rs.getString("umbral_id"));
 			temp.setOrigen(origen);
+			temp.setSensor(sensor);
 			temp.setUmbralValor(rs.getFloat("umbral"));
 			
 			respuesta.add(temp);

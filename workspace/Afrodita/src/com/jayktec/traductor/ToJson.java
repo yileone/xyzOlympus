@@ -425,11 +425,11 @@ boolean pVez=true;
 		if (existeUmbral(mapaItem)) {
 			Float umbral = umbral(mapaItem.getMapabd());
 
-			if (pVez) pVez=false;
-			else serie=serie+","; 
 			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
 			for (int i = 0; i < countLista; i++) {
-
+				if (pVez) pVez=false;
+				else serie=serie+","; 
+				
 				serie = serie + " { \"value\":\"" + umbral + "\"}";
 
 			}
@@ -457,7 +457,7 @@ boolean pVez=true;
 	 */
 	private Float umbral(Catalogo mapabd) {
 		for (Umbral umbral : listaUmbrales) {
-			if (umbral.getMapa().equals(mapabd))
+			if (umbral.getMapa().getMapabd().equals(mapabd))
 				return(umbral.getUmbralValor());
 		}
 		return 0f;

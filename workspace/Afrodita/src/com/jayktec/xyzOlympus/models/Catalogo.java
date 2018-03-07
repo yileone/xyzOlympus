@@ -12,6 +12,7 @@ import org.openxava.annotations.*;
 import org.openxava.calculators.*;
 
 import com.jayktec.persistencia.*;
+import com.sun.org.apache.bcel.internal.generic.*;
 
 
 @Entity
@@ -29,6 +30,18 @@ import com.jayktec.persistencia.*;
 public class Catalogo {
 
 
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Catalogo) {
+			Catalogo comparar = (Catalogo) obj;
+			
+			if(comparar.getOid().equals(getOid()))
+				return true;
+		}
+		
+		return false;
+	}
 
 	@Id
 	@GeneratedValue(generator="system-uuid")

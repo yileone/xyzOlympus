@@ -89,8 +89,10 @@ public class Mapa {
 
 		if (obj instanceof Mapa) {
 			Mapa temp = (Mapa) obj;
-			if (temp.getOid() == this.getOid() && temp.getMapaapp() == this.getMapaapp()
-					&& temp.getMapabd() == this.getMapabd() && temp.getMapaTabla() == this.getMapaTabla()) {
+			if (temp.getOid() .equals( this.getOid()) 
+					&& temp.getMapaapp().equals( this.getMapaapp())
+					&& temp.getMapabd().equals( this.getMapabd()) 
+					&& temp.getMapaTabla().equals( this.getMapaTabla())) {
 				return true;
 			}
 		}
