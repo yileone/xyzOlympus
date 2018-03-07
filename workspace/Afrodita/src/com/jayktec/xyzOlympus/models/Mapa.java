@@ -1,52 +1,54 @@
 package com.jayktec.xyzOlympus.models;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.codehaus.groovy.transform.*;
 import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 import java.util.Date;
 
-
 @Entity
-@Table(name="fateon_mapa")
+@Table(name = "fateon_mapa")
 public class Mapa {
 	@Id
-	@GeneratedValue(generator="system-uuid")
+	@GeneratedValue(generator = "system-uuid")
 	@Hidden
-	@GenericGenerator(name="system-uuid",strategy="uuid")
-	@Column(name="mapa_id",length=32)
-	private String oid; 	
-	
-	/*@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="mapa_tabla",insertable=true,updatable=true)
-	private Tablamapa nombre;*/
-	
-	//@NoModify
-	//@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="mapa_tabla",insertable=true,updatable=true)
-	@DescriptionsList(condition="e.oid in(SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaTabla')",
-			showReferenceView=true,
-			descriptionProperties="valorCadena")  
-	@ReferenceView("VMapa") 
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@Column(name = "mapa_id", length = 32)
+	private String oid;
+
+	/*
+	 * @ManyToOne(fetch=FetchType.LAZY,optional=false)
+	 * 
+	 * @JoinColumn(name="mapa_tabla",insertable=true,updatable=true) private
+	 * Tablamapa nombre;
+	 */
+
+	// @NoModify
+	// @NoCreate
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "mapa_tabla", insertable = true, updatable = true)
+	@DescriptionsList(condition = "e.oid in(SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaTabla')", showReferenceView = true, descriptionProperties = "valorCadena")
+	@ReferenceView("VMapa")
 	private Catalogo mapaTabla;
-	
-	/*@Column(name="mapa_campo",insertable=true,updatable=true)
-	private String mapabd;
-	*/
-	
+
+	/*
+	 * @Column(name="mapa_campo",insertable=true,updatable=true) private String
+	 * mapabd;
+	 */
+
 	@NoModify
 	@NoCreate
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="mapa_campo",insertable=true,updatable=true)
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaCampo')",
-			showReferenceView=false,
-			descriptionProperties="valorCadena")  
-	@ReferenceView("VVarchar") 
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "mapa_campo", insertable = true, updatable = true)
+	@DescriptionsList(condition = "e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='MapaCampo')", showReferenceView = false, descriptionProperties = "valorCadena")
+	@ReferenceView("VVarchar")
 	private Catalogo mapabd;
-	
+
 	@Required
-	@Column(name="mapa_nombre_campo",insertable=true,updatable=true)
+	@Column(name = "mapa_nombre_campo", insertable = true, updatable = true)
 	private String mapaapp;
 
 	public String getOid() {
@@ -81,28 +83,18 @@ public class Mapa {
 		this.mapaapp = mapaapp;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-	
-	
+		if (obj instanceof Mapa) {
+			Mapa temp = (Mapa) obj;
+			if (temp.getOid() == this.getOid() && temp.getMapaapp() == this.getMapaapp()
+					&& temp.getMapabd() == this.getMapabd() && temp.getMapaTabla() == this.getMapaTabla()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

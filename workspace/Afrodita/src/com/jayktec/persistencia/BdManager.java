@@ -175,6 +175,36 @@ public class BdManager {
 
 	}
 
+	
+
+	public static ArrayList<Umbral> consultarUmbral( Sensor sensor, Origen origen) throws SQLException {
+
+		// PreparedStatement pst = connection.prepareStatement(sql);
+		Statement stmt = connection.createStatement();
+		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ="+ origen.getOid();
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		// ResultSet rs = consultarSql(pst);
+
+		ArrayList<Umbral> respuesta = new ArrayList<Umbral>();
+		while (rs.next()) {
+
+			Umbral temp = new Umbral();
+			temp.setMapa(new Mapa(rs.getString("mapa_id")));
+			temp.setOid(rs.getString("umbral_id"));
+			temp.setOrigen(origen);
+			temp.set(rs.getString("mapa_id"));
+			temp.setMapa(rs.getString("mapa_id"));
+			
+			respuesta.add(temp);
+
+		}
+
+		return respuesta;
+
+	}
+
+	
 	public static ArrayList<Registro> consultarRegistro(String sql, Sensor sensor, Origen origen) throws SQLException {
 
 		// PreparedStatement pst = connection.prepareStatement(sql);

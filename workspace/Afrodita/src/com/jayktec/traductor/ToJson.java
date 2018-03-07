@@ -36,28 +36,30 @@ public class ToJson {
 	private String canvasborderalpha = "0";
 	private String legendshadow = "0";
 	private String linethickness = "3";
-	private int valorPercentil=95;
+	private int valorPercentil = 95;
 
-	
-	/*amarrufo 20180307 Bangin*/
-	
-	private String subCaption="";
-	private String theme="fint";
-	private String showhovereffect="1";
-	private String xAxisName="";
-	private String yAxisName="";
-	private String numbersuffix="";
-	private String drawCrossLine="2";
-	private String crossLineAlpha="100";
-	private String crossLineColor ="#876EA1"; //amarrufo se cambio el color para homologar con el grafico existente
-	private String ajustDiv ="1";
-	private String yAxisMaxvalue ="0";
-	private String yAxisMinvalue ="10";
-	private String numDivLines ="10";
-	private String numVDivLines ="0";
-	private String vDivLineColor ="0";
-	private String VDivLineThickness = "0";//groso line vertical en px
-	private String VDivLineAlpha = "50";//transparencia de la lineas verticales 0 trasparente 100 opaco
+	/* amarrufo 20180307 Bangin */
+
+	private String subCaption = "";
+	private String theme = "fint";
+	private String showhovereffect = "1";
+	private String xAxisName = "";
+	private String yAxisName = "";
+	private String numbersuffix = "";
+	private String drawCrossLine = "2";
+	private String crossLineAlpha = "100";
+	private String crossLineColor = "#876EA1"; // amarrufo se cambio el color
+												// para homologar con el grafico
+												// existente
+	private String ajustDiv = "1";
+	private String yAxisMaxvalue = "0";
+	private String yAxisMinvalue = "10";
+	private String numDivLines = "10";
+	private String numVDivLines = "0";
+	private String vDivLineColor = "0";
+	private String VDivLineThickness = "0";// groso line vertical en px
+	private String VDivLineAlpha = "50";// transparencia de la lineas verticales
+										// 0 trasparente 100 opaco
 	private String showAlternateVGridColor = "0";
 	private String alternateVGridColor = "#00ffaa";
 	private String alternateVGridAlpha = "0";
@@ -70,7 +72,7 @@ public class ToJson {
 	private String exportatclient = "1";
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
-	/*amarrufo 20180307 End*/
+	/* amarrufo 20180307 End */
 	private static String dataset;
 	private static String categorias;
 	private static Tiempo periodo;
@@ -80,8 +82,9 @@ public class ToJson {
 	private static String preCategoria = "{ \"label\": ";
 
 	private static String postCategoria = "}";// ", \"stepSkipped\": false,
-												// \"appliedSmartLabel\": true
-												// }";
+	private static ArrayList<Umbral> listaUmbrales;
+	// \"appliedSmartLabel\": true
+	// }";
 
 	public static void main(String[] args) throws SQLException, JsonIOException, IOException {
 		System.out.println("empezando json");
@@ -135,51 +138,38 @@ public class ToJson {
 
 	public void crearEncabezado(String yAxisName, String xAxisName) {
 
-		
-		this.encabezado = 
-				" { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()+ " \"" + ","
-				+ "\"xaxisname\":" + " \"" + this.getxAxisName() + "\"" + "," 
-				+ "\"yaxisname\":" + " \"" + this.getyAxisName()  + "\"" + ","
-				+ "\"showvalues\":" + " \"" + this.getShowValues()  + "\"" + "," 
-				+ "\"numberprefix\":" + " \"" + this.getNumberPrefix() +"\"" + "," 
-				+ "\"legendborderalpha\":" + " \"" + this.getLegendborderalpha() + "\"" + "," 
-				+ "\"showborder\":"+ " \"" + this.getShowborder() + "\"" + "," 
-				+ "\"bgcolor\":"	+ " \"" + this.getBgColor() + "\"" + ","
-				+ "\"plotgradientcolor\":" + " \"" + this.getPlotgradientcolor() + "\"" + ","
-				+ "\"showalternatehgridcolor\":" + " \"" + this.getShowalternatehgridcolor() + "\"" + "," 
-				+ "\"showplotborder\":"		+ " \"" + this.getShowplotborder() + "\"" + "," 
-				+ "\"labeldisplay\":" + " \"" + this.getLabeldisplay() + "\"" + ","
-				+ "\"divlinecolor\":" + " \"" + this.getDivlinecolor() + "\"" + "," 
-				+ "\"showcanvasborder\":" + " \""	+ this.getShowcanvasborder() + "\"" + "," 
-				+ "\"canvasborderalpha\":" + " \"" + this.getCanvasborderalpha() + "\"" + ","
-				+ "\"legendshadow\":" + " \"" + this.getLegendshadow() + "\"" + ","
-				+ "\"theme\": \"" + this.getTheme() + "\"" + ","
-				+ "\"showhovereffect\": \"" + this.getShowhovereffect() + "\"" + ","
-				+ "\"numbersuffix\": \"" + this.getNumbersuffix() + "\"" + ","
-				+ "\"drawCrossLine\": \"" + this.getDrawCrossLine() + "\"" + ","
-				+ "\"crossLineAlpha\": \"" + this.getCrossLineAlpha() + "\"" + ","
-				+ "\"crossLineColor\": \"" + this.getCrossLineColor() + "\"" + ","
-				+ "\"ajustDiv\": \"" + this.getAjustDiv() + "\"" + ","
-				+ "\"yAxisMaxvalue\": \"" + this.getyAxisMaxvalue() + "\"" + ","
-				+ "\"yAxisMinvalue\": \"" + this.getyAxisMinvalue() + "\"" + ","
-				+ "\"numDivLines\": \"" + this.getNumDivLines() + "\"" + ","
-				+ "\"numVDivLines\": \"" + this.getNumVDivLines() + "\"" + ","
-				+ "\"vDivLineColor\": \"" + this.getvDivLineColor() + "\"" + ","
-				+ "\"VDivLineThickness\": \"" + this.getVDivLineThickness() + "\"" + ","
-				+ "\"VDivLineAlpha\": \"" + this.getVDivLineAlpha() + "\"" + ","
-				+ "\"showAlternateVGridColor\": \"" + this.getShowAlternateVGridColor() + "\"" + ","
-				+ "\"alternateVGridColor\": \"" + this.getAlternateVGridColor() + "\"" + ","
-				+ "\"alternateVGridAlpha\": \"" + this.getAlternateVGridAlpha() + "\"" + ","
-				+ "\"drawAnchors\": \"" + this.getDrawAnchors() + "\"" + ","
-				+ "\"logoURL\": \"" + this.getLogoURL() + "\"" + ","
-				+ "\"logoScale\": \"" + this.getLogoScale() + "\"" + ","
-				+ "\"logoPosition\": \"" + this.getLogoPosition() + "\"" + ","
-				+ "\"logoAlpha\": \"" + this.getLogoAlpha() + "\"" + ","
-				+ "\"exportenabled\": \"" + this.getExportenabled() + "\"" + ","
-				+ "\"exportatclient\": \"" + this.getExportatclient() + "\"" + ","
-				+ "\"exporthandler\": \"" + this.getExporthandler() + "\"" + ","
-				+ "\"html5exporthandler\": \"" + this.getHtml5exporthandler() +"\"},";
- 
+		this.encabezado = " { \"chart\": {" + " \"caption\": " + " \"" + origen.getNombre() + "-" + sensor.getNombre()
+				+ " \"" + "," + "\"xaxisname\":" + " \"" + this.getxAxisName() + "\"" + "," + "\"yaxisname\":" + " \""
+				+ this.getyAxisName() + "\"" + "," + "\"showvalues\":" + " \"" + this.getShowValues() + "\"" + ","
+				+ "\"numberprefix\":" + " \"" + this.getNumberPrefix() + "\"" + "," + "\"legendborderalpha\":" + " \""
+				+ this.getLegendborderalpha() + "\"" + "," + "\"showborder\":" + " \"" + this.getShowborder() + "\""
+				+ "," + "\"bgcolor\":" + " \"" + this.getBgColor() + "\"" + "," + "\"plotgradientcolor\":" + " \""
+				+ this.getPlotgradientcolor() + "\"" + "," + "\"showalternatehgridcolor\":" + " \""
+				+ this.getShowalternatehgridcolor() + "\"" + "," + "\"showplotborder\":" + " \""
+				+ this.getShowplotborder() + "\"" + "," + "\"labeldisplay\":" + " \"" + this.getLabeldisplay() + "\""
+				+ "," + "\"divlinecolor\":" + " \"" + this.getDivlinecolor() + "\"" + "," + "\"showcanvasborder\":"
+				+ " \"" + this.getShowcanvasborder() + "\"" + "," + "\"canvasborderalpha\":" + " \""
+				+ this.getCanvasborderalpha() + "\"" + "," + "\"legendshadow\":" + " \"" + this.getLegendshadow() + "\""
+				+ "," + "\"theme\": \"" + this.getTheme() + "\"" + "," + "\"showhovereffect\": \""
+				+ this.getShowhovereffect() + "\"" + "," + "\"numbersuffix\": \"" + this.getNumbersuffix() + "\"" + ","
+				+ "\"drawCrossLine\": \"" + this.getDrawCrossLine() + "\"" + "," + "\"crossLineAlpha\": \""
+				+ this.getCrossLineAlpha() + "\"" + "," + "\"crossLineColor\": \"" + this.getCrossLineColor() + "\""
+				+ "," + "\"ajustDiv\": \"" + this.getAjustDiv() + "\"" + "," + "\"yAxisMaxvalue\": \""
+				+ this.getyAxisMaxvalue() + "\"" + "," + "\"yAxisMinvalue\": \"" + this.getyAxisMinvalue() + "\"" + ","
+				+ "\"numDivLines\": \"" + this.getNumDivLines() + "\"" + "," + "\"numVDivLines\": \""
+				+ this.getNumVDivLines() + "\"" + "," + "\"vDivLineColor\": \"" + this.getvDivLineColor() + "\"" + ","
+				+ "\"VDivLineThickness\": \"" + this.getVDivLineThickness() + "\"" + "," + "\"VDivLineAlpha\": \""
+				+ this.getVDivLineAlpha() + "\"" + "," + "\"showAlternateVGridColor\": \""
+				+ this.getShowAlternateVGridColor() + "\"" + "," + "\"alternateVGridColor\": \""
+				+ this.getAlternateVGridColor() + "\"" + "," + "\"alternateVGridAlpha\": \""
+				+ this.getAlternateVGridAlpha() + "\"" + "," + "\"drawAnchors\": \"" + this.getDrawAnchors() + "\""
+				+ "," + "\"logoURL\": \"" + this.getLogoURL() + "\"" + "," + "\"logoScale\": \"" + this.getLogoScale()
+				+ "\"" + "," + "\"logoPosition\": \"" + this.getLogoPosition() + "\"" + "," + "\"logoAlpha\": \""
+				+ this.getLogoAlpha() + "\"" + "," + "\"exportenabled\": \"" + this.getExportenabled() + "\"" + ","
+				+ "\"exportatclient\": \"" + this.getExportatclient() + "\"" + "," + "\"exporthandler\": \""
+				+ this.getExporthandler() + "\"" + "," + "\"html5exporthandler\": \"" + this.getHtml5exporthandler()
+				+ "\"},";
+
 		System.out.println(encabezado);
 	}
 
@@ -225,7 +215,7 @@ public class ToJson {
 	public float percentil(int valor, Catalogo mapa) {
 		if (valor < 100) {
 			float resp = 0f;
-			int count = ((int) Math.round(listaRegistro.size() * (valor  *0.01)))-1;
+			int count = ((int) Math.round(listaRegistro.size() * (valor * 0.01))) - 1;
 
 			final String bdOrder = mapa.getNombre();
 
@@ -336,7 +326,6 @@ public class ToJson {
 		System.out.println(categorias);
 	}
 
-
 	public void creaDataset()
 
 	{
@@ -352,7 +341,7 @@ public class ToJson {
 		for (Mapa mapaItem : mapa) {
 
 			String serie = "";
-			int countLista=listaRegistro.size();
+			int countLista = listaRegistro.size();
 			String bd = mapaItem.getMapabd().getNombre();
 			if (!(bd.equals(campoCategoriaFecha.campoBD()) || bd.equals(campoCategoriaHora.campoBD()))) {
 				if (!primeraVez)
@@ -386,13 +375,14 @@ public class ToJson {
 						serie = serie + registro.getRegistroInt5();
 					}
 					serie = serie + "\" }";
-					
+
 					primeraVez = false;
 				}
-				serie=serie+ "]}"+crearSeriePercentil(countLista,percentil,mapaItem);
+				serie = serie + "]}" + crearSeriePercentil(countLista, percentil, mapaItem);
+				serie = serie + crearSerieUmbral(mapaItem);
 
-				setDataset(getDataset() + serie );
-				
+				setDataset(getDataset() + serie);
+
 			}
 		}
 		setDataset(getDataset() + "]}");
@@ -405,22 +395,64 @@ public class ToJson {
 	 * @param mapaItem
 	 * @return
 	 */
-	private String crearSeriePercentil(int countLista,int valorPercentil ,Mapa mapaItem) {
+	private String crearSeriePercentil(int countLista, int valorPercentil, Mapa mapaItem) {
 		// TODO Auto-generated method stub
-		
-		String serie="";
-		
-		
-		serie = serie + ",{\"seriesname\":  \"" + "Percentil-"+mapaItem.getMapaapp() + "\", \"data\": [";
+
+		String serie = "";
+
+		serie = serie + ",{\"seriesname\":  \"" + "Percentil-" + mapaItem.getMapaapp() + "\", \"data\": [";
 		Float percentil = percentil(valorPercentil, mapaItem.getMapabd());
 		for (int i = 0; i < countLista; i++) {
 
-			serie = serie + " { \"value\":\""+ percentil+"\"}";
-			
-			
+			serie = serie + " { \"value\":\"" + percentil + "\"}";
+
 		}
 		serie = serie + "]}";
 		return serie;
+	}
+
+	private String crearSerieUmbral(Mapa mapaItem) {
+		// TODO Auto-generated method stub
+
+		String serie = "";
+		int countLista = listaRegistro.size();
+		if (existeUmbral(mapaItem)) {
+			Float umbral = umbral(mapaItem.getMapabd());
+
+			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
+			for (int i = 0; i < countLista; i++) {
+
+				serie = serie + " { \"value\":\"" + umbral + "\"}";
+
+			}
+			serie = serie + "]}";
+		}
+		return serie;
+	}
+
+	/**
+	 * @param mapaItem
+	 * @return
+	 */
+	private boolean existeUmbral(Mapa mapaItem) {
+		// TODO Auto-generated method stub
+		
+		for (Umbral umbral : listaUmbrales) {
+			if (umbral.getMapa().equals(mapaItem)) return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @param mapabd
+	 * @return
+	 */
+	private Float umbral(Catalogo mapabd) {
+		for (Umbral umbral : listaUmbrales) {
+			if (umbral.getMapa().equals(mapabd))
+				return(umbral.getUmbralValor())
+		}
+		return 0f;
 	}
 
 	public void refrescarJson(Object object) throws SQLException, JsonIOException, IOException {
@@ -456,6 +488,7 @@ public class ToJson {
 		if (refrescar) {
 			mapaParaSensor();
 			buscarRegistros();
+			buscarUmbrales();
 		}
 
 		;
@@ -574,6 +607,13 @@ public class ToJson {
 		// TODO Auto-generated method stub
 		ToJson.listaRegistro = null;
 		ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor);
+
+	}
+
+	private void buscarUmbrales() throws SQLException {
+		// TODO Auto-generated method stub
+		ToJson.setListaUmbrales(null);
+		ToJson.setListaUmbrales(BdManager.consultarUmbral(sensor, origen));
 
 	}
 
@@ -1020,7 +1060,8 @@ public class ToJson {
 	}
 
 	/**
-	 * @param valorPercentil the valorPercentil to set
+	 * @param valorPercentil
+	 *            the valorPercentil to set
 	 */
 	public void setValorPercentil(int valorPercentil) {
 		this.valorPercentil = valorPercentil;
@@ -1258,7 +1299,8 @@ public class ToJson {
 	}
 
 	/**
-	 * @param campoCategoriaFecha the campoCategoriaFecha to set
+	 * @param campoCategoriaFecha
+	 *            the campoCategoriaFecha to set
 	 */
 	public static void setCampoCategoriaFecha(CampoRegistro campoCategoriaFecha) {
 		ToJson.campoCategoriaFecha = campoCategoriaFecha;
@@ -1272,7 +1314,8 @@ public class ToJson {
 	}
 
 	/**
-	 * @param campoCategoriaHora the campoCategoriaHora to set
+	 * @param campoCategoriaHora
+	 *            the campoCategoriaHora to set
 	 */
 	public static void setCampoCategoriaHora(CampoRegistro campoCategoriaHora) {
 		ToJson.campoCategoriaHora = campoCategoriaHora;
@@ -1286,7 +1329,8 @@ public class ToJson {
 	}
 
 	/**
-	 * @param preCategoria the preCategoria to set
+	 * @param preCategoria
+	 *            the preCategoria to set
 	 */
 	public static void setPreCategoria(String preCategoria) {
 		ToJson.preCategoria = preCategoria;
@@ -1300,7 +1344,8 @@ public class ToJson {
 	}
 
 	/**
-	 * @param postCategoria the postCategoria to set
+	 * @param postCategoria
+	 *            the postCategoria to set
 	 */
 	public static void setPostCategoria(String postCategoria) {
 		ToJson.postCategoria = postCategoria;
@@ -1313,8 +1358,20 @@ public class ToJson {
 	public void setyAxisName(String yAxisName) {
 		this.yAxisName = yAxisName;
 	}
-	
-	
-	
+
+	/**
+	 * @return the listaUmbrales
+	 */
+	public static ArrayList<Umbral> getListaUmbrales() {
+		return listaUmbrales;
+	}
+
+	/**
+	 * @param listaUmbrales
+	 *            the listaUmbrales to set
+	 */
+	public static void setListaUmbrales(ArrayList<Umbral> listaUmbrales) {
+		ToJson.listaUmbrales = listaUmbrales;
+	}
 
 }
