@@ -35,7 +35,7 @@ String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 System.out.println("******* GRAFICO *********");
 System.out.println(grafico);
 System.out.println("******* GRAFICO *********");		
-		FusionCharts mslineChat = new FusionCharts("msline", // chartType
+		FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
 				"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
 				"chart", // chartContainer
