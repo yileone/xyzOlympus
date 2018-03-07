@@ -137,6 +137,12 @@ public class Origen {
 	@ReferenceView("VVarchar") 
 	private Catalogo ciudad;
 	
+	
+	@NoModify
+	@NoCreate
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	private Umbral umbral;
+	
 	public Origen(String string) {
 		// TODO Auto-generated constructor stub
 		buscarOrigen(string);
@@ -297,6 +303,14 @@ public class Origen {
 
 	public void setProvincia(Catalogo provincia) {
 		this.provincia = provincia;
+	}
+
+	public Umbral getUmbral() {
+		return umbral;
+	}
+
+	public void setUmbral(Umbral umbral) {
+		this.umbral = umbral;
 	}
 
 
