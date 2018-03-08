@@ -197,22 +197,25 @@ Origen origen= null;
 		Statement stmt = connection.createStatement();
 		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ='"+ origen.getOid()+"'";
 		System.out.println(sql);
-		ResultSet rs = stmt.executeQuery(sql);
-		
-		// ResultSet rs = consultarSql(pst);
+		//ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement pst= connection.prepareStatement(sql);
+		 ResultSet rs = consultarSql(pst);
 
 		ArrayList<Umbral> respuesta = new ArrayList<Umbral>();
 		while (rs.next()) {
 
+			try{
 			Umbral temp = new Umbral();
-			temp.setMapa(buscarMapaLista(rs.getString("mapa_id"),mapas));
-			temp.setOid(rs.getString("umbral_id"));
 			temp.setOrigen(origen);
 			temp.setSensor(sensor);
+			temp.setMapa(buscarMapaLista(rs.getString("mapa_id"),mapas));
+			temp.setOid(rs.getString("umbral_id"));
 			temp.setUmbralValor(rs.getFloat("umbral"));
 			
 			respuesta.add(temp);
-
+			}
+			catch(Exception e)
+			{}
 		}
 
 		return respuesta;

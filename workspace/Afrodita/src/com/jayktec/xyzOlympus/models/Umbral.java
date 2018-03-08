@@ -71,7 +71,7 @@ public class Umbral {
 	@JoinColumn(name="mapa_id",insertable=true,updatable=true)
 	@DescriptionsList(
 			showReferenceView=true,
-			descriptionProperties="mapaTabla.valorCadena")
+			descriptionProperties="mapaapp")
 	@ReferenceView("VMapaenUmbral")
 
 	private Mapa mapa;
@@ -118,7 +118,7 @@ public class Umbral {
 	}
 
 	public void setMapa(Mapa mapa) {
-		mapa.setOid(sensor.getMapa().getOid());
+	//    mapa.setMapaTabla(sensor.getMapa());
 		this.mapa = mapa;
 	}
 

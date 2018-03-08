@@ -423,7 +423,7 @@ boolean pVez=true;
 		int countLista = listaRegistro.size();
 boolean pVez=true;
 		if (existeUmbral(mapaItem)) {
-			Float umbral = umbral(mapaItem.getMapabd());
+			float umbral = umbral(mapaItem.getMapabd());
 
 			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
 			for (int i = 0; i < countLista; i++) {

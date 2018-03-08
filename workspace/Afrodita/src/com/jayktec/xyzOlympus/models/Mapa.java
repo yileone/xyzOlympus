@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "fateon_mapa")
-@View(name="VMapaenUmbral",members="mapaTabla" )
+@View(name="VMapaenUmbral",members="mapabd" )
 public class Mapa {
 	@Id
 	@GeneratedValue(generator = "system-uuid")
