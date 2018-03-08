@@ -286,8 +286,8 @@ Origen origen= null;
 				temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
 			} catch (Exception e) {
 			}
-			temp.setSensor(new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD())));
-			temp.setOrigen(new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD())));
+			temp.setSensor(sensor);
+			temp.setOrigen(origen);
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
 			temp.setRegistroFecha(rs.getString(Constantes.CampoRegistro.FECHA_REGISTRO.campoBD()));
 			respuesta.add(temp);
