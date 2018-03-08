@@ -12,6 +12,7 @@ import com.jayktec.controlador.Constantes;
 import com.jayktec.controlador.Constantes.*;
 import com.jayktec.persistencia.*;
 import com.jayktec.xyzOlympus.models.*;
+import com.jayktec.xyzOlympus.transitorio.Tendencia;
 
 public class ToJson {
 

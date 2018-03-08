@@ -8,6 +8,7 @@ import java.util.logging.*;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
+import com.jayktec.xyzOlympus.transitorio.Tendencia;
 
 public class BdManager {
 	static Conexion conexion = new Conexion();
