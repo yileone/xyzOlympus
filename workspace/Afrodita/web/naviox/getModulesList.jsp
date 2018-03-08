@@ -6,4 +6,3 @@ if ("true".equals(request.getParameter("bookmarkModules"))) {
 else {
 	modulesList = modules.getAll();
 }
-%>
