@@ -27,10 +27,12 @@
 	<objeto nombre="origenOid" clase="java.lang.String" valor="" ambito="global"/>
     <objeto nombre="sensorOid" clase="java.lang.String" valor="" ambito="global"/>
 	<controlador nombre="tipochart">
-	    <accion nombre="GraficoXy"      clase="com.jayktec.xyzOlympus.actions.MostrarGraficoxySeries" />
+	    <!-- --><accion nombre="GraficoXy"      clase="com.jayktec.xyzOlympus.actions.MostrarGraficoxySeries" />
 		<accion nombre="GraficoXyZoom"  clase="com.jayktec.xyzOlympus.actions.MostrarGrafricoZoomxyLine" />
 		<accion nombre="GraficoDetalle" clase="com.jayktec.xyzOlympus.actions.MostrarGraficoBarraDetalle"/>
 		<accion nombre="MultiAxis" clase="com.jayktec.xyzOlympus.actions.ToJsonMultiAxis"/>
+		<accion nombre="column2d" clase="com.jayktec.xyzOlympus.actions.ToJsonBarra"/>
+		<accion nombre="MsLine" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
 		<accion nombre="ImportarDatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
 	</controlador>
 	

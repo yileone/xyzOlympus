@@ -15,4 +15,5 @@
 <fullyQualifiedTypeName name="org.openxava.annotations.OnChange"/>
 <fullyQualifiedTypeName name="org.openxava.actions.OnChangePropertyBaseAction"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.buscarMapaSensor"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 </qualifiedTypeNameHistroy>
