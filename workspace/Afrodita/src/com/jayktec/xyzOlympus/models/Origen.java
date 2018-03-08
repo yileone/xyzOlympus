@@ -91,7 +91,7 @@ public class Origen {
 	//@NoCreate
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="origen_id_provincia",insertable=true,updatable=true)
-	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Provicias' )",
+	@DescriptionsList(condition="e.oid in( SELECT c.oid FROM Catalogo c, Tabla t where c.tabla = t.oid and t.nombre ='Provincias' )",
 		showReferenceView=false,
 			descriptionProperties="valorCadena")  
 	@ReferenceView("VVarchar") 
