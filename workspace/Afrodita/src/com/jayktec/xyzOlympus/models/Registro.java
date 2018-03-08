@@ -39,31 +39,31 @@ public class Registro {
 	@Column(name = "registro_float_5", length = 45)
 	private Float registroFloat5;
 
-	@Column(name = "registro_Int_1", length = 45)
+	@Column(name = "registro_int_1", length = 45)
 	private int registroInt1;
 	
-	@Column(name = "registro_Int_2", length = 45)
+	@Column(name = "registro_int_2", length = 45)
 	private int registroInt2;
-	@Column(name = "registro_Int_3", length = 45)
+	@Column(name = "registro_int_3", length = 45)
 	private int registroInt3;
-	@Column(name = "registro_Int_4", length = 45)
+	@Column(name = "registro_int_4", length = 45)
 	private int registroInt4;
-	@Column(name = "registro_Int_5", length = 45)
+	@Column(name = "registro_int_5", length = 45)
 	private int registroInt5;
 	
-	@Column(name = "registro_Varchar_1", length = 45)
+	@Column(name = "registro_varchar_1", length = 45)
 	private String registroVarchar1;
 
-	@Column(name = "registro_Varchar_2", length = 45)
+	@Column(name = "registro_varchar_2", length = 45)
 	private String registroVarchar2;
 
-	@Column(name = "registro_Varchar_3", length = 45)
+	@Column(name = "registro_varchar_3", length = 45)
 	private String registroVarchar3;
 
-	@Column(name = "registro_Varchar_4", length = 45)
+	@Column(name = "registro_varchar_4", length = 45)
 	private String registroVarchar4;
 
-	@Column(name = "registro_Varchar_5", length = 45)
+	@Column(name = "registro_varchar_5", length = 45)
 	private String registroVarchar5;
 	
 	@Column(name = "registro_date_1", length = 10)

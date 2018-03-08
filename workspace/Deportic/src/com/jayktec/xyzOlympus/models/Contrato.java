@@ -31,6 +31,7 @@ equipo_id int(11)
 	           + "descuento {#descuento}"
 	)
 	})
+
 public class Contrato {
 	
 	

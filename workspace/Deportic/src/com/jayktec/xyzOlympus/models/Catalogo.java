@@ -27,6 +27,7 @@ descripcion longtext*/
 	 @View( name="VHora", members="valorHora" ),
 	 @View( name="VFecha", members="valorFecha" )
 	})
+@Table(name="catalogo")
 public class Catalogo {
 
 	@Id
