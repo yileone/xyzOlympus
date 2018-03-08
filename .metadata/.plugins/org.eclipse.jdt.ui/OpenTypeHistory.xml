@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=Afrodita/src&lt;com.jayktec.xyzOlympus.models{Registro.java[Registro" modifiers="1" timestamp="1520443754000"/>
+<typeInfo handle="=Afrodita/src&lt;com.jayktec.controller{Conexion.java[Conexion" modifiers="1" timestamp="1520443753977"/>
+<typeInfo handle="=Afrodita/src&lt;com.jayktec.traductor{ToJson.java[ToJson" modifiers="1" timestamp="1520464790416"/>
 </typeInfoHistroy>
