@@ -36,11 +36,11 @@ public class ToJsonZoomAxis extends ToJson{
 	 * @param sensor
 	 * @throws SQLException
 	 */
+	
 	public ToJsonZoomAxis(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		super(registros, origen, sensor);
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @param args
 	 */
@@ -89,7 +89,7 @@ public class ToJsonZoomAxis extends ToJson{
 	 * @see com.jayktec.traductor.ToJson#creaDataset()
 	 */
 	@Override
-	public void creaDataset() {
+	public void creaDataset() throws SQLException {
 		// TODO Auto-generated method stub
 		super.creaDataset();
 	}
@@ -116,7 +116,7 @@ public class ToJsonZoomAxis extends ToJson{
 	 * @see com.jayktec.traductor.ToJson#armarJson()
 	 */
 	@Override
-	public String armarJson() {
+	public String armarJson() throws SQLException {
 		// TODO Auto-generated method stub
 		return super.armarJson();
 	}

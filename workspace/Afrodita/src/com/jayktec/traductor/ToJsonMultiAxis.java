@@ -141,7 +141,7 @@ public class ToJsonMultiAxis extends ToJson {
 	}
 
 	@Override
-	public String armarJson() {
+	public String armarJson() throws SQLException {
 		// TODO Auto-generated method stub
 		return super.armarJson();
 	}

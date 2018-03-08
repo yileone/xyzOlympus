@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.text.*;
 import java.util.*;
 
+import org.hibernate.hql.internal.ast.tree.*;
+
 import com.google.gson.JsonIOException;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controlador.Constantes.*;
@@ -72,6 +74,8 @@ public class ToJson {
 	private String exportatclient = "1";
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
+	private int mesTendencia=1;
+	private ArrayList<Tendencia> listaTendencia;
 	/* amarrufo 20180307 End */
 	private static String dataset;
 	private static String categorias;
@@ -89,8 +93,9 @@ public class ToJson {
 	public static void main(String[] args) throws SQLException, JsonIOException, IOException {
 		System.out.println("empezando json");
 
-		ToJson temp = new ToJson("ad87651f614d9b3701614d9d69b50000", new Sensor("ad87651f619cd4430161dd9ec4590029"));
-
+		ToJson temp = new ToJson("4028b8816206bd49016206be8a150000", new Sensor("4028b8816206bd49016206c440d50006"));
+		
+		//BdManager.buscarTendencia(new Sensor("ad87651f619cd4430161dd9ec4590029"), new Origen("ad87651f614d9b3701614d9d69b50000") ,1);
 		System.out.println("finalizando json " + temp.crearJson());
 
 	}
@@ -326,13 +331,13 @@ public class ToJson {
 		System.out.println(categorias);
 	}
 
-	public void creaDataset()
+	public void creaDataset() throws SQLException
 
 	{
 		creaDataset(valorPercentil);
 	}
 
-	public void creaDataset(int percentil)
+	public void creaDataset(int percentil) throws SQLException
 
 	{
 		setDataset("\"dataset\": [");
@@ -380,6 +385,7 @@ public class ToJson {
 				}
 				serie = serie + "]}" + crearSeriePercentil(countLista, percentil, mapaItem);
 				serie = serie + crearSerieUmbral(mapaItem);
+				serie = serie + crearSerieTendencia(mapaItem);
 
 				setDataset(getDataset() + serie);
 
@@ -389,6 +395,58 @@ public class ToJson {
 		System.out.println(getDataset());
 
 	}
+
+	/**
+	 * @param mapaItem
+	 * @return
+	 * @throws SQLException 
+	 */
+	private String crearSerieTendencia(Mapa mapaItem) throws SQLException {
+		// TODO Auto-generated method stubnd
+		int countLista= listaRegistro.size();
+		int countTendencia= listaTendencia.size();
+		String serie = "";
+		boolean pVez=true;
+		serie = serie + ",{\"seriesname\":  \"" + "Tendencia-" + mapaItem.getMapaapp() + "\", \"data\": [";
+		float tendencia = 0f ;
+		
+		for (Tendencia tempTendencia : listaTendencia) {
+
+			if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
+				tendencia=tempTendencia.getFloat1();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
+				tendencia=tempTendencia.getFloat2();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
+				tendencia=tempTendencia.getFloat3();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
+				tendencia=tempTendencia.getFloat4();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
+				tendencia=tempTendencia.getFloat5();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia=tempTendencia.getInt1();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia=tempTendencia.getInt2();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia=tempTendencia.getInt3();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia=tempTendencia.getInt4();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia=tempTendencia.getInt5();
+			
+			
+			
+				if (!pVez)
+				{
+					serie=serie+",";
+				}
+				else pVez=false;
+				serie = serie + " { \"value\":\"" + tendencia + "\"}";
+
+			
+		}
+
+		serie = serie + "]}";
+		return serie;	}
 
 	/**
 	 * @param countLista
@@ -497,6 +555,7 @@ boolean pVez=true;
 			mapaParaSensor();
 			buscarRegistros();
 			buscarUmbrales();
+			buscarTendencia();
 		}
 
 		;
@@ -505,9 +564,20 @@ boolean pVez=true;
 	}
 
 	/**
-	 * @return
+	 * @throws SQLException 
+	 * 
 	 */
-	public String armarJson() {
+	private void buscarTendencia() throws SQLException {
+		listaTendencia=null;
+		listaTendencia= BdManager.buscarTendencia(sensor, origen, mesTendencia);
+				
+	}
+
+	/**
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String armarJson() throws SQLException {
 		crearEncabezado();
 		crearCategorias();
 		creaDataset();
