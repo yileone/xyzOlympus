@@ -42,7 +42,9 @@
 <Resource name="jdbc/AfroditaDS" auth="Container" type="javax.sql.DataSource" 
  maxActive="100" maxIdle="4" maxWait="10000"
  username="mysql" password="afrodita" driverClassName="com.mysql.jdbc.Driver"
- url="jdbc:mysql://localhost:3306/fateon" />     
+ url="jdbc:mysql://localhost:3306/fateon_new" />     
+ 
+
 
 <Resource name="jdbc/DeporticDS" auth="Container" type="javax.sql.DataSource" 
  maxActive="100" maxIdle="4" maxWait="10000"
