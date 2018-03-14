@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.*;
 import java.util.*;
 
+import org.codehaus.groovy.transform.*;
 import org.hibernate.hql.internal.ast.tree.*;
 
 import com.google.gson.JsonIOException;
@@ -74,7 +75,7 @@ public class ToJson {
 	private String exportatclient = "1";
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
-	private int mesTendencia=1;
+	private static int mesTendencia = 1;
 	private ArrayList<Tendencia> listaTendencia;
 	/* amarrufo 20180307 End */
 	private static String dataset;
@@ -94,8 +95,10 @@ public class ToJson {
 		System.out.println("empezando json");
 
 		ToJson temp = new ToJson("4028b8816206bd49016206be8a150000", new Sensor("4028b8816206bd49016206c440d50006"));
-		
-		//BdManager.buscarTendencia(new Sensor("ad87651f619cd4430161dd9ec4590029"), new Origen("ad87651f614d9b3701614d9d69b50000") ,1);
+		mesTendencia=2;
+		// BdManager.buscarTendencia(new
+		// Sensor("ad87651f619cd4430161dd9ec4590029"), new
+		// Origen("ad87651f614d9b3701614d9d69b50000") ,1);
 		System.out.println("finalizando json " + temp.crearJson());
 
 	}
@@ -399,54 +402,112 @@ public class ToJson {
 	/**
 	 * @param mapaItem
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	private String crearSerieTendencia(Mapa mapaItem) throws SQLException {
 		// TODO Auto-generated method stubnd
-		int countLista= listaRegistro.size();
-		int countTendencia= listaTendencia.size();
+		int countLista = listaRegistro.size();
+		int countTendencia = listaTendencia.size();
 		String serie = "";
-		boolean pVez=true;
-		serie = serie + ",{\"seriesname\":  \"" + "Tendencia-" + mapaItem.getMapaapp() + "\", \"data\": [";
-		float tendencia = 0f ;
+		boolean pVez = true;
+		boolean haytendencia = false;
+		float tendencia = 0f;listaRegistro.get(0).getRegistroDate1();
+		Calendar inicio = Calendar.getInstance();
+
+		inicio.setTime(listaRegistro.get(0).getRegistroDate1());
 		
-		for (Tendencia tempTendencia : listaTendencia) {
+		int dayOfWeek =diaMysql( inicio.get(Calendar.DAY_OF_WEEK));
+		inicio.setTime(listaRegistro.get(0).getRegistrotime1());
+		
+		int hourOfWeek = inicio.get(Calendar.HOUR);
 
-			if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
-				tendencia=tempTendencia.getFloat1();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
-				tendencia=tempTendencia.getFloat2();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
-				tendencia=tempTendencia.getFloat3();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
-				tendencia=tempTendencia.getFloat4();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
-				tendencia=tempTendencia.getFloat5();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-				tendencia=tempTendencia.getInt1();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-				tendencia=tempTendencia.getInt2();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-				tendencia=tempTendencia.getInt3();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-				tendencia=tempTendencia.getInt4();
-			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-				tendencia=tempTendencia.getInt5();
-			
-			
-			
-				if (!pVez)
-				{
-					serie=serie+",";
-				}
-				else pVez=false;
-				serie = serie + " { \"value\":\"" + tendencia + "\"}";
+		Calendar fin = Calendar.getInstance();
 
-			
+		fin.setTime(listaRegistro.get(countLista-1).getRegistroDate1());
+		int dayEndOfWeek = diaMysql(fin.get(Calendar.DAY_OF_WEEK));
+
+		int diaInicio = (listaTendencia.get(0).getDia());
+
+		int horaInicio = (listaTendencia.get(0).getHora());
+
+		ArrayList<Tendencia> temp = (ArrayList<Tendencia>) listaTendencia.clone();
+		ArrayList<Tendencia> tendenciaFinal = new ArrayList<Tendencia>();
+
+		for (Tendencia tenTemp : temp) {
+			if (haytendencia) {
+				tendenciaFinal.add(tenTemp);
+			} else
+
+			if (tenTemp.getDia() == dayOfWeek && tenTemp.getHora() == hourOfWeek) {
+				haytendencia = true;
+				tendenciaFinal.add(tenTemp);
+			}
+		}
+		int falta = countLista - tendenciaFinal.size();
+		if (falta > 0) {
+			int veces = countLista/countTendencia ;
+			for (int i = 0; i < veces; i++) {
+				tendenciaFinal.addAll(listaTendencia);
+			}
+			veces = countLista%countTendencia ;
+			for (int i = 0; i < veces; i++) {
+				tendenciaFinal.add(listaTendencia.get(i));
+			}
 		}
 
-		serie = serie + "]}";
-		return serie;	}
+		if (haytendencia) {
+
+			serie = serie + ",{\"seriesname\":  \"" + "Tendencia-" + mapaItem.getMapaapp() + "\", \"data\": [";
+
+			for (Tendencia tempTendencia : tendenciaFinal) {
+
+				if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
+					tendencia = tempTendencia.getFloat1();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
+					tendencia = tempTendencia.getFloat2();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
+					tendencia = tempTendencia.getFloat3();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
+					tendencia = tempTendencia.getFloat4();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
+					tendencia = tempTendencia.getFloat5();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = tempTendencia.getInt1();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = tempTendencia.getInt2();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = tempTendencia.getInt3();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = tempTendencia.getInt4();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = tempTendencia.getInt5();
+
+				if (!pVez) {
+					serie = serie + ",";
+				} else
+					pVez = false;
+				serie = serie + " { \"value\":\"" + tendencia + "\"}";
+
+			}
+
+			serie = serie + "]}";
+		}
+		System.out.println(serie);
+		return serie;
+	}
+
+	/**
+	 * @param i
+	 * @return
+	 */
+	private int diaMysql(int i) {
+		// TODO Auto-generated method stub
+		int respuesta = 0;
+		respuesta=i-2;
+		if (respuesta==-1)respuesta=0;
+
+		return respuesta;
+	}
 
 	/**
 	 * @param countLista
@@ -457,16 +518,15 @@ public class ToJson {
 		// TODO Auto-generated method stub
 
 		String serie = "";
-boolean pVez=true;
+		boolean pVez = true;
 		serie = serie + ",{\"seriesname\":  \"" + "Percentil-" + mapaItem.getMapaapp() + "\", \"data\": [";
 		Float percentil = percentil(valorPercentil, mapaItem.getMapabd());
 		for (int i = 0; i < countLista; i++) {
 
-			if (!pVez)
-			{
-				serie=serie+",";
-			}
-			else pVez=false;
+			if (!pVez) {
+				serie = serie + ",";
+			} else
+				pVez = false;
 			serie = serie + " { \"value\":\"" + percentil + "\"}";
 
 		}
@@ -479,15 +539,17 @@ boolean pVez=true;
 
 		String serie = "";
 		int countLista = listaRegistro.size();
-boolean pVez=true;
+		boolean pVez = true;
 		if (existeUmbral(mapaItem)) {
 			float umbral = umbral(mapaItem.getMapabd());
 
 			serie = serie + ",{\"seriesname\":  \"" + "Umbral-" + mapaItem.getMapaapp() + "\", \"data\": [";
 			for (int i = 0; i < countLista; i++) {
-				if (pVez) pVez=false;
-				else serie=serie+","; 
-				
+				if (pVez)
+					pVez = false;
+				else
+					serie = serie + ",";
+
 				serie = serie + " { \"value\":\"" + umbral + "\"}";
 
 			}
@@ -502,9 +564,10 @@ boolean pVez=true;
 	 */
 	private boolean existeUmbral(Mapa mapaItem) {
 		// TODO Auto-generated method stub
-		
+
 		for (Umbral umbral : listaUmbrales) {
-			if (umbral.getMapa().equals(mapaItem)) return true;
+			if (umbral.getMapa().equals(mapaItem))
+				return true;
 		}
 		return false;
 	}
@@ -516,7 +579,7 @@ boolean pVez=true;
 	private Float umbral(Catalogo mapabd) {
 		for (Umbral umbral : listaUmbrales) {
 			if (umbral.getMapa().getMapabd().equals(mapabd))
-				return(umbral.getUmbralValor());
+				return (umbral.getUmbralValor());
 		}
 		return 0f;
 	}
@@ -564,18 +627,18 @@ boolean pVez=true;
 	}
 
 	/**
-	 * @throws SQLException 
+	 * @throws SQLException
 	 * 
 	 */
 	private void buscarTendencia() throws SQLException {
-		listaTendencia=null;
-		listaTendencia= BdManager.buscarTendencia(sensor, origen, mesTendencia);
-				
+		listaTendencia = null;
+		listaTendencia = BdManager.buscarTendencia(sensor, origen, mesTendencia);
+
 	}
 
 	/**
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public String armarJson() throws SQLException {
 		crearEncabezado();
@@ -1450,6 +1513,34 @@ boolean pVez=true;
 	 */
 	public static void setListaUmbrales(ArrayList<Umbral> listaUmbrales) {
 		ToJson.listaUmbrales = listaUmbrales;
+	}
+
+	/**
+	 * @return the mesTendencia
+	 */
+	public int getMesTendencia() {
+		return mesTendencia;
+	}
+
+	/**
+	 * @param mesTendencia the mesTendencia to set
+	 */
+	public void setMesTendencia(int mesTendencia) {
+		this.mesTendencia = mesTendencia;
+	}
+
+	/**
+	 * @return the listaTendencia
+	 */
+	public ArrayList<Tendencia> getListaTendencia() {
+		return listaTendencia;
+	}
+
+	/**
+	 * @param listaTendencia the listaTendencia to set
+	 */
+	public void setListaTendencia(ArrayList<Tendencia> listaTendencia) {
+		this.listaTendencia = listaTendencia;
 	}
 
 }
