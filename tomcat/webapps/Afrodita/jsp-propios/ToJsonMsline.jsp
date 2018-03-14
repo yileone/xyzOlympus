@@ -30,7 +30,6 @@ System.out.println(sensor);
 ToJson tjMsLine = new ToJson(origen,sensor);
 
 System.out.println("BUSCAR CREAR Y BUSCAR: ");
-//String grafico = BdManager.buscarJson(20);
 String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 System.out.println("******* GRAFICO *********");
 System.out.println(grafico);

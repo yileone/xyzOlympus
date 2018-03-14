@@ -1,13 +1,17 @@
 /**
  * 
  */
-package com.jayktec.xyzOlympus.models;
+package com.jayktec.xyzOlympus.transitorio;
+
+import com.jayktec.xyzOlympus.models.Origen;
+import com.jayktec.xyzOlympus.models.Sensor;
 
 /**
  * @author {Yisheng León Espinoza}
  * 8 mar. 2018
  * www.jayktec.com.ve
  */
+
 public class Tendencia {
 
 	/**
