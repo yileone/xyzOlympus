@@ -76,7 +76,7 @@ public class ToJson {
 	private String exportatclient = "1";
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
-	private static int mesTendencia = 1;
+	private static int mesTendencia = 12;
 	private ArrayList<Tendencia> listaTendencia;
 	/* amarrufo 20180307 End */
 	private static String dataset;
@@ -229,37 +229,38 @@ public class ToJson {
 			final String bdOrder = mapa.getNombre();
 
 			ArrayList<Registro> temp = (ArrayList<Registro>) listaRegistro.clone();
-			Collections.sort(temp, new Comparator() {
-
+			Comparator<Registro> comparador=new Comparator<Registro>() {
 				@Override
-				public int compare(Object o1, Object o2) {
+				public int compare(Registro o1, Registro o2) {
 					Registro r1 = (Registro) o1;
 					Registro r2 = (Registro) o2;
-					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1))
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
 						return Float.compare(r1.getRegistroFloat1(), r2.getRegistroFloat1());
-					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2))
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
 						return Float.compare(r1.getRegistroFloat2(), r2.getRegistroFloat2());
-					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3))
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
 						return Float.compare(r1.getRegistroFloat3(), r2.getRegistroFloat3());
-					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4))
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
 						return Float.compare(r1.getRegistroFloat4(), r2.getRegistroFloat4());
-					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5))
+					if (bdOrder.equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
 						return Float.compare(r1.getRegistroFloat5(), r2.getRegistroFloat5());
-					if (bdOrder.equals(Constantes.CampoRegistro.INT1))
+					if (bdOrder.equals(Constantes.CampoRegistro.INT1.campoBD()))
 						return Float.compare(r1.getRegistroInt1(), r2.getRegistroInt1());
-					if (bdOrder.equals(Constantes.CampoRegistro.INT2))
+					if (bdOrder.equals(Constantes.CampoRegistro.INT2.campoBD()))
 						return Float.compare(r1.getRegistroInt2(), r2.getRegistroInt2());
-					if (bdOrder.equals(Constantes.CampoRegistro.INT3))
+					if (bdOrder.equals(Constantes.CampoRegistro.INT3.campoBD()))
 						return Float.compare(r1.getRegistroInt3(), r2.getRegistroInt3());
-					if (bdOrder.equals(Constantes.CampoRegistro.INT4))
+					if (bdOrder.equals(Constantes.CampoRegistro.INT4.campoBD()))
 						return Float.compare(r1.getRegistroInt4(), r2.getRegistroInt4());
-					if (bdOrder.equals(Constantes.CampoRegistro.INT5))
+					if (bdOrder.equals(Constantes.CampoRegistro.INT5.campoBD()))
 						return Float.compare(r1.getRegistroInt5(), r2.getRegistroInt5());
 
 					return 0;
 				}
 
-			});
+				
+			};
+			Collections.sort(temp, comparador);
 
 			if (bdOrder.equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
 				return temp.get(count).getRegistroFloat1();
@@ -425,11 +426,6 @@ public class ToJson {
 		Calendar fin = Calendar.getInstance();
 
 		fin.setTime(listaRegistro.get(countLista-1).getRegistroDate1());
-		int dayEndOfWeek = diaMysql(fin.get(Calendar.DAY_OF_WEEK));
-
-		int diaInicio = (listaTendencia.get(0).getDia());
-
-		int horaInicio = (listaTendencia.get(0).getHora());
 
 		ArrayList<Tendencia> temp = (ArrayList<Tendencia>) listaTendencia.clone();
 		ArrayList<Tendencia> tendenciaFinal = new ArrayList<Tendencia>();
@@ -446,11 +442,11 @@ public class ToJson {
 		}
 		int falta = countLista - tendenciaFinal.size();
 		if (falta > 0) {
-			int veces = countLista/countTendencia ;
+			int veces = falta/countTendencia ;
 			for (int i = 0; i < veces; i++) {
 				tendenciaFinal.addAll(listaTendencia);
 			}
-			veces = countLista%countTendencia ;
+			veces = falta%countTendencia ;
 			for (int i = 0; i < veces; i++) {
 				tendenciaFinal.add(listaTendencia.get(i));
 			}
