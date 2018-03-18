@@ -7,6 +7,7 @@ tmp/**/*
 *.tmp
 *.bak
 *.class
+.class
 *.swp
 *~.nib
 *.snap
