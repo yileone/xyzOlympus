@@ -14,26 +14,18 @@
 
 <jsp:useBean id="context" class="org.openxava.controller.ModuleContext" scope="session"/>
 <%
-
-
 String viewObject = request.getParameter("viewObject");
 viewObject = (viewObject == null || viewObject.equals(""))?"xava_view":viewObject;
 View view = (org.openxava.view.View) context.get(request,viewObject);
 	   
 String sensor = (String)view.getValue("sensor.oid");
 String origen = (String)view.getValue("origen.oid");
-System.out.print("ORIGEN: ");
-System.out.println(origen);
-System.out.print("SENSOR: ");
-System.out.println(sensor);
+try{
 
 ToJson tjMsLine = new ToJson(origen,sensor);
 
-System.out.println("BUSCAR CREAR Y BUSCAR: ");
 String grafico = BdManager.buscarJson(tjMsLine.crearJson());
-System.out.println("******* GRAFICO *********");
 System.out.println(grafico);
-System.out.println("******* GRAFICO *********");		
 		FusionCharts mslineChat = new FusionCharts("mscolumn2d", // chartType
 				"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
@@ -41,9 +33,29 @@ System.out.println("******* GRAFICO *********");
 				"json", // dataFormat
 				grafico//dataSource
 		);
-	
-	%>
+%>
 	<div id="chart"></div>
 	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/VerOrigen'">
 	<%=mslineChat.render()%>
+<%
+}
+catch(Exception e){
+if(sensor==null){
+	%>
+	<xava:message key="validaSensor"/>
+	<%		
 	
+}	
+
+if(origen==null){
+	%>
+	<xava:message key="validaOrigen"/>
+	<%		
+	
+}
+	
+ 
+	
+}
+		
+%>
