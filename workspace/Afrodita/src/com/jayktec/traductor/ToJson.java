@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.text.*;
 import java.util.*;
 
-import org.codehaus.groovy.transform.*;
-import org.hibernate.hql.internal.ast.tree.*;
-
 import com.google.gson.JsonIOException;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controlador.Constantes.*;
@@ -76,7 +73,6 @@ public class ToJson {
 	private String exportatclient = "1";
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
-	private static int mesTendencia = 12;
 	private ArrayList<Tendencia> listaTendencia;
 	/* amarrufo 20180307 End */
 	private static String dataset;
@@ -96,10 +92,6 @@ public class ToJson {
 		System.out.println("empezando json");
 
 		ToJson temp = new ToJson("4028b8816206bd49016206be8a150000", new Sensor("4028b8816206bd49016206c440d50006"));
-		mesTendencia=2;
-		// BdManager.buscarTendencia(new
-		// Sensor("ad87651f619cd4430161dd9ec4590029"), new
-		// Origen("ad87651f614d9b3701614d9d69b50000") ,1);
 		System.out.println("finalizando json " + temp.crearJson());
 
 	}
@@ -629,7 +621,7 @@ public class ToJson {
 	 */
 	private void buscarTendencia() throws SQLException {
 		listaTendencia = null;
-		listaTendencia = BdManager.buscarTendencia(sensor, origen, mesTendencia);
+		listaTendencia = BdManager.buscarTendencia(sensor, origen);
 
 	}
 
@@ -760,7 +752,7 @@ public class ToJson {
 
 	}
 
-	public void mapaParaSensor(Sensor sensor) throws SQLException {
+	public void mapaParaSensor(Sensor sensor) throws SQLException ,NullPointerException{
 		mapa = BdManager.consultarMapa(sensor);
 
 	}
@@ -1512,19 +1504,6 @@ public class ToJson {
 		ToJson.listaUmbrales = listaUmbrales;
 	}
 
-	/**
-	 * @return the mesTendencia
-	 */
-	public int getMesTendencia() {
-		return mesTendencia;
-	}
-
-	/**
-	 * @param mesTendencia the mesTendencia to set
-	 */
-	public void setMesTendencia(int mesTendencia) {
-		this.mesTendencia = mesTendencia;
-	}
 
 	/**
 	 * @return the listaTendencia

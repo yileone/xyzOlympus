@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.openxava.controller.ModuleContext"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.DefaultValueCalculator"/>
 <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.models.Identificable"/>
 <fullyQualifiedTypeName name="javax.persistence.Index"/>
@@ -57,7 +55,9 @@
 <fullyQualifiedTypeName name="com.sun.istack.internal.Nullable"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="com.jayktec.persistencia.BdManager"/>
-<fullyQualifiedTypeName name="com.jayktec.controlador.Constantes"/>
 <fullyQualifiedTypeName name="com.jayktec.traductor.ToJson"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.jayktec.controlador.Configuracion"/>
+<fullyQualifiedTypeName name="com.jayktec.controlador.Constantes"/>
+<fullyQualifiedTypeName name="com.jayktec.batch.Ejecucion"/>
 </qualifiedTypeNameHistroy>

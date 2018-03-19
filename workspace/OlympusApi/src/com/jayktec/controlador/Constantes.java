@@ -2,7 +2,7 @@ package com.jayktec.controlador;
 
 public class Constantes {
 
-	public static final String ARCHIVO_PROPERTIES = "/config/properties/olympus.properties";
+	public static final String ARCHIVO_PROPERTIES = "/olympus.properties";
 	public static final String IP ="IP";
 	public static final String PUERTO ="PORT";
 	public static final String BD="fateon_new";

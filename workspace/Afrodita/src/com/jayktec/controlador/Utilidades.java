@@ -13,7 +13,7 @@ public class Utilidades {
 	 */
 	public static Properties loadProperties() {
 
-		return loadProperties(Constantes.ARCHIVO_PROPERTIES);
+		return loadProperties(Utilidades.class.getResourceAsStream(Constantes.ARCHIVO_PROPERTIES));
 	}
 
 	/**
@@ -22,14 +22,13 @@ public class Utilidades {
 	 * @return Properties.   
 	 */
 
-	
-	public static Properties loadProperties(String nombreArchivo) {
+	public static Properties loadProperties(InputStream nombreArchivo) {
 
 		Properties archivo = new Properties();
 
 		try {
 
-			archivo.load(Utilidades.class.getResourceAsStream(nombreArchivo));
+			archivo.load(nombreArchivo);
 
 		} catch (IOException e) {
 

@@ -604,7 +604,7 @@ Origen origen= null;
 
 	}
 
-	public static ArrayList<Tendencia> buscarTendencia(Sensor sensor, Origen origen, int mes) throws SQLException
+	public static ArrayList<Tendencia> buscarTendencia(Sensor sensor, Origen origen) throws SQLException
 	{
 		String sql="SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
 				+ "	avg(ifnull(registro_int_2,0)) as 'int2',"
@@ -623,19 +623,7 @@ Origen origen= null;
 				+ "fateon_new.fateon_registro "
 				+ "where "
 				+ "sensor_id='"+ sensor.getOid()+"'"
-				+ " and origen_id='"+origen.getOid()+"'"
-				+ "	and registro_date_1 BETWEEN  date_sub(now(), interval "+mes+" month) and now()"
-			    + "group by "
-				+ "origen_id,"
-				+ "sensor_id, "
-				+ "hour(registro_time_1), "
-				+ "minute(registro_time_1) , "
-				+ "weekday(registro_date_1)"
-				+ "        order by origen_id,"
-				+ "        sensor_id,"
-				+ "        weekday(registro_date_1),"
-				+ "        hour(registro_time_1),"
-				+ "        minute(registro_time_1)";
+				+ " and origen_id='"+origen.getOid()+"'";
 		Statement stmt = connection.createStatement();
 System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);
@@ -672,6 +660,52 @@ respuesta.add(temp);
 		
 	}
 	
+	public static int crearTendencias( int mes) throws SQLException
+	{
+		truncarTendencias();
+		String sql="insert into fateon_tendencia"
+				+ " SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
+				+ "	avg(ifnull(registro_int_2,0)) as 'int2',"
+				+ " avg(ifnull(registro_int_3,0)) as 'int3',"
+				+ " avg(ifnull(registro_int_4,0)) as 'int4',"
+				+ " avg(ifnull(registro_int_5,0)) as 'int5',"
+				+ " avg(ifnull(registro_float_1,0)) as 'float1',"
+				+ " avg(ifnull(registro_float_2,0)) as 'float2',"
+				+ " avg(ifnull(registro_float_3,0)) as 'float3',"
+				+ " avg(ifnull(registro_float_4,0)) as 'float4',"
+				+ " avg(ifnull(registro_float_5,0)) as 'float5',"
+				+ " sensor_id,origen_id,hour(registro_time_1) as 'hora',"
+				+ " minute(registro_time_1) as 'minuto',"
+				+ " weekday(registro_date_1) as 'dia' "
+				+ "FROM "
+				+ "fateon_new.fateon_registro "
+				+ "where "
+				+ "registro_date_1 BETWEEN  date_sub(now(), interval "+mes+" month) and now()"
+			    + "group by "
+				+ "origen_id,"
+				+ "sensor_id, "
+				+ "hour(registro_time_1), "
+				+ "minute(registro_time_1) , "
+				+ "weekday(registro_date_1)"
+				+ "        order by origen_id,"
+				+ "        sensor_id,"
+				+ "        weekday(registro_date_1),"
+				+ "        hour(registro_time_1),"
+				+ "        minute(registro_time_1)";
+		Statement stmt = connection.createStatement();
+System.out.println(sql);
+		return stmt.executeUpdate(sql);
+
+}
+	public static int truncarTendencias( ) throws SQLException
+	{
+		
+		String sql="truncate table fateon_tendencia";
+						Statement stmt = connection.createStatement();
+System.out.println(sql);
+		return stmt.executeUpdate(sql);
+
+}
 	
 	
 	private static ArrayList<Catalogo> buscarCatalogos(String tabla, ArrayList<Catalogo> listaDeCatalogos) {

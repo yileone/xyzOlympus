@@ -2,10 +2,26 @@ package com.jayktec.controlador;
 
 public class Constantes {
 
-	public static final String ARCHIVO_PROPERTIES = "/config/properties/olympus.properties";
+	public static final String ARCHIVO_PROPERTIES = "/olympus.properties";
 	public static final String IP ="IP";
 	public static final String PUERTO ="PORT";
 	public static final String BD="fateon_new";
+	
+	public enum TipoParametro {
+		MesTendencia("mesTendencia");
+        private String tipo;
+		
+		private TipoParametro(String tipo) {
+			this.tipo= tipo;
+			// TODO Auto-generated constructor stub
+		}
+		
+		public String tipo()
+		{
+			return tipo;
+		}
+	}
+	
 	
 	public enum Tiempo {
 		DIA("dia"),

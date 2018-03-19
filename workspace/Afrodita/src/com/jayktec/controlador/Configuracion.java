@@ -1,11 +1,12 @@
 package com.jayktec.controlador;
 
+import java.io.*;
 import java.util.*;
 import java.util.Map.*;
 import java.util.logging.*;
 
 public class Configuracion {
-	Properties archivo=null;
+	Properties archivo = null;
 
 	ArrayList<Parametro> parametros = new ArrayList<Parametro>();
 
@@ -49,8 +50,8 @@ public class Configuracion {
 
 	}
 
-	public Configuracion(String archivoPropiedades) {
-
+	public Configuracion(InputStream archivoPropiedades) {
+		System.out.println(archivoPropiedades);
 		archivo = Utilidades.loadProperties(archivoPropiedades);
 		carga();
 	}
