@@ -31,7 +31,7 @@ System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> sensor "+view.getVal
 <th align='left' class="<%=style.getLabel()%>">
 <xava:message key="introducir_origen"/>
 </th>
-<td><xava:descriptionsList reference="origen"/></td>
+<td><xava:descriptionsList reference="origen" /></td>
 </tr>
 <tr>
 <th align='left' class="<%=style.getLabel()%>">

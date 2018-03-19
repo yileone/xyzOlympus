@@ -14,7 +14,8 @@ public class ToJsonMsLine extends ViewBaseAction implements INavigationAction{
 	public void execute() throws Exception {
 		// TODO Auto-generated method stub
 		
-		//getView().reset();
+		
+
 	}
 
 	@Override

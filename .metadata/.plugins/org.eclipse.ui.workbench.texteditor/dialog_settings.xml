@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Registr" key="selection"/>
+		<item value="crearSerie" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Registr"/>
-			<item value="catalogo"/>
-			<item value="Provincias"/>
-			<item value="new Re"/>
-			<item value="listaUmbrales"/>
-			<item value="existeumbral"/>
-			<item value="existe"/>
-			<item value="pst"/>
+			<item value="crearserie"/>
+			<item value="&quot;value&quot;:&quot;28.648&quot;}, { &quot;value&quot;:&quot;30.506&quot;}, { &quot;value&quot;:&quot;599354.9&quot;}"/>
+			<item value="28.648"/>
+			<item value="tendencia"/>
+			<item value="percentil"/>
+			<item value="mes"/>
+			<item value="crearSerieTendencia"/>
+			<item value="customizeList"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ImportColumnRegistro"/>
