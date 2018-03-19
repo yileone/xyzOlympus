@@ -39,15 +39,18 @@ try{
 <%
 }
 catch(Exception e){
-	if(sensor==null){
+	System.out.println("****************************** seosor");
+	if(sensor==null || sensor.equals("")){
 	%>
+	<br>
 	<xava:message key="validaSensor"/>
 	<%		
 	
 	}	
-
-	if(origen==null){
+	System.out.println("****************************** origen");
+	if(origen==null || origen.equals("")){
 	%>
+	<br>
 	<xava:message key="validaOrigen"/>
 	<%		
 	
