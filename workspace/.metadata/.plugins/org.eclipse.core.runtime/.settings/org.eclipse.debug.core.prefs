@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
 org.eclipse.debug.core.PREF_BREAKPOINT_MANAGER_ENABLED_STATE=true
 org.eclipse.debug.core.USE_STEP_FILTERS=true
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="listaRegistro.get(0).getRegistroDate1()"/>\n<expression enabled\="true" text\="tendenciaFinal.size"/>\n</watchExpressions>\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="Ejecucion.class.getResourceAsStream(Constantes.ARCHIVO_PROPERTIES)"/>\n<expression enabled\="true" text\="configuracion"/>\n</watchExpressions>\n
