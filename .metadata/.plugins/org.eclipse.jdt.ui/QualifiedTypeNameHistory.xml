@@ -16,4 +16,6 @@
 <fullyQualifiedTypeName name="org.openxava.actions.OnChangePropertyBaseAction"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.buscarMapaSensor"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>

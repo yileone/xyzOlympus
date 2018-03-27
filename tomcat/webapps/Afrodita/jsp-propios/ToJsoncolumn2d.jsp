@@ -14,6 +14,7 @@
 
 <jsp:useBean id="context" class="org.openxava.controller.ModuleContext" scope="session"/>
 <%
+
 String viewObject = request.getParameter("viewObject");
 viewObject = (viewObject == null || viewObject.equals(""))?"xava_view":viewObject;
 View view = (org.openxava.view.View) context.get(request,viewObject);
@@ -22,11 +23,9 @@ String sensor = (String)view.getValue("sensor.oid");
 String origen = (String)view.getValue("origen.oid");
 try{
 
-ToJson tjMsLine = new ToJson(origen,sensor);
-
-String grafico = BdManager.buscarJson(tjMsLine.crearJson());
-System.out.println(grafico);
-		FusionCharts mslineChat = new FusionCharts("mscolumn2d", // chartType
+	ToJson tjMsLine = new ToJson(origen,sensor);		
+	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
+	FusionCharts mslineChat = new FusionCharts("mscolumn2d", // chartType
 				"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
 				"chart", // chartContainer
@@ -40,22 +39,41 @@ System.out.println(grafico);
 <%
 }
 catch(Exception e){
-if(sensor==null){
 	%>
-	<xava:message key="validaSensor"/>
-	<%		
-	
-}	
+	 	<div class='ox-errors-wrapper'>
+		<table id="ox_Afrodita_SignIn__errors_table1">
+	<%
+	if(sensor==null || sensor.equals("")){
+	%>
 
-if(origen==null){
-	%>
-	<xava:message key="validaOrigen"/>
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+							<xava:message key="validaSensor"/>
+				</div>
+			</td></tr>
+
 	<%		
 	
-}
+	}	
+	if(origen==null || origen.equals("")){
+	%>
+
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+						<xava:message key="validaOrigen"/>
+				</div>
+			</td></tr>
+
+	<%		
 	
- 
-	
+	}
+	%>		
+	</table>
+	</div>
+<% 
 }
 		
 %>
+		

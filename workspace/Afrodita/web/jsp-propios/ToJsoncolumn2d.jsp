@@ -39,23 +39,40 @@ try{
 <%
 }
 catch(Exception e){
-	System.out.println("****************************** seosor");
+	%>
+	 	<div class='ox-errors-wrapper'>
+		<table id="ox_Afrodita_SignIn__errors_table1">
+	<%
 	if(sensor==null || sensor.equals("")){
 	%>
-	<br>
-	<xava:message key="validaSensor"/>
+
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+							<xava:message key="validaSensor"/>
+				</div>
+			</td></tr>
+
 	<%		
 	
 	}	
-	System.out.println("****************************** origen");
 	if(origen==null || origen.equals("")){
 	%>
-	<br>
-	<xava:message key="validaOrigen"/>
+
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+						<xava:message key="validaOrigen"/>
+				</div>
+			</td></tr>
+
 	<%		
 	
 	}
-	
+	%>		
+	</table>
+	</div>
+<% 
 }
 		
 %>

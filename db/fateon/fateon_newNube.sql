@@ -287,18 +287,18 @@ DROP TABLE IF EXISTS `fateon_umbral`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fateon_umbral` (
   `umbral_id` varchar(32) NOT NULL,
-  `fateon_sensor_sensor_id` varchar(32) NOT NULL,
-  `fateon_origen_origen_id` varchar(32) NOT NULL,
-  `fateon_mapa_mapa_id` varchar(32) NOT NULL,
-  `umbral` float NOT NULL,
+  `sensor_id` varchar(32) NOT NULL,
+  `origen_id` varchar(32) NOT NULL,
+  `mapa_id` varchar(32) NOT NULL,
+  `umbral_valor` float NOT NULL,
   PRIMARY KEY (`umbral_id`),
-  UNIQUE KEY `fk_umbral_unico` (`fateon_mapa_mapa_id`,`fateon_origen_origen_id`,`fateon_sensor_sensor_id`),
-  KEY `fk_umbral_fateon_sensor1_idx` (`fateon_sensor_sensor_id`),
-  KEY `fk_umbral_fateon_origen1_idx` (`fateon_origen_origen_id`),
-  KEY `fk_umbral_fateon_mapa1_idx` (`fateon_mapa_mapa_id`),
-  CONSTRAINT `fk_umbral_fateon_mapa1` FOREIGN KEY (`fateon_mapa_mapa_id`) REFERENCES `fateon`.`fateon_mapa` (`mapa_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_umbral_fateon_origen1` FOREIGN KEY (`fateon_origen_origen_id`) REFERENCES `fateon`.`fateon_origen` (`origen_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_umbral_fateon_sensor1` FOREIGN KEY (`fateon_sensor_sensor_id`) REFERENCES `fateon`.`fateon_sensor` (`sensor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `fk_umbral_unico` (`mapa_id`,`origen_id`,`sensor_id`),
+  KEY `fk_umbral_fateon_sensor1_idx` (`sensor_id`),
+  KEY `fk_umbral_fateon_origen1_idx` (`origen_id`),
+  KEY `fk_umbral_fateon_mapa1_idx` (`mapa_id`),
+  CONSTRAINT `fk_umbral_fateon_mapa1` FOREIGN KEY (`mapa_id`) REFERENCES `fateon`.`fateon_mapa` (`mapa_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_umbral_fateon_origen1` FOREIGN KEY (`origen_id`) REFERENCES `fateon`.`fateon_origen` (`origen_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_umbral_fateon_sensor1` FOREIGN KEY (`sensor_id`) REFERENCES `fateon`.`fateon_sensor` (`sensor_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

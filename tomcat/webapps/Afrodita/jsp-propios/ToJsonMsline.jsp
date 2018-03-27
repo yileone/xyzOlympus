@@ -39,21 +39,40 @@ try{
 <%
 }
 catch(Exception e){
-	if(sensor==null){
 	%>
-	<xava:message key="validaSensor"/>
+	 	<div class='ox-errors-wrapper'>
+		<table id="ox_Afrodita_SignIn__errors_table1">
+	<%
+	if(sensor==null || sensor.equals("")){
+	%>
+
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+							<xava:message key="validaSensor"/>
+				</div>
+			</td></tr>
+
 	<%		
 	
 	}	
-
-	if(origen==null){
+	if(origen==null || origen.equals("")){
 	%>
-	<xava:message key="validaOrigen"/>
+
+			<tr><td class='ox-errors'>
+				<div class='ox-message-box'>
+					<i class="mdi mdi-close" style="cursor: pointer;" onclick="$(this).parent().fadeOut()"></i>
+						<xava:message key="validaOrigen"/>
+				</div>
+			</td></tr>
+
 	<%		
 	
 	}
-	
+	%>		
+	</table>
+	</div>
+<% 
 }
 		
 %>
-		

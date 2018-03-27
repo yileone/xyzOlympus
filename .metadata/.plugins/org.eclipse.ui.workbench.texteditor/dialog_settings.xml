@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="crearSerie" key="selection"/>
+		<item value="form" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="form"/>
 			<item value="crearserie"/>
 			<item value="&quot;value&quot;:&quot;28.648&quot;}, { &quot;value&quot;:&quot;30.506&quot;}, { &quot;value&quot;:&quot;599354.9&quot;}"/>
 			<item value="28.648"/>
@@ -15,7 +16,6 @@
 			<item value="percentil"/>
 			<item value="mes"/>
 			<item value="crearSerieTendencia"/>
-			<item value="customizeList"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ImportColumnRegistro"/>
