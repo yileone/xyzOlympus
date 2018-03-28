@@ -1,2 +1,3 @@
-<jsp:include page="../jsp-propios/welcomeD.jsp"/>
+	<jsp:include page='welcome.jsp'/>
+
 
