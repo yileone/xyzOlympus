@@ -22,54 +22,55 @@ String app = request.getParameter("application");
 			<li><a href="#">Contact</a></li>
 		</ul>
 	</div>
-	<!-- end #menu -->
+	<!-- end #menu 
 	<div id="header">
 		<div id="logo">
 			<h1><a href="#">  BIENVENIDOS A DEPORTIC  </a></h1>			
 		</div>
 	</div>
 	<!-- end #header -->
+	<div class="scrollWrapper" onMouseover="scrollspeed=0" onMouseout="scrollspeed=current">
+    <div class="scrollTitle">Últimas Noticias</div>
+    <div id="scroll" >
+        <div class="title">Primera Noticia</div>
+        <div class="content">Contenido de ejemplo para el scroll de noticias personalizable. En el contenido puedes añadir cualquier codigo HTML, incluidos enlaces <a href="http://www.lawebdelprogramador.com" target="_top">La Web del programador</a>
+        </div>
+        <div class="title">Segunda Noticia</div>
+        <div class="content">Contenido de ejemplo para el scroll de noticias personalizable. En el contenido puedes añadir cualquier codigo HTML, incluidos enlaces <a href="http://www.lawebdelprogramador.com" target="_top">La Web del programador</a>
+        </div>
+        <div class="title">Tercera Noticia</div>
+        <div class="content">Contenido de ejemplo para el scroll de noticias personalizable. En el contenido puedes añadir cualquier codigo HTML, incluidos enlaces <a href="http://www.lawebdelprogramador.com" target="_top">La Web del programador</a>
+        </div>
+       
+    </div>
+    
+</div>	
+ <div class="scrollTitle"  width:"80%" height:"100%"></div>
 	<div id="page">
 	<div id="page-bgtop">
 	<div id="page-bgbtm">
 		<div id="content">
 			<div class="post">
-				<h2 class="title"><a href="#">ACA VA EL BANNER DE NOTICIAS   </a></h2>
-				<div style="clear: both;">&nbsp;</div>
-				<div class="entry">					
-					<p class="links"><a href="#">Read More</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Comments</a></p>
-				</div>
-			</div>
-			<div class="post">
 				<h2 class="title"><a href="#">ACA VA EL TABLERO</a></h2>
 				<div style="clear: both;">&nbsp;</div>
-				<div class="entry">
-				</div>
-			</div>
-			<div class="post">
-				<div style="clear: both;">&nbsp;</div>
-				<div class="entry">
-				</div>
 			</div>
 		<div style="clear: both;">&nbsp;</div>
 		</div>
 		<!-- end #content -->
-		<div id="sidebar">
+		<div id="sidebar" >
 			<ul>
 				<li>
 					<jsp:include page='<%="../xava/module.jsp?application=" + app + "&module=SignIn"%>'/>
 					<div style="clear: both;">&nbsp;</div>
 				</li>
 			</ul>
-		</div>
+</div>
 		<!-- end #sidebar -->
 		<div style="clear: both;">&nbsp;</div>
-	</div>
-	</div>
-	</div>
+
 	<!-- end #page -->
 </div>
-	<div id="footer">
+	<!--<div id="footer">
 		<p><a href="#">***********************</a>.</p>
 	</div>
-	<!-- end #footer -->
+	 end #footer -->
