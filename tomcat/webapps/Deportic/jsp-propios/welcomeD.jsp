@@ -4,10 +4,10 @@ String app = request.getParameter("application");
 <div class="social">
 		<ul>
 			<li><a href="#" target="_blank" class="icon-twitter"></a></li>
-			<li><a href="#" target="_blank" class="icon-facebook"></a></li>
-			<li><a href="#" target="_blank" class="icon-linkedin"></a></li>
+			
 			<li><a href="#" target="_blank" class="icon-youtube"></a></li>
 			<li><a href="#" target="_blank" class="icon-mail"></a></li>
+			<li><a href="#" target="_blank" class="icon-googleplus"></a></li>
 
 		</ul>
 </div>
