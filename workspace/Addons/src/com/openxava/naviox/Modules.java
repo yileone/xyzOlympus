@@ -20,7 +20,7 @@ import com.openxava.naviox.util.*;
  */
 public class Modules implements Serializable {
 	
-	public final static String FIRST_STEPS = "Atleta";
+	public final static String FIRST_STEPS = "FirstSteps";
 	
 	private static Log log = LogFactory.getLog(Modules.class);
 	private final static int MODULES_ON_TOP = 20; 
@@ -45,7 +45,7 @@ public class Modules implements Serializable {
 		MetaModule firstStepsModule = new MetaModule();
 		firstStepsModule.setName(FIRST_STEPS);
 		firstStepsModule.setModelName("SignIn"); // The model does not matter
-		firstStepsModule.setWebViewURL("/xava/signIn.jsp");
+		firstStepsModule.setWebViewURL("/naviox/FirstSteps");
 		System.out.println("//////////////////////////////////////");
 		System.out.println(firstStepsModule.getWebViewURL());
 		firstStepsModule.setModeControllerName("Void");
@@ -74,7 +74,7 @@ public class Modules implements Serializable {
 	private MetaModule createWelcomeModule(MetaApplication app) {
 		MetaModule result = new MetaModule();
 		result.setName("Welcome");				
-		result.setWebViewURL("welcome");		
+		result.setWebViewURL("naviox/welcome");		
 		return result;
 	}
 
