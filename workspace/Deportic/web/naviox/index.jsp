@@ -33,7 +33,7 @@ if (title == null) title = modules.getCurrentModuleDescription(request);
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/interface/Folders.js?ox=<%=oxVersion%>'></script>
 </head>
 
-<body <%=NaviOXStyle.getBodyClass(request)%> onLoad="scrollStart();">
+<body <%=NaviOXStyle.getBodyClass(request)%>>
 
 	<div id="main_navigation">
 		<jsp:include page="mainNavigation.jsp"/>
