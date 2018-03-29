@@ -59,7 +59,7 @@ if (title == null) title = modules.getCurrentModuleDescription(request);
 			<td valign="top">
 				<div class="module-wrapper">
 					<% if ("SignIn".equals(module)) {  %>
-					<jsp:include page='../jsp-propios/signIn.jsp'/>
+					<jsp:include page='signIn.jsp'/>
 					<% } else { %>
 					<div id="module_description">
 						<%=modules.getCurrentModuleDescription(request)%> 
