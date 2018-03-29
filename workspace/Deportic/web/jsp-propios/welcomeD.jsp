@@ -3,8 +3,7 @@ String app = request.getParameter("application");
 %>
 <div class="social">
 		<ul>
-			<li><a href="#" target="_blank" class="icon-twitter"></a></li>
-			
+		
 			<li><a href="#" target="_blank" class="icon-youtube"></a></li>
 			<li><a href="#" target="_blank" class="icon-mail"></a></li>
 			<li><a href="#" target="_blank" class="icon-googleplus"></a></li>
@@ -15,11 +14,12 @@ String app = request.getParameter("application");
 	<div id="menu">
 		<ul>
 			<li class="current_page_item"><a href="#">Home</a></li>
-			<li><a href="#">Blog</a></li>
-			<li><a href="#">Photos</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Links</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="#">Funcionalidad 1</a></li>
+			<li><a href="#">Funcionalidad 2</a></li>
+			<li><a href="#">Funcionalidad 3</a></li>
+			<li><a href="#">Funcionalidad 4</a></li>
+			<li><a href="#">Funcionalidad ...</a></li>
+			<li><a href="#">Funcionalidad N</a></li>
 		</ul>
 	</div>
 	<!-- end #menu 

@@ -1,4 +1,4 @@
-<%@include file="../xava/imports.jsp"%>
+	<%@include file="../xava/imports.jsp"%>
 <%@page import="org.openxava.application.meta.MetaApplications"%>
 <%@page import="org.openxava.application.meta.MetaApplication"%>
 

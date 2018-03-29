@@ -7,7 +7,7 @@ String language = "es".equals(request.getLocale().getLanguage()) || "ca".equals(
 %>
 
 
-<jsp:forward page="/m/Regla"/>
+<jsp:forward page="/m/Atleta"/>
 <div id="first_steps">
 <p><xava:message key="first_steps_p1"/></p>
 <p class="screenshot"><img src="../naviox/images/modules-screenshot_<%=language%>.png"/></p>
