@@ -3454,3 +3454,9 @@ java.util.zip.ZipException: zip file is empty
 	at org.eclipse.wst.server.core.internal.Server.visit(Server.java:3039)
 	at org.eclipse.wst.server.core.internal.Server$ResourceChangeJob.run(Server.java:228)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-29 12:35:23.327
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-29 12:35:23.327
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

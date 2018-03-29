@@ -33,7 +33,7 @@ if (title == null) title = modules.getCurrentModuleDescription(request);
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/interface/Folders.js?ox=<%=oxVersion%>'></script>
 </head>
 
-<body <%=NaviOXStyle.getBodyClass(request)%>>
+<body <%=NaviOXStyle.getBodyClass(request)%> onLoad="scrollStart();">
 
 	<div id="main_navigation">
 		<jsp:include page="mainNavigation.jsp"/>
@@ -59,7 +59,7 @@ if (title == null) title = modules.getCurrentModuleDescription(request);
 			<td valign="top">
 				<div class="module-wrapper">
 					<% if ("SignIn".equals(module)) {  %>
-					<jsp:include page='signIn.jsp'/>
+					<jsp:include page='../jsp-propios/signIn.jsp'/>
 					<% } else { %>
 					<div id="module_description">
 						<%=modules.getCurrentModuleDescription(request)%> 

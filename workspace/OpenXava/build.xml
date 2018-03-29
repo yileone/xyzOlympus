@@ -974,10 +974,10 @@
 
 	<target name="installAddons">
 		<copy todir="../${project}/web" overwrite="true">
-			<fileset dir="../Addons/web" excludes="naviox/firstSteps.jsp,naviox/welcome.jsp,naviox/indexExt.jsp"/>
+			<fileset dir="../Addons/web" excludes="naviox/firstSteps.jsp,naviox/welcome.jsp,naviox/indexExt.jsp,naviox/index.jsp,naviox/SignIn.jsp"/>
 		</copy>
 		<copy todir="../${project}/web">
-			<fileset dir="../Addons/web" includes="naviox/firstSteps.jsp,naviox/welcome.jsp,naviox/indexExt.jsp">
+			<fileset dir="../Addons/web" excludes="naviox/firstSteps.jsp,naviox/welcome.jsp,naviox/index.jsp,naviox/indexExt.jsp,naviox/SignIn.jsp"><!-- amarrufo-->
 				<present present="srconly" targetdir="../${project}/web" />
 			</fileset>
 		</copy>			
