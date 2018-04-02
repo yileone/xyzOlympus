@@ -606,24 +606,13 @@ Origen origen= null;
 
 	public static ArrayList<Tendencia> buscarTendencia(Sensor sensor, Origen origen) throws SQLException
 	{
-		String sql="SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
-				+ "	avg(ifnull(registro_int_2,0)) as 'int2',"
-				+ " avg(ifnull(registro_int_3,0)) as 'int3',"
-				+ " avg(ifnull(registro_int_4,0)) as 'int4',"
-				+ " avg(ifnull(registro_int_5,0)) as 'int5',"
-				+ " avg(ifnull(registro_float_1,0)) as 'float1',"
-				+ " avg(ifnull(registro_float_2,0)) as 'float2',"
-				+ " avg(ifnull(registro_float_3,0)) as 'float3',"
-				+ " avg(ifnull(registro_float_4,0)) as 'float4',"
-				+ " avg(ifnull(registro_float_5,0)) as 'float5',"
-				+ " sensor_id,origen_id,hour(registro_time_1) as 'hora',"
-				+ " minute(registro_time_1) as 'minuto',"
-				+ " weekday(registro_date_1) as 'dia' "
+		String sql="SELECT  * "
 				+ "FROM "
-				+ "fateon_new.fateon_registro "
+				+ "fateon_new.fateon_tendencia "
 				+ "where "
 				+ "sensor_id='"+ sensor.getOid()+"'"
-				+ " and origen_id='"+origen.getOid()+"'";
+				+ " and origen_id='"+origen.getOid()+"'"
+						+ "  order by dia, hora, minuto";
 		Statement stmt = connection.createStatement();
 System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);

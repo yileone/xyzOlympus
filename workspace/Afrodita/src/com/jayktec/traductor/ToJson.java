@@ -98,7 +98,7 @@ public class ToJson {
 
 	public ToJson(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		this(origen, sensor);
-		listaRegistro = registros;
+		listaRegistro = registros;	
 
 	}
 
