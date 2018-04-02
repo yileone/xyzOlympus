@@ -980,7 +980,7 @@
 			<fileset dir="../Addons/web" includes="naviox/firstSteps.jsp,naviox/welcome.jsp,naviox/indexExt.jsp">
 				<present present="srconly" targetdir="../${project}/web" />
 			</fileset>
-		</copy>			
+		</copy>		
 		<copy todir="../${project}/properties">
 			<fileset dir="../Addons/properties-templates">
 				<present present="srconly" targetdir="../${project}/properties" />

@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="icon-facebook" key="selection"/>
+		<item value="index.jsp" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="index.jsp"/>
+			<item value="/xava/signIn"/>
+			<item value="SignIn"/>
 			<item value="icon-facebook"/>
 			<item value="icon-twitter"/>
 			<item value="twit"/>
 			<item value="../../images/"/>
 			<item value="../../"/>
-			<item value="twitter"/>
-			<item value="form"/>
-			<item value="crearserie"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ImportColumnRegistro"/>
