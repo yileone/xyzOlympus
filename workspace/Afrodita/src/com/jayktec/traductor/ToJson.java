@@ -100,7 +100,7 @@ public class ToJson {
 
 	public ToJson(ArrayList<Registro> registros, String origen, Sensor sensor) throws SQLException {
 		this(origen, sensor);
-		listaRegistro = registros;	
+		listaRegistro = registros;
 
 	}
 
@@ -223,7 +223,7 @@ public class ToJson {
 			final String bdOrder = mapa.getNombre();
 
 			ArrayList<Registro> temp = (ArrayList<Registro>) listaRegistro.clone();
-			Comparator<Registro> comparador=new Comparator<Registro>() {
+			Comparator<Registro> comparador = new Comparator<Registro>() {
 				@Override
 				public int compare(Registro o1, Registro o2) {
 					Registro r1 = (Registro) o1;
@@ -252,7 +252,6 @@ public class ToJson {
 					return 0;
 				}
 
-				
 			};
 			Collections.sort(temp, comparador);
 
@@ -413,15 +412,15 @@ public class ToJson {
 		Calendar inicio = Calendar.getInstance();
 
 		inicio.setTime(listaRegistro.get(0).getRegistroDate1());
-		
-		int dayOfWeek =diaMysql( inicio.get(Calendar.DAY_OF_WEEK));
+
+		int dayOfWeek = diaMysql(inicio.get(Calendar.DAY_OF_WEEK));
 		inicio.setTime(listaRegistro.get(0).getRegistrotime1());
-		
+
 		int hourOfWeek = inicio.get(Calendar.HOUR);
 
 		Calendar fin = Calendar.getInstance();
 
-		fin.setTime(listaRegistro.get(countLista-1).getRegistroDate1());
+		fin.setTime(listaRegistro.get(countLista - 1).getRegistroDate1());
 
 		ArrayList<Tendencia> temp = (ArrayList<Tendencia>) listaTendencia.clone();
 		ArrayList<Tendencia> tendenciaFinal = new ArrayList<Tendencia>();
@@ -438,11 +437,11 @@ public class ToJson {
 		}
 		int falta = countLista - tendenciaFinal.size();
 		if (falta > 0) {
-			int veces = falta/countTendencia ;
+			int veces = falta / countTendencia;
 			for (int i = 0; i < veces; i++) {
 				tendenciaFinal.addAll(listaTendencia);
 			}
-			veces = falta%countTendencia ;
+			veces = falta % countTendencia;
 			for (int i = 0; i < veces; i++) {
 				tendenciaFinal.add(listaTendencia.get(i));
 			}
@@ -496,44 +495,43 @@ public class ToJson {
 	 */
 	private String crearSerieMediaMovil(Mapa mapaItem) throws SQLException {
 		// TODO Auto-generated method stubnd
-				boolean pVez = true;
-		String serie="";
-			 serie = serie + ",{\"seriesname\":  \"" + "MediaMovil-" + mapaItem.getMapaapp() + "\", \"data\": [";
+		boolean pVez = true;
+		String serie = "";
+		serie = serie + ",{\"seriesname\":  \"" + "MediaMovil-" + mapaItem.getMapaapp() + "\", \"data\": [";
 
-for (MediaMovil mediaMovil : listaMedia) {
-	            float tendencia = 0f;
-	
-				if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
-					tendencia = mediaMovil.getFloat1();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
-					tendencia = mediaMovil.getFloat2();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
-					tendencia = mediaMovil.getFloat3();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
-					tendencia = mediaMovil.getFloat4();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
-					tendencia = mediaMovil.getFloat5();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-					tendencia = mediaMovil.getInt1();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-					tendencia = mediaMovil.getInt2();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-					tendencia = mediaMovil.getInt3();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-					tendencia = mediaMovil.getInt4();
-				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
-					tendencia = mediaMovil.getInt5();
+		for (MediaMovil mediaMovil : listaMedia) {
+			float tendencia = 0f;
 
-				if (!pVez) {
-					serie = serie + ",";
-				} else
-					pVez = false;
-				serie = serie + " { \"value\":\"" + tendencia + "\"}";
+			if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
+				tendencia = mediaMovil.getFloat1();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
+				tendencia = mediaMovil.getFloat2();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
+				tendencia = mediaMovil.getFloat3();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
+				tendencia = mediaMovil.getFloat4();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
+				tendencia = mediaMovil.getFloat5();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia = mediaMovil.getInt1();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia = mediaMovil.getInt2();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia = mediaMovil.getInt3();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia = mediaMovil.getInt4();
+			else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+				tendencia = mediaMovil.getInt5();
 
-			
+			if (!pVez) {
+				serie = serie + ",";
+			} else
+				pVez = false;
+			serie = serie + " { \"value\":\"" + tendencia + "\"}";
 
-			serie = serie + "]}";
 		}
+		serie = serie + "]}";
+
 		System.out.println(serie);
 		return serie;
 	}
@@ -545,8 +543,9 @@ for (MediaMovil mediaMovil : listaMedia) {
 	private int diaMysql(int i) {
 		// TODO Auto-generated method stub
 		int respuesta = 0;
-		respuesta=i-2;
-		if (respuesta==-1)respuesta=0;
+		respuesta = i - 2;
+		if (respuesta == -1)
+			respuesta = 0;
 
 		return respuesta;
 	}
@@ -669,7 +668,6 @@ for (MediaMovil mediaMovil : listaMedia) {
 
 	}
 
-
 	/**
 	 * @throws SQLException
 	 * 
@@ -680,7 +678,6 @@ for (MediaMovil mediaMovil : listaMedia) {
 
 	}
 
-	
 	/**
 	 * @throws SQLException
 	 * 
@@ -818,7 +815,7 @@ for (MediaMovil mediaMovil : listaMedia) {
 
 	}
 
-	public void mapaParaSensor(Sensor sensor) throws SQLException ,NullPointerException{
+	public void mapaParaSensor(Sensor sensor) throws SQLException, NullPointerException {
 		mapa = BdManager.consultarMapa(sensor);
 
 	}
@@ -1570,7 +1567,6 @@ for (MediaMovil mediaMovil : listaMedia) {
 		ToJson.listaUmbrales = listaUmbrales;
 	}
 
-
 	/**
 	 * @return the listaTendencia
 	 */
@@ -1579,7 +1575,8 @@ for (MediaMovil mediaMovil : listaMedia) {
 	}
 
 	/**
-	 * @param listaTendencia the listaTendencia to set
+	 * @param listaTendencia
+	 *            the listaTendencia to set
 	 */
 	public void setListaTendencia(ArrayList<Tendencia> listaTendencia) {
 		this.listaTendencia = listaTendencia;

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.Timestamp"/>
-<fullyQualifiedTypeName name="com.jayktec.xyzOlympus.models.Identificable"/>
 <fullyQualifiedTypeName name="javax.persistence.Index"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.Condition"/>
-<fullyQualifiedTypeName name="java.sql.Time"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.sun.scenario.animation.shared.InfiniteClipEnvelope"/>
 <fullyQualifiedTypeName name="org.directwebremoting.convert.CollectionConverter"/>
@@ -56,8 +53,11 @@
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="com.jayktec.persistencia.BdManager"/>
 <fullyQualifiedTypeName name="com.jayktec.traductor.ToJson"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.jayktec.controlador.Configuracion"/>
 <fullyQualifiedTypeName name="com.jayktec.controlador.Constantes"/>
 <fullyQualifiedTypeName name="com.jayktec.batch.Ejecucion"/>
+<fullyQualifiedTypeName name="java.sql.Time"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="com.jayktec.xyzOlympus.transitorio.MediaMovil"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
