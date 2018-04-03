@@ -1,7 +1,13 @@
 /BeansContext.properties
+/LoginContextFactory.properties
+/jndi-jboss.properties
+/jndi-websphere.properties
+/jndi.properties
+/logging.properties
+/naviox-users.properties
+/naviox.properties
 /EtiquetasAfrodita_es.properties
 /GalleryImage.hbm.xml
-/LoginContextFactory.properties
 /META-INF/
 /MensajesAfrodita_es.properties
 /aplicacion.xml
@@ -11,11 +17,5 @@
 /editores.xml
 /fusioncharts/
 /hibernate.cfg.xml
-/jndi-jboss.properties
-/jndi-websphere.properties
-/jndi.properties
-/logging.properties
-/naviox-users.properties
-/naviox.properties
 /xava-junit.properties
 /xava.properties
