@@ -10,7 +10,7 @@ import com.jayktec.controlador.Constantes;
 import com.jayktec.controlador.Constantes.*;
 import com.jayktec.persistencia.*;
 import com.jayktec.xyzOlympus.models.*;
-import com.jayktec.xyzOlympus.transitorio.Tendencia;
+import com.jayktec.xyzOlympus.transitorio.*;
 
 public class ToJson {
 
@@ -74,6 +74,8 @@ public class ToJson {
 	private String exporthandler = "http://export.api3.fusioncharts.com";
 	private String html5exporthandler = "http://export.api3.fusioncharts.com";
 	private ArrayList<Tendencia> listaTendencia;
+	private ArrayList<MediaMovil> listaMedia;
+
 	/* amarrufo 20180307 End */
 	private static String dataset;
 	private static String categorias;
@@ -383,6 +385,7 @@ public class ToJson {
 				serie = serie + "]}" + crearSeriePercentil(countLista, percentil, mapaItem);
 				serie = serie + crearSerieUmbral(mapaItem);
 				serie = serie + crearSerieTendencia(mapaItem);
+				serie = serie + crearSerieMediaMovil(mapaItem);
 
 				setDataset(getDataset() + serie);
 
@@ -405,7 +408,8 @@ public class ToJson {
 		String serie = "";
 		boolean pVez = true;
 		boolean haytendencia = false;
-		float tendencia = 0f;listaRegistro.get(0).getRegistroDate1();
+		float tendencia = 0f;
+		listaRegistro.get(0).getRegistroDate1();
 		Calendar inicio = Calendar.getInstance();
 
 		inicio.setTime(listaRegistro.get(0).getRegistroDate1());
@@ -478,6 +482,55 @@ public class ToJson {
 				serie = serie + " { \"value\":\"" + tendencia + "\"}";
 
 			}
+
+			serie = serie + "]}";
+		}
+		System.out.println(serie);
+		return serie;
+	}
+
+	/**
+	 * @param mapaItem
+	 * @return
+	 * @throws SQLException
+	 */
+	private String crearSerieMediaMovil(Mapa mapaItem) throws SQLException {
+		// TODO Auto-generated method stubnd
+				boolean pVez = true;
+		String serie="";
+			 serie = serie + ",{\"seriesname\":  \"" + "MediaMovil-" + mapaItem.getMapaapp() + "\", \"data\": [";
+
+for (MediaMovil mediaMovil : listaMedia) {
+	            float tendencia = 0f;
+	
+				if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT1.campoBD()))
+					tendencia = mediaMovil.getFloat1();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT2.campoBD()))
+					tendencia = mediaMovil.getFloat2();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT3.campoBD()))
+					tendencia = mediaMovil.getFloat3();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT4.campoBD()))
+					tendencia = mediaMovil.getFloat4();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.FLOAT5.campoBD()))
+					tendencia = mediaMovil.getFloat5();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = mediaMovil.getInt1();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = mediaMovil.getInt2();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = mediaMovil.getInt3();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = mediaMovil.getInt4();
+				else if (mapaItem.getMapabd().getNombre().equals(Constantes.CampoRegistro.INT1.campoBD()))
+					tendencia = mediaMovil.getInt5();
+
+				if (!pVez) {
+					serie = serie + ",";
+				} else
+					pVez = false;
+				serie = serie + " { \"value\":\"" + tendencia + "\"}";
+
+			
 
 			serie = serie + "]}";
 		}
@@ -608,6 +661,7 @@ public class ToJson {
 			buscarRegistros();
 			buscarUmbrales();
 			buscarTendencia();
+			buscarMediaMovil();
 		}
 
 		;
@@ -615,6 +669,18 @@ public class ToJson {
 
 	}
 
+
+	/**
+	 * @throws SQLException
+	 * 
+	 */
+	private void buscarMediaMovil() throws SQLException {
+		listaMedia = null;
+		listaMedia = BdManager.buscarMediaMovil(sensor, origen);
+
+	}
+
+	
 	/**
 	 * @throws SQLException
 	 * 

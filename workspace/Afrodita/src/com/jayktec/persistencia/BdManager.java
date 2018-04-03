@@ -8,7 +8,7 @@ import java.util.logging.*;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
-import com.jayktec.xyzOlympus.transitorio.Tendencia;
+import com.jayktec.xyzOlympus.transitorio.*;
 
 public class BdManager {
 	static Conexion conexion = new Conexion();
@@ -48,6 +48,15 @@ public class BdManager {
 
 	}
 
+	public static ArrayList<Registro> consultarRegistro() throws SQLException {
+
+		String sql = "select * from  " + Constantes.BD + ".fateon_registro"  + "  order by "
+				+ Constantes.CampoRegistro.DATE1.campoBD() + "," + Constantes.CampoRegistro.HORA1.campoBD();
+		System.out.println(sql);
+		return consultarRegistro(sql);
+
+	}
+
 	public ArrayList<Registro> consultarRegistro(Registro object) throws SQLException {
 		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id=" + object.getSensor();
 		return consultarRegistro(sql);
@@ -72,7 +81,7 @@ public class BdManager {
 	public static ArrayList<Mapa> consultarMapa(Registro registro) throws SQLException {
 
 		String sql = "select a.* from  " + Constantes.BD + ".fateon_mapa a" + " fateon_sensor b  where  "
-				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id ='" + registro.getSensor().getMapa().getOid()+"'";
+				+ "a.mapa_id= b.sensor_mapa and" + "a.mapa_id ='" + registro.getSensor().getMapa().getOid() + "'";
 		System.out.println(sql);
 		return consultarMapa(sql);
 		// TODO Auto-generated method stub
@@ -135,9 +144,9 @@ public class BdManager {
 		ResultSet rs = stmt.executeQuery(sql);
 
 		// ResultSet rs = consultarSql(pst);
-boolean pvez=true;
-Sensor sensor=null;
-Origen origen= null;
+		boolean pvez = true;
+		Sensor sensor = null;
+		Origen origen = null;
 		ArrayList<Registro> respuesta = new ArrayList<Registro>();
 		while (rs.next()) {
 
@@ -162,18 +171,33 @@ Origen origen= null;
 			temp.setRegistroVarchar3(rs.getString(Constantes.CampoRegistro.VARCHAR3.campoBD()));
 			temp.setRegistroVarchar4(rs.getString(Constantes.CampoRegistro.VARCHAR4.campoBD()));
 			temp.setRegistroVarchar5(rs.getString(Constantes.CampoRegistro.VARCHAR5.campoBD()));
-			temp.setRegistrotime1(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()).getTime()));
-			temp.setRegistrotime2(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()).getTime()));
-			temp.setRegistrotime3(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()).getTime()));
-			temp.setRegistrotime4(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()).getTime()));
-			temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
-			if (pvez)
-			{
-				sensor=new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
-				origen=new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
-			pvez=false;
+			try {
+				temp.setRegistrotime1(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA1.campoBD()).getTime()));
+			} catch (Exception e) {
 			}
-			
+			try {
+				temp.setRegistrotime2(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA2.campoBD()).getTime()));
+			} catch (Exception e) {
+			}
+			try {
+				temp.setRegistrotime3(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA3.campoBD()).getTime()));
+			} catch (Exception e) {
+			}
+			try {
+				temp.setRegistrotime4(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA4.campoBD()).getTime()));
+			} catch (Exception e) {
+			}
+			try {
+				temp.setRegistrotime5(new Time(rs.getTimestamp(Constantes.CampoRegistro.HORA5.campoBD()).getTime()));
+			} catch (Exception e) {
+			}
+
+			if (pvez) {
+				sensor = new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
+				origen = new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
+				pvez = false;
+			}
+
 			temp.setSensor(sensor);
 			temp.setOrigen(origen);
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
@@ -186,47 +210,45 @@ Origen origen= null;
 
 	}
 
-	public static ArrayList<Umbral> consultarUmbral( Sensor sensor, Origen origen) throws SQLException {
+	public static ArrayList<Umbral> consultarUmbral(Sensor sensor, Origen origen) throws SQLException {
 		return consultarUmbral(sensor, origen, consultarMapa(sensor));
 	}
 
-	public static ArrayList<Umbral> consultarUmbral( Sensor sensor, Origen origen,ArrayList<Mapa> mapas) throws SQLException {
+	public static ArrayList<Umbral> consultarUmbral(Sensor sensor, Origen origen, ArrayList<Mapa> mapas)
+			throws SQLException {
 
-		 
-		
 		// PreparedStatement pst = connection.prepareStatement(sql);
 		Statement stmt = connection.createStatement();
-		String sql="select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid() + "' and origen_id ='"+ origen.getOid()+"'";
+		String sql = "select * from " + Constantes.BD + ".fateon_umbral where sensor_id='" + sensor.getOid()
+				+ "' and origen_id ='" + origen.getOid() + "'";
 		System.out.println(sql);
-		//ResultSet rs = stmt.executeQuery(sql);
-		PreparedStatement pst= connection.prepareStatement(sql);
-		 ResultSet rs = consultarSql(pst);
+		// ResultSet rs = stmt.executeQuery(sql);
+		PreparedStatement pst = connection.prepareStatement(sql);
+		ResultSet rs = consultarSql(pst);
 
 		ArrayList<Umbral> respuesta = new ArrayList<Umbral>();
 		while (rs.next()) {
 
-			try{
-			Umbral temp = new Umbral();
-			temp.setOrigen(origen);
-			temp.setSensor(sensor);
-			temp.setMapa(buscarMapaLista(rs.getString("mapa_id"),mapas));
-			temp.setOid(rs.getString("umbral_id"));
-			temp.setUmbralValor(rs.getFloat("umbral"));
-			
-			respuesta.add(temp);
+			try {
+				Umbral temp = new Umbral();
+				temp.setOrigen(origen);
+				temp.setSensor(sensor);
+				temp.setMapa(buscarMapaLista(rs.getString("mapa_id"), mapas));
+				temp.setOid(rs.getString("umbral_id"));
+				temp.setUmbralValor(rs.getFloat("umbral"));
+
+				respuesta.add(temp);
+			} catch (Exception e) {
 			}
-			catch(Exception e)
-			{}
 		}
 
 		return respuesta;
 
 	}
 
-	
 	/**
 	 * @param idMapa
-	 * @param mapas 
+	 * @param mapas
 	 * @return
 	 */
 	private static Mapa buscarMapaLista(String idMapa, ArrayList<Mapa> mapas) {
@@ -604,17 +626,11 @@ Origen origen= null;
 
 	}
 
-	public static ArrayList<Tendencia> buscarTendencia(Sensor sensor, Origen origen) throws SQLException
-	{
-		String sql="SELECT  * "
-				+ "FROM "
-				+ "fateon_new.fateon_tendencia "
-				+ "where "
-				+ "sensor_id='"+ sensor.getOid()+"'"
-				+ " and origen_id='"+origen.getOid()+"'"
-						+ "  order by dia, hora, minuto";
+	public static ArrayList<Tendencia> buscarTendencia(Sensor sensor, Origen origen) throws SQLException {
+		String sql = "SELECT  * " + "FROM " + "fateon_new.fateon_tendencia " + "where " + "sensor_id='"
+				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'" + "  order by dia, hora, minuto";
 		Statement stmt = connection.createStatement();
-System.out.println(sql);
+		System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);
 
 		// ResultSet rs = consultarSql(pst);
@@ -622,81 +638,94 @@ System.out.println(sql);
 		while (rs.next()) {
 
 			Tendencia temp = new Tendencia();
-temp.setFloat1(rs.getFloat("float1"));
-temp.setFloat2(rs.getFloat("float2"));
-temp.setFloat3(rs.getFloat("float3"));
-temp.setFloat4(rs.getFloat("float4"));
-temp.setFloat5(rs.getFloat("float5"));
-temp.setInt1(rs.getInt("int1"));
-temp.setInt2(rs.getInt("int2"));
-temp.setInt3(rs.getInt("int3"));
-temp.setInt4(rs.getInt("int4"));
-temp.setInt5(rs.getInt("int5"));
-temp.setDia(rs.getInt("dia"));
-temp.setHora(rs.getInt("hora"));
-temp.setMinuto(rs.getInt("minuto"));
-temp.setOrigen(origen);
-temp.setSensor(sensor);
+			temp.setFloat1(rs.getFloat("float1"));
+			temp.setFloat2(rs.getFloat("float2"));
+			temp.setFloat3(rs.getFloat("float3"));
+			temp.setFloat4(rs.getFloat("float4"));
+			temp.setFloat5(rs.getFloat("float5"));
+			temp.setInt1(rs.getInt("int1"));
+			temp.setInt2(rs.getInt("int2"));
+			temp.setInt3(rs.getInt("int3"));
+			temp.setInt4(rs.getInt("int4"));
+			temp.setInt5(rs.getInt("int5"));
+			temp.setDia(rs.getInt("dia"));
+			temp.setHora(rs.getInt("hora"));
+			temp.setMinuto(rs.getInt("minuto"));
+			temp.setOrigen(origen);
+			temp.setSensor(sensor);
 
-respuesta.add(temp);
+			respuesta.add(temp);
 
 		}
 
-		
-		
 		return respuesta;
 
-		
 	}
-	
-	public static int crearTendencias( int mes) throws SQLException
-	{
+	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen) throws SQLException {
+		String sql = "SELECT  * " + "FROM " + "fateon_new.fateon_mediaMovil " + "where " + "sensor_id='"
+				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'" + "  order by dia, hora";
+		Statement stmt = connection.createStatement();
+		System.out.println(sql);
+		ResultSet rs = stmt.executeQuery(sql);
+
+		// ResultSet rs = consultarSql(pst);
+		ArrayList<MediaMovil> respuesta = new ArrayList<MediaMovil>();
+		while (rs.next()) {
+
+			MediaMovil temp = new MediaMovil();
+			temp.setFloat1(rs.getFloat("float1"));
+			temp.setFloat2(rs.getFloat("float2"));
+			temp.setFloat3(rs.getFloat("float3"));
+			temp.setFloat4(rs.getFloat("float4"));
+			temp.setFloat5(rs.getFloat("float5"));
+			temp.setInt1(rs.getInt("int1"));
+			temp.setInt2(rs.getInt("int2"));
+			temp.setInt3(rs.getInt("int3"));
+			temp.setInt4(rs.getInt("int4"));
+			temp.setInt5(rs.getInt("int5"));
+			temp.setDia(rs.getDate("dia"));
+			temp.setHora(rs.getTime("hora"));
+			temp.setOrigen(origen);
+			temp.setSensor(sensor);
+
+			respuesta.add(temp);
+
+		}
+
+		return respuesta;
+
+	}
+
+	public static int crearTendencias(int mes) throws SQLException {
 		truncarTendencias();
-		String sql="insert into fateon_tendencia"
-				+ " SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
-				+ "	avg(ifnull(registro_int_2,0)) as 'int2',"
-				+ " avg(ifnull(registro_int_3,0)) as 'int3',"
-				+ " avg(ifnull(registro_int_4,0)) as 'int4',"
-				+ " avg(ifnull(registro_int_5,0)) as 'int5',"
-				+ " avg(ifnull(registro_float_1,0)) as 'float1',"
-				+ " avg(ifnull(registro_float_2,0)) as 'float2',"
-				+ " avg(ifnull(registro_float_3,0)) as 'float3',"
-				+ " avg(ifnull(registro_float_4,0)) as 'float4',"
+		String sql = "insert into fateon_tendencia" + " SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
+				+ "	avg(ifnull(registro_int_2,0)) as 'int2'," + " avg(ifnull(registro_int_3,0)) as 'int3',"
+				+ " avg(ifnull(registro_int_4,0)) as 'int4'," + " avg(ifnull(registro_int_5,0)) as 'int5',"
+				+ " avg(ifnull(registro_float_1,0)) as 'float1'," + " avg(ifnull(registro_float_2,0)) as 'float2',"
+				+ " avg(ifnull(registro_float_3,0)) as 'float3'," + " avg(ifnull(registro_float_4,0)) as 'float4',"
 				+ " avg(ifnull(registro_float_5,0)) as 'float5',"
-				+ " sensor_id,origen_id,hour(registro_time_1) as 'hora',"
-				+ " minute(registro_time_1) as 'minuto',"
-				+ " weekday(registro_date_1) as 'dia' "
-				+ "FROM "
-				+ "fateon_new.fateon_registro "
-				+ "where "
-				+ "registro_date_1 BETWEEN  date_sub(now(), interval "+mes+" month) and now()"
-			    + "group by "
-				+ "origen_id,"
-				+ "sensor_id, "
-				+ "hour(registro_time_1), "
-				+ "minute(registro_time_1) , "
-				+ "weekday(registro_date_1)"
-				+ "        order by origen_id,"
-				+ "        sensor_id,"
-				+ "        weekday(registro_date_1),"
-				+ "        hour(registro_time_1),"
+				+ " sensor_id,origen_id,hour(registro_time_1) as 'hora'," + " minute(registro_time_1) as 'minuto',"
+				+ " weekday(registro_date_1) as 'dia' " + "FROM " + "fateon_new.fateon_registro " + "where "
+				+ "registro_date_1 BETWEEN  date_sub(now(), interval " + mes + " month) and now()" + "group by "
+				+ "origen_id," + "sensor_id, " + "hour(registro_time_1), " + "minute(registro_time_1) , "
+				+ "weekday(registro_date_1)" + "        order by origen_id," + "        sensor_id,"
+				+ "        weekday(registro_date_1)," + "        hour(registro_time_1),"
 				+ "        minute(registro_time_1)";
 		Statement stmt = connection.createStatement();
-System.out.println(sql);
+		System.out.println(sql);
 		return stmt.executeUpdate(sql);
 
-}
-	public static int truncarTendencias( ) throws SQLException
-	{
-		
-		String sql="truncate table fateon_tendencia";
-						Statement stmt = connection.createStatement();
-System.out.println(sql);
+	}
+
+	public static int truncarTendencias() throws SQLException {
+
+		String sql = "truncate table fateon_tendencia";
+		Statement stmt = connection.createStatement();
+		System.out.println(sql);
 		return stmt.executeUpdate(sql);
 
-}
-	
-	
+	}
+
 	private static ArrayList<Catalogo> buscarCatalogos(String tabla, ArrayList<Catalogo> listaDeCatalogos) {
 
 		if (listaDeCatalogos == null) {
@@ -808,6 +837,106 @@ System.out.println(sql);
 		}
 
 		return respuesta;
+	}
+
+	/**
+	 * @param mes
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int crearMediaMovil() throws SQLException {
+		int cont = 0;
+		truncarMediaMovil();
+		ArrayList<Registro> temp = consultarRegistro();
+		String sql = "insert into "+ Constantes.BD +".fateon_mediaMovil " 
+//		        + "(int1, int2, int3, int4, int5, "
+//				+ "float1, float2, float3, float4, float5, "
+//				+ "sensor_id, origen_id, hora, dia)"
+				+ "values (?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
+System.out.println(sql);
+
+		for (Registro registro : temp) {
+
+			MediaMovil temporal = new MediaMovil();
+
+			if (cont == 0 || (temp.size() - cont < 3)) {
+				temporal.setInt1(registro.getRegistroInt1());
+				temporal.setInt2(registro.getRegistroInt2());
+				temporal.setInt3(registro.getRegistroInt3());
+				temporal.setInt4(registro.getRegistroInt4());
+				temporal.setInt5(registro.getRegistroInt5());
+				temporal.setFloat1(registro.getRegistroFloat1());
+				temporal.setFloat2(registro.getRegistroFloat2());
+				temporal.setFloat3(registro.getRegistroFloat3());
+				temporal.setFloat4(registro.getRegistroFloat4());
+				temporal.setFloat5(registro.getRegistroFloat5());
+				temporal.setDia(registro.getRegistroDate1());
+				temporal.setHora(registro.getRegistrotime1());
+				temporal.setOrigen(registro.getOrigen());
+				temporal.setSensor(registro.getSensor());
+
+			} else {
+				temporal.setInt1((temp.get(cont).getRegistroInt1() + temp.get(cont + 1).getRegistroInt1()
+						+ temp.get(cont + 2).getRegistroInt1()) / 3);
+				temporal.setInt2(temp.get(cont).getRegistroInt2() + temp.get(cont + 1).getRegistroInt2()
+						+ temp.get(cont + 2).getRegistroInt2() / 3);
+
+				temporal.setInt3(temp.get(cont).getRegistroInt3() + temp.get(cont + 1).getRegistroInt3()
+						+ temp.get(cont + 2).getRegistroInt3() / 3);
+				temporal.setInt4(temp.get(cont).getRegistroInt4() + temp.get(cont + 1).getRegistroInt4()
+						+ temp.get(cont + 2).getRegistroInt4() / 3);
+				temporal.setInt5(temp.get(cont).getRegistroInt5() + temp.get(cont + 1).getRegistroInt5()
+						+ temp.get(cont + 2).getRegistroInt5() / 3);
+				temporal.setFloat1(temp.get(cont).getRegistroFloat1() + temp.get(cont + 1).getRegistroFloat1()
+						+ temp.get(cont + 2).getRegistroFloat1() / 3);
+				temporal.setFloat2(temp.get(cont).getRegistroFloat2() + temp.get(cont + 1).getRegistroFloat2()
+						+ temp.get(cont + 2).getRegistroFloat2() / 3);
+				temporal.setFloat3(temp.get(cont).getRegistroFloat3() + temp.get(cont + 1).getRegistroFloat3()
+						+ temp.get(cont + 2).getRegistroFloat3() / 3);
+				temporal.setFloat4(temp.get(cont).getRegistroFloat4() + temp.get(cont + 1).getRegistroFloat4()
+						+ temp.get(cont + 2).getRegistroFloat4() / 3);
+				temporal.setFloat5(temp.get(cont).getRegistroFloat5() + temp.get(cont + 1).getRegistroFloat5()
+						+ temp.get(cont + 2).getRegistroFloat5() / 3);
+				
+				
+				temporal.setDia(registro.getRegistroDate1());
+				temporal.setHora(registro.getRegistrotime1());
+				temporal.setOrigen(registro.getOrigen());
+				temporal.setSensor(registro.getSensor());
+
+			}
+
+			cont++;
+
+			PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, temporal.getInt1());
+			pst.setInt(2, temporal.getInt2());
+			pst.setInt(3, temporal.getInt3());
+			pst.setInt(4, temporal.getInt4());
+			pst.setInt(5, temporal.getInt5());
+			pst.setFloat(6, temporal.getFloat1());
+			pst.setFloat(7, temporal.getFloat2());
+			pst.setFloat(8, temporal.getFloat3());
+			pst.setFloat(9, temporal.getFloat4());
+			pst.setFloat(10, temporal.getFloat5());
+			pst.setString(11, temporal.getSensor().getOid());
+			pst.setString(12, temporal.getOrigen().getOid());
+			pst.setTime(13, temporal.getHora());
+			pst.setDate(14, (java.sql.Date) temporal.getDia());
+			pst.executeUpdate();
+
+		}
+
+		return cont;
+	}
+
+	public static int truncarMediaMovil() throws SQLException {
+
+		String sql = "truncate table fateon_mediaMovil";
+		Statement stmt = connection.createStatement();
+		System.out.println(sql);
+		return stmt.executeUpdate(sql);
+
 	}
 
 }
