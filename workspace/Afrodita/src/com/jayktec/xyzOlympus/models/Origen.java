@@ -36,28 +36,26 @@ public class Origen {
 	@Column(name = "origen_mac", length = 100)
 	private String mac;
 
-	
-	//@Required
-		@Column(name="hora_apertura",length=9)
-		@Stereotype("HORA_MINUTO")
-		private Time  horaApertura ;	
-		
+	// @Required
+	@Column(name = "hora_apertura", length = 9)
+	@Stereotype("HORA_MINUTO")
+	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
 
-		//@Required
-			@Column(name="hora_cierre",length=9)
-			@Stereotype("HORA_MINUTO")
-			private Time  horaCierre ;	
-				
-	//@Required
-	@Column(name="origen_ip",length=15,nullable = true) 
-    @Pattern(regexp="^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +// Se valida la direccion IP 
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
-        message = "Direccion IP Ivalida") 
+	private Time horaApertura;
+
+	// @Required
+	@Column(name = "hora_cierre", length = 9)
+	@Stereotype("HORA_MINUTO")
+	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
+
+	private Time horaCierre;
+
+	// @Required
+	@Column(name = "origen_ip", length = 15, nullable = true)
+	@Pattern(regexp = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + // Se valida la direccion IP
+			"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$", message = "Direccion IP Ivalida")
 	private String ip;
-	
-
 
 	// @NoModify
 	// @NoCreate
@@ -160,8 +158,6 @@ public class Origen {
 			this.setTipo(temp.getTipo());
 			this.setHoraApertura(temp.getHoraApertura());
 			this.setHoraCierre(temp.getHoraCierre());
-			
-			
 
 		}
 	}
