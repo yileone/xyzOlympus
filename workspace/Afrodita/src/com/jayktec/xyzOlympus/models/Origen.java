@@ -2,7 +2,9 @@ package com.jayktec.xyzOlympus.models;
 
 
 
+import java.sql.*;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -10,14 +12,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.*;
 
 import org.hibernate.annotations.*;
-import org.hibernate.cache.spi.entry.CollectionCacheEntry;
 import org.openxava.annotations.*;
 
-import com.sun.istack.internal.*;
-
-
-
- import com.jayktec.persistencia.*;
+import com.jayktec.persistencia.*;
  
 
 
@@ -45,6 +42,19 @@ public class Origen {
 	@Column(name="origen_mac",length=100)
 	private String mac;	
 	
+	//@Required
+		@Column(name="hora_apertura",length=9)
+		@Stereotype("HORAS")
+
+		private Time  horaApertura ;	
+		
+
+		//@Required
+			@Column(name="hora_cierre",length=9)
+			@Stereotype("HORAS")
+
+			private Time  horaCierre ;	
+				
 	//@Required
 	@Column(name="origen_ip",length=15,nullable = true) 
     @Pattern(regexp="^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +// Se valida la direccion IP 
@@ -211,6 +221,34 @@ public class Origen {
 	}
 
 
+	/**
+	 * @return the horaApertura
+	 */
+	public Time getHoraApertura() {
+		return horaApertura;
+	}
+
+	/**
+	 * @param horaApertura the horaApertura to set
+	 */
+	public void setHoraApertura(Time horaApertura) {
+		this.horaApertura = horaApertura;
+	}
+
+	/**
+	 * @return the horaCierre
+	 */
+	public Time getHoraCierre() {
+		return horaCierre;
+	}
+
+	/**
+	 * @param horaCierre the horaCierre to set
+	 */
+	public void setHoraCierre(Time horaCierre) {
+		this.horaCierre = horaCierre;
+	}
+
 	public String getModelo() {
 		return modelo;
 	}
@@ -318,15 +356,6 @@ public class Origen {
 		this.umbral = umbral;
 	}
 
-
-	
-
-
-
-
-
-
-	
 
 }
 
