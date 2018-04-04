@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy>
-<typeInfo handle="=Afrodita/src&lt;com.jayktec.xyzOlympus.models{Registro.java[Registro" modifiers="1" timestamp="1520537789884"/>
-<typeInfo handle="=Afrodita/src&lt;com.jayktec.controller{Conexion.java[Conexion" modifiers="1" timestamp="1520516351831"/>
-<typeInfo handle="=Afrodita/src&lt;com.jayktec.traductor{ToJson.java[ToJson" modifiers="1" timestamp="1521494824904"/>
-<typeInfo handle="=Afrodita/src&lt;com.jayktec.persistencia{BdManager.java[BdManager" modifiers="1" timestamp="1521494824902"/>
-</typeInfoHistroy>
+<typeInfoHistroy/>

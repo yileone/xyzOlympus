@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.text.*;
 import java.util.*;
 
+import org.hibernate.context.internal.*;
+
 import com.google.gson.JsonIOException;
 import com.jayktec.controlador.Constantes;
 import com.jayktec.controlador.Constantes.*;
@@ -105,11 +107,21 @@ public class ToJson {
 
 	}
 
+	public ToJson(String origen, String sensor, boolean habil) throws SQLException {
+		this(origen,sensor);
+		setHabil(habil);
+	}
+
 	public ToJson(String origen, String sensor) throws SQLException {
 		this.origen = new Origen(origen);
 		this.sensor = new Sensor(sensor);
 		mapaParaSensor();
 		refrescar = true;
+	}
+
+	public ToJson(String origen, Sensor sensor, boolean habil) throws SQLException {
+		this(origen,sensor);
+		setHabil(habil);
 	}
 
 	public ToJson(String origen, Sensor sensor) throws SQLException {
