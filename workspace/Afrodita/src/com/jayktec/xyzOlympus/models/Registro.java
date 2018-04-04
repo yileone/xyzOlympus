@@ -113,7 +113,7 @@ public class Registro {
     
 	@Transient
 	private boolean habil;
-	
+	 
 	
 	
 	public boolean isHabil() {
