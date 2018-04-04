@@ -38,15 +38,6 @@ public class Origen {
 	@Column(name = "origen_mac", length = 100)
 	private String mac;
 
-	// @Required
-	@Column(name = "hora_apertura", length = 9)
-	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
-	@Stereotype("HORA_MINUTO")
-	
-<<<<<<< HEAD
-	//@Required
-	@Column(name="origen_mac",length=100)
-	private String mac;	
 	
 	//@Required
 		@Column(name="hora_apertura",length=9)
@@ -68,23 +59,7 @@ public class Origen {
         message = "Direccion IP Ivalida") 
 	private String ip;
 	
-=======
-	private Timestamp horaApertura;
->>>>>>> 65a1876804ab5222a46479faf8eb6c6205422fce
 
-	// @Required
-	@Column(name = "hora_cierre", length = 9)
-	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
-	@Stereotype("HORA_MINUTO")
-	
-	private Timestamp horaCierre;
-
-	// @Required
-	@Column(name = "origen_ip", length = 15, nullable = true)
-	@Pattern(regexp = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + // Se valida la direccion IP
-			"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$", message = "Direccion IP Ivalida")
-	private String ip;
 
 	// @NoModify
 	// @NoCreate
@@ -219,7 +194,7 @@ public class Origen {
 	/**
 	 * @return the horaApertura
 	 */
-	public Timestamp getHoraApertura() {
+	public Time getHoraApertura() {
 		return horaApertura;
 	}
 
@@ -227,14 +202,14 @@ public class Origen {
 	 * @param horaApertura
 	 *            the horaApertura to set
 	 */
-	public void setHoraApertura(Timestamp horaApertura) {
+	public void setHoraApertura(Time horaApertura) {
 		this.horaApertura = horaApertura;
 	}
 
 	/**
 	 * @return the horaCierre
 	 */
-	public Timestamp getHoraCierre() {
+	public Time getHoraCierre() {
 		return horaCierre;
 	}
 
@@ -242,7 +217,7 @@ public class Origen {
 	 * @param horaCierre
 	 *            the horaCierre to set
 	 */
-	public void setHoraCierre(Timestamp horaCierre) {
+	public void setHoraCierre(Time horaCierre) {
 		this.horaCierre = horaCierre;
 	}
 
