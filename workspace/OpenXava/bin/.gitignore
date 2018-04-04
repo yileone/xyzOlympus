@@ -27,11 +27,6 @@
 /Messages_zh.properties
 /Messages_zh_CN.properties
 /commons-logging.properties
-/default-controllers.xml
-/default-converters.xml
-/default-editors.xml
-/default-size.xml
-/default-validators.xml
 /dtds/
 /org/
 /stereotype-type-default.xml
