@@ -4,33 +4,31 @@
 <%
 String propertyKey = request.getParameter("propertyKey");
 MetaProperty p = (MetaProperty) request.getAttribute(propertyKey);
-String [] fvalues = (String []) request.getAttribute(propertyKey + ".fvalue");
-String fDate = fvalues[0];
-String fTime = fvalues[1];
-String fvalue = fDate + " " + fTime;
+String fvalues = (String) request.getAttribute(propertyKey + ".fvalue");
 String align = p.isNumber()?"right":"left";
 boolean editable="true".equals(request.getParameter("editable"));
 String disabled=editable?"":"disabled";
 String script = request.getParameter("script");
 boolean label = org.openxava.util.XavaPreferences.getInstance().isReadOnlyAsLabel();
 if (editable || !label) {
-%>PAC
+%>
     <input name="<%=propertyKey%>" class=<%=style.getEditor()%>
-    type="text" 
+    type=time 
+    max="24:00:00" min="00:00:00" step="1"
     title="<%=p.getDescription(request)%>"
     align='<%=align%>'
     maxlength="8" 
     size="8" 
-    value="<%=fTime%>"
+    value="<%=fvalues%>"
     <%=disabled%>
     <%=script%> />
 <%
 } else {
 %>
-<%=fTime%>&nbsp;    
+<%=fvalues%>&nbsp;    
 <%
 }
 %>
 <% if (!editable) { %>
-    <input type="hidden" name="<%=propertyKey%>" value="<%=fvalue%>">
+    <input type="hiddven" name="<%=propertyKey%>" value="<%=fvalues%>">
 <% } %>
