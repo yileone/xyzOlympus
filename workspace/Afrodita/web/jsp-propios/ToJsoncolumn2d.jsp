@@ -23,7 +23,7 @@ String sensor = (String)view.getValue("sensor.oid");
 String origen = (String)view.getValue("origen.oid");
 Boolean habil = (Boolean)view.getValue("habil");
 try{
-	ToJson tjMsLine = new ToJson(origen,sensor); 		
+	ToJson tjMsLine = new ToJson(origen,sensor,habil); 		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 	FusionCharts mslineChat = new FusionCharts("mscolumn2d", // chartType
 				"chart1", // chartId
