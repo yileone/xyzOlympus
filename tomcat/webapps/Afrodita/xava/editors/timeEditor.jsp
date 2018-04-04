@@ -13,7 +13,7 @@ boolean label = org.openxava.util.XavaPreferences.getInstance().isReadOnlyAsLabe
 if (editable || !label) {
 %>
     <input name="<%=propertyKey%>" class=<%=style.getEditor()%>
-    type="timer" max="23:59:59" min="00:00:00" step="1"
+    type="time" max="23:59:59" min="00:00:00" step="1"
     title="<%=p.getDescription(request)%>"
     align='<%=align%>'
     maxlength="8" 
