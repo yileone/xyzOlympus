@@ -45,6 +45,11 @@ System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> sensor "+view.getVal
 </th>
 <td><xava:editor property="habil" editable="true"/></td>
 </tr>
+
+
 </table>
+
+
+
 
 

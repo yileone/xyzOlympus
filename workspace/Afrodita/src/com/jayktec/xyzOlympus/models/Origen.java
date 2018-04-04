@@ -2,6 +2,8 @@ package com.jayktec.xyzOlympus.models;
 
 import java.sql.*;
 import java.util.Collection;
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -201,6 +203,7 @@ public class Origen {
 		this.horaApertura = horaApertura;
 	}
 
+	
 	/**
 	 * @return the horaCierre
 	 */

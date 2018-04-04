@@ -110,6 +110,8 @@ public class Registro {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "sensor_id", insertable = true, updatable = true)
 	
+	
+	
 	private Sensor sensor;
     
 	@Transient
