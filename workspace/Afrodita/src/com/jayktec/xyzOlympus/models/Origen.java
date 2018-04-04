@@ -41,14 +41,12 @@ public class Origen {
 	// @Required
 	@Column(name = "hora_apertura", length = 9)
 	@Stereotype("HORA_MINUTO")
-	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
 
 	private Time horaApertura;
 
 	// @Required
 	@Column(name = "hora_cierre", length = 9)
 	@Stereotype("HORA_MINUTO")
-	@Pattern(regexp = "^(?:(?:([01]?\\d|2[0-3]):)?([0-5]?\\d):)?([0-5]?\\d)$", message = "Formato de Hora invalido")
 
 	private Time horaCierre;
 
