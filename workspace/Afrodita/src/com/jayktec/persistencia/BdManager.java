@@ -1,6 +1,7 @@
 package com.jayktec.persistencia;
 
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 import java.util.Date;
 import java.util.logging.*;
@@ -9,6 +10,8 @@ import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
 import com.jayktec.xyzOlympus.transitorio.*;
+
+import jdk.nashorn.internal.objects.annotations.*;
 
 public class BdManager {
 	static Conexion conexion = new Conexion();
@@ -21,7 +24,7 @@ public class BdManager {
 		System.out.println("prueba bdmanager");
 		Sensor sensor = buscarSensor("4028b8816153e69d016153eb61680005");
 
-		ArrayList<Registro> temp = BdManager.consultarRegistro(new Origen("ad87651f614d9b3701614d9d69b50000"), sensor);
+		ArrayList<Registro> temp = BdManager.consultarRegistro(new Origen("ad87651f614d9b3701614d9d69b50000"), sensor,false);
 
 	}
 
@@ -34,14 +37,24 @@ public class BdManager {
 
 	public static ArrayList<Registro> consultarRegistro(String origen, Sensor sensor) throws SQLException {
 
-		return consultarRegistro(new Origen(origen), sensor);
+		return consultarRegistro(new Origen(origen), sensor,false);
 
 	}
 
-	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor) throws SQLException {
+	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor, Boolean habil) throws SQLException {
 
 		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id='" + sensor.getOid()
-				+ "' and origen_id='" + origen.getOid() + "'  order by " + Constantes.CampoRegistro.DATE1.campoBD()
+				+ "' and origen_id='" + origen.getOid() + "' ";
+						
+		if (habil)
+		{
+			Date horaApertura=new Date(origen.getHoraApertura().getTime());
+
+			Date horaCierre=new Date(origen.getHoraCierre().getTime());
+			DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+			sql=sql +" and hora >= '" + hourFormat.format(horaApertura)+"' and hora<= '"+hourFormat.format(horaCierre)+"'";
+		}
+				sql= sql		+ " order by " + Constantes.CampoRegistro.DATE1.campoBD()
 				+ "," + Constantes.CampoRegistro.HORA1.campoBD();
 		System.out.println(sql);
 		return consultarRegistro(sql, sensor, origen);
@@ -662,9 +675,19 @@ public class BdManager {
 
 	}
 
-	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen) throws SQLException {
+	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen,boolean habil) throws SQLException {
 		String sql = "SELECT  * " + "FROM " + "fateon_new.fateon_mediaMovil " + "where " + "sensor_id='"
-				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'" + "  order by dia, hora";
+				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'" ;
+		if (habil)
+		{
+			Date horaApertura=new Date(origen.getHoraApertura().getTime());
+
+			Date horaCierre=new Date(origen.getHoraCierre().getTime());
+			DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+			sql=sql +" and hora >= '" + hourFormat.format(horaApertura)+"' and hora<= '"+hourFormat.format(horaCierre)+"'";
+		}
+			
+		sql= sql+ "  order by dia, hora";
 		Statement stmt = connection.createStatement();
 		System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);

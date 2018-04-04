@@ -687,7 +687,7 @@ public class ToJson {
 	 */
 	private void buscarMediaMovil() throws SQLException {
 		listaMedia = null;
-		listaMedia = BdManager.buscarMediaMovil(sensor, origen);
+		listaMedia = BdManager.buscarMediaMovil(sensor, origen,habil);
 
 	}
 
@@ -812,7 +812,7 @@ public class ToJson {
 	private void buscarRegistros() throws SQLException {
 		// TODO Auto-generated method stub
 		ToJson.listaRegistro = null;
-		ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor);
+		ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor,habil);
 
 	}
 
