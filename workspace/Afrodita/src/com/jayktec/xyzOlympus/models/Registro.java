@@ -110,6 +110,19 @@ public class Registro {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "sensor_id", insertable = true, updatable = true)
 	private Sensor sensor;
+    
+	@Transient
+	private boolean habil;
+	
+	
+	
+	public boolean isHabil() {
+		return habil;
+	}
+
+	public void setHabil(boolean habil) {
+		this.habil = habil;
+	}
 
 	public Origen getOrigen() {
 		return origen;
@@ -480,5 +493,7 @@ public class Registro {
 	}
 	
 
+	
+	
 
 }

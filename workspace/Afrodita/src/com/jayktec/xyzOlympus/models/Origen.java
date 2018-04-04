@@ -44,15 +44,13 @@ public class Origen {
 	
 	//@Required
 		@Column(name="hora_apertura",length=9)
-		@Stereotype("HORAS")
-
+		@Stereotype("HORA_MINUTO")
 		private Time  horaApertura ;	
 		
 
 		//@Required
 			@Column(name="hora_cierre",length=9)
-			@Stereotype("HORAS")
-
+			@Stereotype("HORA_MINUTO")
 			private Time  horaCierre ;	
 				
 	//@Required
@@ -187,6 +185,9 @@ public class Origen {
 			this.setSistema(temp.getSistema());
 			this.setSucursal(temp.getSucursal());
 			this.setTipo(temp.getTipo());
+			
+			
+			
 
 		}
 	}

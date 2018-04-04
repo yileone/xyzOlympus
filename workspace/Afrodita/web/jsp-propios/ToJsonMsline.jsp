@@ -21,8 +21,12 @@ View view = (org.openxava.view.View) context.get(request,viewObject);
 	   
 String sensor = (String)view.getValue("sensor.oid");
 String origen = (String)view.getValue("origen.oid");
-try{
+Boolean habil = (Boolean)view.getValue("habil");
+ 
 
+try{
+    System.out.println("HABIL: "+habil);
+    System.out.println("loadOrigenRegistroCharts  JSP PROPIO-->"+view.getModelName());
 	ToJson tjMsLine = new ToJson(origen,sensor);		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 	FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
@@ -34,7 +38,7 @@ try{
 		);
 %>
 	<div id="chart"></div>
-	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/VerOrigen'">
+	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">
 	<%=mslineChat.render()%>
 <%
 }
