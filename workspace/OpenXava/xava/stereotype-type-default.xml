@@ -19,6 +19,7 @@
 	<for stereotype="BOLD_LABEL" type="String"/>	
 	<for stereotype="DATETIME" type="java.sql.Timestamp"/>
 	<for stereotype="FECHAHORA" type="java.sql.Timestamp"/>
+	<for stereotype="HORAS" type="java.sql.Time"/>
 	<for stereotype="IMAGES_GALLERY" type="String"/>
 	<for stereotype="GALERIA_IMAGENES" type="String"/>
 	<for stereotype="HTML_TEXT" type="java.lang.String"/>

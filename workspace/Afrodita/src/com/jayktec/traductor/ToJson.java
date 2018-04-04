@@ -87,6 +87,7 @@ public class ToJson {
 
 	private static String postCategoria = "}";// ", \"stepSkipped\": false,
 	private static ArrayList<Umbral> listaUmbrales;
+	private static boolean habil=false;
 	// \"appliedSmartLabel\": true
 	// }";
 
@@ -1580,6 +1581,20 @@ public class ToJson {
 	 */
 	public void setListaTendencia(ArrayList<Tendencia> listaTendencia) {
 		this.listaTendencia = listaTendencia;
+	}
+
+	/**
+	 * @return the habil
+	 */
+	public static boolean isHabil() {
+		return habil;
+	}
+
+	/**
+	 * @param habil the habil to set
+	 */
+	public static void setHabil(boolean habil) {
+		ToJson.habil = habil;
 	}
 
 }
