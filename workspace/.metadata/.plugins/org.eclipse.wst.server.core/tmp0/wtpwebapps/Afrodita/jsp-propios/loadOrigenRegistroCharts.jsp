@@ -39,6 +39,12 @@ System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> sensor "+view.getVal
 </th>
 <td><xava:descriptionsList reference="sensor"/></td>
 </tr>
+<tr>
+<th align='right' class="<%=style.getLabel()%>">
+<xava:message key="diaHabil"/>
+</th>
+<td><xava:editor property="habil" editable="true"/></td>
+</tr>
 </table>
 
 

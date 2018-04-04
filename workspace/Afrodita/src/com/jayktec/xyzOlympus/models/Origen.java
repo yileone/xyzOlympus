@@ -2,8 +2,6 @@ package com.jayktec.xyzOlympus.models;
 
 import java.sql.*;
 import java.util.Collection;
-import java.util.Date;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -160,7 +158,8 @@ public class Origen {
 			this.setSistema(temp.getSistema());
 			this.setSucursal(temp.getSucursal());
 			this.setTipo(temp.getTipo());
-			
+			this.setHoraApertura(temp.getHoraApertura());
+			this.setHoraCierre(temp.getHoraCierre());
 			
 			
 

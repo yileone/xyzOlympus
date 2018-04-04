@@ -1,6 +1,7 @@
 package com.jayktec.persistencia;
 
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 import java.util.Date;
 import java.util.logging.*;
@@ -9,6 +10,8 @@ import com.jayktec.controlador.Constantes;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
 import com.jayktec.xyzOlympus.transitorio.*;
+
+import jdk.nashorn.internal.objects.annotations.*;
 
 public class BdManager {
 	static Conexion conexion = new Conexion();
@@ -21,7 +24,8 @@ public class BdManager {
 		System.out.println("prueba bdmanager");
 		Sensor sensor = buscarSensor("4028b8816153e69d016153eb61680005");
 
-		ArrayList<Registro> temp = BdManager.consultarRegistro(new Origen("ad87651f614d9b3701614d9d69b50000"), sensor);
+		ArrayList<Registro> temp = BdManager.consultarRegistro(new Origen("ad87651f614d9b3701614d9d69b50000"), sensor,
+				false);
 
 	}
 
@@ -34,15 +38,27 @@ public class BdManager {
 
 	public static ArrayList<Registro> consultarRegistro(String origen, Sensor sensor) throws SQLException {
 
-		return consultarRegistro(new Origen(origen), sensor);
+		return consultarRegistro(new Origen(origen), sensor, false);
 
 	}
 
-	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor) throws SQLException {
+	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor, Boolean habil)
+			throws SQLException {
 
 		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id='" + sensor.getOid()
-				+ "' and origen_id='" + origen.getOid() + "'  order by " + Constantes.CampoRegistro.DATE1.campoBD()
-				+ "," + Constantes.CampoRegistro.HORA1.campoBD();
+				+ "' and origen_id='" + origen.getOid() + "' ";
+
+		if (habil) {
+			Date horaApertura = new Date(origen.getHoraApertura().getTime());
+
+			Date horaCierre = new Date(origen.getHoraCierre().getTime());
+			DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+			sql = sql + " and " + Constantes.CampoRegistro.HORA1.campoBD() + " >= '" + hourFormat.format(horaApertura)
+					+ "' and " + Constantes.CampoRegistro.HORA1.campoBD() + " <= '" + hourFormat.format(horaCierre)
+					+ "'";
+		}
+		sql = sql + " order by " + Constantes.CampoRegistro.DATE1.campoBD() + ","
+				+ Constantes.CampoRegistro.HORA1.campoBD();
 		System.out.println(sql);
 		return consultarRegistro(sql, sensor, origen);
 
@@ -508,6 +524,8 @@ public class BdManager {
 				respuesta.setCiudad(buscarEnListaCatalogo(rs.getString("origen_id_ciudad")));
 				respuesta.setPais(buscarEnListaCatalogo(rs.getString("origen_id_pais")));
 				respuesta.setIp(rs.getString("origen_ip"));
+				respuesta.setHoraApertura(rs.getTime("hora_apertura"));
+				respuesta.setHoraCierre(rs.getTime("hora_cierre"));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -662,9 +680,20 @@ public class BdManager {
 
 	}
 
-	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen) throws SQLException {
+	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen, boolean habil)
+			throws SQLException {
 		String sql = "SELECT  * " + "FROM " + "fateon_new.fateon_mediaMovil " + "where " + "sensor_id='"
-				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'" + "  order by dia, hora";
+				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'";
+		if (habil) {
+			Date horaApertura = new Date(origen.getHoraApertura().getTime());
+
+			Date horaCierre = new Date(origen.getHoraCierre().getTime());
+			DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+			sql = sql + " and hora >= '" + hourFormat.format(horaApertura) + "' and hora<= '"
+					+ hourFormat.format(horaCierre) + "'";
+		}
+
+		sql = sql + "  order by dia, hora";
 		Statement stmt = connection.createStatement();
 		System.out.println(sql);
 		ResultSet rs = stmt.executeQuery(sql);
@@ -849,8 +878,8 @@ public class BdManager {
 		int cont = 0;
 		truncarMediaMovil();
 		ArrayList<Registro> temp = consultarRegistro();
-		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil "
-				+ "values (?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
+		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil " + "values (?,?,?,?,?," + "?,?,?,?,?,"
+				+ "?,?,?,?)";
 		System.out.println(sql);
 
 		for (Registro registro : temp) {
@@ -902,7 +931,6 @@ public class BdManager {
 
 			}
 
-
 			PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, temporal.getInt1());
 			pst.setInt(2, temporal.getInt2());
@@ -936,8 +964,8 @@ public class BdManager {
 		int cont = 0;
 		truncarMediaMovil();
 		ArrayList<Registro> temp = consultarRegistro();
-		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil "
-				+ "values (?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
+		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil " + "values (?,?,?,?,?," + "?,?,?,?,?,"
+				+ "?,?,?,?)";
 		System.out.println(sql);
 
 		for (Registro registro : temp) {
@@ -961,70 +989,58 @@ public class BdManager {
 				temporal.setSensor(registro.getSensor());
 
 			} else {
-				int tempInt=0;
-				float tempFloat=0;
-				for (int i=0; i<serie;i++)
-				{
-					tempInt=tempInt+temp.get(cont+i).getRegistroInt1();
+				int tempInt = 0;
+				float tempFloat = 0;
+				for (int i = 0; i < serie; i++) {
+					tempInt = tempInt + temp.get(cont + i).getRegistroInt1();
 				}
-								
-				temporal.setInt1(tempInt/ serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempInt=tempInt+temp.get(cont+i).getRegistroInt2();
+
+				temporal.setInt1(tempInt / serie);
+				for (int i = 0; i < serie; i++) {
+					tempInt = tempInt + temp.get(cont + i).getRegistroInt2();
 				}
-				
+
 				temporal.setInt2(tempInt / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempInt=tempInt+temp.get(cont+i).getRegistroInt3();
+				for (int i = 0; i < serie; i++) {
+					tempInt = tempInt + temp.get(cont + i).getRegistroInt3();
 				}
-				
-				temporal.setInt3(tempInt/ serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempInt=tempInt+temp.get(cont+i).getRegistroInt4();
+
+				temporal.setInt3(tempInt / serie);
+				for (int i = 0; i < serie; i++) {
+					tempInt = tempInt + temp.get(cont + i).getRegistroInt4();
 				}
-				
+
 				temporal.setInt4(tempInt / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempInt=tempInt+temp.get(cont+i).getRegistroInt5();
+				for (int i = 0; i < serie; i++) {
+					tempInt = tempInt + temp.get(cont + i).getRegistroInt5();
 				}
-				
+
 				temporal.setInt5(tempInt / serie);
-				
-				for (int i=0; i<serie;i++)
-				{
-					tempFloat=tempFloat+temp.get(cont+i).getRegistroFloat1();
+
+				for (int i = 0; i < serie; i++) {
+					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat1();
 				}
-				
-				
+
 				temporal.setFloat1(tempFloat / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempFloat=tempFloat+temp.get(cont+i).getRegistroFloat2();
+				for (int i = 0; i < serie; i++) {
+					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat2();
 				}
-				
-				
+
 				temporal.setFloat2(tempFloat / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempFloat=tempFloat+temp.get(cont+i).getRegistroFloat3();
+				for (int i = 0; i < serie; i++) {
+					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat3();
 				}
-				
+
 				temporal.setFloat3(tempFloat / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempFloat=tempFloat+temp.get(cont+i).getRegistroFloat4();
+				for (int i = 0; i < serie; i++) {
+					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat4();
 				}
-				
+
 				temporal.setFloat4(tempFloat / serie);
-				for (int i=0; i<serie;i++)
-				{
-					tempFloat=tempFloat+temp.get(cont+i).getRegistroFloat5();
+				for (int i = 0; i < serie; i++) {
+					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat5();
 				}
-				
+
 				temporal.setFloat5(tempFloat / serie);
 
 				temporal.setDia(registro.getRegistroDate1());
@@ -1033,7 +1049,6 @@ public class BdManager {
 				temporal.setSensor(registro.getSensor());
 
 			}
-
 
 			PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, temporal.getInt1());
@@ -1059,7 +1074,6 @@ public class BdManager {
 		return cont;
 	}
 
-	
 	public static int truncarMediaMovil() throws SQLException {
 
 		String sql = "truncate table fateon_mediaMovil";
