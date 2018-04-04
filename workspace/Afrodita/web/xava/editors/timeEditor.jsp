@@ -26,6 +26,7 @@ if (editable || !label) {
     <%=script%> />
 <%
 } else {
+	
 %>
 <%=fTime%>&nbsp;    
 <%
