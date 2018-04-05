@@ -1,3 +1,2 @@
 #Tomcat publish data
-#Wed Apr 04 19:07:28 VET 2018
-org.eclipse.jst.j2ee.server\:OpenXava=WEB-INF/lib/OpenXava.jar
+#Thu Apr 05 18:51:45 VET 2018

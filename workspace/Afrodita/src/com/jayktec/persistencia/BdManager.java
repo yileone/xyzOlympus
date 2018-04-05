@@ -9,6 +9,7 @@ import java.util.logging.*;
 import org.jfree.chart.axis.*;
 
 import com.jayktec.controlador.Constantes;
+import com.jayktec.controlador.Constantes.*;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
 import com.jayktec.xyzOlympus.transitorio.*;
@@ -31,13 +32,6 @@ public class BdManager {
 
 	}
 
-	public Object search(Object object) throws SQLException {
-		if (object instanceof Registro) {
-			return consultarRegistro((Registro) object);
-		}
-		return null;
-	}
-
 	public static ArrayList<Registro> consultarRegistro(String origen, Sensor sensor) throws SQLException {
 
 		return consultarRegistro(new Origen(origen), sensor, false);
@@ -46,8 +40,14 @@ public class BdManager {
 
 	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor, Boolean habil)
 			throws SQLException {
+		return consultarRegistro(origen, sensor, habil, Constantes.TablaBD.REGISTRO);
 
-		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id='" + sensor.getOid()
+	}
+
+	public static ArrayList<Registro> consultarRegistro(Origen origen, Sensor sensor, Boolean habil, TablaBD tabla)
+			throws SQLException {
+
+		String sql = "select * from  " + Constantes.BD + tabla.tabla() + " where sensor_id='" + sensor.getOid()
 				+ "' and origen_id='" + origen.getOid() + "' ";
 
 		if (habil) {
@@ -68,15 +68,15 @@ public class BdManager {
 
 	public static ArrayList<Registro> consultarRegistro() throws SQLException {
 
-		String sql = "select * from  " + Constantes.BD + ".fateon_registro" + "  order by "
-				+ Constantes.CampoRegistro.DATE1.campoBD() + "," + Constantes.CampoRegistro.HORA1.campoBD();
-		System.out.println(sql);
-		return consultarRegistro(sql);
+		return consultarRegistro(Constantes.TablaBD.REGISTRO);
 
 	}
 
-	public ArrayList<Registro> consultarRegistro(Registro object) throws SQLException {
-		String sql = "select * from  " + Constantes.BD + ".fateon_registro where sensor_id=" + object.getSensor();
+	public static ArrayList<Registro> consultarRegistro(TablaBD tabla) throws SQLException {
+
+		String sql = "select * from  " + Constantes.BD + tabla.tabla() + "  order by "
+				+ Constantes.CampoRegistro.DATE1.campoBD() + "," + Constantes.CampoRegistro.HORA1.campoBD();
+		System.out.println(sql);
 		return consultarRegistro(sql);
 
 	}
@@ -683,9 +683,22 @@ public class BdManager {
 	}
 
 	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen, boolean habil)
+			throws SQLException
+
+	{
+		return buscarMediaMovil(sensor, origen, habil, false);
+	}
+
+	public static ArrayList<MediaMovil> buscarMediaMovil(Sensor sensor, Origen origen, boolean habil, boolean reducido)
 			throws SQLException {
-		String sql = "SELECT  * " + "FROM " + "fateon_new.fateon_mediaMovil " + "where " + "sensor_id='"
-				+ sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'";
+		String sql = "SELECT  * " + "FROM " + Constantes.BD;
+
+		if (reducido)
+			sql = sql + TablaBD.MEDIA_MOVIL_REDUCIDO.tabla();
+		else
+			sql = sql + TablaBD.MEDIA_MOVIL.tabla();
+
+		sql = sql + " where " + "sensor_id='" + sensor.getOid() + "'" + " and origen_id='" + origen.getOid() + "'";
 		if (habil) {
 			Date horaApertura = new Date(origen.getHoraApertura().getTime());
 
@@ -729,7 +742,7 @@ public class BdManager {
 	}
 
 	public static int crearTendencias(int mes) throws SQLException {
-		truncarTendencias();
+		truncarTabla(TablaBD.TENDENCIA);
 		String sql = "insert into fateon_tendencia" + " SELECT  avg(ifnull(registro_int_1,0)) as 'int1',"
 				+ "	avg(ifnull(registro_int_2,0)) as 'int2'," + " avg(ifnull(registro_int_3,0)) as 'int3',"
 				+ " avg(ifnull(registro_int_4,0)) as 'int4'," + " avg(ifnull(registro_int_5,0)) as 'int5',"
@@ -743,15 +756,6 @@ public class BdManager {
 				+ "weekday(registro_date_1)" + "        order by origen_id," + "        sensor_id,"
 				+ "        weekday(registro_date_1)," + "        hour(registro_time_1),"
 				+ "        minute(registro_time_1)";
-		Statement stmt = connection.createStatement();
-		System.out.println(sql);
-		return stmt.executeUpdate(sql);
-
-	}
-
-	public static int truncarTendencias() throws SQLException {
-
-		String sql = "truncate table fateon_tendencia";
 		Statement stmt = connection.createStatement();
 		System.out.println(sql);
 		return stmt.executeUpdate(sql);
@@ -877,97 +881,32 @@ public class BdManager {
 	 * @throws SQLException
 	 */
 	public static int crearMediaMovil() throws SQLException {
-		int cont = 0;
-		truncarMediaMovil();
-		ArrayList<Registro> temp = consultarRegistro();
-		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil " + "values (?,?,?,?,?," + "?,?,?,?,?,"
-				+ "?,?,?,?)";
-		System.out.println(sql);
+		return crearMediaMovil(3, Constantes.TablaBD.REGISTRO);
 
-		for (Registro registro : temp) {
-
-			MediaMovil temporal = new MediaMovil();
-
-			if (cont == 0 || (temp.size() - cont < 3)) {
-				temporal.setInt1(registro.getRegistroInt1());
-				temporal.setInt2(registro.getRegistroInt2());
-				temporal.setInt3(registro.getRegistroInt3());
-				temporal.setInt4(registro.getRegistroInt4());
-				temporal.setInt5(registro.getRegistroInt5());
-				temporal.setFloat1(registro.getRegistroFloat1());
-				temporal.setFloat2(registro.getRegistroFloat2());
-				temporal.setFloat3(registro.getRegistroFloat3());
-				temporal.setFloat4(registro.getRegistroFloat4());
-				temporal.setFloat5(registro.getRegistroFloat5());
-				temporal.setDia(registro.getRegistroDate1());
-				temporal.setHora(registro.getRegistrotime1());
-				temporal.setOrigen(registro.getOrigen());
-				temporal.setSensor(registro.getSensor());
-
-			} else {
-				temporal.setInt1((temp.get(cont).getRegistroInt1() + temp.get(cont + 1).getRegistroInt1()
-						+ temp.get(cont + 2).getRegistroInt1()) / 3);
-				temporal.setInt2((temp.get(cont).getRegistroInt2() + temp.get(cont + 1).getRegistroInt2()
-						+ temp.get(cont + 2).getRegistroInt2()) / 3);
-				temporal.setInt3((temp.get(cont).getRegistroInt3() + temp.get(cont + 1).getRegistroInt3()
-						+ temp.get(cont + 2).getRegistroInt3()) / 3);
-				temporal.setInt4((temp.get(cont).getRegistroInt4() + temp.get(cont + 1).getRegistroInt4()
-						+ temp.get(cont + 2).getRegistroInt4()) / 3);
-				temporal.setInt5((temp.get(cont).getRegistroInt5() + temp.get(cont + 1).getRegistroInt5()
-						+ temp.get(cont + 2).getRegistroInt5()) / 3);
-				temporal.setFloat1((temp.get(cont).getRegistroFloat1() + temp.get(cont + 1).getRegistroFloat1()
-						+ temp.get(cont + 2).getRegistroFloat1()) / 3);
-				temporal.setFloat2((temp.get(cont).getRegistroFloat2() + temp.get(cont + 1).getRegistroFloat2()
-						+ temp.get(cont + 2).getRegistroFloat2()) / 3);
-				temporal.setFloat3((temp.get(cont).getRegistroFloat3() + temp.get(cont + 1).getRegistroFloat3()
-						+ temp.get(cont + 2).getRegistroFloat3()) / 3);
-				temporal.setFloat4((temp.get(cont).getRegistroFloat4() + temp.get(cont + 1).getRegistroFloat4()
-						+ temp.get(cont + 2).getRegistroFloat4()) / 3);
-				temporal.setFloat5((temp.get(cont).getRegistroFloat5() + temp.get(cont + 1).getRegistroFloat5()
-						+ temp.get(cont + 2).getRegistroFloat5()) / 3);
-
-				temporal.setDia(registro.getRegistroDate1());
-				temporal.setHora(registro.getRegistrotime1());
-				temporal.setOrigen(registro.getOrigen());
-				temporal.setSensor(registro.getSensor());
-
-			}
-
-			PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, temporal.getInt1());
-			pst.setInt(2, temporal.getInt2());
-			pst.setInt(3, temporal.getInt3());
-			pst.setInt(4, temporal.getInt4());
-			pst.setInt(5, temporal.getInt5());
-			pst.setFloat(6, temporal.getFloat1());
-			pst.setFloat(7, temporal.getFloat2());
-			pst.setFloat(8, temporal.getFloat3());
-			pst.setFloat(9, temporal.getFloat4());
-			pst.setFloat(10, temporal.getFloat5());
-			pst.setString(11, temporal.getSensor().getOid());
-			pst.setString(12, temporal.getOrigen().getOid());
-			pst.setTime(13, temporal.getHora());
-			pst.setDate(14, (java.sql.Date) temporal.getDia());
-			pst.executeUpdate();
-
-			cont++;
-
-		}
-
-		return cont;
 	}
 
 	/**
-	 * @param serie
+	 * @param i
+	 * @param registro
 	 * @return
 	 * @throws SQLException
 	 */
-	public static int crearMediaMovil(int serie) throws SQLException {
+	private static int crearMediaMovil(int serie, TablaBD tablaBD) throws SQLException {
+		// TODO Auto-generated method stub
+
 		int cont = 0;
-		truncarMediaMovil();
-		ArrayList<Registro> temp = consultarRegistro();
-		String sql = "insert into " + Constantes.BD + ".fateon_mediaMovil " + "values (?,?,?,?,?," + "?,?,?,?,?,"
-				+ "?,?,?,?)";
+
+		ArrayList<Registro> temp = consultarRegistro(tablaBD);
+		String sql = "insert into " + Constantes.BD;
+		if (tablaBD.equals(Constantes.TablaBD.REGISTRO)) {
+			truncarTabla(TablaBD.MEDIA_MOVIL);
+			sql = sql + TablaBD.MEDIA_MOVIL.tabla();
+		} else {
+			truncarTabla(TablaBD.MEDIA_MOVIL_REDUCIDO);
+			sql = sql + TablaBD.MEDIA_MOVIL_REDUCIDO.tabla();
+
+		}
+		sql = sql + "values (?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
 		System.out.println(sql);
 
 		for (Registro registro : temp) {
@@ -1076,9 +1015,9 @@ public class BdManager {
 		return cont;
 	}
 
-	public static int truncarMediaMovil() throws SQLException {
+	public static int truncarTabla(TablaBD tabla) throws SQLException {
 
-		String sql = "truncate table " + Constantes.BD + ".fateon_mediaMovil";
+		String sql = "truncate table " + Constantes.BD + tabla.tabla();
 		Statement stmt = connection.createStatement();
 		System.out.println(sql);
 		return stmt.executeUpdate(sql);
@@ -1092,7 +1031,7 @@ public class BdManager {
 	 */
 	public static int reducirRegistros(int serie) throws SQLException, ParseException {
 		int cont = 0;
-		truncarRegistrosReducidos();
+		truncarTabla(TablaBD.REGISTRO_REDUCIDO);
 		ArrayList<Registro> temp = consultarRegistro();
 		String sql = "insert into " + Constantes.BD + ".fateon_registro_reducido " + "values " + "(?,?,?,?,?,"
 				+ "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
@@ -1290,13 +1229,13 @@ public class BdManager {
 
 	}
 
-	public static int truncarRegistrosReducidos() throws SQLException {
-
-		String sql = "truncate table " + Constantes.BD + ".fateon_registro_reducido";
-		Statement stmt = connection.createStatement();
-		System.out.println(sql);
-		return stmt.executeUpdate(sql);
-
+	/**
+	 * @param registroReducido
+	 * @throws SQLException
+	 */
+	public static void crearMediaMovil(TablaBD tablaBD) throws SQLException {
+		// TODO Auto-generated method stub
+		crearMediaMovil(3, tablaBD);
 	}
 
 }

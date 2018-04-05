@@ -9,12 +9,28 @@ import java.text.*;
 import java.util.*;
 
 import com.jayktec.controlador.*;
+import com.jayktec.controlador.Constantes.*;
 import com.jayktec.persistencia.*;
 
 /**
  * @author {Yisheng León Espinoza} 19 mar. 2018 www.jayktec.com.ve
  */
 public class MediaMovilBatch extends Ejecucion {
+
+	TablaBD tablaBD;
+	/**
+	 * @return the tablaBD
+	 */
+	public TablaBD getTablaBD() {
+		return tablaBD;
+	}
+
+	/**
+	 * @param tablaBD the tablaBD to set
+	 */
+	public void setTablaBD(TablaBD tablaBD) {
+		this.tablaBD = tablaBD;
+	}
 
 	/**
 	 * @throws ParseException 
@@ -31,7 +47,13 @@ public class MediaMovilBatch extends Ejecucion {
 
 	public MediaMovilBatch() {
 		// TODO Auto-generated constructor stub
+		setTablaBD(Constantes.TablaBD.REGISTRO);
+	}
 
+
+	public MediaMovilBatch(TablaBD tablaBd) {
+		// TODO Auto-generated constructor stub
+		setTablaBD(tablaBd);
 	}
 
 	@Override
@@ -73,7 +95,9 @@ public class MediaMovilBatch extends Ejecucion {
 	@Override
 	public void run() throws ParseException {
 		try {
-			BdManager.crearMediaMovil();
+			//BdManager.crearMediaMovil();
+
+			BdManager.crearMediaMovil(TablaBD.REGISTRO_REDUCIDO);
 		} catch (NumberFormatException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

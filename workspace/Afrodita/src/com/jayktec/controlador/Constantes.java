@@ -1,5 +1,7 @@
 package com.jayktec.controlador;
 
+import com.jayktec.xyzOlympus.transitorio.*;
+
 public class Constantes {
 
 	public static final String ARCHIVO_PROPERTIES = "/olympus.properties";
@@ -7,8 +9,29 @@ public class Constantes {
 	public static final String PUERTO ="PORT";
 	public static final String BD="fateon_new";
 	
+	public enum TablaBD {
+		REGISTRO(".fateon_registro "),
+		REGISTRO_REDUCIDO(".fateon_registro_reducido "),
+		TENDENCIA(".fateon_tendencia"),
+		MEDIA_MOVIL (".fateon_mediaMovil "),
+		MEDIA_MOVIL_REDUCIDO (".fateon_mediaMovil_reducido ");
+		
+		private String tabla;
+		
+		private TablaBD(String tabla) {
+			this.tabla= tabla;
+			// TODO Auto-generated constructor stub
+		}
+		
+		public String tabla()
+		{
+			return tabla;
+		}
+	}
+	
+	
 	public enum TipoParametro {
-		MesTendencia("mesTendencia");
+		MesTendencia("mesTendencia"),SerieMedia("serieMedia");
         private String tipo;
 		
 		private TipoParametro(String tipo) {
