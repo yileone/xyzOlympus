@@ -5,6 +5,7 @@ package com.jayktec.batch;
 
 import java.io.*;
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 
 import com.jayktec.controlador.*;
@@ -74,9 +75,8 @@ public class Ejecucion {
 		}
 		
 		return null;
-	}
-	
-	public void run()
+	}	
+	public void run() throws ParseException
 	{
 	//TODO LOG DE EJECUCION
 	}

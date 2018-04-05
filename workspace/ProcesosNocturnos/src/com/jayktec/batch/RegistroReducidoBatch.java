@@ -14,7 +14,7 @@ import com.jayktec.persistencia.*;
 /**
  * @author {Yisheng León Espinoza} 19 mar. 2018 www.jayktec.com.ve
  */
-public class MediaMovilBatch extends Ejecucion {
+public class RegistroReducidoBatch extends Ejecucion {
 
 	/**
 	 * @throws ParseException 
@@ -23,13 +23,13 @@ public class MediaMovilBatch extends Ejecucion {
 
 	public static void main(String[] args) throws SQLException, IOException, ParseException {
 		System.out.println("empezando Ejecucion");
-		MediaMovilBatch temp = new MediaMovilBatch();
+		RegistroReducidoBatch temp = new RegistroReducidoBatch();
 		temp.run();
 		System.out.println("finalizando Ejecucion ");
 
 	}
 
-	public MediaMovilBatch() {
+	public RegistroReducidoBatch() {
 		// TODO Auto-generated constructor stub
 
 	}
@@ -73,7 +73,7 @@ public class MediaMovilBatch extends Ejecucion {
 	@Override
 	public void run() throws ParseException {
 		try {
-			BdManager.crearMediaMovil();
+			BdManager.reducirRegistros(3);
 		} catch (NumberFormatException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

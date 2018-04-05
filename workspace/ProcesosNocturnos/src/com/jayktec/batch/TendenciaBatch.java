@@ -5,6 +5,7 @@ package com.jayktec.batch;
 
 import java.io.*;
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 
 import com.jayktec.controlador.*;
@@ -16,10 +17,11 @@ import com.jayktec.persistencia.*;
 public class TendenciaBatch extends Ejecucion {
 
 	/**
+	 * @throws ParseException 
 	 * 
 	 */
 
-	public static void main(String[] args) throws SQLException, IOException {
+	public static void main(String[] args) throws SQLException, IOException, ParseException {
 		System.out.println("empezando Ejecucion");
 		TendenciaBatch temp = new TendenciaBatch();
 		temp.run();
@@ -69,7 +71,7 @@ public class TendenciaBatch extends Ejecucion {
 	}
 
 	@Override
-	public void run() {
+	public void run() throws ParseException {
 		try {
 			BdManager.crearTendencias(Integer.valueOf(valorParametro(Constantes.TipoParametro.MesTendencia.tipo())));
 		} catch (NumberFormatException | SQLException e) {
