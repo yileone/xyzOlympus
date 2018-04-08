@@ -103,15 +103,16 @@ public class Registro {
 	@Stereotype("HORA_MINUTO")
 	private Time registrotime5;
 
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "origen_id", insertable = true, updatable = true)
 	private Origen origen;
 
+	@NoModify
+	@NoCreate
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "sensor_id", insertable = true, updatable = true)
-	
-	
-	
 	private Sensor sensor;
     
 	@Transient

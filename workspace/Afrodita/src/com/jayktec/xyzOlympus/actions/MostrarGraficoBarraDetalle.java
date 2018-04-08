@@ -6,7 +6,7 @@ public class MostrarGraficoBarraDetalle extends BaseAction implements INavigatio
 	@Override
 	public String[] getNextControllers() throws Exception {
 		// TODO Auto-generated method stub
-		return  new String [] {"accionescancelar"};
+		return  new String [] {"atras"};
 	}
 
 	@Override

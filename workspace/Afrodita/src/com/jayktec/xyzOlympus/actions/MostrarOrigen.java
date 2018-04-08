@@ -18,8 +18,8 @@ public class MostrarOrigen extends ViewBaseAction implements INavigationAction{
 		
 		try{
 			
-			System.out.println(" Exute-->"+getView().getValue("origen.oid"));
-			System.out.println(" Exute-->"+getView().getValue("origen.name"));
+			/*System.out.println(" Exute-->"+getView().getValue("origen.oid"));
+			System.out.println(" Exute-->"+getView().getValue("origen.name"));*/
 			
 		
 		}catch (Exception e) {

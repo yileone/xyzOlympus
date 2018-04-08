@@ -7,13 +7,18 @@
 	<objeto nombre="origenOid" clase="java.lang.String" valor="" ambito="global"/>
     <objeto nombre="sensorOid" clase="java.lang.String" valor="" ambito="global"/>
 	<controlador nombre="tipochart">
-		<accion nombre="Graficar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
-		<accion nombre="ImportarDatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
+		<accion nombre="graficar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
+		<accion nombre="importardatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
 	</controlador>
 	
-    <controlador nombre="accionescancelar">
+    <controlador nombre="atras">
+  		<accion nombre="volver" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
+  	</controlador>
+  	
+   <controlador nombre="accionescancelar">
   		<accion nombre="cancelar" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
   	</controlador>
+  	
   	
   	<controlador nombre="ConfigureImportReg">
 		<accion nombre="ConfigurarDatosRegitros" clase="com.jayktec.xyzOlympus.actions.ConfigureImportActionReg"/>										

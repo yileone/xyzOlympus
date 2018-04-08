@@ -14,7 +14,7 @@ public class MostrarGraficoBuld extends BaseAction implements INavigationAction{
 	@Override
 	public void execute() throws Exception {
 
-		System.out.println("Aqui Voy ");
+		/*System.out.println("Aqui Voy ");*/
 	}
 
 	@Override

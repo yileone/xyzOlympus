@@ -5137,3 +5137,45 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface.text 2 0 2018-04-08 10:53:16.157
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-04-08 10:53:16.250
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.core 4 0 2018-04-08 11:26:47.582
+!MESSAGE Auto sharing project with git failed
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 4: .git:
+	at sun.nio.fs.WindowsPathParser.normalize(Unknown Source)
+	at sun.nio.fs.WindowsPathParser.parse(Unknown Source)
+	at sun.nio.fs.WindowsPathParser.parse(Unknown Source)
+	at sun.nio.fs.WindowsPath.parse(Unknown Source)
+	at sun.nio.fs.WindowsFileSystem.getPath(Unknown Source)
+	at sun.nio.fs.AbstractPath.resolve(Unknown Source)
+	at org.eclipse.egit.core.RepositoryUtil.toDirSet(RepositoryUtil.java:451)
+	at org.eclipse.egit.core.RepositoryUtil.getRepositories(RepositoryUtil.java:414)
+	at org.eclipse.egit.core.RepositoryUtil.getConfiguredRepositories(RepositoryUtil.java:461)
+	at org.eclipse.egit.core.RepositoryUtil.addConfiguredRepository(RepositoryUtil.java:485)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.visitConnect(Activator.java:610)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.run(Activator.java:531)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.egit.core 4 0 2018-04-08 11:44:50.263
+!MESSAGE Auto sharing project with git failed
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 4: .git:
+	at sun.nio.fs.WindowsPathParser.normalize(Unknown Source)
+	at sun.nio.fs.WindowsPathParser.parse(Unknown Source)
+	at sun.nio.fs.WindowsPathParser.parse(Unknown Source)
+	at sun.nio.fs.WindowsPath.parse(Unknown Source)
+	at sun.nio.fs.WindowsFileSystem.getPath(Unknown Source)
+	at sun.nio.fs.AbstractPath.resolve(Unknown Source)
+	at org.eclipse.egit.core.RepositoryUtil.toDirSet(RepositoryUtil.java:451)
+	at org.eclipse.egit.core.RepositoryUtil.getRepositories(RepositoryUtil.java:414)
+	at org.eclipse.egit.core.RepositoryUtil.getConfiguredRepositories(RepositoryUtil.java:461)
+	at org.eclipse.egit.core.RepositoryUtil.addConfiguredRepository(RepositoryUtil.java:485)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.visitConnect(Activator.java:610)
+	at org.eclipse.egit.core.Activator$CheckProjectsToShare.run(Activator.java:531)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)

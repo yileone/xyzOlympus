@@ -6,7 +6,7 @@ public class MostrarGrafricoZoomxyLine extends BaseAction implements INavigation
 	@Override
 	public String[] getNextControllers() throws Exception {
 		// TODO Auto-generated method stub
-		return  new String [] {"accionescancelar"};
+		return  new String [] {"volver"};
 	}
 
 	@Override

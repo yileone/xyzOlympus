@@ -39,22 +39,22 @@ public class ConfigureImportActionReg extends TabBaseAction implements INavigati
 	public void execute() throws Exception {
 		
 
-    	System.out.println("**************ConfigureImportActionReg - execute ***********************");
+    	/*System.out.println("**************ConfigureImportActionReg - execute ***********************");
     	System.out.println("");
     	System.out.println(" EJECUTANDO ACTION ---> ImportDataActionReg" );
     	System.out.println("    ACTION : ConfigureImportActionReg" );
-    	System.out.println("NEXTACTION : ImportReg" );
+    	System.out.println("NEXTACTION : ImportReg" );*/
     	this.setSensorOid(sensorOid);
     	this.setOrigenOid(origenOid);
        	assert origenOid == this.getOrigenOid();
     	assert sensorOid == this.getSensorOid();
     	
-    	System.out.println("    SENSOR : "+ this.getSensorOid());	
+    	/*System.out.println("    SENSOR : "+ this.getSensorOid());	
     	System.out.println("    ORIGEN : "+ this.getOrigenOid());
     	System.out.println("");
     	System.out.println("*************************************");
     	System.out.println("");
-    	System.out.println("*************************************");
+    	System.out.println("*************************************");*/
 		
 		String fileName = "UNKNOWN";
 		try {
