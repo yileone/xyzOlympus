@@ -28,8 +28,9 @@ try{
 
 	ToJson tjMsLine = new ToJson(origen,sensor,habil);		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
-	FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
-				"chart1", // chartId
+	//FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
+	FusionCharts mslineChat = new FusionCharts("Msline", // chartType			
+			"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
 				"chart", // chartContainer
 				"json", // dataFormat
@@ -37,7 +38,7 @@ try{
 		);
 %>
 	<div id="chart"></div>
-	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">
+	<!--  <input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">-->
 	<%=mslineChat.render()%>
 <%
 }

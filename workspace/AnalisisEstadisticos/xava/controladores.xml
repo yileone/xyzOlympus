@@ -4,21 +4,32 @@
 
 <controladores>
     
-    <!-- Variable de entorno: 
-    <var-entorno nombre="AnalisisEstadisticos_ANYO_DEFECTO" valor="2015"/>
-    -->
+	<objeto nombre="origenOid" clase="java.lang.String" valor="" ambito="global"/>
+    <objeto nombre="sensorOid" clase="java.lang.String" valor="" ambito="global"/>
+	<controlador nombre="tipochart">
+		<accion nombre="graficar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
+		<accion nombre="importardatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
+	</controlador>
+	
+    <controlador nombre="atras">
+  		<accion nombre="volver" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
+  	</controlador>
+  	
+   <controlador nombre="accionescancelar">
+  		<accion nombre="cancelar" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
+  	</controlador>
+  	
+  	
+  	<controlador nombre="ConfigureImportReg">
+		<accion nombre="ConfigurarDatosRegitros" clase="com.jayktec.xyzOlympus.actions.ConfigureImportActionReg"/>										
+		<accion nombre="cancel" clase="org.openxava.actions.CancelAction"/>
+	</controlador>
     
-    <!-- Objeto de sesión:
-    <Objeto nombre="AnalisisEstadisticos_anyoActivo" clase="java.lang.Integer" valor="2015" 
-            ambito="global"/>
-    -->
-    
-    <!-- Controlador:
-    <controlador nombre="Profesor">
-        <hereda-de controlador="Typical"/>
-        <accion nombre="new" icono="library-plus" atajo-de-teclado="Control N" 
-                clase="acciones.CrearProfesor"/>        
-    </controlador>
-    -->
-    
+    <controlador nombre="ImportReg">
+		<accion nombre="import" cuesta="true" clase="com.jayktec.xyzOlympus.actions.ImportActionReg"/>										
+		<accion nombre="cancel" clase="org.openxava.actions.CancelAction"/>		
+	</controlador>
+	
+	<controlador nombre="Void"/>
+	
 </controladores>

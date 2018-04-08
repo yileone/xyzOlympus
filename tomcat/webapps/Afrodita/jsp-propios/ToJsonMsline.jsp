@@ -25,18 +25,12 @@ Boolean habil = (Boolean)view.getValue("habil");
  
 
 try{
-    System.out.println("HABIL: "+habil); 
-<<<<<<< HEAD
-    
-    System.out.println("loadOrigenRegistroCharts  JSP PROPIO-->"+view.getModelName());
-	ToJson tjMsLine = new ToJson(origen,sensor);		
-=======
-    System.out.println("loadOrigenRegistroCharts  JSP PROPIO-->"+view.getModelName());
+
 	ToJson tjMsLine = new ToJson(origen,sensor,habil);		
->>>>>>> b7e669ec1cb8c0f32397bdc1f0f60a621ed506b3
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
-	FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
-				"chart1", // chartId
+	//FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
+	FusionCharts mslineChat = new FusionCharts("Msline", // chartType			
+			"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
 				"chart", // chartContainer
 				"json", // dataFormat
@@ -44,7 +38,7 @@ try{
 		);
 %>
 	<div id="chart"></div>
-	<input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">
+	<!--  <input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">-->
 	<%=mslineChat.render()%>
 <%
 }

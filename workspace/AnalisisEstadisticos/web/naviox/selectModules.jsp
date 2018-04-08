@@ -37,6 +37,7 @@ for (Iterator it= modulesList.iterator(); it.hasNext();) {
 	<div id="<%=module.getName()%>_module" class="module-row <%=selected%>" onclick="$('#<%=module.getName()%>_loading').show()">	
 		<div class="module-name">
 			<%=label%>
+			<% System.out.print("---->" +label ); %>
 			<% if (bookmarkModules) { %>
 			<img src="<%=request.getContextPath()%>/naviox/images/bookmark-on.png" class="bookmark-decoration"/>
 			<% } %>

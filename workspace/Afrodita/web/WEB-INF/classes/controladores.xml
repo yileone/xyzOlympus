@@ -13,7 +13,9 @@
 	
     <controlador nombre="atras">
   		<accion nombre="volver" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
+  		<accion nombre="actualizar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine" />
   	</controlador>
+
   	
    <controlador nombre="accionescancelar">
   		<accion nombre="cancelar" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	

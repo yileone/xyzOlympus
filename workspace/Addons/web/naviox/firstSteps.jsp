@@ -6,4 +6,3 @@
 String language = "es".equals(request.getLocale().getLanguage()) || "ca".equals(request.getLocale().getLanguage())?"es":"en";
 %>
 
-<jsp:forward page="/m/Regla"/>

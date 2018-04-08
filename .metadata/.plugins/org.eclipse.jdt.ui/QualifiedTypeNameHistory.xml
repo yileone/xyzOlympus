@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.models.Contrato"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
-<fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.Required"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportRegistro"/>
 <fullyQualifiedTypeName name="com.jayktec.xyzOlympus.actions.ImportColumnRegistro"/>
@@ -19,4 +17,6 @@
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="javax.persistence.Transient"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
+<fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
 </qualifiedTypeNameHistroy>
