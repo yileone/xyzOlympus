@@ -89,7 +89,9 @@ public class ToJson {
 
 	private static String postCategoria = "}";// ", \"stepSkipped\": false,
 	private static ArrayList<Umbral> listaUmbrales;
-	private  boolean habil = true;
+	private boolean habil = true;
+	private boolean reducido = true;
+
 	// \"appliedSmartLabel\": true
 	// }";
 
@@ -110,6 +112,12 @@ public class ToJson {
 	public ToJson(String origen, String sensor, boolean habil) throws SQLException {
 		this(origen, sensor);
 		setHabil(habil);
+	}
+
+	public ToJson(String origen, String sensor, boolean habil, boolean reducido) throws SQLException {
+		this(origen, sensor);
+		setHabil(habil);
+		setReducido(reducido);
 	}
 
 	public ToJson(String origen, String sensor) throws SQLException {
@@ -687,6 +695,10 @@ public class ToJson {
 	 */
 	private void buscarMediaMovil() throws SQLException {
 		listaMedia = null;
+		if (reducido)
+			listaMedia = BdManager.buscarMediaMovil(sensor, origen, habil,reducido);
+
+		else
 		listaMedia = BdManager.buscarMediaMovil(sensor, origen, habil);
 
 	}
@@ -715,7 +727,11 @@ public class ToJson {
 	private void buscarRegistros() throws SQLException {
 		// TODO Auto-generated method stub
 		ToJson.listaRegistro = null;
-		ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor, habil);
+		if (reducido)
+			ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor, habil, TablaBD.REGISTRO_REDUCIDO);
+
+		else
+			ToJson.listaRegistro = BdManager.consultarRegistro(origen, sensor, habil);
 
 	}
 
@@ -1501,7 +1517,7 @@ public class ToJson {
 	/**
 	 * @return the habil
 	 */
-	public  boolean isHabil() {
+	public boolean isHabil() {
 		return habil;
 	}
 
@@ -1509,8 +1525,38 @@ public class ToJson {
 	 * @param habil
 	 *            the habil to set
 	 */
-	public  void setHabil(boolean habil) {
+	public void setHabil(boolean habil) {
 		this.habil = habil;
+	}
+
+	/**
+	 * @return the listaMedia
+	 */
+	public ArrayList<MediaMovil> getListaMedia() {
+		return listaMedia;
+	}
+
+	/**
+	 * @param listaMedia
+	 *            the listaMedia to set
+	 */
+	public void setListaMedia(ArrayList<MediaMovil> listaMedia) {
+		this.listaMedia = listaMedia;
+	}
+
+	/**
+	 * @return the reducido
+	 */
+	public boolean isReducido() {
+		return reducido;
+	}
+
+	/**
+	 * @param reducido
+	 *            the reducido to set
+	 */
+	public void setReducido(boolean reducido) {
+		this.reducido = reducido;
 	}
 
 }

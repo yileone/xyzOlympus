@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-org.eclipse.debug.core.PREF_BREAKPOINT_MANAGER_ENABLED_STATE=true
+org.eclipse.debug.core.PREF_BREAKPOINT_MANAGER_ENABLED_STATE=false
 org.eclipse.debug.core.USE_STEP_FILTERS=true
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="temp.get(cont).getRegistroFloat1()"/>\n<expression enabled\="true" text\="temp.get(cont+1).getRegistroFloat1()"/>\n<expression enabled\="true" text\="temp.get(cont+2).getRegistroFloat1()"/>\n<expression enabled\="true" text\="(temp.get(cont).getRegistroFloat1() + temp.get(cont + 1).getRegistroFloat1()&\#10;&\#9;&\#9;&\#9;&\#9;&\#9;&\#9;+ temp.get(cont + 2).getRegistroFloat1())"/>\n<expression enabled\="true" text\="(temp.get(cont).getRegistroFloat1() + temp.get(cont + 1).getRegistroFloat1()&\#10;&\#9;&\#9;&\#9;&\#9;&\#9;&\#9;+ temp.get(cont + 2).getRegistroFloat1()) / 3"/>\n<expression enabled\="true" text\="cont"/>\n</watchExpressions>\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="new java.sql.Date ( temporal.getRegistroDate1().getTime())"/>\n<expression enabled\="true" text\=" temporal.getRegistroDate1().getTime()"/>\n<expression enabled\="true" text\=" temporal.getRegistroDate1()"/>\n</watchExpressions>\n
