@@ -25,9 +25,7 @@ Boolean habil = (Boolean)view.getValue("habil");
  
 
 try{
-    System.out.println("HABIL: "+habil); 
-    
-    System.out.println("loadOrigenRegistroCharts  JSP PROPIO-->"+view.getModelName());
+
 	ToJson tjMsLine = new ToJson(origen,sensor,habil);		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 	FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType

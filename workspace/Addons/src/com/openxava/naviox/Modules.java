@@ -45,9 +45,7 @@ public class Modules implements Serializable {
 		MetaModule firstStepsModule = new MetaModule();
 		firstStepsModule.setName(FIRST_STEPS);
 		firstStepsModule.setModelName("SignIn"); // The model does not matter
-		firstStepsModule.setWebViewURL("/naviox/FirstSteps");
-		System.out.println("//////////////////////////////////////");
-		System.out.println(firstStepsModule.getWebViewURL());
+		firstStepsModule.setWebViewURL("/naviox/firstSteps.jsp");
 		firstStepsModule.setModeControllerName("Void");
 		app.addMetaModule(firstStepsModule);		
 	}
