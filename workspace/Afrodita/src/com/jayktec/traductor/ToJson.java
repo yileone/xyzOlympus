@@ -404,7 +404,7 @@ public class ToJson {
 				}
 				serie = serie + "]}" + crearSeriePercentil(countLista, percentil, mapaItem);
 				serie = serie + crearSerieUmbral(mapaItem);
-				serie = serie + crearSerieTendencia(mapaItem);
+			//	serie = serie + crearSerieTendencia(mapaItem);
 				serie = serie + crearSerieMediaMovil(mapaItem);
 
 				setDataset(getDataset() + serie);
