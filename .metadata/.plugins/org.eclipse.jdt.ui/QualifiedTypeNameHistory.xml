@@ -19,4 +19,5 @@
 <fullyQualifiedTypeName name="javax.persistence.Transient"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.NoModify"/>
 <fullyQualifiedTypeName name="org.openxava.annotations.NoCreate"/>
+<fullyQualifiedTypeName name="java.beans.Transient"/>
 </qualifiedTypeNameHistroy>
