@@ -4,42 +4,23 @@
 
 <controladores>
     
-    
-	<!-- <controlador nombre="VerTipoCharts1">
-    	<accion nombre="GraficoxySeries" 
-	    		clase="com.jayktec.xyzOlympus.actions.MostrarGraficoxySeries" 
-	    		icono="chart-line">
-		</accion> 
-	</controlador>
-	<controlador nombre="VerTipoCharts2">
-		<accion nombre="GraficoxySeriesZoom" 
-	    		clase="com.jayktec.xyzOlympus.actions.MostrarGrafricoZoomxyLine" 
-	    		icono="chart-line-stacked" >
-		</accion> 
-	</controlador>
-	<controlador nombre="VerTipoCharts3">
-		<accion nombre="GraficoBarraDetalle" 
-	    		clase="com.jayktec.xyzOlympus.actions.MostrarGraficoBarraDetalle" 
-	    		icono="chart-bar" >
-		</accion>
-	</controlador>-->
-	
 	<objeto nombre="origenOid" clase="java.lang.String" valor="" ambito="global"/>
     <objeto nombre="sensorOid" clase="java.lang.String" valor="" ambito="global"/>
-    <objeto nombre="habil" clase="java.lang.Integer" valor="" ambito="global"/>
 	<controlador nombre="tipochart">
-	    <!-- <accion nombre="GraficoXy"      clase="com.jayktec.xyzOlympus.actions.MostrarGraficoxySeries" />
-		<accion nombre="GraficoXyZoom"  clase="com.jayktec.xyzOlympus.actions.MostrarGrafricoZoomxyLine" />
-		<accion nombre="GraficoDetalle" clase="com.jayktec.xyzOlympus.actions.MostrarGraficoBarraDetalle"/>
-		<accion nombre="MultiAxis" clase="com.jayktec.xyzOlympus.actions.ToJsonMultiAxis"/>-->
-		<accion nombre="column2d" clase="com.jayktec.xyzOlympus.actions.ToJsonBarra"/>
-		<accion nombre="MsLine" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
-		<accion nombre="ImportarDatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
+		<accion nombre="graficar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine"/>
+		<accion nombre="importardatos"  clase="com.jayktec.xyzOlympus.actions.ImportDataActionReg" />
 	</controlador>
 	
-    <controlador nombre="accionescancelar">
+    <controlador nombre="atras">
+  		<accion nombre="volver" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
+  		<accion nombre="actualizar" clase="com.jayktec.xyzOlympus.actions.ToJsonMsLine" />
+  	</controlador>
+
+  	
+   <controlador nombre="accionescancelar">
   		<accion nombre="cancelar" clase="com.jayktec.xyzOlympus.actions.CancelAction" />	
   	</controlador>
+  	
   	
   	<controlador nombre="ConfigureImportReg">
 		<accion nombre="ConfigurarDatosRegitros" clase="com.jayktec.xyzOlympus.actions.ConfigureImportActionReg"/>										
@@ -53,8 +34,4 @@
 	
 	<controlador nombre="Void"/>
 	
-	
-    
-    
-    
 </controladores>

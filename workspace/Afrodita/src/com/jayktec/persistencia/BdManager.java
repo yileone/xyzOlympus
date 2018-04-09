@@ -1053,47 +1053,55 @@ public class BdManager {
 				}
 
 				temporal.setRegistroInt1(tempInt / serie);
+				tempInt =0;
 				for (int i = 0; i < serie; i++) {
 					tempInt = tempInt + temp.get(cont + i).getRegistroInt2();
 				}
 
 				temporal.setRegistroInt2(tempInt / serie);
+				tempInt =0;
 				for (int i = 0; i < serie; i++) {
 					tempInt = tempInt + temp.get(cont + i).getRegistroInt3();
 				}
 
 				temporal.setRegistroInt3(tempInt / serie);
+				tempInt =0;
 				for (int i = 0; i < serie; i++) {
 					tempInt = tempInt + temp.get(cont + i).getRegistroInt4();
 				}
 
 				temporal.setRegistroInt4(tempInt / serie);
+				tempInt =0;
 				for (int i = 0; i < serie; i++) {
 					tempInt = tempInt + temp.get(cont + i).getRegistroInt5();
 				}
 
 				temporal.setRegistroInt5(tempInt / serie);
-
+				tempInt =0;
 				for (int i = 0; i < serie; i++) {
 					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat1();
 				}
 
 				temporal.setRegistroFloat1(tempFloat / serie);
+				tempFloat = 0;
 				for (int i = 0; i < serie; i++) {
 					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat2();
 				}
 
 				temporal.setRegistroFloat2(tempFloat / serie);
+				tempFloat = 0;
 				for (int i = 0; i < serie; i++) {
 					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat3();
 				}
 
 				temporal.setRegistroFloat3(tempFloat / serie);
+				tempFloat = 0;
 				for (int i = 0; i < serie; i++) {
 					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat4();
 				}
 
 				temporal.setRegistroFloat4(tempFloat / serie);
+				tempFloat = 0;
 				for (int i = 0; i < serie; i++) {
 					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat5();
 				}
