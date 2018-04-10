@@ -6,14 +6,20 @@ import java.util.*;
 import java.util.Date;
 import java.util.logging.*;
 
-import org.jfree.chart.axis.*;
+import javax.validation.constraints.*;
 
-import com.jayktec.controlador.Constantes;
+import org.jfree.chart.axis.*;
+import org.jfree.chart.plot.dial.*;
+
+import com.jayktec.controlador.*;
 import com.jayktec.controlador.Constantes.*;
 import com.jayktec.controller.*;
 import com.jayktec.xyzOlympus.models.*;
 import com.jayktec.xyzOlympus.transitorio.*;
+import com.lowagie.text.pdf.*;
 
+import groovy.lang.*;
+import javassist.compiler.ast.*;
 import jdk.nashorn.internal.objects.annotations.*;
 
 public class BdManager {
@@ -75,6 +81,7 @@ public class BdManager {
 	public static ArrayList<Registro> consultarRegistro(TablaBD tabla) throws SQLException {
 
 		String sql = "select * from  " + Constantes.BD + tabla.tabla() + "  order by "
+				+ Constantes.CampoRegistro.SENSOR.campoBD() + "," + Constantes.CampoRegistro.ORIGEN.campoBD() + ","
 				+ Constantes.CampoRegistro.DATE1.campoBD() + "," + Constantes.CampoRegistro.HORA1.campoBD();
 		System.out.println(sql);
 		return consultarRegistro(sql);
@@ -163,8 +170,8 @@ public class BdManager {
 
 		// ResultSet rs = consultarSql(pst);
 		boolean pvez = true;
-		Sensor sensor = null;
-		Origen origen = null;
+		Sensor sensor = new Sensor();
+		Origen origen = new Origen();
 		ArrayList<Registro> respuesta = new ArrayList<Registro>();
 		while (rs.next()) {
 
@@ -210,12 +217,23 @@ public class BdManager {
 			} catch (Exception e) {
 			}
 
-			if (pvez) {
-				sensor = new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
-				origen = new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
-				pvez = false;
-			}
+			try {
+				if (!sensor.getOid().equals(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()))) {
 
+				}
+			} catch (Exception e) {
+				sensor = new Sensor(rs.getString(Constantes.CampoRegistro.SENSOR.campoBD()));
+
+			}
+			try {
+
+				if (!origen.getOid().equals(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()))) {
+					origen = new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
+
+				}
+			} catch (Exception e) {
+				origen = new Origen(rs.getString(Constantes.CampoRegistro.ORIGEN.campoBD()));
+			}
 			temp.setSensor(sensor);
 			temp.setOrigen(origen);
 			temp.setOid(rs.getString(Constantes.CampoRegistro.ID_.campoBD()));
@@ -1032,209 +1050,268 @@ public class BdManager {
 	public static int reducirRegistros(int serie) throws SQLException, ParseException {
 		int cont = 0;
 		truncarTabla(TablaBD.REGISTRO_REDUCIDO);
-		ArrayList<Registro> temp = consultarRegistro();
+
+		ArrayList<ArrayList<Registro>> listaTemp = dividirSensorOrigen(consultarRegistro());
 		String sql = "insert into " + Constantes.BD + ".fateon_registro_reducido " + "values " + "(?,?,?,?,?,"
 				+ "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?,?," + "?,?,?,?)";
 		System.out.println(sql);
 
-		for (int j = 0; j < temp.size(); j = j + 3) {
+		for (int j = 0; j < listaTemp.size(); j++) {
 
-			Registro temporal = new Registro();
-			Registro registro = temp.get(j);
+			ArrayList<Registro> temp = listaTemp.get(j);
+			for (int z = 0; z < temp.size(); z = z + 3) {
+				Registro temporal = new Registro();
+				temporal = temp.get(z);
 
-			if (cont == 0 || (temp.size() - cont < serie)) {
-				temporal = registro;
-			} else {
-				int tempInt = 0;
-				float tempFloat = 0;
-				temporal = registro;
-				for (int i = 0; i < serie; i++) {
-					tempInt = tempInt + temp.get(cont + i).getRegistroInt1();
+				System.out.println(
+						"sensor origen:" + temporal.getSensor().getNombre() + temporal.getOrigen().getNombre());
+				if (cont == 0 || (temp.size() - cont < serie)) {
+					temporal = temp.get(z);
+					;
+				} else {
+					int tempInt = 0;
+					float tempFloat = 0;
+					for (int i = 0; i < serie; i++) {
+						tempInt = tempInt + temp.get(cont + i).getRegistroInt1();
+					}
+
+					temporal.setRegistroInt1(tempInt / serie);
+					tempInt = 0;
+					for (int i = 0; i < serie; i++) {
+						tempInt = tempInt + temp.get(cont + i).getRegistroInt2();
+					}
+
+					temporal.setRegistroInt2(tempInt / serie);
+					tempInt = 0;
+					for (int i = 0; i < serie; i++) {
+						tempInt = tempInt + temp.get(cont + i).getRegistroInt3();
+					}
+
+					temporal.setRegistroInt3(tempInt / serie);
+					tempInt = 0;
+					for (int i = 0; i < serie; i++) {
+						tempInt = tempInt + temp.get(cont + i).getRegistroInt4();
+					}
+
+					temporal.setRegistroInt4(tempInt / serie);
+					tempInt = 0;
+					for (int i = 0; i < serie; i++) {
+						tempInt = tempInt + temp.get(cont + i).getRegistroInt5();
+					}
+
+					temporal.setRegistroInt5(tempInt / serie);
+					tempInt = 0;
+					for (int i = 0; i < serie; i++) {
+						tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat1();
+					}
+
+					temporal.setRegistroFloat1(tempFloat / serie);
+					tempFloat = 0;
+					for (int i = 0; i < serie; i++) {
+						tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat2();
+					}
+
+					temporal.setRegistroFloat2(tempFloat / serie);
+					tempFloat = 0;
+					for (int i = 0; i < serie; i++) {
+						tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat3();
+					}
+
+					temporal.setRegistroFloat3(tempFloat / serie);
+					tempFloat = 0;
+					for (int i = 0; i < serie; i++) {
+						tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat4();
+					}
+
+					temporal.setRegistroFloat4(tempFloat / serie);
+					tempFloat = 0;
+					for (int i = 0; i < serie; i++) {
+						tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat5();
+					}
+
+					temporal.setRegistroFloat5(tempFloat / serie);
+
 				}
 
-				temporal.setRegistroInt1(tempInt / serie);
-				tempInt =0;
-				for (int i = 0; i < serie; i++) {
-					tempInt = tempInt + temp.get(cont + i).getRegistroInt2();
+				PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+				pst.setString(1, temporal.getOid());
+				DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
+				pst.setTimestamp(2, new Timestamp((dFormat.parse(temporal.getRegistroFecha())).getTime()));
+				pst.setString(3, temporal.getRegistroVarchar1());
+				pst.setString(4, temporal.getRegistroVarchar2());
+				pst.setString(5, temporal.getRegistroVarchar3());
+				pst.setString(6, temporal.getRegistroVarchar4());
+				pst.setString(7, temporal.getRegistroVarchar5());
+
+				pst.setInt(8, temporal.getRegistroInt1());
+				pst.setInt(9, temporal.getRegistroInt2());
+				pst.setInt(10, temporal.getRegistroInt3());
+				pst.setInt(11, temporal.getRegistroInt4());
+				pst.setInt(12, temporal.getRegistroInt5());
+				try {
+
+					pst.setFloat(13, temporal.getRegistroFloat1());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				try {
+
+					pst.setFloat(14, temporal.getRegistroFloat2());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				try {
+
+					pst.setFloat(15, temporal.getRegistroFloat3());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				try {
+
+					pst.setFloat(16, temporal.getRegistroFloat4());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				try {
+
+					pst.setFloat(17, temporal.getRegistroFloat5());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				pst.setDate(18, new java.sql.Date(temporal.getRegistroDate1().getTime()));
+
+				try {
+					pst.setDate(19, new java.sql.Date(temporal.getRegistroDate2().getTime()));
+				} catch (Exception e) {
+					// TODO: handle exception
+					pst.setDate(19, null);
+				}
+				try {
+
+					pst.setDate(20, new java.sql.Date(temporal.getRegistroDate3().getTime()));
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(20, null);
+				}
+				try {
+
+					pst.setDate(21, new java.sql.Date(temporal.getRegistroDate4().getTime()));
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(21, null);
+				}
+				try {
+
+					pst.setDate(22, new java.sql.Date(temporal.getRegistroDate5().getTime()));
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(22, null);
+				}
+				try {
+
+					pst.setTime(23, temporal.getRegistrotime1());
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(23, null);
+				}
+				try {
+					pst.setTime(24, temporal.getRegistrotime2());
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(24, null);
+				}
+				try {
+					pst.setTime(25, temporal.getRegistrotime3());
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(25, null);
+				}
+				try {
+					pst.setTime(26, temporal.getRegistrotime4());
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(26, null);
+				}
+				try {
+					pst.setTime(27, temporal.getRegistrotime5());
+				} catch (Exception e) {
+					// TODO: handle exception
+
+					pst.setDate(27, null);
 				}
 
-				temporal.setRegistroInt2(tempInt / serie);
-				tempInt =0;
-				for (int i = 0; i < serie; i++) {
-					tempInt = tempInt + temp.get(cont + i).getRegistroInt3();
-				}
+				pst.setString(28, temporal.getSensor().getOid());
+				pst.setString(29, temporal.getOrigen().getOid());
+				pst.executeUpdate();
 
-				temporal.setRegistroInt3(tempInt / serie);
-				tempInt =0;
-				for (int i = 0; i < serie; i++) {
-					tempInt = tempInt + temp.get(cont + i).getRegistroInt4();
-				}
-
-				temporal.setRegistroInt4(tempInt / serie);
-				tempInt =0;
-				for (int i = 0; i < serie; i++) {
-					tempInt = tempInt + temp.get(cont + i).getRegistroInt5();
-				}
-
-				temporal.setRegistroInt5(tempInt / serie);
-				tempInt =0;
-				for (int i = 0; i < serie; i++) {
-					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat1();
-				}
-
-				temporal.setRegistroFloat1(tempFloat / serie);
-				tempFloat = 0;
-				for (int i = 0; i < serie; i++) {
-					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat2();
-				}
-
-				temporal.setRegistroFloat2(tempFloat / serie);
-				tempFloat = 0;
-				for (int i = 0; i < serie; i++) {
-					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat3();
-				}
-
-				temporal.setRegistroFloat3(tempFloat / serie);
-				tempFloat = 0;
-				for (int i = 0; i < serie; i++) {
-					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat4();
-				}
-
-				temporal.setRegistroFloat4(tempFloat / serie);
-				tempFloat = 0;
-				for (int i = 0; i < serie; i++) {
-					tempFloat = tempFloat + temp.get(cont + i).getRegistroFloat5();
-				}
-
-				temporal.setRegistroFloat5(tempFloat / serie);
+				cont++;
 
 			}
-
-			PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-			pst.setString(1, temporal.getOid());
-			DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-			pst.setTimestamp(2, new Timestamp((dFormat.parse(temporal.getRegistroFecha())).getTime()));
-			pst.setString(3, temporal.getRegistroVarchar1());
-			pst.setString(4, temporal.getRegistroVarchar2());
-			pst.setString(5, temporal.getRegistroVarchar3());
-			pst.setString(6, temporal.getRegistroVarchar4());
-			pst.setString(7, temporal.getRegistroVarchar5());
-
-			pst.setInt(8, temporal.getRegistroInt1());
-			pst.setInt(9, temporal.getRegistroInt2());
-			pst.setInt(10, temporal.getRegistroInt3());
-			pst.setInt(11, temporal.getRegistroInt4());
-			pst.setInt(12, temporal.getRegistroInt5());
-			try {
-
-				pst.setFloat(13, temporal.getRegistroFloat1());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-
-				pst.setFloat(14, temporal.getRegistroFloat2());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-
-				pst.setFloat(15, temporal.getRegistroFloat3());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-
-				pst.setFloat(16, temporal.getRegistroFloat4());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-
-				pst.setFloat(17, temporal.getRegistroFloat5());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			pst.setDate(18, new java.sql.Date(temporal.getRegistroDate1().getTime()));
-
-			try {
-				pst.setDate(19, new java.sql.Date(temporal.getRegistroDate2().getTime()));
-			} catch (Exception e) {
-				// TODO: handle exception
-				pst.setDate(19, null);
-			}
-			try {
-
-				pst.setDate(20, new java.sql.Date(temporal.getRegistroDate3().getTime()));
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(20, null);
-			}
-			try {
-
-				pst.setDate(21, new java.sql.Date(temporal.getRegistroDate4().getTime()));
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(21, null);
-			}
-			try {
-
-				pst.setDate(22, new java.sql.Date(temporal.getRegistroDate5().getTime()));
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(22, null);
-			}
-			try {
-
-				pst.setTime(23, temporal.getRegistrotime1());
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(23, null);
-			}
-			try {
-				pst.setTime(24, temporal.getRegistrotime2());
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(24, null);
-			}
-			try {
-				pst.setTime(25, temporal.getRegistrotime3());
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(25, null);
-			}
-			try {
-				pst.setTime(26, temporal.getRegistrotime4());
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(26, null);
-			}
-			try {
-				pst.setTime(27, temporal.getRegistrotime5());
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				pst.setDate(27, null);
-			}
-
-			pst.setString(28, temporal.getSensor().getOid());
-			pst.setString(29, temporal.getOrigen().getOid());
-			pst.executeUpdate();
-
-			cont++;
-
 		}
 
 		return cont;
 
+	}
+
+	/**
+	 * @param consultarRegistro
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static ArrayList<ArrayList<Registro>> dividirSensorOrigen(ArrayList<Registro> registros) {
+
+		ArrayList<ArrayList<Registro>> respuesta = new ArrayList<ArrayList<Registro>>();
+		ArrayList<Tupla> tuplas = new ArrayList<Tupla>();
+		for (Registro registro : registros) {
+			Sensor sensor = registro.getSensor();
+			Origen origen = registro.getOrigen();
+			
+			if (!buscarSensorOrigen(tuplas, registro)) {
+				tuplas.add( new Tupla(sensor, origen));
+				ArrayList<Registro> resp = new ArrayList<Registro>();
+				ArrayList<Registro> temp = (ArrayList<Registro>) registros.clone();
+				temp.remove(0);
+				resp.add(registro);
+				for (Registro registro2 : temp) {
+ 
+					if (registro2.getSensor().equals(sensor) && registro2.getOrigen().equals(origen)) {
+						resp.add(registro2);
+						//registros.remove(registro2);
+
+					}
+
+				}
+
+				respuesta.add(resp);
+			}
+		}
+
+		return respuesta;
+	}
+
+	/**
+	 * @param tuplas
+	 * @param registro
+	 * @return
+	 */
+	private static boolean buscarSensorOrigen(ArrayList<Tupla> tuplas, Registro registro) {
+		// TODO Auto-generated method stub
+		Tupla<Sensor, Origen> tupla= new Tupla<Sensor, Origen>(registro.getSensor(), registro.getOrigen());
+		
+		for (Tupla tuplaTemp : tuplas) {
+			if(tuplaTemp.equals(tupla))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/**

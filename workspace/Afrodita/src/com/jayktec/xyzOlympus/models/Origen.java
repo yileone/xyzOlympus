@@ -12,6 +12,7 @@ import javax.validation.constraints.*;
 import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 
+import com.gargoylesoftware.htmlunit.WebConsole.*;
 import com.jayktec.persistencia.*;
 
 @Entity
@@ -201,7 +202,6 @@ public class Origen {
 		this.horaApertura = horaApertura;
 	}
 
-	
 	/**
 	 * @return the horaCierre
 	 */
@@ -303,6 +303,39 @@ public class Origen {
 
 	public void setUmbral(Collection<Umbral> umbral) {
 		this.umbral = umbral;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof Origen) {
+			Origen temp = (Origen) obj;
+
+			try {
+
+				if (this.getOid().equals(temp.getOid()) && this.getCiudad().equals(temp.getCiudad())
+						&& this.getIp().equals(temp.getIp()) &&
+
+						this.getMac().equals(temp.getMac()) && this.getModelo().equals(temp.getModelo())
+						&& this.getMunicipio().equals(temp.municipio) && this.getNombre().equals(temp.getNombre())
+						&& this.getOficina().equals(temp.oficina) && this.getPais().equals(temp.getPais())
+						&& this.getSistema().equals(temp.getSistema()) && this.getSucursal().equals(temp.getSucursal())
+						&& this.getTipo().equals(temp.getTipo())
+						&& this.getHoraApertura().equals(temp.getHoraApertura())
+						&& this.getHoraCierre().equals(temp.getHoraCierre()))
+					return true;
+
+			} catch (Exception e) {
+
+				return false;// TODO: handle exception
+			}
+		}
+		return false;
 	}
 
 }
