@@ -42,13 +42,11 @@ public class Origen {
 	// @Required
 	@Column(name = "hora_apertura", length = 9)
 	@Stereotype("HORA_MINUTO")
-
 	private Time horaApertura;
 
 	// @Required
 	@Column(name = "hora_cierre", length = 9)
 	@Stereotype("HORA_MINUTO")
-
 	private Time horaCierre;
 
 	// @Required
