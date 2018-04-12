@@ -117,9 +117,18 @@ public class Registro {
     
 	@Transient
 	private boolean habil;
-	 
+	@Transient
+	private boolean reducido; 
 	
 	
+	public boolean isReducido() {
+		return reducido;
+	}
+
+	public void setReducido(boolean reducido) {
+		this.reducido = reducido;
+	}
+
 	public boolean isHabil() {
 		return habil;
 	}

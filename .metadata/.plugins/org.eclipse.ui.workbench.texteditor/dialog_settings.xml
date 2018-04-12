@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="tupla" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="tupla"/>
 			<item value="passw"/>
 			<item value="editor"/>
 			<item value="placeholder"/>
@@ -15,7 +16,6 @@
 			<item value="sign_in_box"/>
 			<item value="sign"/>
 			<item value="SinI"/>
-			<item value="HORA_MINUTO"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ImportColumnRegistro"/>
