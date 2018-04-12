@@ -30,6 +30,20 @@ public class Constantes {
 	}
 	
 	
+	public enum Reporte {
+		Pdf("PDF"),Xls("excel");
+        private String tipo;
+		
+		private Reporte(String tipo) {
+			this.tipo= tipo;
+			// TODO Auto-generated constructor stub
+		}
+		
+		public String tipo()
+		{
+			return tipo;
+		}
+	}
 	public enum TipoParametro {
 		MesTendencia("mesTendencia"),SerieMedia("serieMedia");
         private String tipo;

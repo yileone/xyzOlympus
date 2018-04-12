@@ -6,8 +6,8 @@
 <%@page import="com.google.gson.*"%>
 <%@page import="fusioncharts.FusionCharts"%>
 <%@page import="org.openxava.*"%>
-<%@page import="com.jayktec.persistencia.BdManager"%>
-<%@page import="com.jayktec.traductor.ToJson"%>
+<%@page import="test.com.jayktec.persistencia.BdManager"%>
+<%@page import="test.com.jayktec.traductor.ToJson"%>
 <%@page import="com.jayktec.controlador.Constantes"%>
 <%@page import="com.jayktec.controlador.Constantes.CampoRegistro"%>
 <%@ include file="../xava/imports.jsp"%>
