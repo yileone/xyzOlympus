@@ -1,7 +1,5 @@
 package com.jayktec.controlador;
 
-import com.jayktec.xyzOlympus.transitorio.*;
-
 public class Constantes {
 
 	public static final String ARCHIVO_PROPERTIES = "/olympus.properties";

@@ -41,7 +41,12 @@ System.out.println("loadOrigenRegistroCharts  JSP PROPIO--> sensor "+view.getVal
 </th>
 <td><xava:editor property="habil" editable="true"/></td>
 </tr>
-
+<tr>
+<th align='right' class="<%=style.getLabel()%>">
+<xava:message key="graficarDatosReducido"/>
+</th>
+<td><xava:editor property="reducido" editable="true"/></td>
+</tr>
 
 </table>
 
