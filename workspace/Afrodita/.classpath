@@ -15,6 +15,9 @@
 	<classpathentry kind="lib" path="/OpenXava/lib/jfreechart-1.0.12.jar"/>
 	<classpathentry kind="lib" path="/OpenXava/lib/gson-2.4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OpenXava"/>
+<<<<<<< HEAD
 	<classpathentry combineaccessrules="false" kind="src" path="/OlympusApi"/>
+=======
+>>>>>>> d4f9fdfd0e0c0e07f94eaa8fa0e0bd863d3e4c73
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

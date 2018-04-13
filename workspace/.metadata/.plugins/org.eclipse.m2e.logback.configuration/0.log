@@ -222,3 +222,8 @@ Caused by: java.net.UnknownHostException: download.eclipse.org
 2018-04-12 20:46:24,791 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2018-04-12 21:03:33,662 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2018-04-12 21:12:13,739 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+<<<<<<< HEAD
+=======
+2018-04-13 10:23:48,107 [Worker-21] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-04-13 10:51:22,467 [Worker-10] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+>>>>>>> d4f9fdfd0e0c0e07f94eaa8fa0e0bd863d3e4c73
