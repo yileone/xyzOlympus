@@ -14,6 +14,8 @@ import org.openxava.web.*;
 
 import com.jayktec.xyzOlympus.models.*;
 import com.mysql.jdbc.interceptors.*;
+import com.jayktec.persistencia.*;
+
 
 /**
  * 
@@ -51,7 +53,7 @@ public class ImportActionReg extends ViewBaseAction implements IChangeController
     	System.out.println("******************* Antes ******************");*/
     	
     	
-    	
+  
 		getView().updateModelFromView();
 		/*System.out.println("*******************  "+getView().getModel());*/
 		Import imp = (Import) getView().getModel();

@@ -38,7 +38,7 @@
     -->
     
 <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="4" maxWait="10000" name="jdbc/AfroditaDS" password="afrodita" type="javax.sql.DataSource" url="jdbc:mysql://45.7.229.159:3306/fateon_new" username="mysql"/>     
-<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="4" maxWait="10000" name="jdbc/AnalisisEstadisticosDS" password="afrodita" type="javax.sql.DataSource" url="jdbc:mysql://45.7.229.159:3306/fateon_new" username="mysql"/>     
+<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="4" maxWait="10000" name="jdbc/AfroditaTestDS" password="afrodita" type="javax.sql.DataSource" url="jdbc:mysql://45.7.229.159:3306/fateon_new" username="mysql"/>     
 <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="4" maxWait="10000" name="jdbc/DeporticDS" password="afrodita" type="javax.sql.DataSource" url="jdbc:mysql://45.7.229.159:3306/deportic" username="mysql"/>   
     
     

@@ -1,5 +1,6 @@
-in/
+7in/
 tmp/
+.metadata/
 .metadata
 bin/**
 tmp/**

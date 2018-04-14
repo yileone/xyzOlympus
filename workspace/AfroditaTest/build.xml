@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<project name="Afrodita" basedir="." default="desplegarWar">
+<project name="AfroditaTest" basedir="." default="desplegarWar">
 
-	<property name="project" value="Afrodita" />
+	<property name="project" value="AfroditaTest" />
 	<property name="ox3" value="true" />
 	<property file="../openxava.properties"/>
 	

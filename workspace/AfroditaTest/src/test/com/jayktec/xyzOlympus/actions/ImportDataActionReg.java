@@ -3,6 +3,8 @@ package test.com.jayktec.xyzOlympus.actions;
 import javax.inject.*;
 
 import org.openxava.actions.*;
+import test.com.jayktec.controlador.Constantes;
+import test.com.jayktec.persistencia.*;
 
 /**
  * 
@@ -35,7 +37,7 @@ public class ImportDataActionReg extends ViewBaseAction implements ILoadFileActi
     	System.out.println("*************************************");
     	System.out.println("");
     	System.out.println("*************************************");*/
-    	
+    	BdManager.truncarTabla(Constantes.TablaBD.REGISTRO);
     	showDialog();
     }
  
