@@ -29,7 +29,7 @@ try{
 	ToJson tjMsLine = new ToJson(origen,sensor,habil);		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 	//FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
-	FusionCharts mslineChat = new FusionCharts("Msline", // chartType			
+	FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType			
 			"chart1", // chartId
 				"90%", "600", // chartWidth, chartHeight
 				"chart", // chartContainer
@@ -38,14 +38,14 @@ try{
 		);
 %>
 	<div id="chart"></div>
-	<!--  <input type="button" value="Actualizar Pagina" onclick="window.location='/Afrodita/m/analisisEstadistico'">-->
+	<!--  <input type="button" value="Actualizar Pagina" onclick="window.location='/AfroditaTest/m/analisisEstadistico'">-->
 	<%=mslineChat.render()%>
 <%
 }
 catch(Exception e){
 	%>
 	 	<div class='ox-errors-wrapper'>
-		<table id="ox_Afrodita_SignIn__errors_table1">
+		<table id="ox_AfroditaTest_SignIn__errors_table1">
 	<%
 	if(sensor==null || sensor.equals("")){
 	%>

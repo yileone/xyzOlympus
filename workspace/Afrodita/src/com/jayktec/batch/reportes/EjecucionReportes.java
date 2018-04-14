@@ -66,22 +66,22 @@ public class EjecucionReportes extends Ejecucion {
 	public void pdfExporter(JasperPrint jasperPrint) throws JRException {
 		JRPdfExporter exporter = new JRPdfExporter();
 
-		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(destFile + ".pdf"));
+		//exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+		//exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(destFile + ".pdf"));
 		SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
-		exporter.setConfiguration(configuration);
+		//exporter.setConfiguration(configuration);
 		exporter.exportReport();
 	}
 
 	public void xlsExporter(JasperPrint jasperPrint) throws JRException {
 		JRXlsExporter exporter = new JRXlsExporter();
-		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(destFile + ".xls"));
+		//exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+		//exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(destFile + ".xls"));
 		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
 		configuration.setOnePagePerSheet(true);
 		configuration.setDetectCellType(true);
 		configuration.setCollapseRowSpan(false);
-		exporter.setConfiguration(configuration);
+		//exporter.setConfiguration(configuration);
 
 		exporter.exportReport();
 	}
