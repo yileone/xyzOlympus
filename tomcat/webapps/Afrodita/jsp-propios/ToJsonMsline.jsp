@@ -22,11 +22,11 @@ View view = (org.openxava.view.View) context.get(request,viewObject);
 String sensor = (String)view.getValue("sensor.oid");
 String origen = (String)view.getValue("origen.oid");
 Boolean habil = (Boolean)view.getValue("habil");
- 
+Boolean reducido = (Boolean)view.getValue("habil");
 
 try{
 
-	ToJson tjMsLine = new ToJson(origen,sensor,habil);		
+	ToJson tjMsLine = new ToJson(origen,sensor,habil,reducido);		
 	String grafico = BdManager.buscarJson(tjMsLine.crearJson());
 	//FusionCharts mslineChat = new FusionCharts("zoomlinedy", // chartType
 	FusionCharts mslineChat = new FusionCharts("Msline", // chartType			

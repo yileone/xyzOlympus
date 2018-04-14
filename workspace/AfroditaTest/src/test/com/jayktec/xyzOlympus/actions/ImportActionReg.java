@@ -14,6 +14,8 @@ import org.openxava.web.*;
 
 import com.mysql.jdbc.interceptors.*;
 
+import test.com.jayktec.controlador.*;
+import test.com.jayktec.persistencia.*;
 import test.com.jayktec.xyzOlympus.models.*;
 
 /**
@@ -34,6 +36,7 @@ public class ImportActionReg extends ViewBaseAction implements IChangeController
 	
 	public void execute() throws Exception {
 		
+		BdManager.truncarTabla(Constantes.TablaBD.REGISTRO);
     	/*System.out.println("************** ImportActionReg - execute ***********************");
     	System.out.println("");
     	System.out.println(" EJECUTANDO ACTION ---> ImportDataActionReg" );

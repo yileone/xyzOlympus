@@ -21,7 +21,8 @@
 
 	private String getAdditionalParameters(HttpServletRequest request) {
 		StringBuffer result = new StringBuffer();
-		for (java.util.Enumeration en = request.getParameterNames(); en.hasMoreElements();) {
+		for (java.util.Enumeration en = request.getParameterNames(); en
+				.hasMoreElements();) {
 			String name = (String) en.nextElement();
 			if ("application".equals(name) || "module".equals(name)
 					|| "xava.portlet.application".equals(name)
@@ -48,15 +49,20 @@
 	String windowId = context.getWindowId(request);
 	context.setCurrentWindowId(windowId);	
 	Locales.setCurrent(request);	
-	request.getSession().setAttribute("xava.user",request.getRemoteUser());
+	request.getSession().setAttribute("xava.user",
+			request.getRemoteUser());
 	Users.setCurrent(request); 
 	String app = request.getParameter("application");
 	String module = context.getCurrentModule(request);
 	String contextPath = (String) request.getAttribute("xava.contextPath");
 	if (contextPath == null) contextPath = request.getContextPath();
 
-	org.openxava.controller.ModuleManager managerHome = (org.openxava.controller.ModuleManager) context.get(request, "manager","org.openxava.controller.ModuleManager");
-	org.openxava.controller.ModuleManager manager = (org.openxava.controller.ModuleManager) context.get(app, module, "manager","org.openxava.controller.ModuleManager");
+	org.openxava.controller.ModuleManager managerHome = (org.openxava.controller.ModuleManager) context
+			.get(request, "manager",
+					"org.openxava.controller.ModuleManager");
+	org.openxava.controller.ModuleManager manager = (org.openxava.controller.ModuleManager) context
+			.get(app, module, "manager",
+					"org.openxava.controller.ModuleManager");
 
 	manager.setSession(session);
 	managerHome.setSession(session); 
@@ -72,7 +78,8 @@
 		restoreLastMessage = true;
 	}	
 
-	boolean isPortlet = (session.getAttribute(Ids.decorate(app, request.getParameter("module"), "xava.portlet.uploadActionURL")) != null);
+	boolean isPortlet = (session.getAttribute(Ids.decorate(app, request
+			.getParameter("module"), "xava.portlet.uploadActionURL")) != null);
 
 	Module.setPortlet(isPortlet);
 	boolean htmlHead = isPortlet?false:!Is.equalAsStringIgnoreCase(request.getParameter("htmlHead"), "false");
